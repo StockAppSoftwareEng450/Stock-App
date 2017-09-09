@@ -1,10 +1,72 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Hello World!</title>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+</head>
+<style>
+  body {
+    background: black;
+    color: white;
+    font-family: 'Source Code Pro','arial';
+    text-align: center;
+  }
+  .the-price {
+    font-size: 35px;
+  }
+  .up {
+    color: green;
+  }
+  .noChange {
+    color: grey;
+  }
+  .down {
+    color: red;
+  }
+</style>
+<body style="-webkit-app-region: drag">
+  <h3>Current Share Price: APPL</h3>
+  <div class="the-price" id="price"></div>
+  <div class="up-down" id="priceHistory"></div>
+  <script>
+    var request = require('request');
+    setInterval (function(){
+      request("https://api.iextrading.com/1.0/stock/aapl/quote", function(error, response, body) {
+        body = body.slice(34);
+        body = JSON.parse(body);
+        console.log(body);
+        newPrice(body);
+      });
+    }, 1000);
+    var lastPrice;
+    function newPrice(arr) {
+      currentPrice = arr[0]["l"];
+      var history = document.getElementById("priceHistory");
+      if (lastPrice<currentPrice) {
+        var newElText = "▲ ";
+        var wrap = document.createElement("span");
+        wrap.className="up";
+      }
+      else if (lastPrice==currentPrice) {
+        var newElText = "▬ ";
+        var wrap = document.createElement("span");
+        wrap.className="noChange";
+      }
+      else {
+        var newElText = "▼ ";
+        var wrap = document.createElement("span");
+        wrap.className="down";
+      }
+      history.appendChild(wrap);
+      var textNode = document.createTextNode(newElText);
+      wrap.appendChild(textNode);
+      var nodeList = history.getElementsByTagName("SPAN").length;
+      if (nodeList==6) {
+        history.children[0].remove();
+      }
+      document.getElementById("price").innerHTML = currentPrice;
+      lastPrice=currentPrice;
+    }
+
+  </script>
+</body>
 </html>

@@ -3,6 +3,7 @@
 *
 *   Run:        npm start
 *   Install:    npm install electron-packager
+*               npm run build
 */
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
@@ -14,16 +15,17 @@ let win
 
 function createWindow () {
   // Create the browser window.
-  win = new BrowserWindow({width: 400, height: 200, frame: false})
+  // Add Frameless later: ,frame: false
+  win = new BrowserWindow({width: 700, height: 500 })
 
   // and load the index.html of the app.
   win.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
+    pathname: path.join(__dirname, 'testingForHTTPRequest.html'),
     protocol: 'file:',
     slashes: true
   }))
 
-  // Open the DevTools.
+  // Open the DevTools. Comment out to openDevTools
   win.webContents.openDevTools()
 
   // Emitted when the window is closed.
