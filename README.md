@@ -5,11 +5,11 @@ In our Software Engineering we were tasked with designing a program. We chose to
 
 
   
-#  Needed Software:
+##  Needed Software:
 - Electron 
 - NodeJS
 - Text Editor (I used atom for simplicity)
-# How to install Electron and NodeJS
+## How to install Electron and NodeJS
 
   - Go to electron.com and scroll down till you see the download for windows.
   - Go to https://nodejs.org/en/ and install the lastest LTS version
