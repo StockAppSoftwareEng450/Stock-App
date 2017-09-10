@@ -1,7 +1,7 @@
 //init the request
 var httpRequest = new XMLHttpRequest();
 // Make true for asynchronous request
-httpRequest.open('GET', "https://api.iextrading.com/1.0/stock/aapl/quote", false);
+httpRequest.open('GET', "https://api.iextrading.com/1.0/stock/aapl/quote", true);
 //This sends the request
 httpRequest.send();
 // This notifies us of when the request comes back
