@@ -1,0 +1,10 @@
+body {
+  background-color: black;
+}
+#StockTest_container{
+  text-align : center;
+  color : white;
+}
+#StockIntro, #StockPrice {
+   display : inline;
+}
