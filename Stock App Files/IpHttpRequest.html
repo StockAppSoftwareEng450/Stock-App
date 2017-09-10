@@ -25,9 +25,11 @@
         //Reading the body of the response
         var response = JSON.parse(xhr.responseText);
         // .ip is the response sent back
-        alert(response);
+        alert(response.ip);
         //  dislaying to the console for debugging
-        console.log(response);
+        var ipAddress = response.ip;
+        console.log(ipAddress);
+        return ipAddress;
       }
     }
   </script>
