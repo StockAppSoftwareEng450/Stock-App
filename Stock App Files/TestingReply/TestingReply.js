@@ -17,7 +17,7 @@ function processRequest(e) {
     // for debugging purposes response sent back
     console.log(response.latestPrice);
     var lastPrice = response.latestPrice;
-    alert(lastPrice);
+    //alert(lastPrice);
     document.getElementById("StockPrice").innerHTML = lastPrice;
     //console.log(lastPrice);
     return lastPrice;
