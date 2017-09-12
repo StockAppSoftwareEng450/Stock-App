@@ -1,15 +1,71 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Testing Reply</title>
-    <link rel="stylesheet" type="text/css" href="TestingReply.css">
-    <script src="TestingReply.js"></script>
-  </head>
-  <body>
-    <!-- Testing confirguration -->
-    <div id="StockTest_container">
-      <div id="StockIntro">Stock price of Apple: </div>
-      <div id="StockPrice"> </div>
-    </div>
-  </body>
+    <head>
+        <title> Next </title>
+    </head>
+        <style>
+          body {
+            background: black;
+            color: white;
+            font-family: 'Source Code Pro','arial';
+            text-align: center;
+          }
+          .the-price {
+            font-size: 35px;
+          }
+          .up {
+            color: green;
+          }
+          .noChange {
+            color: grey;
+          }
+          .down {
+            color: red;
+          }
+        </style>
+    <body>
+        <div id="StockTest_container">
+            <div id="StockIntro">Stock price of </div>
+            <div id="CompanyName"> </div>
+            <div id="StockPrice"> </div>
+        </div>
+        <script>
+            var price = null;
+            var httpRequest = new XMLHttpRequest();
+            httpRequest.open('GET', "https://api.iextrading.com/1.0/stock/aapl/quote", true);
+            httpRequest.send();
+            httpRequest.addEventListener("readystatechange", processRequest.bind(this, writeToDoc), false);
+
+            function writeToDoc (price) {
+                document.write("outside: " + price);
+                console.log(price);
+            }
+
+            function processRequest(e, cb) {
+                // request logic
+                if (httpRequest.readyState == 4 && httpRequest.status == 200) {
+                    response = JSON.parse(httpRequest.responseText);
+                    console.log(response.latestPrice);
+                    var lastPrice = response.latestPrice;
+                    var CompanyName = response.companyName;
+                    document.getElementById("StockPrice").innerHTML = lastPrice;
+                    document.getElementById("CompanyName").innerHTML = CompanyName;
+                    price = lastPrice;
+                    // Call callback function
+                    //cb(price);
+                    console.log(price);
+                    writeToDoc(price);
+                    return price;
+                }
+            }
+
+            function
+
+
+
+
+
+
+        </script>
+    </body>
 </html>
