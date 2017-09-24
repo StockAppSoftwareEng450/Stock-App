@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <script src="jquery3_2_1.js"></script>
+        <script src = "withinviewport.js"></script>
+        <script src = "jquery.withinviewport.js"></script>
+
+        <meta charset="UTF-8">
+        <title>Titlee</title>
+    </head>
+    <body>
+        <!-- elements visibility on screen to be DETECTED -->
+        <div id="elements">
+            <div id="elem-1">Lorem ipsum</div>
+            <div id="elem-2">Lorem ipsum</div>
+            <div id="elem-3">Lorem ipsum</div>
+            <div id="elem-4">Lorem ipsum</div>
+            <div id="elem-5">Lorem ipsum</div>
+            <div id="elem-6">Lorem ipsum</div>
+            <div id="elem-7">Lorem ipsum</div>
+            <div id="elem-8">Lorem ipsum</div>
+        </div>
+
+        <!--elements visibility on screen to be AFFECTED  -->
+        <ul id="timeline">
+            <li view-id="elem-1">Elem-1</li>
+            <li view-id="elem-2">Elem-2</li>
+            <li view-id="elem-3" class="active">Elem-3</li>
+            <li view-id="elem-4" class="active">Elem-4</li>
+            <li view-id="elem-5" class="active">Elem-5</li>
+            <li view-id="elem-6" class="active">Elem-6</li>
+            <li view-id="elem-7">Elem-7</li>
+            <li view-id="elem-8">Elem-8</li>
+        </ul>
+
+        <script>
+            $(window).bind("scroll", function() {
+
+                //clear all active class
+                $('#timeline > li').removeClass('active');
+
+                //add active class to timeline
+                $("#elements > div").withinviewport().each(function() {
+                    $('#timeline > li[view-id="'+$(this)[0].id+'"]').addClass('active');
+                });
+            });
+
+        </script>
+    </body>
+</html>

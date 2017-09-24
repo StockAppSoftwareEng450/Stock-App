@@ -23,48 +23,95 @@
     <!-- Custom styles for this template -->
     <link href="css/sb-admin.css" rel="stylesheet">
 
+      <!-- Testing the style aspect of the overlay feature for the search bar -->
+      <style>
+          #myUL {
+              display: none;
+          }
+
+        /*
+          * {
+              box-sizing: border-box;
+          }
+
+          #myInput {
+          //background-image: url('/css/searchicon.png');
+              background-position: 10px 12px;
+              background-repeat: no-repeat;
+              width: 100%;
+              font-size: 16px;
+              padding: 12px 20px 12px 40px;
+              border: 1px solid #ddd;
+              margin-bottom: 12px;
+          }
+
+          #myUL {
+              list-style-type: none;
+              padding: 0;
+              margin: 0;
+          }
+
+          #myUL li a {
+              border: 1px solid #ddd;
+              margin-top: -1px;
+              background-color: #f6f6f6;
+              padding: 12px;
+              text-decoration: none;
+              font-size: 18px;
+              color: black;
+              display: block
+          }
+
+          #myUL li a:hover:not(.header) {
+              background-color: #eee;
+          }
+          */
+
+      </style>
+
+
   </head>
 
   <body class="fixed-nav sticky-footer bg-dark" id="page-top">
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-      <a class="navbar-brand" href="#">Start Bootstrap</a>
+      <a class="navbar-brand" href="#">Stock Portfolio</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-          <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
-            <a class="nav-link" href="#">
-              <i class="fa fa-fw fa-dashboard"></i>
-              <span class="nav-link-text">
-                Dashboard</span>
-            </a>
-          </li>
-          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-            <a class="nav-link" href="#">
-              <i class="fa fa-fw fa-area-chart"></i>
-              <span class="nav-link-text">
-                Charts</span>
-            </a>
-          </li>
-          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-            <a class="nav-link" href="#">
-              <i class="fa fa-fw fa-table"></i>
-              <span class="nav-link-text">
-                Tables</span>
-            </a>
-          </li>
+          <!--<li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">-->
+            <!--<a class="nav-link" href="#">-->
+              <!--<i class="fa fa-fw fa-dashboard"></i>-->
+              <!--<span class="nav-link-text">-->
+                <!--Dashboard</span>-->
+            <!--</a>-->
+          <!--</li>-->
+          <!--<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">-->
+            <!--<a class="nav-link" href="#">-->
+              <!--<i class="fa fa-fw fa-area-chart"></i>-->
+              <!--<span class="nav-link-text">-->
+                <!--Charts</span>-->
+            <!--</a>-->
+          <!--</li>-->
+          <!--<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">-->
+            <!--<a class="nav-link" href="#">-->
+              <!--<i class="fa fa-fw fa-table"></i>-->
+              <!--<span class="nav-link-text">-->
+                <!--Tables</span>-->
+            <!--</a>-->
+          <!--</li>-->
           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
             <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
               <i class="fa fa-fw fa-wrench"></i>
               <span class="nav-link-text">
-                Components</span>
+                My Portfolio</span>
             </a>
             <ul class="sidenav-second-level collapse" id="collapseComponents">
               <li>
-                <a href="static-nav.html">Static Navigation</a>
+                <a href="blank.html">Blank Page</a>
               </li>
               <li>
                 <a href="#">Custom Card Examples</a>
@@ -75,7 +122,7 @@
             <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
               <i class="fa fa-fw fa-file"></i>
               <span class="nav-link-text">
-                Example Pages</span>
+                Watch List</span>
             </a>
             <ul class="sidenav-second-level collapse" id="collapseExamplePages">
               <li>
@@ -96,7 +143,7 @@
             <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
               <i class="fa fa-fw fa-sitemap"></i>
               <span class="nav-link-text">
-                Menu Levels</span>
+                Common Stocks</span>
             </a>
             <ul class="sidenav-second-level collapse" id="collapseMulti">
               <li>
@@ -118,13 +165,13 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
-            <a class="nav-link" href="#">
-              <i class="fa fa-fw fa-link"></i>
-              <span class="nav-link-text">
-                Link</span>
-            </a>
-          </li>
+          <!--<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">-->
+            <!--<a class="nav-link" href="#">-->
+              <!--<i class="fa fa-fw fa-link"></i>-->
+              <!--<span class="nav-link-text">-->
+                <!--Link</span>-->
+            <!--</a>-->
+          <!--</li>-->
         </ul>
         <ul class="navbar-nav sidenav-toggler">
           <li class="nav-item">
@@ -223,7 +270,86 @@
           <li class="nav-item">
             <form class="form-inline my-2 my-lg-0 mr-lg-2">
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for...">
+                <input type="text" id="myInput" onkeyup="myFunction()" class="form-control"
+                       placeholder="Search for a Stock Symbol.." title="Type in a name">
+
+                  <ul id="myUL">
+                      <!--
+                      <li><a href="#">Christina</a></li>
+                      <li><a href="#">Cindy</a></li>
+
+                       Starting the Stock Test -->
+                  </ul>
+
+                  <!-- Testing the Search script -->
+                  <script>
+
+                      function myFunction() {
+                          var input, filter, ul, li, a, i;
+                          input = document.getElementById("myInput");
+                          console.log(input);
+                          filter = input.value.toUpperCase();
+                          ul = document.getElementById("myUL");
+                          li = ul.getElementsByTagName("li");
+                          for (i = 0; i < li.length; i++) {
+                              a = li[i].getElementsByTagName("a")[0];
+                              if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                                  li[i].style.display = "";
+                              } else {
+                                  li[i].style.display = "none";
+
+                              }
+                          }
+                          //Returning the result
+                          console.log(filter);
+
+                          var parser = document.createElement('a');
+                          //End result should look like: https://api.iextrading.com/1.0/stock/VNOM/quote
+                          parser.href = "https://api.iextrading.com/1.0/stock/";
+
+                          parser.StockName = filter;
+                          console.log("Parser StockName: " + parser.StockName);
+
+                          var url = parser.href;
+                          var stockName = parser.StockName;
+                          var result = url + stockName;
+
+                          //concat quote to the end of the url
+                          var quoteAdd = "/quote";
+                          result = result + quoteAdd;
+                          console.log("quote: " + quoteAdd);
+                          console.log("Final url: " + result);
+
+                          //counting letters in the filter
+                          var count = filter.replace(/[^A-Z]/gi, "").length;
+                          console.log(count);
+                          if (count == 2 || count == 3 || count == 4 && filter){
+                              if($("#myUL").length) {
+                                  console.log("nested if result: " + result);
+
+                                  /*  I need to find the element that i searched for, then add the result url to the button.
+                                      For example, when i search for FLWS, i click on that tag to take me to a new page.
+
+
+                                  ul = document.getElementById("myUL");
+                                  li = ul.getElementsByTagName("li");
+                                  console.log(li);
+
+                                  var result1 = document.getElementById('li');
+                                  console.log("nested result After: " + result);
+                                  console.log("result1: " + result1);*/
+                                  var resultDiv = "<li><a href=" + "'" + result + "'" + ">" + filter + "</a></li>"
+                                  $("#myUL").append(resultDiv);
+                              }
+                          }
+                          return result;
+                      }
+
+                      myFunction();
+                  </script>
+                  <!-- Ending the script -->
+
+
                 <span class="input-group-btn">
                   <button class="btn btn-primary" type="button">
                     <i class="fa fa-search"></i>
@@ -258,11 +384,15 @@
           <div class="col-xl-3 col-sm-6 mb-3">
             <div class="card text-white bg-primary o-hidden h-100">
               <div class="card-body">
-                <div class="card-body-icon">
-                  <i class="fa fa-fw fa-comments"></i>
-                </div>
                 <div class="mr-5">
-                  26 New Messages!
+
+                    <!-- Testing Stock Code -->
+                    <div id = "CompanyName"></div>
+                    <div id="StockPrice">
+                        <!-- Entering TEST EXTR -->
+                    </div>
+
+
                 </div>
               </div>
               <a href="#" class="card-footer text-white clearfix small z-1">
@@ -276,11 +406,16 @@
           <div class="col-xl-3 col-sm-6 mb-3">
             <div class="card text-white bg-warning o-hidden h-100">
               <div class="card-body">
-                <div class="card-body-icon">
-                  <i class="fa fa-fw fa-list"></i>
-                </div>
                 <div class="mr-5">
-                  11 New Tasks!
+
+
+                    <!-- Testing Stock Code -->
+                    <div id = "CompanyNameCard2"></div>
+                    <div id="StockPriceCard2">
+                        <!-- Entering TEST MSFT -->
+                    </div>
+
+
                 </div>
               </div>
               <a href="#" class="card-footer text-white clearfix small z-1">
@@ -294,11 +429,17 @@
           <div class="col-xl-3 col-sm-6 mb-3">
             <div class="card text-white bg-success o-hidden h-100">
               <div class="card-body">
-                <div class="card-body-icon">
-                  <i class="fa fa-fw fa-shopping-cart"></i>
-                </div>
                 <div class="mr-5">
-                  123 New Orders!
+
+
+                    <!-- Testing Stock Code -->
+                    <div id = "CompanyNameCard3"></div>
+                    <div id="StockPriceCard3">
+                        <!-- Entering TEST TSLA -->
+                    </div>
+
+
+
                 </div>
               </div>
               <a href="#" class="card-footer text-white clearfix small z-1">
@@ -312,11 +453,16 @@
           <div class="col-xl-3 col-sm-6 mb-3">
             <div class="card text-white bg-danger o-hidden h-100">
               <div class="card-body">
-                <div class="card-body-icon">
-                  <i class="fa fa-fw fa-support"></i>
-                </div>
                 <div class="mr-5">
-                  13 New Tickets!
+
+
+                    <!-- Testing Stock Code -->
+                    <div id = "CompanyNameCard4"></div>
+                    <div id="StockPriceCard4">
+                        <!-- Entering TEST TSLA -->
+                    </div>
+
+
                 </div>
               </div>
               <a href="#" class="card-footer text-white clearfix small z-1">
@@ -1257,6 +1403,12 @@
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/popper/popper.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Stock API References  -->
+    <script src="StockReply.js"></script>
+    <script src="StockReply2.js"></script>
+    <script src="StockReply3.js"></script>
+    <script src="StockReply4.js"></script>
 
     <!-- Plugin JavaScript -->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>

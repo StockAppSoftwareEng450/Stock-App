@@ -1,10 +1,10 @@
 body {
-  background-color: black;
+    background-color: black;
 }
 #StockTest_container{
-  text-align : center;
-  color : white;
+    text-align : center;
+    color : white;
 }
-#StockIntro, #StockPrice {
-   display : inline;
+#CompanyName, #StockPrice, #StockIntro #Colon{
+    display : inline;
 }
