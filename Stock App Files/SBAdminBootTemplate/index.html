@@ -82,27 +82,8 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-          <!--<li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">-->
-            <!--<a class="nav-link" href="#">-->
-              <!--<i class="fa fa-fw fa-dashboard"></i>-->
-              <!--<span class="nav-link-text">-->
-                <!--Dashboard</span>-->
-            <!--</a>-->
-          <!--</li>-->
-          <!--<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">-->
-            <!--<a class="nav-link" href="#">-->
-              <!--<i class="fa fa-fw fa-area-chart"></i>-->
-              <!--<span class="nav-link-text">-->
-                <!--Charts</span>-->
-            <!--</a>-->
-          <!--</li>-->
-          <!--<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">-->
-            <!--<a class="nav-link" href="#">-->
-              <!--<i class="fa fa-fw fa-table"></i>-->
-              <!--<span class="nav-link-text">-->
-                <!--Tables</span>-->
-            <!--</a>-->
-          <!--</li>-->
+
+          <!-- My Portfolio Sidebar -->
           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
             <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
               <i class="fa fa-fw fa-wrench"></i>
@@ -118,6 +99,8 @@
               </li>
             </ul>
           </li>
+
+          <!-- WatchList Sidebar -->
           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
             <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
               <i class="fa fa-fw fa-file"></i>
@@ -139,6 +122,8 @@
               </li>
             </ul>
           </li>
+
+          <!-- Common Stocks Sidebar -->
           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
             <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
               <i class="fa fa-fw fa-sitemap"></i>
@@ -147,7 +132,7 @@
             </a>
             <ul class="sidenav-second-level collapse" id="collapseMulti">
               <li>
-                <a href="#">Second Level Item</a>
+                <a href="AAPLCommon.html">AAPL</a>
               </li>
               <li>
                 <a href="#">Second Level Item</a>
@@ -165,13 +150,6 @@
               </li>
             </ul>
           </li>
-          <!--<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">-->
-            <!--<a class="nav-link" href="#">-->
-              <!--<i class="fa fa-fw fa-link"></i>-->
-              <!--<span class="nav-link-text">-->
-                <!--Link</span>-->
-            <!--</a>-->
-          <!--</li>-->
         </ul>
         <ul class="navbar-nav sidenav-toggler">
           <li class="nav-item">
@@ -326,6 +304,9 @@
                           if (count == 2 || count == 3 || count == 4 && filter){
                               if($("#myUL").length) {
                                   console.log("nested if result: " + result);
+                                  var resultDiv = "<li><a href=" + "'" + result + "'" + ">" + filter + "</a></li>";
+                                  $("#myUL").append(resultDiv);
+
 
                                   /*  I need to find the element that i searched for, then add the result url to the button.
                                       For example, when i search for FLWS, i click on that tag to take me to a new page.
@@ -338,8 +319,6 @@
                                   var result1 = document.getElementById('li');
                                   console.log("nested result After: " + result);
                                   console.log("result1: " + result1);*/
-                                  var resultDiv = "<li><a href=" + "'" + result + "'" + ">" + filter + "</a></li>"
-                                  $("#myUL").append(resultDiv);
                               }
                           }
                           return result;
@@ -374,7 +353,7 @@
         <!-- Breadcrumbs -->
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="#">Dashboard</a>
+            <a href="index.html">Dashboard</a>
           </li>
           <li class="breadcrumb-item active">My Dashboard</li>
         </ol>

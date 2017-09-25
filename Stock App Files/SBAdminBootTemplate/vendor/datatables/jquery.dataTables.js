@@ -55,7 +55,7 @@
 		// Browser
 		factory( jQuery, window, document );
 	}
-}
+};
 (function( $, window, document, undefined ) {
 	"use strict";
 
@@ -6412,7 +6412,7 @@
 	
 			_fnCallbackFire( settings, 'aoStateLoaded', 'stateLoaded', [settings, s] );
 			callback();
-		}
+		};
 	
 		if ( ! settings.oFeatures.bStateSave ) {
 			callback();
