@@ -1,0 +1,3 @@
+The TestSearchBar.html converts a xlxs to json and I return that to the console.
+It currently only works on 1 workbook at a time. I am going to try and combine
+files.
