@@ -25,9 +25,6 @@
 
       <!-- Testing the style aspect of the overlay feature for the search bar -->
       <style>
-
-
-
           * {
               box-sizing: border-box;
           }
@@ -253,7 +250,6 @@
                       <!--
                       <li><a href="#">Christina</a></li>
                       <li><a href="#">Cindy</a></li>
-
                        Starting the Stock Test -->
                   </ul>
 
@@ -299,24 +295,12 @@
                           //counting letters in the filter
                           var count = filter.replace(/[^A-Z]/gi, "").length;
                           console.log(count);
-                          if (count == 2 || count == 3 || count == 4 && filter){
+                          if (count === 2 || count === 3 || count === 4 && filter){
                               if($("#myUL").length) {
                                   console.log("nested if result: " + result);
                                   var resultDiv = "<li><a href=" + "'" + result + "'" + ">" + filter + "</a></li>";
                                   $("#myUL").append(resultDiv);
 
-
-                                  /*  I need to find the element that i searched for, then add the result url to the button.
-                                      For example, when i search for FLWS, i click on that tag to take me to a new page.
-
-
-                                  ul = document.getElementById("myUL");
-                                  li = ul.getElementsByTagName("li");
-                                  console.log(li);
-
-                                  var result1 = document.getElementById('li');
-                                  console.log("nested result After: " + result);
-                                  console.log("result1: " + result1);*/
                               }
                           }
                           return result;
