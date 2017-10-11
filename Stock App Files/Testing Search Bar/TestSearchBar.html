@@ -37,10 +37,8 @@
                 console.log(XLSX.utils.sheet_to_json(worksheet,{raw:true}));
                 console.log("break");
 
-
-
+                //printing result to screen
                 var result = XLSX.utils.sheet_to_html(worksheet,{raw:true});
-
                 document.getElementById("demo").innerHTML = result;
 
             };
