@@ -2,84 +2,99 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Excel to JSON Demo For Randomization</title>
-        <script src="../Testing%20Search%20Bar/xlsx.full.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    </head>
-    <body>
+<head>
+    <title>Excel to JSON Demo For Randomization</title>
+    <script src="../Testing%20Search%20Bar/xlsx.full.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
 
-        <p id="demo"></p>
-        <script>
+<h2> This converts excel file to JSON and return that to the Screen </h2>
+<h3> I will be working on Randomizing the array next! </h3>
+<p id="demo"></p>
+<script>
 
-            //Waits until document has loaded
-            $( document ).ready(function() {
-                /* set up XMLHttpRequest */
-                var url = "Fortune500List.xlsx";
-                var oReq = new XMLHttpRequest();
-                oReq.open("GET", url, true);
-                oReq.responseType = "arraybuffer";
+    //Waits until document has loaded
+    $(document).ready(function () {
+        /* set up XMLHttpRequest */
+        var url = "Fortune500List.xlsx";
+        var oReq = new XMLHttpRequest();
+        oReq.open("GET", url, true);
+        oReq.responseType = "arraybuffer";
 
-                oReq.onload = function(e) {
-                    var arraybuffer = oReq.response;
+        oReq.onload = function (e) {
+            var arraybuffer = oReq.response;
 
-                    /* convert data to binary string */
-                    var data = new Uint8Array(arraybuffer);
-                    var arr = new Array();
-                    for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
-                    var bstr = arr.join("");
+            /* convert data to binary string */
+            var data = new Uint8Array(arraybuffer);
+            var arr = new Array();
+            for (var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
+            var bstr = arr.join("");
 
-                    /* Call XLSX */
-                    var workbook = XLSX.read(bstr, {type:"binary"});
+            /* Call XLSX */
+            var workbook = XLSX.read(bstr, {type: "binary"});
 
-                    /* DO SOMETHING WITH workbook HERE */
-                    var first_sheet_name = workbook.SheetNames[0];
-                    /* Get worksheet */
-                    var worksheet = workbook.Sheets[first_sheet_name];
-                    console.log(XLSX.utils.sheet_to_json(worksheet,
-                        {raw:true}));
-                    console.log("break");
+            /* DO SOMETHING WITH workbook HERE */
+            var first_sheet_name = workbook.SheetNames[0];
+            /* Get worksheet */
+            var worksheet = workbook.Sheets[first_sheet_name];
 
-                    //printing result to screen
-                    var result = XLSX.utils.sheet_to_html(worksheet,
-                        {raw:true});
-                    document.getElementById("demo").innerHTML = result;
+            var convertArrayResult = new Array();
+            convertArrayResult = XLSX.utils.sheet_to_json(worksheet);
+            //console.log("printing Converted Array");
+            //console.log(convertArrayResult);
 
-                    return result;
+            function shuffle(convertArrayResult) {
+                // Trying to randomize function
+                var currentIndex = convertArrayResult.length, temporaryValue, randomIndex;
 
-                };
+                // While there remain elements to shuffle...
+                while (0 !== currentIndex) {
 
-                console.log( "ready!" );
-                var result1 = oReq.send();
-                console.log(result1);
+                    // Pick a remaining element...
+                    randomIndex = Math.floor(Math.random() * currentIndex);
+                    currentIndex -= 1;
 
-                //shuffle function
-                function shuffle(array) {
-                    var currentIndex = array.length, temporaryValue, randomIndex;
-
-                    // While there remain elements to shuffle...
-                    while (0 !== currentIndex) {
-
-                        // Pick a remaining element...
-                        randomIndex = Math.floor(Math.random() * currentIndex);
-                        currentIndex -= 1;
-
-                        // And swap it with the current element.
-                        temporaryValue = array[currentIndex];
-                        array[currentIndex] = array[randomIndex];
-                        array[randomIndex] = temporaryValue;
-                    }
-
-                    return array;
+                    // And swap it with the current element.
+                    temporaryValue = convertArrayResult[currentIndex];
+                    convertArrayResult[currentIndex] = convertArrayResult[randomIndex];
+                    convertArrayResult[randomIndex] = temporaryValue;
                 }
+            }
 
-                // Used like so
-                var arr = [2, 11, 37, 42];
-                arr = shuffle(arr);
-                console.log(arr);
+            //Calling Shuffle
+            shuffle(convertArrayResult);
 
-            });
+            //returning the last 4 items in array after splicing
+            convertArrayResult.splice(0, 496);
+            console.log(convertArrayResult);
 
-        </script>
-    </body>
+            //printing to screen after converting to JSON
+            document.getElementById("demo").innerHTML = JSON.stringify(convertArrayResult);
+
+
+//            var newConvertArray = JSON.stringify(convertArrayResult);
+//            newConvertArray.slice(0, 496);
+//            console.log("Slicing");
+//            console.log(newConvertArray);
+//
+//            document.getElementById("demo").innerHTML = newConvertArray;
+//
+//
+//            //printing result to screen
+//            var result = XLSX.utils.sheet_to_html(worksheet,
+//                {raw:true});
+//            document.getElementById("demo").innerHTML = result;
+//
+//            return result;
+
+        };
+
+        console.log("Doc ready!");
+        oReq.send();
+
+    });
+
+</script>
+</body>
 </html>
