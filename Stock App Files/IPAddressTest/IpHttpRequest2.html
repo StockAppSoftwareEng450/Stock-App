@@ -17,23 +17,36 @@
         <script>
 
             //inner box
-            function pressMe1() {
-                console.log("First Function");
 
+            function profileloader()
+            {
+                profile = []; // no "var" makes this global in scope
+                profile[0] = "Joe";
+                profile[1] = "Bloggs";
+                profile[2] = "images/joeb/pic.jpg";
+                profile[3] = "Web Site Manager";
+            }
+            profileloader(); // mandatory
+            document.write("Firstname is: " + profile[0]);
+
+            function pressme(){
                 $.getJSON('//freegeoip.net/json/?callback=?', function (data) {
                     console.log(JSON.stringify(data, null, 2));
 
                     //Testing to see if response returns correctly
                     var response = (data);
                     console.log(response);
+                    resultArray = [];
+                    resultArray[0] = response.country_name;
+                    console.log(resultArray[0]);
 
                     document.getElementById("demo").innerHTML = response.country_name + " " + response.ip;
-
                 });
             }
 
-            //calling functions
-            pressMe1();
+            pressme();
+            document.write("Country is: " + pressme().resultArray[0]);
+
 
         </script>
     </body>

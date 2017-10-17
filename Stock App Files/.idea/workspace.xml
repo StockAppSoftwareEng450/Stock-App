@@ -24,8 +24,38 @@
       <file leaf-file-name="IpHttpRequest2.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/IPAddressTest/IpHttpRequest2.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="629">
-              <caret line="37" column="17" lean-forward="true" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
+            <state relative-caret-position="651">
+              <caret line="46" column="22" lean-forward="true" selection-start-line="46" selection-start-column="22" selection-end-line="46" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="File2.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/IPAddressTest/AccessingGlobalVarsWithMultipleFilesTest/File2.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="2" lean-forward="true" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="File1.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/IPAddressTest/AccessingGlobalVarsWithMultipleFilesTest/File1.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="2" lean-forward="true" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Test1.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/IPAddressTest/AccessingGlobalVarsWithMultipleFilesTest/Test1.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="14" column="7" lean-forward="true" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -48,6 +78,7 @@
       <list>
         <option value="CSS File" />
         <option value="HTML File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -68,6 +99,9 @@
         <option value="$PROJECT_DIR$/Scrolling News Bar/Test1/smoothDivScroll.css" />
         <option value="$PROJECT_DIR$/Scrolling News Bar/Test2/ScrollBarInfiniteTest2.html" />
         <option value="$PROJECT_DIR$/IPAddressTest/Readme.txt" />
+        <option value="$PROJECT_DIR$/IPAddressTest/AccessingGlobalVarsWithMultipleFilesTest/File1.js" />
+        <option value="$PROJECT_DIR$/IPAddressTest/AccessingGlobalVarsWithMultipleFilesTest/File2.js" />
+        <option value="$PROJECT_DIR$/IPAddressTest/AccessingGlobalVarsWithMultipleFilesTest/Test1.html" />
         <option value="$PROJECT_DIR$/IPAddressTest/IpHttpRequest2.html" />
       </list>
     </option>
@@ -114,6 +148,12 @@
               <item name="Stock App Files" type="b2602c69:ProjectViewProjectNode" />
               <item name="Stock App Files" type="462c0819:PsiDirectoryNode" />
               <item name="IPAddressTest" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Stock App Files" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Stock App Files" type="462c0819:PsiDirectoryNode" />
+              <item name="IPAddressTest" type="462c0819:PsiDirectoryNode" />
+              <item name="AccessingGlobalVarsWithMultipleFilesTest" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Stock App Files" type="b2602c69:ProjectViewProjectNode" />
@@ -189,18 +229,18 @@
       <workItem from="1507734880536" duration="1864000" />
       <workItem from="1507945722083" duration="11846000" />
       <workItem from="1508083575932" duration="1216000" />
-      <workItem from="1508268636702" duration="5045000" />
+      <workItem from="1508268636702" duration="8665000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20156000" />
+    <option name="totallyTimeSpent" value="23776000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1513" height="973" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4257028" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16277519" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -248,7 +288,9 @@
     </ignored-roots>
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -571,10 +613,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/IPAddressTest/AccessingGlobalVarsWithMultipleFilesTest/Test1.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="7" lean-forward="true" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IPAddressTest/AccessingGlobalVarsWithMultipleFilesTest/File1.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="2" lean-forward="true" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IPAddressTest/AccessingGlobalVarsWithMultipleFilesTest/File2.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="2" lean-forward="true" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/IPAddressTest/IpHttpRequest2.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="37" column="17" lean-forward="true" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
+        <state relative-caret-position="651">
+          <caret line="46" column="22" lean-forward="true" selection-start-line="46" selection-start-column="22" selection-end-line="46" selection-end-column="22" />
           <folding />
         </state>
       </provider>
