@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!-- Jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+<body>
+
+    <p id="demo"></p>
+
+    <script>
+        $.getJSON('//freegeoip.net/json/?callback=?', function(data) {
+            console.log(JSON.stringify(data, null, 2));
+            alert(JSON.stringify(data, null, 2));
+
+            //printing to screen
+            document.getElementById("demo").innerHTML = JSON.stringify(data, null, 2);
+
+            
+        });
+
+    </script>
+</body>
+</html>
