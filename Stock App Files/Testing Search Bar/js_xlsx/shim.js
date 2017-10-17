@@ -239,9 +239,8 @@ if (typeof ArrayBuffer !== 'undefined' && !ArrayBuffer.prototype.slice) {
 // https://github.com/davidchambers/Base64.js
 // (C) 2015 David Chambers
 // Base64.js may be freely distributed under the Apache 2.0 License.
-;(function () {
-
-  var object =
+(function () {
+    var object =
     typeof exports != 'undefined' ? exports :
     typeof self != 'undefined' ? self : // #8: web workers
     $.global; // #31: ExtendScript

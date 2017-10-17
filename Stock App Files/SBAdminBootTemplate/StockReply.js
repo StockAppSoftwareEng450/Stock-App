@@ -9,4 +9,6 @@ setInterval(function() {
             console.log(response.latestPrice);
         }
     });
+
+//   Change me later
 }, 3000);

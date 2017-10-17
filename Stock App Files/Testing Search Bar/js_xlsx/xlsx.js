@@ -7861,7 +7861,7 @@ function write_TABLESTYLES_bin(ba, data) {
 }
 
 function write_COLORPALETTE_bin(ba, data) {
-	return;
+
 	/* BrtBeginColorPalette [INDEXEDCOLORS] [MRUCOLORS] BrtEndColorPalette */
 }
 
@@ -8681,8 +8681,8 @@ function fuzzyfmla(f) {
 }
 /* --- formula references point to MS-XLS --- */
 /* Small helpers */
-function parseread(l) { return function(blob, length) { blob.l+=l; return; }; }
-function parseread1(blob) { blob.l+=1; return; }
+function parseread(l) { return function(blob, length) { blob.l+=l;  }; }
+function parseread1(blob) { blob.l+=1;  }
 
 /* Rgce Helpers */
 
@@ -8926,7 +8926,7 @@ function parsetab(blob, length) {
 
 /* 2.5.198.41 */
 function parse_PtgAttrSum(blob, length, opts) {
-	blob.l += opts && opts.biff == 2 ? 3 : 4; return;
+	blob.l += opts && opts.biff == 2 ? 3 : 4;
 }
 
 /* 2.5.198.43 */

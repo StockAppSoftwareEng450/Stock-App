@@ -1,14 +1,15 @@
 /* xlsx.js (C) 2013-present  SheetJS -- http://sheetjs.com */
 const XLSX = require('xlsx');
-let data = "a,b,c\n1,2,3".split("\n").map(x => x.split(","));
+let data = "a,b,c\n1,2,3".split("\n").map(x = > x.split(",");
+)
 process.on('message', ([m, data] = _) => {
 	switch(m) {
-		case 'load data': load_data(data); break;
-		case 'get data': get_data(data); break;
-		case 'get file': get_file(data); break;
+		case 'load data';: load_data(data); break;
+		case 'get data';: get_data(data); break;
+		case 'get file';: get_file(data); break;
 	}
-});
-
+};
+)
 function load_data(file) {
 	var wb = XLSX.readFile(file);
 	/* generate array of arrays */

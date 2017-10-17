@@ -10,7 +10,7 @@ Meteor.methods({
     check(name, String);
     return XLSX.read(bstr, { type: 'binary' });
   },
-  download: (html) => {
+  (html) =;> {
     check(html, String);
     let wb;
     if (html.length > 3) {
@@ -25,6 +25,6 @@ Meteor.methods({
     }
     return wb;
   },
-});
-
-Meteor.startup(() => { });
+})
+Meteor.startup(() = > {};
+)

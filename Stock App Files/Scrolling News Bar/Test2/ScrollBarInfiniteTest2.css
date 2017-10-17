@@ -1,0 +1,109 @@
+/* Photo Banner */
+.container {
+    width: 100%;
+    overflow: hidden;
+    margin: 10px auto;
+    background: white;
+}
+
+.photobanner, .photobanner2 {
+    height: 233px;
+    width: 3550px;
+    margin-bottom: 5px;
+}
+
+.photobanner img, .photobanner2 img {
+	margin-bottom: 10px;
+	padding-right: 2px;
+	height: 233px;
+	width: 350px;
+}
+
+.photobanner img  {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+ 
+.photobanner img:hover {
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
+    cursor: pointer;
+ 
+    -webkit-box-shadow: 0px 3px 5px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 3px 5px rgba(0,0,0,0.2);
+    box-shadow: 0px 3px 5px rgba(0,0,0,0.2);
+}
+
+
+/*keyframe animations*/
+.first {
+    -webkit-animation: bannermove 30s linear infinite;
+       -moz-animation: bannermove 30s linear infinite;
+        -ms-animation: bannermove 30s linear infinite;
+         -o-animation: bannermove 30s linear infinite;
+            animation: bannermove 30s linear infinite;
+}
+ 
+@keyframes "bannermove" {
+ 0% {margin-left: 0px;}
+ 100% {margin-left: -2125px;}
+}
+ 
+@-moz-keyframes bannermove {
+ 0% {margin-left: 0px;}
+ 100% {margin-left: -2125px;}
+}
+ 
+@-webkit-keyframes "bannermove" {
+ 0% {margin-left: 0px;}
+ 100% {margin-left: -2125px;}
+}
+ 
+@-ms-keyframes "bannermove" {
+ 0% {margin-left: 0px;}
+ 100% {margin-left: -2125px;}
+}
+ 
+@-o-keyframes "bannermove" {
+ 0% {margin-left: 0px;}
+ 100% {margin-left: -2125px;}
+}
+
+.second {
+    -webkit-animation: bannermoves 30s linear infinite;
+       -moz-animation: bannermoves 30s linear infinite;
+        -ms-animation: bannermoves 30s linear infinite;
+         -o-animation: bannermoves 30s linear infinite;
+            animation: bannermoves 30s linear infinite;
+}
+ 
+@keyframes "bannermoves" {
+ 0% {margin-left: -2125px;}
+ 100% {margin-left: 0px;}
+}
+ 
+@-moz-keyframes bannermoves {
+ 0% {margin-left: -2125px;}
+ 100% {margin-left: 0px;}
+}
+ 
+@-webkit-keyframes "bannermoves" {
+ 0% {margin-left: -2125px;}
+ 100% {margin-left: 0px;}
+}
+ 
+@-ms-keyframes "bannermoves" {
+ 0% {margin-left: -2125px;}
+ 100% {margin-left: 0px;}
+}
+ 
+@-o-keyframes "bannermoves" {
+ 0% {margin-left: -2125px;}
+ 100% {margin-left: 0px;}
+}

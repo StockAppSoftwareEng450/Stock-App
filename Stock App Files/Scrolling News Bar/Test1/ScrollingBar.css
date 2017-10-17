@@ -1,0 +1,14 @@
+#logoParade
+{
+    width: 728px;
+    height: 75px;
+    position: relative;
+}
+
+#logoParade div.scrollableArea a
+{
+    display: block;
+    float: left;
+    padding-left: 10px;
+    padding-right: 10px;
+}

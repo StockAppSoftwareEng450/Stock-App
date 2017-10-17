@@ -6,4 +6,4 @@
 		xlsx: "xlsx.full.min"
 	},
 	out: "app-built.js"
-})
+});

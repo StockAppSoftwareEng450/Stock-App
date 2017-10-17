@@ -27,7 +27,7 @@
 
             /* convert data to binary string */
             var data = new Uint8Array(arraybuffer);
-            var arr = new Array();
+            var arr = [];
             for (var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
             var bstr = arr.join("");
 
@@ -39,7 +39,7 @@
             /* Get worksheet */
             var worksheet = workbook.Sheets[first_sheet_name];
 
-            var convertArrayResult = new Array();
+            var convertArrayResult = [];
             convertArrayResult = XLSX.utils.sheet_to_json(worksheet);
             //console.log("printing Converted Array");
             //console.log(convertArrayResult);
@@ -65,11 +65,18 @@
             //Calling Shuffle
             shuffle(convertArrayResult);
 
+            /********************* Splicing 4 items **********************************************/
+
             //returning the last 4 items in array after splicing
-            convertArrayResult.splice(0, 496);
-            console.log(convertArrayResult);
+//            convertArrayResult.splice(0, 496);
+//            console.log(convertArrayResult);
+
+            /********************* End of Splicing 4 items ***************************************/
 
             //printing to screen after converting to JSON
+
+            console.log("Before Conversion");
+            console.log(convertArrayResult);
             document.getElementById("demo").innerHTML = JSON.stringify(convertArrayResult);
 
 

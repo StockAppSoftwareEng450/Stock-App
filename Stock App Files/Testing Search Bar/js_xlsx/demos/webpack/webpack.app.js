@@ -6,7 +6,7 @@ var commonops = {
 		process: false,
 		Buffer: false
 	}
-}
+};
 
 /* app.out.js */
 var app_config = Object.assign({
@@ -23,4 +23,4 @@ var appworker_config = Object.assign({
 module.exports = [
 	app_config,
 	appworker_config
-]
+];

@@ -82,7 +82,7 @@ var do_file = (function() {
 
 var export_xlsx = (function() {
 	var HTMLOUT = document.getElementById('htmlout');
-	var XTENSION = "xls|xlsx|xlsm|xlsb|xml|csv|txt|dif|sylk|slk|prn|ods|fods|htm|html".split("|")
+	var XTENSION = "xls|xlsx|xlsm|xlsb|xml|csv|txt|dif|sylk|slk|prn|ods|fods|htm|html".split("|");
 	return function() {
 		var wb = XLSX.utils.table_to_book(HTMLOUT);
 		var o = electron.dialog.showSaveDialog({

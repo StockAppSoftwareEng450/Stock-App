@@ -1,1 +1,1 @@
-../shim.js
+../shim.js;

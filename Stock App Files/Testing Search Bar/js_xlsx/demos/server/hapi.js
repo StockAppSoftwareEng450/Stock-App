@@ -3,8 +3,8 @@ var Hapi = require('hapi'), server = new Hapi.Server();
 var logit = require('./_logit');
 var Worker = require('tiny-worker');
 var fs = require('fs');
-var data = "a,b,c\n1,2,3".split("\n").map(x => x.split(","));
-
+var data = "a,b,c\n1,2,3".split("\n").map(x = > x.split(",");
+)
 function get_data(req, res, type) {
 	var work = new Worker('worker.js');
 	work.onmessage = function(e) {

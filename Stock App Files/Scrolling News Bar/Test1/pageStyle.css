@@ -1,0 +1,201 @@
+body
+{
+    font-family: Georgia, 'Times New Roman', Times, Serif;
+    /*background: #6facad url(../images/smoothDivScroll_bg.gif) repeat-y center;*/
+    background: #ffa41f url(../images/smoothDivScroll_bg.gif) repeat-y center;
+
+    text-align: center;
+}
+
+div#wrapper
+{
+    width: 952px;
+    margin: 0 auto;
+    text-align: left;
+    background: #fff;
+}
+
+div#mainColumn
+{
+    padding: 0;
+    float: left;
+    padding: 16px 0px 16px 16px;
+    width: 728px;
+    margin-bottom: 50px;
+    background: #fff;
+}
+
+div#rightColumn
+{
+    float: right;
+    padding: 16px;
+    background: #fff;
+}
+
+h1 { font-size: 40px; }
+h2 { font-size: 24px; }
+h3 { font-size: 18px; }
+
+
+h1, h2, h3
+{
+    margin-bottom: 10px;
+    padding-bottom: 0;
+}
+
+p
+{
+    font-size: 15px;
+    line-height: 20px;
+    margin-bottom: 20px;
+    margin-top: 0;
+}
+
+ul.options, ul.methods, ul.callbacks {
+    list-style-type: none;
+    list-style-position: outside;
+    padding: 0;
+}
+
+ul.options li, ul.methods li, ul.callbacks li {
+    background-color: #FFEACC;
+    font-size: 12px;
+    line-height: 18px;
+    margin-bottom: 25px;
+}
+
+ul.options li h4, ul.methods li h4, ul.callbacks li h4 {
+    background-color: #ffa41f;
+    padding: 5px;
+    margin: 0;
+}
+
+.removed {
+    color: #900;
+}
+
+ul.options li h4.removed, ul.methods li h4.removed, ul.callbacks li h4.removed {
+    background-color: #FFB2B2;
+}
+
+
+ul.options li p, ul.methods li p, ul.callbacks li p {
+    padding: 5px;
+    margin: 0;
+}
+
+ul.options li a.toc, ul.methods li a.toc, ul.callbacks li a.toc {
+    float: right;
+    padding: 5px;
+}
+
+
+/*
+a:link { color: #3d6666; }
+a:visited { color: #3d6666; }
+a:hover { color: #61a3a3; }
+a:active { color: #61a3a3; }
+
+h2 a:link { color: #000; }
+h2 a:visited { color: #000; }
+h2 a:hover { color: #000; }
+h2 a:active { color: #000; }
+*/
+ol, ul
+{
+    margin: 15px 0px;
+}
+
+ul li, ol li
+{
+    font-size: 15px;
+    line-height: 20px;
+    margin-top: 0;
+}
+
+pre
+{
+    font-size: 12px;
+    padding: 0;
+    margin: 0px 0px 20px 0px;
+    background: #f0f0f0;
+    border-left: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    line-height: 20px; /*--Height of each line of code--*/
+    background: url(../images/pre_code_bg.gif) repeat-y left top; /*--Background of lined paper--*/
+    width: 100%;
+    overflow: auto; /*--If the Code exceeds the width, a scrolling is available--*/
+    overflow-Y: hidden;  /*--Hides vertical scroll created by IE--*/
+}
+
+pre.publicMethods {
+    width: 720px;
+}
+
+pre code {
+    margin: 0 0 0 40px;  /*--Left Margin--*/
+    padding: 18px 0;
+    display: block;
+}
+
+code.javascript, code.html, code.css
+{
+    font-size: 13px;
+    color: #525252;
+}
+
+table
+{
+    font-size: 12px;
+    line-height: 18px;
+    border: solid 1px #e5ece5;
+    border-collapse:collapse;
+    width: 100%;
+}
+
+th
+{
+    text-align: left;
+    padding: 10px;
+    border: solid 1px #ffa41f;
+    background-color: #ffa41f;
+    color: #000;
+}
+
+td
+{
+    background-color: #FFEACC;
+    border: solid 1px #ffa41f;
+    padding: 10px;
+    vertical-align: top;
+    margin: 0;
+
+}
+
+img.site
+{
+    width: 150px;
+    width: 150px;
+    float: left;
+    margin: 0px 15px 20px 0px;
+    border: solid 1px #e5ece5;
+}
+
+/* Clearfix */
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.clearfix {
+    *zoom: 1;
+}

@@ -55,9 +55,9 @@ class SheetJSApp extends React.Component {
 	</div></div>
 </DragDropFile>
 ); };
-};
+}
 
-if(typeof module !== 'undefined') module.exports = SheetJSApp
+if(typeof module !== 'undefined') module.exports = SheetJSApp;
 
 /* -------------------------------------------------------------------------- */
 
@@ -81,7 +81,7 @@ class DragDropFile extends React.Component {
 	{this.props.children}
 </div>
 	); };
-};
+}
 
 /*
   Simple HTML5 file input wrapper
@@ -129,7 +129,7 @@ class OutTable extends React.Component {
 	</table>
 </div>
 	); };
-};
+}
 
 /* list of supported file types */
 const SheetJSFT = [

@@ -24,4 +24,4 @@ module.exports = {
 		process: false,
 		Buffer: false
 	}
-}
+};

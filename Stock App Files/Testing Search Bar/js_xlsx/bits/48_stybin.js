@@ -362,7 +362,7 @@ function write_TABLESTYLES_bin(ba, data) {
 }
 
 function write_COLORPALETTE_bin(ba, data) {
-	return;
+	
 	/* BrtBeginColorPalette [INDEXEDCOLORS] [MRUCOLORS] BrtEndColorPalette */
 }
 

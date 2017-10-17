@@ -18,7 +18,7 @@ function SheetJSExportService(uiGridExporterService) {
 
 	var service = {};
 	service.exportXLSB = function exportXLSB(gridApi) { return exportSheetJS(gridApi, { bookType: 'xlsb', bookSST: true, type: 'binary' }); };
-	service.exportXLSX = function exportXLSX(gridApi) { return exportSheetJS(gridApi, { bookType: 'xlsx', bookSST: true, type: 'binary' }); }
+	service.exportXLSX = function exportXLSX(gridApi) { return exportSheetJS(gridApi, { bookType: 'xlsx', bookSST: true, type: 'binary' }); };
 
 	return service;
 
