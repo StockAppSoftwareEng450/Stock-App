@@ -1,29 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
 
-    <!-- Jquery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!-- Jquery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-</head>
-<body>
+    </head>
 
+    <body>
+
+    <h3> Returns Country of Origin from users IP Address</h3>
     <p id="demo"></p>
 
-    <script>
-        $.getJSON('//freegeoip.net/json/?callback=?', function(data) {
-            console.log(JSON.stringify(data, null, 2));
-            alert(JSON.stringify(data, null, 2));
+        <script>
 
-            //printing to screen
-            document.getElementById("demo").innerHTML = JSON.stringify(data, null, 2);
+            //inner box
+            function pressMe1() {
+                console.log("First Function");
 
-            //Printing test
-            
-        });
+                $.getJSON('//freegeoip.net/json/?callback=?', function (data) {
+                    console.log(JSON.stringify(data, null, 2));
 
-    </script>
-</body>
+                    //Testing to see if response returns correctly
+                    var response = (data);
+                    console.log(response);
+
+                    document.getElementById("demo").innerHTML = response.country_name + " " + response.ip;
+
+                });
+            }
+
+            //calling functions
+            pressMe1();
+
+        </script>
+    </body>
 </html>
