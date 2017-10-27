@@ -36,16 +36,19 @@
                     //Testing to see if response returns correctly
                     var response = (data);
                     console.log(response);
-                    resultArray = [];
-                    resultArray[0] = response.country_name;
-                    console.log(resultArray[0]);
+                    resultResponse = response.country_name;
 
                     document.getElementById("demo").innerHTML = response.country_name + " " + response.ip;
+
+                    console.log(resultResponse);
+                    return resultResponse;
                 });
             }
 
-            pressme();
-            document.write("Country is: " + pressme().resultArray[0]);
+            var p = pressme();
+
+            //document.write("Country is: " + resultArray[0]);
+            document.write("Country is: " + resultResponse);
 
 
         </script>
