@@ -29,5 +29,7 @@ In our Software Engineering we were tasked with designing a program. We chose to
 - Russell Quao
 - Philip Gil-Perea
 - Isaiah Johnson
+- Isaac Silvious
+- Alyssa Drohan
 
 
