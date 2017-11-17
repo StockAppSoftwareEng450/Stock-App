@@ -31,7 +31,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AjaxTest.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AjaxTest.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/AjaxRequestTesting/AjaxTest.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
@@ -41,51 +41,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AjaxTest.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AjaxTest.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AjaxRequestTesting/AjaxTest.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="25" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="File2.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/IPAddressTest/AccessingGlobalVarsWithMultipleFilesTest/File2.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="15" lean-forward="false" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="15" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="File1.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/IPAddressTest/AccessingGlobalVarsWithMultipleFilesTest/File1.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="2" lean-forward="false" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Test1.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/IPAddressTest/AccessingGlobalVarsWithMultipleFilesTest/Test1.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="7" lean-forward="false" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="require.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/require.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="595">
+              <caret line="35" column="0" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -250,12 +210,12 @@
       <workItem from="1508437294880" duration="910000" />
       <workItem from="1508515752236" duration="86000" />
       <workItem from="1509075707269" duration="670000" />
-      <workItem from="1510932269205" duration="106000" />
+      <workItem from="1510932269205" duration="1020000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27881000" />
+    <option name="totallyTimeSpent" value="28795000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1513" height="973" extended-state="6" />
@@ -659,18 +619,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AjaxRequestTesting/AjaxTest.html">
+    <entry file="file://$PROJECT_DIR$/AjaxRequestTesting/AjaxTest.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="31" lean-forward="true" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
+        <state relative-caret-position="595">
+          <caret line="35" column="0" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AjaxRequestTesting/AjaxTest.js">
+    <entry file="file://$PROJECT_DIR$/AjaxRequestTesting/AjaxTest.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="25" selection-end-column="34" />
+        <state relative-caret-position="102">
+          <caret line="6" column="31" lean-forward="true" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
           <folding />
         </state>
       </provider>

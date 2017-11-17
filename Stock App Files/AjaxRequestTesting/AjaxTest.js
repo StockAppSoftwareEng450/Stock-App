@@ -17,13 +17,17 @@ function loadDoc() {
         200: "OK"
         403: "Forbidden"
         404: "Page not found" */
+
+        //Status returns the string in the txt file
         if (this.readyState === 4 && this.status === 200) {
             document.getElementById("demo").innerHTML =
                 this.responseText;
         }
-        else if (this.readyState === 4 && this.status === 403) {
-            document.getElementById("demo").innerHTML =
-                this.responseText;
+
+        //If file is not found, Display a message.
+        else if (this.readyState === 4 && this.status === 404) {
+            document.write("Failed to load given file");
+            console.log("Failed to load given file");
         }
     };
 
