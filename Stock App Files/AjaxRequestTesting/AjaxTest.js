@@ -21,6 +21,10 @@ function loadDoc() {
             document.getElementById("demo").innerHTML =
                 this.responseText;
         }
+        else if (this.readyState === 4 && this.status === 403) {
+            document.getElementById("demo").innerHTML =
+                this.responseText;
+        }
     };
 
     // Specifies the type of request: open(method, url, async)
