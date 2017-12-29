@@ -32,7 +32,10 @@
 <script>
 const _XLSX = require('xlsx');
 const X = typeof XLSX !== 'undefined' ? XLSX : _XLSX;
-const make_cols = refstr => Array(X.utils.decode_range(refstr).e.c + 1).fill(0).map((x,i) => ({name:X.utils.encode_col(i), key:i}));
+const make_cols = refstr =;
+>
+Array(X.utils.decode_range(refstr).e.c + 1).fill(0).map((x, i) = > ({name: X.utils.encode_col(i), key: i});
+)
 
 /* see Browser download file example in docs */
 function s2ab(s) {
@@ -84,7 +87,7 @@ export default {
 		_file(file) {
 			/* Boilerplate to set up FileReader */
 			const reader = new FileReader();
-			reader.onload = (e) => {
+			reader.onload = (e) =;> {
 				/* Parse data */
 				const bstr = e.target.result;
 				const wb = X.read(bstr, {type:'binary'});
@@ -96,8 +99,8 @@ export default {
 				/* Update state */
 				this.data = data;
 				this.cols = make_cols(ws['!ref']);
-			};
-			reader.readAsBinaryString(file);
+            }
+            reader.readAsBinaryString(file);
 		}
 	}
 };
