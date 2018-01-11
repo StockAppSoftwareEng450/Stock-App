@@ -5,7 +5,3 @@ asd
 
 test
 testDG
-<<<<<<< HEAD
-boyasasdass
-=======
->>>>>>> 10c3388f667abca931b085362c24228f389318c6
