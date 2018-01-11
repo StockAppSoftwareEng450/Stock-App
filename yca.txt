@@ -12,9 +12,14 @@ gump
 testing dg
 <<<<<<< Updated upstream
 moeny
+<<<<<<< refs/remotes/origin/master
 Isaiah 
 =======
 
 >>>>>>> Stashed changes
 
 Isaac
+=======
+
+test
+>>>>>>> test
