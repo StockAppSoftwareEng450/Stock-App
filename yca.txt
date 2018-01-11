@@ -10,16 +10,3 @@ i honestly dont think im doing this right
 Hello, I am BDB kjkj;lkj
 gump
 testing dg
-<<<<<<< Updated upstream
-moeny
-<<<<<<< refs/remotes/origin/master
-Isaiah 
-=======
-
->>>>>>> Stashed changes
-
-Isaac
-=======
-
-test
->>>>>>> test
