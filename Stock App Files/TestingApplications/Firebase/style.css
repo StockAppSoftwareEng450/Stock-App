@@ -3,8 +3,8 @@
 }
 
 body{
-    background:#92bde7;
-    color:#485e74;
+    background:#343a40;
+    color:#007bff;
     line-height:1.6;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding:1em;
@@ -39,7 +39,7 @@ ul{
 }
 
 .company-info{
-    background:#c9e6ff;
+    background:#007bff;
 }
 
 .company-info h3, .company-info ul{
@@ -73,11 +73,11 @@ ul{
 .contact form button, .contact form input, .contact form textarea{
     width:100%;
     padding:1em;
-    border:1px solid #c9e6ff;
+    border:1px solid #868e96;
 }
 
 .contact form button{
-    background:#c9e6ff;
+    background:#007bff;
     border:0;
     text-transform: uppercase;
 }
