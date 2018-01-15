@@ -7,16 +7,16 @@
 }
 
 .photobanner, .photobanner2 {
-    height: 233px;
-    width: 3550px;
+    height: 50px;
+    width: 150%;
     margin-bottom: 5px;
 }
 
 .photobanner img, .photobanner2 img {
 	margin-bottom: 10px;
 	padding-right: 2px;
-	height: 233px;
-	width: 350px;
+	height: 50px;
+	width: 150px;
 }
 
 .photobanner img  {

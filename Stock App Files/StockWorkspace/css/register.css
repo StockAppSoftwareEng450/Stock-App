@@ -1,0 +1,20 @@
+/* Sent message */
+.alert-message-sent {
+    text-align: center;
+    padding: 10px;
+    background: #79c879;
+    color: white;
+    margin-bottom: 10px;
+    display:none;
+}
+
+/* valid phone number */
+.alert-message-valid-phone {
+    text-align: center;
+    padding: 10px;
+    background: red;
+    color: white;
+    margin-bottom: 10px;
+    display:none;
+}
+

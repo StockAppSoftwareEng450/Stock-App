@@ -17,6 +17,12 @@
     <!-- Custom fonts for this template -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+    <!-- Firebase Integration -->
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+
+    <!-- Firebase login JS -->
+    <script src="js/login.js"></script>
+
     <!-- Custom styles for this template -->
     <link href="css/sb-admin.css" rel="stylesheet">
 
@@ -33,7 +39,8 @@
             <form>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                           placeholder="Enter email">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Password</label>
@@ -56,32 +63,6 @@
         </div>
     </div>
 </div>
-
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
-<script>
-    // Initialize Firebase
-    var config = {
-        apiKey: "AIzaSyBWRqFtzDSiyZfDD8WjvdERLo-NuraC8Bg",
-        authDomain: "stockapp-57f25.firebaseapp.com",
-        databaseURL: "https://stockapp-57f25.firebaseio.com",
-        projectId: "stockapp-57f25",
-        storageBucket: "stockapp-57f25.appspot.com",
-        messagingSenderId: "496167713307"
-    };
-    firebase.initializeApp(config);
-
-    var ref = firebase.database().ref("users");
-    console.log(ref);
-    /*ref.orderByKey().startAt(document.getElementById('exampleInputEmail1').innerHTML).endAt(document.getElementById('exampleInputEmail1')).on("child_added", function(snapshot) {
-        console.log(snapshot.key);
-    });*/
-
-    ref.orderByKey().startAt("name").endAt("name").on("child_added", function(snapshot) {
-        console.log(snapshot.key);
-    })
-
-</script>
 
 <!-- Bootstrap core JavaScript -->
 <script src="vendor/jquery/jquery.min.js"></script>
