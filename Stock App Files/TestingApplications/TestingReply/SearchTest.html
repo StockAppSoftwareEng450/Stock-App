@@ -4,48 +4,51 @@
         <!-- inserting jquery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-        <style>
-            * {
-                box-sizing: border-box;
-            }
+        <!-- cookies -->
+        <script src="../cookie/cookie.js"></script>
 
-            #myInput {
-                //background-image: url('/css/searchicon.png');
-                background-position: 10px 12px;
-                background-repeat: no-repeat;
-                width: 100%;
-                font-size: 16px;
-                padding: 12px 20px 12px 40px;
-                border: 1px solid #ddd;
-                margin-bottom: 12px;
-            }
+        <!--<style>-->
+            <!--* {-->
+                <!--box-sizing: border-box;-->
+            <!--}-->
 
-            #myUL {
-                list-style-type: none;
-                padding: 0;
-                margin: 0;
-            }
+            <!--#myInput {-->
+                <!--//background-image: url('/css/searchicon.png');-->
+                <!--background-position: 10px 12px;-->
+                <!--background-repeat: no-repeat;-->
+                <!--width: 100%;-->
+                <!--font-size: 16px;-->
+                <!--padding: 12px 20px 12px 40px;-->
+                <!--border: 1px solid #ddd;-->
+                <!--margin-bottom: 12px;-->
+            <!--}-->
 
-            #myUL li a {
-                border: 1px solid #ddd;
-                margin-top: -1px; /* Prevent double borders */
-                background-color: #f6f6f6;
-                padding: 12px;
-                text-decoration: none;
-                font-size: 18px;
-                color: black;
-                display: block
-            }
+            <!--#myUL {-->
+                <!--list-style-type: none;-->
+                <!--padding: 0;-->
+                <!--margin: 0;-->
+            <!--}-->
 
-            #myUL li a:hover:not(.header) {
-                background-color: #eee;
-            }
-        </style>
+            <!--#myUL li a {-->
+                <!--border: 1px solid #ddd;-->
+                <!--margin-top: -1px; /* Prevent double borders */-->
+                <!--background-color: #f6f6f6;-->
+                <!--padding: 12px;-->
+                <!--text-decoration: none;-->
+                <!--font-size: 18px;-->
+                <!--color: black;-->
+                <!--display: block-->
+            <!--}-->
+
+            <!--#myUL li a:hover:not(.header) {-->
+                <!--background-color: #eee;-->
+            <!--}-->
+        <!--</style>-->
     </head>
     <body>
-        <h2>My Portfolio</h2>
-        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for a Stock Symbol.." title="Type in a name">
-        <ul id="myUL">
+        <!--<h2>My Portfolio</h2>-->
+        <!--<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for a Stock Symbol.." title="Type in a name">-->
+        <!--<ul id="myUL">-->
             <!--
             <li><a href="#">Christina</a></li>
             <li><a href="#">Cindy</a></li>
@@ -53,69 +56,65 @@
              Starting the Stock Test -->
         </ul>
         <script>
-
+            //Testing the cookie
+            console.log("before the cookie");
+            Cookies.get('name');
+            console.log("after the cookie: ");
+        </script>
+        <script>
+            //     function myFunction() {
             //
-
-            function myFunction() {
-                var input, filter, ul, li, a, i;
-                input = document.getElementById("myInput");
-                console.log(input);
-                filter = input.value.toUpperCase();
-                ul = document.getElementById("myUL");
-                li = ul.getElementsByTagName("li");
-                for (i = 0; i < li.length; i++) {
-                    a = li[i].getElementsByTagName("a")[0];
-                    if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                        li[i].style.display = "";
-                    } else {
-                        li[i].style.display = "none";
-
-                    }
-                }
-                //Returning the result
-                console.log(filter);
-
-                var parser = document.createElement('a');
-                //End result should look like: https://api.iextrading.com/1.0/stock/VNOM/quote
-                parser.href = "https://api.iextrading.com/1.0/stock/";
-
-                parser.StockName = filter;
-                console.log("Parser StockName: " + parser.StockName);
-
-                var url = parser.href;
-                var stockName = parser.StockName;
-                var result = url + stockName;
-
-                //concat quote to the end of the url
-                var quoteAdd = "/quote";
-                result = result + quoteAdd;
-                console.log("quote: " + quoteAdd);
-                console.log("Final url: " + result);
-
-                //counting letters in the filter
-                var count = filter.replace(/[^A-Z]/gi, "").length;
-                console.log(count);
-                if (count == 2 || count == 3 || count == 4 && filter){
-                    if($("#myUL").length) {
-                        console.log("nested if result: " + result);
-
-                        /*  I need to find the element that i searched for, then add the result url to the button.
-                            For example, when i search for FLWS, i click on that tag to take me to a new page.
-
-
-                        ul = document.getElementById("myUL");
-                        li = ul.getElementsByTagName("li");
-                        console.log(li);
-
-                        var result1 = document.getElementById('li');
-                        console.log("nested result After: " + result);
-                        console.log("result1: " + result1);*/
-                        var resultDiv = "<li><a href=" + "'" + result + "'" + ">" + filter + "</a></li>";
-                        $("#myUL").append(resultDiv);
-                    }
-                }
-                return result;
-            }
+            //
+            //
+            //     // var input, filter, ul, li, a, i;
+            //     // input = document.getElementById("myInput");
+            //     // console.log(input);
+            //     // filter = input.value.toUpperCase();
+            //     // ul = document.getElementById("myUL");
+            //     // li = ul.getElementsByTagName("li");
+            //     // for (i = 0; i < li.length; i++) {
+            //     //     a = li[i].getElementsByTagName("a")[0];
+            //     //     if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            //     //         li[i].style.display = "";
+            //     //     } else {
+            //     //         li[i].style.display = "none";
+            //     //
+            //     //     }
+            //     // }
+            //     // Returning the result
+            //     // console.log("76: ul: " + ul);
+            //     // console.log("77: filter: " + filter);
+            //     //
+            //     // var parser = document.createElement('a');
+            //     // //End result should look like: https://api.iextrading.com/1.0/stock/VNOM/quote
+            //     // parser.href = "https://api.iextrading.com/1.0/stock/";
+            //     //
+            //     // parser.StockName = filter;
+            //     // console.log("Parser StockName: " + parser.StockName);
+            //     // var url = parser.href;
+            //     // var stockName = parser.StockName;
+            //     // var result = url + stockName;
+            //     //
+            //     // //concat quote to the end of the url
+            //     // var quoteAdd = "/quote";
+            //     // result = result + quoteAdd;
+            //     // //console.log("quote: " + quoteAdd);
+            //     // //console.log("Final url: " + result);
+            //     //
+            //     // //counting letters in the filter
+            //     // var count = filter.replace(/[^A-Z]/gi, "").length;
+            //     // //console.log(count);
+            //     // if (count == 2 || count == 3 || count == 4 && filter){
+            //     //     if($("#myUL").length) {
+            //     //         //console.log("nested if result: " + result);
+            //     //         var resultDiv = "<li><a href=" + "'" + result + "'" + ">" + filter + "</a></li>";
+            //     //         $("#myUL").append(resultDiv);
+            //     //     }
+            //     // }
+            //     //
+            //     // console.log(result);
+            //     // return result;
+            // }
         </script>
     </body>
 </html>

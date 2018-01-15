@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- JS-Cookie API -->
+        <script src="../cookie/cookie.js"></script>
+
+    </head>
+
+    <body>
+        <label for="myText"></label>
+        <input type="text" id="myText">
+        <button onclick="buttonPress()">Try it</button>
+
+        <p id="demo"></p>
+
+        <script>
+
+            //setting cookie
+            Cookies.set('name', 'value');
+
+            function buttonPress() {
+                var x = document.getElementById("myText").value;
+                document.getElementById("demo").innerHTML = x;
+                console.log("input: " + x);
+
+
+            }
+        </script>
+
+    </body>
+</html>

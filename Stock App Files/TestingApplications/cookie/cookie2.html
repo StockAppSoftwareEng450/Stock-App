@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cookie2</title>
+
+    <!-- Calling the Js Cookie API -->
+    <script src="cookie.js"></script>
+
+    <!-- Calling Jquery -->
+    <script src="../TestingReply/jquery3_2_1.js"></script>
+
+</head>
+<body>
+
+    <!-- Testing Configuration -->
+    <div id="StockTest_container">
+        <div id="StockIntro">Stock price of </div>
+        <div id="CompanyName"> </div>
+        <div id="StockPrice"> </div>
+    </div>
+
+    <script>
+
+        // Calling Cookie
+        var value = Cookies.get('stock');
+
+        if (value === "undefined"){
+            // Display error to the user and return user to homepage
+
+        }
+
+        // Verifying the Cookie Value
+        console.log(value);
+
+        // Parsing Stock Quote
+        var parser = document.createElement('a');
+        parser.href = "https://api.iextrading.com/1.0/stock/";
+        parser.StockName = value;
+        var url = parser.href;
+        var stockName = parser.StockName;
+        var result = url + stockName;
+        var addQuote = "/quote";
+        result = result + addQuote;
+
+        // Verifying the url
+        console.log(result);
+
+        setInterval(function() {
+            $.ajax({
+                url: result,
+                success: function(data) {
+                    console.log(data);
+                    var response = (data);
+                    var companyName = response.companyName;
+                    var latestPrice = response.latestPrice;
+                    document.getElementById("CompanyName").innerHTML = companyName;
+                    document.getElementById("StockPrice").innerHTML = latestPrice;
+
+                    //verifying information has been grabbed successfully
+                    console.log(companyName);
+                    console.log(latestPrice);
+                }
+            });
+        }, 3000);
+
+        // Deletes cookie
+        Cookies.remove('stock');
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cookie1</title>
+
+    <!-- Calling Js Cookie API -->
+    <script src="cookie.js"></script>
+</head>
+<body>
+
+    <!-- Input from textBox -->
+    <label for="myText"></label>
+    <input type="text" id="myText">
+
+    <!-- On button click call search button -->
+    <button onclick="buttonPress()">Search</button>
+
+    <script>
+
+        // Function that Grabs text and sets the Cookie and transfers user to the Display page
+        function buttonPress() {
+            var input = document.getElementById("myText").value;
+            console.log("input: " + input);
+
+            Cookies.set('stock', input);
+            window.location.href = "cookie2.html";
+        }
+    </script>
+
+</body>
+</html>
