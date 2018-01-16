@@ -25,9 +25,11 @@
         // Calling Cookie
         var value = Cookies.get('stock');
 
-        if (value === "undefined"){
+        // On refresh loads back to screen 1
+        if (value === undefined){
             // Display error to the user and return user to homepage
-
+            console.log("reached undefined");
+            window.location.href = "cookie1.html";
         }
 
         // Verifying the Cookie Value

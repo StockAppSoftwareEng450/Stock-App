@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Read</title>
+
+    <script src="https://www.gstatic.com/firebasejs/3.2.0/firebase.js"></script>
+    <script src="../TestingReply/jquery3_2_1.js"></script>
+</head>
+<body>
+<script>
+    $( document ).ready(function() {
+        console.log( "Doc ready!" );
+
+        var config = {
+            apiKey: "AIzaSyBWRqFtzDSiyZfDD8WjvdERLo-NuraC8Bg",
+            authDomain: "stockapp-57f25.firebaseapp.com",
+            databaseURL: "https://stockapp-57f25.firebaseio.com",
+            projectId: "stockapp-57f25",
+            storageBucket: "stockapp-57f25.appspot.com",
+            messagingSenderId: "496167713307"
+        };
+        firebase.initializeApp(config);
+
+        // Grabbing the firebase data pushed
+
+        var database = firebase.database();
+
+        var leadsRef = database.ref('leads');
+
+        // Grabbing all the data
+        leadsRef.on('value', function(snapshot){
+            snapshot.forEach(function(childSnapshot) {
+                var childData = childSnapshot.val();
+                console.log("forEach: " + childData);
+            });
+        });
+
+        // // Only show NEW Listings
+        // leadsRef.on('child_added', function(snapshot) {
+        //     //Do something with the data
+        //     snapshot.forEach(function(childSnapshot) {
+        //         var childData = childSnapshot.val();
+        //         console.log("forEach: " + childData);
+        //     });
+        // });
+    });
+</script>
+
+</body>
+</html>

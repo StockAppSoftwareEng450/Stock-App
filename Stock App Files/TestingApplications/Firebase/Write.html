@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Write</title>
+</head>
+<body>
+    <input type="text" id="name">
+    <input type="text" id="mobile">
+    <input type="text" id="email">
+
+    <button type="button" id="button" onclick="addLead()">Submit</button>
+
+    <script src="https://www.gstatic.com/firebasejs/3.2.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBWRqFtzDSiyZfDD8WjvdERLo-NuraC8Bg",
+            authDomain: "stockapp-57f25.firebaseapp.com",
+            databaseURL: "https://stockapp-57f25.firebaseio.com",
+            projectId: "stockapp-57f25",
+            storageBucket: "stockapp-57f25.appspot.com",
+            messagingSenderId: "496167713307"
+        };
+        firebase.initializeApp(config);
+
+        // init database
+        var database = firebase.database();
+
+        function writeUserData(userId, name, email, imageUrl) {
+            firebase.database().ref('users/' + userId).set({
+                username: name,
+                email: email,
+                profile_picture : imageUrl
+            });
+        }
+
+        //writing to database
+        var starCountRef = firebase.database().ref('posts/' + postId + '/starCount');
+        starCountRef.on('value', function(snapshot) {
+            updateStarCount(postElement, snapshot.val());
+        });
+
+    </script>
+
+</body>
+</html>
