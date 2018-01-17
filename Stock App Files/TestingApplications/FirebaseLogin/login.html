@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+    Register Page will include:
+        1) Create fields for all textboxes
+        2) grab info once submit button is hit
+        3) add usr info to the firebase database
+        4) validate text against invalid text (*$%& should not be in first name)
+-->
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>SB Admin - Start Bootstrap Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../StockWorkspace/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!--&lt;!&ndash; Custom fonts for this template &ndash;&gt;-->
+    <!--<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">-->
+
+    <!-- Custom styles for this template -->
+    <link href="../../StockWorkspace/css/sb-admin.css" rel="stylesheet">
+
+    <!-- Style Sheet for register -->
+    <link href="../../StockWorkspace/css/register.css" rel="stylesheet">
+
+
+</head>
+
+<body class="bg-dark">
+
+<header class="stockHeader">
+    <h2>Stock Application</h2>
+</header>
+
+<div id="container" class="container">
+    <!-- LOGIN -->
+    <form id="frmLogin" role="form">
+        <h2>Login</h2>
+
+        <div class="form-group">
+            <label for="txtEmail">Email address</label>
+            <input type="email" class="form-control" id="txtEmail" placeholder="Enter email" name="email" />
+        </div>
+        <div class="form-group">
+            <label for="txtPass">Password</label>
+            <input type="password" class="form-control" id="txtPass" placeholder="Password" name="password" />
+        </div>
+        <button type="submit" class="btn btn-default btn-block">Login</button>
+        <br />
+
+    </form>
+    <!-- / LOGIN -->
+    <!-- ALERT BOX -->
+    <div id="alert" class="alert" role="alert">
+        <h4 id="alert-title">You are not logged in</h4>
+
+        <p id="alert-detail"></p>
+    </div>
+    <!-- / ALERT BOX -->
+</div>
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+
+<!-- Firebase Key init -->
+<script src="js/FirebaseInit.js"></script>
+
+<!-- Firebase Integration -->
+<script src="js/login.js"></script>
+
+
+<!-- Bootstrap core JavaScript -->
+<script src="../../StockWorkspace/vendor/jquery/jquery.min.js"></script>
+<script src="../../StockWorkspace/vendor/popper/popper.min.js"></script>
+<script src="../../StockWorkspace/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

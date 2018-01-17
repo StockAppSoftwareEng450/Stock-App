@@ -9,12 +9,12 @@ var config = {
 };
 firebase.initializeApp(config);
 
-var ref = firebase.database().ref("Users");
+var ref = firebase.database().ref("Users")
 console.log(ref);
 /*ref.orderByKey().startAt(document.getElementById('exampleInputEmail1').innerHTML).endAt(document.getElementById('exampleInputEmail1')).on("child_added", function(snapshot) {
     console.log(snapshot.key);
 });*/
 
-ref.orderByKey().startAt("name").endAt("name").on("child_added", function(snapshot) {
-    console.log(snapshot.key);
+ref.orderByKey().on("child_added", function(snapshot) {
+    console.log("User: "+snapshot.val().confirmPassword);
 })
