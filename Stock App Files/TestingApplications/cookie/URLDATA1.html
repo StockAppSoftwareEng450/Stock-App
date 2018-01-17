@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>cookie1</title>
+    <title>URL DATA 1</title>
 
-    <!-- Calling Js Cookie API -->
-    <script src="cookie.js"></script>
 </head>
 <body>
 
@@ -23,8 +21,8 @@
             var input = document.getElementById("myText").value;
             console.log("input: " + input);
 
-            Cookies.set('stock', input);
-            window.location.href = "cookie2.html?stock="+input;
+            // Passes string input through URL
+            window.location.href = "cookie2.html?stock=" + input;
         }
     </script>
 
