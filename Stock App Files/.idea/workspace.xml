@@ -12,7 +12,7 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
       <file leaf-file-name="URLDATA1.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TestingApplications/cookie/URLDATA1.html">
+        <entry file="file://$PROJECT_DIR$/TestingApplications/URL DATA/URLDATA1.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="132">
               <caret line="4" column="20" lean-forward="false" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
@@ -21,31 +21,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="URLDATA2.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/TestingApplications/cookie/URLDATA2.html">
+      <file leaf-file-name="URLDATA2.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TestingApplications/URL DATA/URLDATA2.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1056">
-              <caret line="32" column="48" lean-forward="true" selection-start-line="32" selection-start-column="48" selection-end-line="32" selection-end-column="48" />
+              <caret line="32" column="48" lean-forward="false" selection-start-line="32" selection-start-column="48" selection-end-line="32" selection-end-column="48" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SearchTest.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TestingApplications/TestingReply/SearchTest.html">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/StockWorkspace/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="4" column="96" lean-forward="false" selection-start-line="4" selection-start-column="96" selection-end-line="4" selection-end-column="96" />
+            <state relative-caret-position="1287">
+              <caret line="300" column="6" lean-forward="false" selection-start-line="300" selection-start-column="6" selection-end-line="300" selection-end-column="6" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TestingApplications/TestingReply/test.html">
+      <file leaf-file-name="SearchForStock.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/StockWorkspace/js/SearchForStock.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="726">
-              <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+            <state relative-caret-position="165">
+              <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -57,8 +57,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
-        <option value="JavaScript File" />
         <option value="HTML File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -75,7 +75,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Testing Search Bar/TestSearchBar.html" />
         <option value="$PROJECT_DIR$/RandomizingFortune500/ConvertAndParse.html" />
         <option value="$PROJECT_DIR$/SBAdminBootTemplate/StockReply.js" />
         <option value="$PROJECT_DIR$/SBAdminBootTemplate/index.html" />
@@ -125,6 +124,8 @@
         <option value="$PROJECT_DIR$/TestingApplications/cookie/URLDATA2.html" />
         <option value="$PROJECT_DIR$/TestingApplications/TestingReply/SearchTest.html" />
         <option value="$PROJECT_DIR$/TestingApplications/cookie/URLDATA1.html" />
+        <option value="$PROJECT_DIR$/StockWorkspace/js/SearchForStock.js" />
+        <option value="$PROJECT_DIR$/StockWorkspace/index.html" />
       </list>
     </option>
   </component>
@@ -170,19 +171,13 @@
             <path>
               <item name="Stock App Files" type="b2602c69:ProjectViewProjectNode" />
               <item name="Stock App Files" type="462c0819:PsiDirectoryNode" />
-              <item name="TestingApplications" type="462c0819:PsiDirectoryNode" />
+              <item name="StockWorkspace" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Stock App Files" type="b2602c69:ProjectViewProjectNode" />
               <item name="Stock App Files" type="462c0819:PsiDirectoryNode" />
-              <item name="TestingApplications" type="462c0819:PsiDirectoryNode" />
-              <item name="cookie" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Stock App Files" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Stock App Files" type="462c0819:PsiDirectoryNode" />
-              <item name="TestingApplications" type="462c0819:PsiDirectoryNode" />
-              <item name="TestingReply" type="462c0819:PsiDirectoryNode" />
+              <item name="StockWorkspace" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -265,12 +260,12 @@
       <workItem from="1516048215004" duration="7261000" />
       <workItem from="1516078709225" duration="76000" />
       <workItem from="1516078804703" duration="2525000" />
-      <workItem from="1516219382907" duration="708000" />
+      <workItem from="1516219382907" duration="1940000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62602000" />
+    <option name="totallyTimeSpent" value="63834000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-13" y="-13" width="3026" height="1946" extended-state="6" />
@@ -333,13 +328,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/TestingApplications/Scrolling News Bar/Test1/ScrollingBarInfinite.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TestingApplications/Scrolling News Bar/Test1/pageStyle.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3349">
@@ -462,13 +450,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="363">
           <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/StockWorkspace/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2145">
-          <caret line="332" column="66" lean-forward="false" selection-start-line="332" selection-start-column="60" selection-end-line="332" selection-end-column="66" />
         </state>
       </provider>
     </entry>
@@ -600,6 +581,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/TestingApplications/URL DATA/URLDATA2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1056">
+          <caret line="32" column="48" lean-forward="false" selection-start-line="32" selection-start-column="48" selection-end-line="32" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/TestingApplications/TestingReply/SearchTest.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
@@ -616,7 +605,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TestingApplications/cookie/URLDATA1.html">
+    <entry file="file://$PROJECT_DIR$/TestingApplications/URL DATA/URLDATA1.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
           <caret line="4" column="20" lean-forward="false" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
@@ -624,10 +613,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TestingApplications/cookie/URLDATA2.html">
+    <entry file="file://$PROJECT_DIR$/StockWorkspace/js/SearchForStock.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1056">
-          <caret line="32" column="48" lean-forward="true" selection-start-line="32" selection-start-column="48" selection-end-line="32" selection-end-column="48" />
+        <state relative-caret-position="165">
+          <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/StockWorkspace/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1287">
+          <caret line="300" column="6" lean-forward="false" selection-start-line="300" selection-start-column="6" selection-end-line="300" selection-end-column="6" />
           <folding />
         </state>
       </provider>

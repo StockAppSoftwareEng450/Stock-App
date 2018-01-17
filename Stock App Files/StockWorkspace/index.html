@@ -23,6 +23,9 @@
     <!-- Custom styles for this template -->
     <link href="css/sb-admin.css" rel="stylesheet">
 
+    <!-- Testing the Search script -->
+    <script src="js/SearchForStock.js"></script>
+
     <!-- Testing the style aspect of the overlay feature for the search bar -->
     <style>
         * {
@@ -270,87 +273,18 @@
                     </a>
                 </div>
             </li>
+
+            <!-- Search Bar -->
             <li class="nav-item">
                 <form class="form-inline my-2 my-lg-0 mr-lg-2">
                     <div class="input-group">
-                        <input type="text" id="myInput" onkeyup="myFunction()" class="form-control"
+                        <input type="text" id="myInput" class="form-control"
                                placeholder="Search for a Stock Symbol.." title="Type in a name">
 
-                        <ul id="myUL">
-                            <!--
-                            <li><a href="#">Christina</a></li>
-                            <li><a href="#">Cindy</a></li>
-                             Starting the Stock Test -->
-                        </ul>
-
-                        <!-- Testing the Search script -->
-                        <script>
-
-                            function myFunction() {
-                                var input, filter, ul, li, a, i;
-                                input = document.getElementById("myInput");
-                                console.log(input);
-                                filter = input.value.toUpperCase();
-                                ul = document.getElementById("myUL");
-                                li = ul.getElementsByTagName("li");
-                                for (i = 0; i < li.length; i++) {
-                                    a = li[i].getElementsByTagName("a")[0];
-                                    if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                                        li[i].style.display = "";
-                                    } else {
-                                        li[i].style.display = "none";
-                                    }
-                                }
-
-                                /*************************** FIX ME ****************************************************/
-                                //Right now the filter returns, every key press. I need the filter to only return valid
-                                // symbols and company. Right now if the client searches the same stock twice the
-                                // the search bar returns twice.
-
-                                //Returning the result
-                                console.log(filter);
-
-                                /**************************** Fix Me *************************************************/
-
-                                var parser = document.createElement('a');
-                                //End result should look like: https://api.iextrading.com/1.0/stock/VNOM/quote
-                                parser.href = "https://api.iextrading.com/1.0/stock/";
-
-                                parser.StockName = filter;
-                                console.log("Parser StockName: " + parser.StockName);
-
-                                var url = parser.href;
-                                var stockName = parser.StockName;
-                                var result = url + stockName;
-
-                                //concat quote to the end of the url
-                                var quoteAdd = "/quote";
-                                result = result + quoteAdd;
-                                console.log("quote: " + quoteAdd);
-                                console.log("Final url: " + result);
-
-                                //counting letters in the filter
-                                var count = filter.replace(/[^A-Z]/gi, "").length;
-                                console.log(count);
-                                if (count === 2 || count === 3 || count === 4 && filter) {
-                                    if ($("#myUL").length) {
-                                        console.log("nested if result: " + result);
-                                        var resultDiv = "<li><a href=" + "'" + result + "'" + ">" + filter + "</a></li>";
-                                        $("#myUL").append(resultDiv);
-                                        console.log(resultDiv);
-
-                                    }
-                                }
-                                return result;
-                            }
-
-                            myFunction();
-                        </script>
-                        <!-- Ending the script -->
-
+                        <!--<ul id="myUL"> </ul>-->
 
                         <span class="input-group-btn">
-                  <button class="btn btn-primary" type="button">
+                  <button class="btn btn-primary" type="button" onclick="UrlStringPass()">
                     <i class="fa fa-search"></i>
                   </button>
                 </span>
