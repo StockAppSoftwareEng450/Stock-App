@@ -11,21 +11,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
-      <file leaf-file-name="Write.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/TestingApplications/Firebase/Write.html">
+      <file leaf-file-name="URLDATA1.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TestingApplications/cookie/URLDATA1.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1280">
-              <caret line="41" column="11" lean-forward="false" selection-start-line="41" selection-start-column="11" selection-end-line="41" selection-end-column="11" />
+            <state relative-caret-position="132">
+              <caret line="4" column="20" lean-forward="false" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Read.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TestingApplications/Firebase/Read.html">
+      <file leaf-file-name="URLDATA2.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/TestingApplications/cookie/URLDATA2.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1419">
-              <caret line="43" column="24" lean-forward="false" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="24" />
+            <state relative-caret-position="1056">
+              <caret line="32" column="48" lean-forward="true" selection-start-line="32" selection-start-column="48" selection-end-line="32" selection-end-column="48" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SearchTest.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TestingApplications/TestingReply/SearchTest.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="132">
+              <caret line="4" column="96" lean-forward="false" selection-start-line="4" selection-start-column="96" selection-end-line="4" selection-end-column="96" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TestingApplications/TestingReply/test.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="726">
+              <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -46,6 +66,7 @@
     <findStrings>
       <find>email</find>
       <find>submit</find>
+      <find>value</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -93,15 +114,17 @@
         <option value="$PROJECT_DIR$/TestingApplications/TestingReply/page2.html" />
         <option value="$PROJECT_DIR$/TestingApplications/TestingReply/cookie.js" />
         <option value="$PROJECT_DIR$/TestingApplications/TestingReply/SearchStockTransfer.html" />
-        <option value="$PROJECT_DIR$/TestingApplications/TestingReply/SearchTest.html" />
         <option value="$PROJECT_DIR$/TestingApplications/TestingReply/cookie1.html" />
         <option value="$PROJECT_DIR$/TestingApplications/TestingReply/cookie2.html" />
-        <option value="$PROJECT_DIR$/TestingApplications/cookie/cookie1.html" />
-        <option value="$PROJECT_DIR$/TestingApplications/cookie/cookie2.html" />
         <option value="$PROJECT_DIR$/TestingApplications/Firebase/WriteTest.html" />
         <option value="$PROJECT_DIR$/TestingApplications/Firebase/ReadTest.html" />
         <option value="$PROJECT_DIR$/TestingApplications/Firebase/Read.html" />
         <option value="$PROJECT_DIR$/TestingApplications/Firebase/Write.html" />
+        <option value="$PROJECT_DIR$/TestingApplications/cookie/cookie1.html" />
+        <option value="$PROJECT_DIR$/TestingApplications/cookie/cookie2.html" />
+        <option value="$PROJECT_DIR$/TestingApplications/cookie/URLDATA2.html" />
+        <option value="$PROJECT_DIR$/TestingApplications/TestingReply/SearchTest.html" />
+        <option value="$PROJECT_DIR$/TestingApplications/cookie/URLDATA1.html" />
       </list>
     </option>
   </component>
@@ -136,7 +159,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -154,7 +176,7 @@
               <item name="Stock App Files" type="b2602c69:ProjectViewProjectNode" />
               <item name="Stock App Files" type="462c0819:PsiDirectoryNode" />
               <item name="TestingApplications" type="462c0819:PsiDirectoryNode" />
-              <item name="Firebase" type="462c0819:PsiDirectoryNode" />
+              <item name="cookie" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Stock App Files" type="b2602c69:ProjectViewProjectNode" />
@@ -166,6 +188,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -242,11 +265,12 @@
       <workItem from="1516048215004" duration="7261000" />
       <workItem from="1516078709225" duration="76000" />
       <workItem from="1516078804703" duration="2525000" />
+      <workItem from="1516219382907" duration="708000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="61894000" />
+    <option name="totallyTimeSpent" value="62602000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-13" y="-13" width="3026" height="1946" extended-state="6" />
@@ -256,6 +280,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -267,7 +292,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -501,20 +525,6 @@
     <entry file="file://$PROJECT_DIR$/TestingApplications/TestingSessionCookie/cookie.js" />
     <entry file="file://$PROJECT_DIR$/TestingApplications/TestingReply/page1.html" />
     <entry file="file://$PROJECT_DIR$/TestingApplications/TestingReply/page2.html" />
-    <entry file="file://$PROJECT_DIR$/TestingApplications/TestingReply/test.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="726">
-          <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TestingApplications/TestingReply/SearchTest.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="620">
-          <caret line="89" column="52" lean-forward="true" selection-start-line="89" selection-start-column="52" selection-end-line="89" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TestingApplications/TestingReply/IndividualStockPageTestReply.html" />
     <entry file="file://$PROJECT_DIR$/TestingApplications/TestingReply/TestingReply.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -541,9 +551,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="462">
           <caret line="20" column="38" lean-forward="false" selection-start-line="20" selection-start-column="38" selection-end-line="20" selection-end-column="38" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -558,23 +566,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TestingApplications/cookie/cookie1.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="858">
-          <caret line="26" column="50" lean-forward="true" selection-start-line="26" selection-start-column="12" selection-end-line="26" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TestingApplications/cookie/cookie2.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="587">
-          <caret line="27" column="44" lean-forward="false" selection-start-line="27" selection-start-column="44" selection-end-line="27" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -590,7 +581,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="462">
           <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="54" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -606,6 +596,38 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1280">
           <caret line="41" column="11" lean-forward="false" selection-start-line="41" selection-start-column="11" selection-end-line="41" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestingApplications/TestingReply/SearchTest.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="4" column="96" lean-forward="false" selection-start-line="4" selection-start-column="96" selection-end-line="4" selection-end-column="96" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestingApplications/TestingReply/test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="726">
+          <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestingApplications/cookie/URLDATA1.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="4" column="20" lean-forward="false" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestingApplications/cookie/URLDATA2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1056">
+          <caret line="32" column="48" lean-forward="true" selection-start-line="32" selection-start-column="48" selection-end-line="32" selection-end-column="48" />
           <folding />
         </state>
       </provider>
