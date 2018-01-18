@@ -4,6 +4,6 @@ function UrlStringPass() {
     console.log("Search for Stock input: " + input);
 
     // Passes string input through URL
-    window.location.href = "IndividualStockPage.html?stock=" + input;
+    window.location.href = "IndividualStockPage.html?stock=" + input + "#";
 }
 
