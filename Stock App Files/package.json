@@ -7,6 +7,7 @@
     "build": "electron-packager . Stock-app --platform=win32 --arch=x64 --version=1.0.0 --overwrite"
   },
   "dependencies": {
+    "a-csv": "^2.0.0",
     "electron-prebuilt": "^1.4.13"
   }
 }
