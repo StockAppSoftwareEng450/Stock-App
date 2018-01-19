@@ -1,7 +1,24 @@
 "use strict";
 
-// Reference Messages collections
-var usersRef = firebase.database().ref('Users');
+var user = firebase.auth().currentUser;
+console.log("User: ");
+console.log(user);
+
+firebase.auth().signOut().then(function() {
+    // Sign-out successful.
+    console.log("Sign-out successful.")
+}).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    console.log(errorCode);
+    console.log(errorMessage);
+    // ...
+});
+
+var user = firebase.auth().currentUser;
+console.log("User: ");
+console.log(user);
 
 // Listen for form sumbit
 document.getElementById('contactForm').addEventListener('submit', submitForm);
@@ -53,24 +70,34 @@ function checkVals (fstName, lstName, email, phone, password, confirmPass) {
 // Function to send the correct values to firebase
 function send(fstName, lstName, email, phone, password, confirmPass) {
 
+    // Create Firebase User + Login
+    createUserAndLogin(email, password);
+    // Get current Firebase user
+    var user1 = null;
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            // User is signed in.
 
-    // Save message
-    saveMessage(fstName, lstName, email, phone, password, confirmPass );
+            // Save message
+            saveMessage(user.uid, fstName, lstName, phone);
 
-    // show alert
-    document.querySelector('.alert-message-sent').style.display = 'block';
+            // show alert
+            document.querySelector('.alert-message-sent').style.display = 'block';
 
-    //hide alert after 3 seconds
-    setTimeout(function(){
-        document.querySelector('.alert-message-sent').style.display = 'none';
-        console.log("before href transfer");
-        //window.location.href = "login.html";
-        console.log("after href transfer");
-    }, 3000);
+            //hide alert after 3 seconds
+            setTimeout(function(){
+                document.querySelector('.alert-message-sent').style.display = 'none';
+                console.log("before href transfer");
+                //window.location.href = "login.html";
+                console.log("after href transfer");
+            }, 3000);
 
-    // Clear Form
-    document.getElementById('contactForm').reset();
-
+            // Clear Form
+            document.getElementById('contactForm').reset();
+        } else {
+            // No user is signed in.
+        }
+    });
 }
 
 
@@ -81,17 +108,45 @@ function getInputVal(id){
 }
 
 // Save message to firebase
-function saveMessage(fstName, lstName, email, phone, password, confirmPass){
-    var newRegisterRef = usersRef.push();
-    newRegisterRef.set({
+function saveMessage(userId, fstName, lstName, phone){
+    firebase.database().ref('Users/' + userId).set({
         firstName: fstName,
         lastName: lstName,
-        email: email,
-        phone: phone,
-        password: password,
-        confirmPassword: confirmPass
+        phone: phone
     });
 
     console.log("Sent");
+}
+
+// create a user but not login
+// returns a promsie
+function createUser(email, password) {
+    var deferred = $.Deferred();
+    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log(errorCode);
+        console.log(errorMessage);
+        // ...
+    });
+
+    return deferred.promise();
+}
+
+// Create a user and then login in
+// returns a promise
+function createUserAndLogin(email, password) {
+    return createUser(email, password)
+        .then(function () {
+            return firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                console.log(errorCode);
+                console.log(errorMessage);
+                // ...
+            });
+        });
 }
 
