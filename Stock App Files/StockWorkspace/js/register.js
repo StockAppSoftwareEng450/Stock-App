@@ -1,9 +1,6 @@
 "use strict";
 
-var user = firebase.auth().currentUser;
-console.log("User: ");
-console.log(user);
-
+//Logout a current user
 firebase.auth().signOut().then(function() {
     // Sign-out successful.
     console.log("Sign-out successful.")
@@ -16,12 +13,8 @@ firebase.auth().signOut().then(function() {
     // ...
 });
 
-var user = firebase.auth().currentUser;
-console.log("User: ");
-console.log(user);
-
 // Listen for form sumbit
-document.getElementById('contactForm').addEventListener('submit', submitForm);
+document.getElementById('registerForm').addEventListener('submit', submitForm);
 
 // Sumbit form
 function submitForm(e){
@@ -99,7 +92,6 @@ function send(fstName, lstName, email, phone, password, confirmPass) {
         }
     });
 }
-
 
 //Function to get form values
 function getInputVal(id){
