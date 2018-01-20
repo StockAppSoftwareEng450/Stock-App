@@ -31,13 +31,12 @@
     <!-- Style Sheet for register -->
     <link href="css/register.css" rel="stylesheet">
 
-
 </head>
 
 <body class="bg-dark">
 
 <div class="container">
-    <header class="stockHeader">
+    <header class="stockHeaderRegister">
         <h2>Stock Application</h2>
     </header>
 
@@ -46,8 +45,9 @@
             Register an Account
         </div>
         <div class="card-body">
+
             <!-- Sending Alert -->
-            <div class="alert-message-sent"> Your message has been sent. Transferring to Login</div>
+            <div class="successful-register"> Successful Register. Transferring to Login</div>
 
             <form id="registerForm">
                 <div class="form-group">
@@ -68,6 +68,9 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Sending Alert That email is already in use -->
+                <div class="email-registered"> Email already registered</div>
 
                 <!-- Email Form  -->
                 <div class="form-group">
@@ -92,14 +95,16 @@
                         <!-- Password Form -->
                         <div class="col-md-6">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password"
+                            <!--Change back to password-->
+                            <input type="text" class="form-control" id="password"
                                    placeholder="Password">
                         </div>
 
                         <!-- Confirm Password Form -->
                         <div class="col-md-6">
                             <label for="confirmPass">Confirm password</label>
-                            <input type="password" class="form-control" id="confirmPass"
+                            <!--Change back to password-->
+                            <input type="text" class="form-control" id="confirmPass"
                                    placeholder="Confirm password">
                         </div>
                     </div>
@@ -122,7 +127,6 @@
 
 <!-- Firebase Integration -->
 <script src="js/register.js"></script>
-
 
 <!-- Bootstrap core JavaScript -->
 <script src="vendor/jquery/jquery.min.js"></script>

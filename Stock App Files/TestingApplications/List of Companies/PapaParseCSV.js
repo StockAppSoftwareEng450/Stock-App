@@ -617,7 +617,7 @@
                 this._chunkError();
             else
                 this._start += this._config.chunkSize;
-        }
+        };
 
         this._chunkLoaded = function()
         {
@@ -632,13 +632,13 @@
 
             this._finished = !this._config.chunkSize || this._start > getFileSize(xhr);
             this.parseChunk(xhr.responseText);
-        }
+        };
 
         this._chunkError = function(errorMessage)
         {
             var errorText = xhr.statusText || errorMessage;
             this._sendError(errorText);
-        }
+        };
 
         function getFileSize(xhr)
         {
@@ -687,7 +687,7 @@
         {
             if (!this._finished && (!this._config.preview || this._rowCount < this._config.preview))
                 this._readChunk();
-        }
+        };
 
         this._readChunk = function()
         {
@@ -700,7 +700,7 @@
             var txt = reader.readAsText(input, this._config.encoding);
             if (!usingAsyncReader)
                 this._chunkLoaded({ target: { result: txt } });	// mimic the async signature
-        }
+        };
 
         this._chunkLoaded = function(event)
         {
@@ -708,7 +708,7 @@
             this._start += this._config.chunkSize;
             this._finished = !this._config.chunkSize || this._start >= this._input.size;
             this.parseChunk(event.target.result);
-        }
+        };
 
         this._chunkError = function()
         {
@@ -732,7 +732,7 @@
             string = s;
             remaining = s;
             return this._nextChunk();
-        }
+        };
         this._nextChunk = function()
         {
             if (this._finished) return;
@@ -763,7 +763,7 @@
             this._input.on('data', this._streamData);
             this._input.on('end', this._streamEnd);
             this._input.on('error', this._streamError);
-        }
+        };
 
         this._nextChunk = function()
         {
@@ -775,7 +775,7 @@
             {
                 parseOnData = true;
             }
-        }
+        };
 
         this._streamData = bindFunction(function(chunk)
         {
@@ -1060,7 +1060,7 @@
                 for (var j = 0; j < preview.data.length; j++)
                 {
                     if (skipEmptyLines && preview.data[j].length === 1 && preview.data[j][0].length === 0) {
-                        emptyLinesCount++
+                        emptyLinesCount++;
                         continue
                     }
                     var fieldCount = preview.data[j].length;
@@ -1069,7 +1069,7 @@
                     if (typeof fieldCountPrevRow === 'undefined')
                     {
                         fieldCountPrevRow = fieldCount;
-                        continue;
+
                     }
                     else if (fieldCount > 1)
                     {
@@ -1326,7 +1326,7 @@
                         });
 
                         quoteSearch++;
-                        continue;
+
 
                     }
 

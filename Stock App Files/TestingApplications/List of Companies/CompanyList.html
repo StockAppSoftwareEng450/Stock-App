@@ -5,11 +5,9 @@
     <head>
         <meta charset="UTF-8">
         <title>Company List</title>
+
         <!-- Adding jquery -->
         <script src="../TestingReply/jquery3_2_1.js"></script>
-
-        <!--CSV Parser-->
-        <script src="PapaParseCSV.js"></script>
 
     </head>
     <body>
@@ -25,35 +23,15 @@
         <!-- Returning all symbols in the array -->
         <script>
 
-            var result = null;
-            var url = "https://api.iextrading.com/1.0/ref-data/symbols";
-
-            $.ajax({
-                url: url,
-                success: function(data) {
-                    console.log(data);
-                    result = [data];
-                }
-            });
-
-            // Function that Grabs text
+            // On button press
             function buttonPress() {
                 var input = document.getElementById("myText").value;
                 console.log("input: " + input);
 
-                var symbolNameArray = [];
-                var parentArray = [];
+                console.log(global);
 
-                for(var i in result[0]){
-                    symbolNameArray = [result[0][i].symbol,result[0][i].name];
-                    parentArray = parentArray.concat(symbolNameArray);
-                    //console.log(symbolNameArray);
-                    //console.log(parentArray);
-                }
             }
 
-
         </script>
-
     </body>
 </html>
