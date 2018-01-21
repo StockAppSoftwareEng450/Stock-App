@@ -22,7 +22,18 @@ function submitForm(e){
         var errorMessage = error.message;
         console.log(errorCode);
         console.log(errorMessage);
-        // ...
+
+        if (errorCode === "auth/user-not-found"){
+            document.querySelector('.user-not-found').style.display = 'block';
+            console.log("User not found");
+
+            // //hide alert after 5 seconds
+            setTimeout(function(){
+                document.querySelector('.user-not-found').style.display = 'none';
+            }, 5000);
+        }
+
+
     });
 
 }
