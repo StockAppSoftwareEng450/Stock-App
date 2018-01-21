@@ -10,7 +10,6 @@ firebase.auth().signOut().then(function() {
     var errorMessage = error.message;
     console.log(errorCode);
     console.log(errorMessage);
-    // ...
 });
 
 // Listen for form sumbit
@@ -32,22 +31,58 @@ function submitForm(e){
     var checkedArray = checkVals(fstName, lstName, email, phone, password, confirmPass);
     console.log("checked values: " + checkedArray);
 
-    /** Regex and check for return error messages to the user CSS **/
+    /** INVALID NAME MESSAGE TO USER**/
+    if (checkedArray[0] === false || checkedArray[1] === false){
+        document.querySelector('.name-invalid').style.display = 'block';
+        console.log("showing naming alert");
 
-    // // Checking if Phone is false, if so then display message to user to enter valid Phone number
-    // if (checkedArray[3] = false ){
-    //     // show phone alert
-    //     document.querySelector('.alert-message-valid-phone').style.display = 'block';
-    //     console.log("showing phone alert");
-    //
-    //     //hide alert after 3 seconds
-    //     setTimeout(function(){
-    //         document.querySelector('.alert-message-valid-phone').style.display = 'none';
-    //     }, 3000);
-    // }
+        // //hide alert after 5 seconds
+        setTimeout(function(){
+            document.querySelector('.name-invalid').style.display = 'none';
+        }, 5000);
+    }
 
-    // Calling send function to pass checked values to the array
-    send(checkedArray[0], checkedArray[1], checkedArray[2], checkedArray[3], checkedArray[4], checkedArray[5]);
+    /** INVALID EMAIL MESSAGE TO USER**/
+    if (checkedArray[2] === false ){
+        document.querySelector('.email-invalid ').style.display = 'block';
+        console.log("showing email alert");
+
+        // //hide alert after 5 seconds
+        setTimeout(function(){
+            document.querySelector('.email-invalid ').style.display = 'none';
+        }, 5000);
+    }
+
+    /** INVALID PHONE MESSAGE TO USER**/
+    if (checkedArray[3] === false ){
+        // show phone alert
+        document.querySelector('.alert-message-valid-phone').style.display = 'block';
+        console.log("showing phone alert");
+
+        // //hide alert after 5 seconds
+        setTimeout(function(){
+            document.querySelector('.alert-message-valid-phone').style.display = 'none';
+        }, 5000);
+    }
+
+    /** INVALID PASSWORD MESSAGE TO USER**/
+    if (checkedArray[4] === false ){
+        document.querySelector('.password-invalid').style.display = 'block';
+        console.log("showing password alert");
+
+        // //hide alert after 5 seconds
+        setTimeout(function(){
+            document.querySelector('.password-invalid').style.display = 'none';
+        }, 5000);
+    }
+
+    if (checkedArray[0] !== false && checkedArray[2] !== false &&
+        checkedArray[3] !== false && checkedArray[4] !== false) {
+
+        // Calling send function to pass checked values to the array
+        send(checkedArray[0], checkedArray[1], checkedArray[2], checkedArray[3], checkedArray[4], checkedArray[5]);
+    }
+
 }
 
 // Function to check if all values are correct
@@ -66,20 +101,29 @@ function checkVals (fstName, lstName, email, phone, password, confirmPass) {
 
     var fullNameRegex = /^(([A-Za-z]+[\-']?)*([A-Za-z]+)?\s)+([A-Za-z]+[\-']?)*([A-Za-z]+)?$/;
     var NameRegexResult = fullNameRegex.test(fstName + " " + lstName);
-    console.log("fullNameRegexResult: " + NameRegexResult);
+    //console.log("fullNameRegexResult: " + NameRegexResult);
 
-    if (NameRegexResult === false || nameLenResult > 40 ) {
+    // Check to see if user forgot name
+    if (fstNameLen === 0  || lstNameLen === 0){
         fstNameChecked = false;
         lstNameChecked = false;
     } else {
-        fstNameChecked = fstName;
-        lstNameChecked = lstName;
+        if (NameRegexResult === false || nameLenResult > 40 ) {
+            fstNameChecked = false;
+            lstNameChecked = false;
+        } else {
+            fstNameChecked = fstName;
+            lstNameChecked = lstName;
+        }
     }
+
+    console.log("fstNameChecked " + fstNameChecked);
+    console.log("lstNameChecked " + lstNameChecked);
 
     /** EMAIL CHECKING **/
     var emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     var emailRegexResult = emailRegex.test(email);
-    console.log("emailRegexResult: " +  emailRegexResult);
+    //console.log("emailRegexResult: " +  emailRegexResult);
 
     if (emailRegexResult === false){
         emailChecked = false;
@@ -87,13 +131,14 @@ function checkVals (fstName, lstName, email, phone, password, confirmPass) {
         emailChecked = email;
     }
 
+    console.log("emailChecked " + emailChecked);
+
     /** PHONE CHECKING **/
     var phoneLen = phone.length;
-    console.log("phone length: " + phoneLen);
 
     var phoneRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
     var phoneRegexResult = phoneRegex.test(phone);
-    console.log("phoneRegexResult: " + phoneRegexResult);
+    //console.log("phoneRegexResult: " + phoneRegexResult);
 
     // Check for ten numbers
     if (phoneRegexResult === false || phoneLen !== 10){
@@ -102,18 +147,20 @@ function checkVals (fstName, lstName, email, phone, password, confirmPass) {
         phoneChecked = phone;
     }
 
+    console.log("phoneChecked " + phoneChecked);
+
     /** PASSWORD **/
     var passRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;  // Minimum 8 chars, 1 num, 1 upper, 1 lower
     var passRegexResult = passRegex.test(password);
-    console.log("passRegexResult: " + passRegexResult);
+    //console.log("passRegexResult: " + passRegexResult);
 
     if (passRegexResult === false){
         passwordChecked = false;
-        console.log("password fails regex: " + password );
     } else {
         passwordChecked = password;
-        console.log("password: " + password);
     }
+
+    console.log("passwordChecked" + passwordChecked );
 
     /** CONFIRM PASSWORD **/
     // If checked Regex password is the same as the checked Regex Confirm Password
@@ -123,11 +170,11 @@ function checkVals (fstName, lstName, email, phone, password, confirmPass) {
     } else {
         passwordChecked = false;
         confirmPassChecked = false;
-        console.log("setting checked passwords against each other to false");
+        //console.log("setting checked passwords against each other to false");
     }
 
-    // passwordChecked = password;
-    // confirmPassChecked = confirmPass;
+    console.log("passwordChecked" + passwordChecked);
+    console.log("confirmPassChecked" + confirmPassChecked );
 
     // Return checked array
     array = [fstNameChecked, lstNameChecked, emailChecked, phoneChecked, passwordChecked, confirmPassChecked];
@@ -135,13 +182,12 @@ function checkVals (fstName, lstName, email, phone, password, confirmPass) {
     return array;
 }
 
-
-
 // Function to send the correct values to firebase
 function send(fstName, lstName, email, phone, password, confirmPass) {
 
     // Create Firebase User + Login
     createUserAndLogin(email, password);
+
     // Get current Firebase user
     var user1 = null;
     firebase.auth().onAuthStateChanged(function(user) {
@@ -157,11 +203,11 @@ function send(fstName, lstName, email, phone, password, confirmPass) {
             //hide alert after 3 seconds
             setTimeout(function(){
                 document.querySelector('.successful-register').style.display = 'none';
-                //window.location.href = "login.html";
+                window.location.href = "index.html";
             }, 3000);
 
             // Clear Form
-            document.getElementById('contactForm').reset();
+            document.getElementById('registerForm').reset();
         } else {
             // No user is signed in.
         }

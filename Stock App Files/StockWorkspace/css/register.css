@@ -8,6 +8,16 @@
     display:none;
 }
 
+/* Wrong Naming scheme */
+.name-invalid {
+    text-align: center;
+    padding: 10px;
+    background: red;
+    color: white;
+    margin-bottom: 10px;
+    display:none;
+}
+
 /* Email has already been registered */
 .email-registered {
     text-align: center;
@@ -18,18 +28,28 @@
     display:none;
 }
 
-
-
-
-
-
-
-
-
-
+/* Wrong Email Scheme */
+.email-invalid {
+    text-align: center;
+    padding: 10px;
+    background: red;
+    color: white;
+    margin-bottom: 10px;
+    display:none;
+}
 
 /* valid phone number */
 .alert-message-valid-phone {
+    text-align: center;
+    padding: 10px;
+    background: red;
+    color: white;
+    margin-bottom: 10px;
+    display:none;
+}
+
+/* Invalid Password */
+.password-invalid {
     text-align: center;
     padding: 10px;
     background: red;
