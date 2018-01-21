@@ -10,7 +10,6 @@ firebase.auth().signOut().then(function() {
     var errorMessage = error.message;
     console.log(errorCode);
     console.log(errorMessage);
-    // ...
 });
 
 // Listen for form submit
@@ -31,9 +30,16 @@ function submitForm(e){
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             // User is signed in.
+            document.querySelector('.login-alert').style.display = 'block';
+            console.log("Successfully Logged in");
 
-            //On success forward to index.html
-            window.location.replace("index.html");
+            // //hide alert after 3 seconds
+            setTimeout(function(){
+                document.querySelector('.login-alert').style.display = 'none';
+                //On success forward to index.html
+                window.location.replace("index.html");
+            }, 3000);
+
         } else {
             // No user is signed in.
         }
@@ -55,9 +61,20 @@ function loginUser(email, password) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
-        console.log(errorCode);
-        console.log(errorMessage);
-        // ...
+        //console.log(errorCode);
+        //console.log(errorMessage);
+
+        // Handle wrong code code
+        if (errorCode === "auth/invalid-email" || errorCode === "auth/wrong-password"){
+            document.querySelector('.wrong-credentials').style.display = 'block';
+            console.log("showing invalid credentials alert");
+
+            // //hide alert after 5 seconds
+            setTimeout(function(){
+                document.querySelector('.wrong-credentials').style.display = 'none';
+            }, 5000);
+        }
+
     });
 
     return deferred.promise();

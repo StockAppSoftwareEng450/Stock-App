@@ -1,0 +1,18 @@
+/* Wrong Naming scheme */
+.wrong-credentials {
+    text-align: center;
+    padding: 10px;
+    background: red;
+    color: white;
+    margin-bottom: 10px;
+    display:none;
+}
+
+.login-alert {
+    text-align: center;
+    padding: 10px;
+    background: #79c879;
+    color: white;
+    margin-bottom: 10px;
+    display:none;
+}
