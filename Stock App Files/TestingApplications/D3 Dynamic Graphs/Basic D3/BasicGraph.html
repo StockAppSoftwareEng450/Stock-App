@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Basic</title>
+
+    <style> /* set the CSS */
+        body {
+            font: 12px "Times New Roman";
+        }
+        path {
+            stroke: steelblue;
+            stroke-width: 2;
+            fill: none;
+        }
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: grey;
+            stroke-width: 1;
+            shape-rendering: crispEdges;
+        }
+    </style>
+</head>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+    // Set the dimensions of the canvas / graph
+    var margin = {
+        top: 30, right: 20, bottom: 30, left: 50},
+        width = 600 - margin.left - margin.right,   //530
+        height = 270 - margin.top - margin.bottom;  //210
+
+    // Parse the date / time refer to
+    // https://github.com/d3/d3-time-format/blob/master/README.md#timeParse
+    var parseDate = d3.time.format("%d-%b-%y").parse;
+
+    /** How D3 interprets the scaling **/
+        // ----------------------------------------
+        // | 0, height                width,height|     0,0   530,0
+        // |                                      |
+        // |                                      |
+        // |                                      |
+        // |  0,0                         width, 0|     0,210 530,210
+        // |---------------------------------------
+
+    // Set the ranges to the time ranges specified
+    var x = d3.time.scale().range([0, width]);
+    var y = d3.scale.linear().range([height, 0]);
+
+    // Define the axes
+    var xAxis = d3.svg.axis().scale(x)
+        .orient("bottom").ticks(5);
+    var yAxis = d3.svg.axis().scale(y)
+        .orient("left").ticks(5);
+
+    // Define the line which adjusts it for our desired coordinates
+    var valueline = d3.svg.line()
+        .interpolate("basis")       // Smoothes the line
+        .x(function(d) {
+            return x(d.date); })
+        .y(function(d) {
+            return y(d.close); });
+
+    // Adds the svg canvas
+    var svg = d3.select("body")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+
+    // Get the data
+    d3.csv("data.csv", function(error, data) {
+        data.forEach(function(d) {
+            d.date = parseDate(d.date);
+            d.close = +d.close;
+        });
+
+        // Scale the range of the data
+        x.domain(d3.extent(data, function(d) { return d.date; }));
+        y.domain([0, d3.max(data, function(d) { return d.close; })]);
+
+        // Add the valueline path.
+        svg.append("path")
+            .attr("class", "line")
+            .attr("d", valueline(data));
+
+        // Add the X Axis
+        svg.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+        // Add the Y Axis
+        svg.append("g")
+            .attr("class", "y axis")
+            .call(yAxis);
+
+        // Add the text label for the X axis
+        svg.append("text")
+            .attr("x", width / 2 )              //Dynamically moves with the graph
+            .attr("y", height + margin.bottom)
+            .style("text-anchor", "middle")
+            .text("Date");
+
+        // Add the text label for the Y axis
+        svg.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("x",0 - (height / 2))
+            .attr("y",0 - margin.left)
+            .attr("dy", "1em")
+            .style("text-anchor", "middle")
+            .text("Price");
+
+        // Adding the Title
+        svg.append("text")
+            .attr("x", (width / 2))
+            .attr("y", 0 - (margin.top / 2))
+            .attr("text-anchor", "middle")
+            .style("font-size", "16px")
+            .style("text-decoration", "underline")
+            .text("Price to Date");
+
+
+    });
+</script>
+
+</body>
+</html>
