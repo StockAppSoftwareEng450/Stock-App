@@ -11,21 +11,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
-      <file leaf-file-name="BasicGraph.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/TestingApplications/D3 Dynamic Graphs/Basic D3/BasicGraph.html">
+      <file leaf-file-name="basicJson.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/TestingApplications/D3 Dynamic Graphs/Basic D3/basicJson.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="903">
-              <caret line="43" column="69" lean-forward="true" selection-start-line="43" selection-start-column="69" selection-end-line="43" selection-end-column="69" />
+            <state relative-caret-position="838">
+              <caret line="48" column="53" lean-forward="true" selection-start-line="48" selection-start-column="53" selection-end-line="48" selection-end-column="53" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="data.csv" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TestingApplications/D3 Dynamic Graphs/Basic D3/data.csv">
+      <file leaf-file-name="ajax.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TestingApplications/D3 Dynamic Graphs/Line Chart/ajax.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="25" column="16" lean-forward="true" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
+            <state relative-caret-position="1234">
+              <caret line="131" column="16" lean-forward="false" selection-start-line="131" selection-start-column="16" selection-end-line="131" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -73,8 +73,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/TestingApplications/List of Companies/jquery.cvs.js" />
-        <option value="$PROJECT_DIR$/TestingApplications/List of Companies/CSV File Example.html" />
         <option value="$PROJECT_DIR$/TestingApplications/List of Companies/PapaParseCSV.js" />
         <option value="$PROJECT_DIR$/TestingApplications/List of Companies/companylist.csv" />
         <option value="$PROJECT_DIR$/TestingApplications/List of Companies/ParseCSVFile.js" />
@@ -124,6 +122,8 @@
         <option value="$PROJECT_DIR$/TestingApplications/D3 Dynamic Graphs/Basic D3/data.csv" />
         <option value="$PROJECT_DIR$/TestingApplications/D3 Dynamic Graphs/Basic D3/data1.csv" />
         <option value="$PROJECT_DIR$/TestingApplications/D3 Dynamic Graphs/Basic D3/BasicGraph.html" />
+        <option value="$PROJECT_DIR$/TestingApplications/D3 Dynamic Graphs/Basic D3/aapl.json" />
+        <option value="$PROJECT_DIR$/TestingApplications/D3 Dynamic Graphs/Basic D3/basicJson.html" />
       </list>
     </option>
   </component>
@@ -136,10 +136,10 @@
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="2118" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-11" />
+    <option name="width" value="1522" />
+    <option name="height" value="1931" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -157,7 +157,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -188,13 +188,27 @@
               <item name="Stock App Files" type="462c0819:PsiDirectoryNode" />
               <item name="TestingApplications" type="462c0819:PsiDirectoryNode" />
               <item name="D3 Dynamic Graphs" type="462c0819:PsiDirectoryNode" />
+              <item name="D3 CSV" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Stock App Files" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Stock App Files" type="462c0819:PsiDirectoryNode" />
+              <item name="TestingApplications" type="462c0819:PsiDirectoryNode" />
+              <item name="D3 Dynamic Graphs" type="462c0819:PsiDirectoryNode" />
+              <item name="D3 JSON" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Stock App Files" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Stock App Files" type="462c0819:PsiDirectoryNode" />
+              <item name="TestingApplications" type="462c0819:PsiDirectoryNode" />
+              <item name="D3 Dynamic Graphs" type="462c0819:PsiDirectoryNode" />
               <item name="Line Chart" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -206,7 +220,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="SearchEverywhereHistoryKey" value="jquer&#9;null&#9;null&#10;please include&#9;null&#9;null&#10;nameHelp&#9;null&#9;null" />
+    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Users/jghor/Documents/GitHub/Stock-App/Stock App Files/TestingApplications/D3 Dynamic Graphs/Basic D3/aapl.json&#10;jquer&#9;null&#9;null&#10;please include&#9;null&#9;null&#10;nameHelp&#9;null&#9;null" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -315,20 +329,22 @@
       <workItem from="1517026199766" duration="51000" />
       <workItem from="1517026260702" duration="604000" />
       <workItem from="1517026874234" duration="6872000" />
+      <workItem from="1517035759990" duration="3507000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="153902000" />
+    <option name="totallyTimeSpent" value="157409000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="0" width="1936" height="2118" extended-state="0" />
+    <frame x="-13" y="-13" width="3026" height="1946" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17622523" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14445196" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3291741" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -342,7 +358,6 @@
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3291741" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -365,20 +380,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/TestingApplications/D3 Dynamic Graphs/PieChart/pie.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1848">
-          <caret line="56" column="18" lean-forward="true" selection-start-line="56" selection-start-column="18" selection-end-line="56" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/StockWorkspace/js/SearchForStock.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="99">
-          <caret line="3" column="52" lean-forward="true" selection-start-line="2" selection-start-column="4" selection-end-line="3" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/StockWorkspace/js/IndividualStockPage.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1254">
@@ -503,13 +504,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TestingApplications/D3 Dynamic Graphs/D3 JSON/tweets.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="18" column="41" lean-forward="false" selection-start-line="18" selection-start-column="41" selection-end-line="18" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TestingApplications/D3 Dynamic Graphs/Line Chart/data.tsv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1576">
@@ -538,20 +532,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TestingApplications/D3 Dynamic Graphs/D3 JSON/JSON.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1267">
-          <caret line="97" column="0" lean-forward="false" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TestingApplications/D3 Dynamic Graphs/D3 CSV/CSV.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TestingApplications/D3 Dynamic Graphs/First App/FirstD3app.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="726">
@@ -570,13 +550,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2079">
           <caret line="99" column="20" lean-forward="false" selection-start-line="99" selection-start-column="20" selection-end-line="99" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TestingApplications/D3 Dynamic Graphs/Line Chart/ajax.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="992">
-          <caret line="100" column="69" lean-forward="false" selection-start-line="100" selection-start-column="69" selection-end-line="100" selection-end-column="69" />
         </state>
       </provider>
     </entry>
@@ -615,13 +588,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/StockWorkspace/js/AAPLCommon.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="11" column="2" lean-forward="true" selection-start-line="11" selection-start-column="2" selection-end-line="11" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/StockWorkspace/js/AAPLCommon.js" />
     <entry file="file://$PROJECT_DIR$/StockWorkspace/IndividualStockPage.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1008">
@@ -633,22 +600,69 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
           <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/TestingApplications/D3 Dynamic Graphs/Basic D3/data.csv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="25" column="16" lean-forward="true" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
+        <state relative-caret-position="825">
+          <caret line="25" column="16" lean-forward="false" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestingApplications/D3 Dynamic Graphs/D3 JSON/tweets.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="18" column="41" lean-forward="false" selection-start-line="18" selection-start-column="41" selection-end-line="18" selection-end-column="41" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/TestingApplications/D3 Dynamic Graphs/Basic D3/BasicGraph.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="903">
-          <caret line="43" column="69" lean-forward="true" selection-start-line="43" selection-start-column="69" selection-end-line="43" selection-end-column="69" />
+        <state relative-caret-position="409">
+          <caret line="74" column="10" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="128" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestingApplications/D3 Dynamic Graphs/Basic D3/aapl.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="294684" lean-forward="false" selection-start-line="0" selection-start-column="294684" selection-end-line="0" selection-end-column="294684" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestingApplications/D3 Dynamic Graphs/D3 CSV/CSV.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestingApplications/D3 Dynamic Graphs/D3 JSON/JSON.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="673">
+          <caret line="78" column="30" lean-forward="true" selection-start-line="78" selection-start-column="30" selection-end-line="78" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestingApplications/D3 Dynamic Graphs/Line Chart/ajax.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1234">
+          <caret line="131" column="16" lean-forward="false" selection-start-line="131" selection-start-column="16" selection-end-line="131" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestingApplications/D3 Dynamic Graphs/Basic D3/basicJson.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="838">
+          <caret line="48" column="53" lean-forward="true" selection-start-line="48" selection-start-column="53" selection-end-line="48" selection-end-column="53" />
           <folding />
         </state>
       </provider>

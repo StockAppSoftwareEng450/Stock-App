@@ -5,4 +5,4 @@
 /*exported XLSX */
 /*global global, exports, module, require:false, process:false, Buffer:false */
 var XLSX = {};
-(function make_xlsx(XLSX) {;
+(function make_xlsx(XLSX) {
