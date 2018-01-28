@@ -25,15 +25,15 @@
 
     <!-- Adding custom Stock Styling -->
     <style>
-        #StockTest_container{
-            text-align : center;
-            color : black;
-        }
         #CompanyName, #StockPrice {
             display : inline;
         }
-    </style>
 
+        #CompanyName {
+            font-size: 150%
+        }
+
+    </style>
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -246,6 +246,8 @@
                     </div>
                 </form>
             </li>
+
+
             <li class="nav-item">
                 <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
                     <i class="fa fa-fw fa-sign-out"></i>
@@ -268,21 +270,16 @@
             <li class="breadcrumb-item active">My Dashboard</li>
         </ol>
 
-        <!-- <h1>Blank Page</h1> -->
-
-
         <!-- insert information here -->
-        <div class="jumbotron text-center" style="padding-bottom: 3%; padding-top: 3%;">
-            <h1>Apple Stock</h1>
-            <p>
-                <!-- Testing Configuration -->
-                <div id="StockTest_container">
-                    <div id="CompanyName"> </div>
-                    <div id="StockPrice"> </div>
-                </div>
-            </p>
-        </div>
+        <div class="jumbotron" style="padding-bottom: 3%; padding-top: 3%;">
 
+            <!-- Company Name -->
+            <div id="CompanyName"></div>
+
+            <!-- Stock Price -->
+            <div id="StockPrice"></div>
+
+        </div>
 
         <div class="container">
             <div class="row">
@@ -303,8 +300,6 @@
                 </div>
             </div>
         </div>
-
-
     </div>
     <!-- /.container-fluid -->
 </div>
@@ -346,36 +341,40 @@
     </div>
 </div>
 
-<!-- Bootstrap core JavaScript -->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/popper/popper.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper/popper.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 
-<!-- Plugin JavaScript -->
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="vendor/chart.js/Chart.min.js"></script>
-<script src="vendor/datatables/jquery.dataTables.js"></script>
-<script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="vendor/datatables/jquery.dataTables.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
 
-<!-- Custom scripts for this template -->
-<script src="js/sb-admin.min.js"></script>
+    <!-- Custom scripts for this template -->
+    <script src="js/sb-admin.min.js"></script>
 
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
 
-<!-- Firebase Key init -->
-<script src="js/FirebaseInit.js"></script>
+    <!-- Firebase Key init -->
+    <script src="js/FirebaseInit.js"></script>
 
-<!-- @TODO Add generalization for individual input for instance any stock any where transfers to stock page. -->
-<!-- JS that takes Search for Stock input a -->
-<script src="js/IndividualStockPage.js"></script>
+    <!-- @TODO Add generalization for individual input for instance any stock any where transfers to stock page. -->
+    <!-- JS that takes Search for Stock input a -->
+    <script src="js/IndividualStockPage.js"></script>
 
-<!-- Enter on Key press for Search for stocks -->
-<script src="js/EnterOnKeyPress.js"></script>
+    <!-- Enter on Key press for Search for stocks -->
+    <script src="js/EnterOnKeyPress.js"></script>
 
-<!-- Search for stock application  -->
-<script src="js/SearchForStock.js"></script>
+    <!-- Search for stock application  -->
+    <script src="js/SearchForStock.js"></script>
 
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script>
+
+
+    </script>
 </body>
-
 </html>
