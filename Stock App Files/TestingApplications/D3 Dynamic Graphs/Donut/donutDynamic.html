@@ -111,8 +111,6 @@
                 var outerRadius=width/2;
                 var innerRadius=100;
 
-                ;
-
                 var color = d3.scale.category10(), svg;
 
                 function graph(_selection) {
@@ -125,7 +123,7 @@
 
                         var arc=d3.svg.arc()
                             .outerRadius(outerRadius)
-                            .innerRadius(innerRadius)
+                            .innerRadius(innerRadius);
                         if (!svg){
                             svg = d3.select(this).append("svg")
                                 .attr("width", width)
@@ -143,7 +141,7 @@
                         path.transition()
                             .attrTween("d", arcTween);
 
-                        path.exit().remove()
+                        path.exit().remove();
 
                         function arcTween(a) {
                             var i = d3.interpolate(this._current, a);

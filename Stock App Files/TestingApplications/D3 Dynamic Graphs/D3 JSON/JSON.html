@@ -45,7 +45,7 @@
             incomingData.forEach(function (el) {
                 el.impact = el.favorites.length + el.retweets.length;
                 el.tweetTime = new Date(el.timestamp);
-            })
+            });
             var maxImpact = d3.max(incomingData, function(el) {return el.impact;});
             var startEnd = d3.extent(incomingData, function(el) {
                 return el.tweetTime;
@@ -93,8 +93,7 @@
             d3.selectAll("g").each(function(d) {console.log(d)});
             d3.selectAll("text").each(function(d) {console.log(d)});
             d3.selectAll("circle").each(function(d) {console.log(d)});
-        };
-
+        }
 
 
     </script>
