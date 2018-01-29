@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+
+        <script src="https://d3js.org/d3.v3.js"></script>
+
+        <style>
+            body {
+                background-color: #1B1F2A;
+                width: 100%;
+                font-family: 'Roboto', sans-serif;
+                height: 100%;
+            }
+
+            .widget {
+                margin: 0 auto;
+                width:350px;
+                margin-top:50px;
+                background-color: #222D3A;
+                border-radius: 5px;
+                box-shadow: 0px 0px 1px 0px #06060d;
+
+            }
+
+            .header{
+                background-color: #29384D;
+                height:40px;
+                color:#929DAF;
+                text-align: center;
+                line-height: 40px;
+                border-top-left-radius: 7px;
+                border-top-right-radius: 7px;
+                font-weight: 400;
+                font-size: 1.5em;
+                text-shadow: 1px 1px #06060d;
+            }
+
+            .chart-container{
+                padding:25px;
+            }
+
+            .shadow {
+                -webkit-filter: drop-shadow( 0px 3px 3px rgba(0,0,0,.5) );
+                filter: drop-shadow( 0px 3px 3px rgba(0,0,0,.5) );
+            }
+
+            /*.firstStockDiv, .firstStockPercentageDiv, .secondStockDiv, .secondStockPercentageDiv,*/
+            /*.thirdStockDiv, .thirdStockPercentageDiv, .fourthStockDiv, .fourthStockPercentageDiv {*/
+                /*display: inline-block;*/
+            /*}*/
+        </style>
+    </head>
+    <body>
+
+        <!-- Donut -->
+        <div class="widget">
+            <div class="header">Browser Market Share</div>
+            <div id="chart" class="chart-container"></div>
+        </div>
+
+
+
+        <script>
+
+            var firstStock = null;
+            var firstStockPercentage = null;
+            var secondStock = null;
+            var secondStockPercentage = null;
+            var thirdStock = null;
+            var thirdStockPercentage = null;
+            var fourthStock = null;
+            var fourthStockPercentage = null;
+
+            // on owned stock Symbol button Click
+            function updateDonut() {
+
+                // first stock
+                firstStock = document.getElementById("firstStock").value;
+                console.log("Search for Stock input: " + firstStock);
+                firstStockPercentage = document.getElementById("firstStockPercentage").value;
+                console.log("Search for Stock input: " + firstStockPercentage);
+
+                // second stock
+                secondStock = document.getElementById("secondStock").value;
+                console.log("Search for Stock input: " + secondStock);
+                secondStockPercentage = document.getElementById("secondStockPercentage").value;
+                console.log("Search for Stock input: " + secondStockPercentage);
+
+                // third stock
+                thirdStock = document.getElementById("thirdStock").value;
+                console.log("Search for Stock input: " + thirdStock);
+                thirdStockPercentage = document.getElementById("thirdStockPercentage").value;
+                console.log("Search for Stock input: " + thirdStockPercentage);
+
+                // fourth stock
+                fourthStock = document.getElementById("fourthStock").value;
+                console.log("Search for Stock input: " + fourthStock);
+                fourthStockPercentage = document.getElementById("fourthStockPercentage").value;
+                console.log("Search for Stock input: " + fourthStockPercentage);
+            }
+
+
+            var updatePie = function () {
+
+                var width = 300,
+                    height = 300,
+                    radius = Math.min(width, height) / 2;
+
+                var outerRadius=width/2;
+                var innerRadius=100;
+
+                var color = d3.scale.category10(), svg;
+
+                function graph(_selection) {
+                    _selection.each(function(_data) {
+
+                        var pie = d3.layout.pie()
+                            .value(function(d) { return d[1]; })
+                            .sort(null);
+
+
+                        var arc=d3.svg.arc()
+                            .outerRadius(outerRadius)
+                            .innerRadius(innerRadius);
+                        if (!svg){
+                            svg = d3.select(this).append("svg")
+                                .attr("width", width)
+                                .attr("height", height)
+                                .append("g")
+                                .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+                        }
+                        var path = svg.selectAll("path").data(pie(_data));
+
+                        path.enter().append("path")
+                            .attr("fill", function(d, i) { return color(i); })
+                            .attr("d", arc)
+                            .each(function(d) {this._current = d;} );
+
+                        path.transition()
+                            .attrTween("d", arcTween);
+
+                        path.exit().remove();
+
+                        function arcTween(a) {
+                            var i = d3.interpolate(this._current, a);
+                            this._current = i(0);
+                            return function(t) {
+                                return arc(i(t));
+                            };
+                        }
+                    });
+
+                }
+                return graph;
+            };
+
+            var updateFunction = updatePie();
+            var container = d3.select("#chart");
+
+            function update(data) {
+                container.datum(data).call(updateFunction);
+            }
+
+            var firstDataset = [
+                [
+                    "blog 1", "6"
+                ],
+                [
+                    "blog 2", "7"
+                ],
+                [
+                    "blog 3", "8"
+                ]
+            ];
+
+            update(firstDataset);
+
+            document.getElementById("reDrawButton").addEventListener("click", reDrawChart);
+
+            function reDrawChart() {
+                var secondDataset = [
+                    [
+                        firstStock, firstStockPercentage
+                    ],
+                    [
+                        secondStock, secondStockPercentage
+                    ],
+                    [
+                        thirdStock, thirdStockPercentage
+                    ],
+                    [
+                        fourthStock, fourthStockPercentage
+                    ]
+                ];
+                update(secondDataset);
+            }
+
+        </script>
+        <!-- Inputs for first stock symbol -->
+        <div class="firstStockDiv">
+            <label for="firstStock"></label>
+            <input type="text" id="firstStock" placeholder="Enter Stock Symbol">
+        </div>
+        <div class="firstStockPercentageDiv">
+            <label for="firstStockPercentage"></label>
+            <input type="text" id="firstStockPercentage" placeholder="Enter First Stock Percentage">
+        </div>
+        <br>
+
+        <!-- Inputs for Second stock symbol -->
+        <div class="secondStockDiv">
+            <label for="secondStock"></label>
+            <input type="text" id="secondStock" placeholder="Enter Stock Symbol">
+        </div>
+        <div class="secondStockPercentageDiv">
+            <label for="secondStockPercentage"></label>
+            <input type="text" id="secondStockPercentage" placeholder="Enter Second Stock Percentage">
+        </div>
+        <br>
+
+        <!-- Inputs for Third stock symbol -->
+        <div class="thirdStockDiv">
+            <label for="thirdStock"></label>
+            <input type="text" id="thirdStock" placeholder="Enter Stock Symbol">
+        </div>
+        <div class="thirdStockPercentageDiv">
+            <label for="thirdStockPercentage"></label>
+            <input type="text" id="thirdStockPercentage" placeholder="Enter Third Stock Percentage">
+        </div>
+        <br>
+
+        <!-- Inputs for Fourth stock symbol -->
+        <div class="fourthStockDiv">
+            <label for="fourthStock"></label>
+            <input type="text" id="fourthStock" placeholder="Enter Stock Symbol">
+        </div>
+        <div class="fourthStockPercentageDiv">
+            <label for="fourthStockPercentage"></label>
+            <input type="text" id="fourthStockPercentage" placeholder="Enter Fourth Stock Percentage">
+        </div>
+
+        <button onclick="updateDonut()" id="reDrawButton">Redraw pie</button>
+
+    </body>
+</html>

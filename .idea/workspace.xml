@@ -1,47 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9eabe292-979e-46a6-beda-4872bcffac2e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Stock App Files/RandomizingFortune500/WebCrawler.html" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Stock App Files/npm-debug.log" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/RandomizingFortune500/ConvertAndParse.html" afterPath="$PROJECT_DIR$/Stock App Files/RandomizingFortune500/ConvertAndParse.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/SBAdminBootTemplate/vendor/datatables/jquery.dataTables.js" afterPath="$PROJECT_DIR$/Stock App Files/SBAdminBootTemplate/vendor/datatables/jquery.dataTables.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/TestSearchBar.html" afterPath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/TestSearchBar.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/bits/00_header.js" afterPath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/bits/00_header.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/bits/48_stybin.js" afterPath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/bits/48_stybin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/bits/62_fxls.js" afterPath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/bits/62_fxls.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/angular/SheetJS-angular.js" afterPath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/angular/SheetJS-angular.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/electron/index.js" afterPath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/electron/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/extendscript/aftereffects.jsx" afterPath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/extendscript/aftereffects.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/extendscript/estoolkit.jsx" afterPath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/extendscript/estoolkit.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/extendscript/illustrator.jsx" afterPath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/extendscript/illustrator.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/extendscript/indesign.jsx" afterPath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/extendscript/indesign.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/extendscript/photoshop.jsx" afterPath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/extendscript/photoshop.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/extendscript/test.jsx" afterPath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/extendscript/test.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/headless/puppeteer.js" afterPath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/headless/puppeteer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/meteor/server/main.js" afterPath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/meteor/server/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/react/pages/index.js" afterPath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/react/pages/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/react/react-native.js" afterPath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/react/react-native.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/react/sheetjs.jsx" afterPath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/react/sheetjs.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/requirejs/build.js" afterPath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/requirejs/build.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/server/_logit.js" afterPath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/server/_logit.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/server/_request.js" afterPath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/server/_request.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/server/hapi.js" afterPath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/server/hapi.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/server/koa.js" afterPath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/server/koa.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/server/koasub.js" afterPath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/server/koasub.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/webpack/webpack.app.js" afterPath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/webpack/webpack.app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/webpack/webpack.config.js" afterPath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/demos/webpack/webpack.config.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/dist/jszip.js" afterPath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/dist/jszip.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/dist/xlsx.js" afterPath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/dist/xlsx.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/jszip.js" afterPath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/jszip.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/shim.js" afterPath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/shim.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/tests/make_fixtures.js" afterPath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/tests/make_fixtures.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/tests/mocha.js" afterPath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/tests/mocha.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/tests/shim.js" afterPath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/tests/shim.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/xlsx.flow.js" afterPath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/xlsx.flow.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/xlsx.js" afterPath="$PROJECT_DIR$/Stock App Files/Testing Search Bar/js_xlsx/xlsx.js" />
-    </list>
+    <list default="true" id="9eabe292-979e-46a6-beda-4872bcffac2e" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -51,61 +11,75 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Note.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Stock App Files/Testing Search Bar/Note.txt">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Stock App Files/StockWorkspace/index.html">
+<<<<<<< Updated upstream
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="6" lean-forward="false" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TestSearchBar.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Stock App Files/Testing Search Bar/TestSearchBar.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="8" lean-forward="false" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="74" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ConvertAndParse.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Stock App Files/RandomizingFortune500/ConvertAndParse.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="458">
-              <caret line="84" column="45" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="99" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WebCrawler.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Stock App Files/RandomizingFortune500/WebCrawler.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" column="7" lean-forward="true" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
+            <state relative-caret-position="363">
+              <caret line="11" column="28" lean-forward="false" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="login.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Stock App Files/SBAdminBootTemplate/login.html">
+        <entry file="file://$PROJECT_DIR$/Stock App Files/StockWorkspace/login.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="2310">
+              <caret line="70" column="0" lean-forward="false" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Stock App Files/SBAdminBootTemplate/index.html">
+      <file leaf-file-name="register.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Stock App Files/StockWorkspace/register.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="901">
-              <caret line="53" column="36" lean-forward="false" selection-start-line="53" selection-start-column="36" selection-end-line="53" selection-end-column="36" />
+            <state relative-caret-position="1089">
+              <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="indexTest.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Stock App Files/TestingApplications/Firebase/indexTest.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="891">
+              <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+=======
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1491">
+              <caret line="71" column="19" lean-forward="true" selection-start-line="71" selection-start-column="19" selection-end-line="71" selection-end-column="19" />
+>>>>>>> Stashed changes
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< Updated upstream
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Stock App Files/TestingApplications/Firebase/style.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="2" lean-forward="false" selection-start-line="0" selection-start-column="2" selection-end-line="0" selection-end-column="2" />
+=======
+      <file leaf-file-name="register.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Stock App Files/StockWorkspace/register.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="329">
+              <caret line="97" column="0" lean-forward="false" selection-start-line="97" selection-start-column="0" selection-end-line="110" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Stock App Files/StockWorkspace/login.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="662">
+              <caret line="78" column="0" lean-forward="true" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
+>>>>>>> Stashed changes
               <folding />
             </state>
           </provider>
@@ -129,6 +103,16 @@
         <option value="$PROJECT_DIR$/Stock App Files/Testing Search Bar/TestSearchBar.html" />
         <option value="$PROJECT_DIR$/Stock App Files/RandomizingFortune500/ConvertAndParse.html" />
         <option value="$PROJECT_DIR$/Stock App Files/RandomizingFortune500/WebCrawler.html" />
+        <option value="$PROJECT_DIR$/Stock App Files/StockWorkspace/login.html" />
+<<<<<<< Updated upstream
+        <option value="$PROJECT_DIR$/Stock App Files/StockWorkspace/index.html" />
+        <option value="$PROJECT_DIR$/Stock App Files/TestingApplications/Firebase/indexTest.html" />
+        <option value="$PROJECT_DIR$/Stock App Files/TestingApplications/Firebase/style.css" />
+        <option value="$PROJECT_DIR$/Stock App Files/TestingApplications/Firebase/main.js" />
+        <option value="$PROJECT_DIR$/Stock App Files/main.js" />
+        <option value="$PROJECT_DIR$/Stock App Files/StockWorkspace/register.html" />
+=======
+>>>>>>> Stashed changes
       </list>
     </option>
   </component>
@@ -142,10 +126,10 @@
     <handled-path value="$PROJECT_DIR$/Stock App Files/node_modules" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="498" />
-    <option name="y" value="-20" />
-    <option name="width" value="1522" />
-    <option name="height" value="1932" />
+    <option name="x" value="-65" />
+    <option name="y" value="542" />
+    <option name="width" value="3000" />
+    <option name="height" value="1920" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -162,6 +146,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -174,30 +159,49 @@
               <item name="Stock-App" type="462c0819:PsiDirectoryNode" />
               <item name="Stock App Files" type="462c0819:PsiDirectoryNode" />
             </path>
+<<<<<<< Updated upstream
+=======
             <path>
               <item name="Stock-App" type="b2602c69:ProjectViewProjectNode" />
               <item name="Stock-App" type="462c0819:PsiDirectoryNode" />
               <item name="Stock App Files" type="462c0819:PsiDirectoryNode" />
-              <item name="RandomizingFortune500" type="462c0819:PsiDirectoryNode" />
+              <item name="StockWorkspace" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Stock-App" type="b2602c69:ProjectViewProjectNode" />
               <item name="Stock-App" type="462c0819:PsiDirectoryNode" />
               <item name="Stock App Files" type="462c0819:PsiDirectoryNode" />
-              <item name="Testing Search Bar" type="462c0819:PsiDirectoryNode" />
+              <item name="StockWorkspace" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Stock-App" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Stock-App" type="462c0819:PsiDirectoryNode" />
+              <item name="Stock App Files" type="462c0819:PsiDirectoryNode" />
+              <item name="StockWorkspace" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="sb-admin.js" type="620a8d5e:NestingTreeNode" />
+            </path>
+>>>>>>> Stashed changes
           </expand>
           <select />
         </subPane>
         <option name="show-excluded-files" value="false" />
       </pane>
-      <pane id="Scratches" />
+<<<<<<< Updated upstream
       <pane id="Scope" />
+=======
+>>>>>>> Stashed changes
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="HbShouldOpenHtmlAsHb" value="" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../WebWork/3D_Animations/jarretthorton.com/public_html" />
+<<<<<<< Updated upstream
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Stock App Files" />
+=======
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+>>>>>>> Stashed changes
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
@@ -208,6 +212,14 @@
     <property name="node.js.selected.package.standard" value="" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="node.js.path.for.package.jscs" value="project" />
+    <property name="node.js.detected.package.jscs" value="true" />
+<<<<<<< Updated upstream
+    <property name="node.js.selected.package.jscs" value="C:\Users\jghor\AppData\Roaming\npm\node_modules\jscs" />
+    <property name="settings.editor.selected.configurable" value="Settings.JavaScript.Linters.JSHint" />
+=======
+    <property name="node.js.selected.package.jscs" value="" />
+>>>>>>> Stashed changes
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -224,6 +236,9 @@
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="9eabe292-979e-46a6-beda-4872bcffac2e" name="Default" comment="" />
@@ -235,31 +250,56 @@
       <workItem from="1507735115008" duration="1574000" />
       <workItem from="1507772950532" duration="5401000" />
       <workItem from="1507813713611" duration="2014000" />
+<<<<<<< Updated upstream
+      <workItem from="1515730757431" duration="725000" />
+      <workItem from="1515774804771" duration="25000" />
+      <workItem from="1515905752154" duration="2222000" />
+      <workItem from="1515961226825" duration="26000" />
+      <workItem from="1516048202377" duration="11000" />
+=======
+      <workItem from="1515694018382" duration="1586000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9446000" />
+<<<<<<< Updated upstream
+    <option name="totallyTimeSpent" value="12455000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="-6" width="1513" height="973" extended-state="6" />
+    <frame x="-13" y="-13" width="3026" height="1946" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34623083" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20266667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+=======
+    <option name="totallyTimeSpent" value="11032000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34583333" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+>>>>>>> Stashed changes
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32908458" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+<<<<<<< Updated upstream
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32908458" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+=======
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32908458" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+>>>>>>> Stashed changes
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -274,23 +314,88 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Stock App Files/Testing Search Bar/Note.txt">
+<<<<<<< Updated upstream
+    <entry file="file://$PROJECT_DIR$/Stock App Files/StockWorkspace/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="6" lean-forward="false" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
+        <state relative-caret-position="363">
+          <caret line="11" column="28" lean-forward="false" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Stock App Files/Testing Search Bar/TestSearchBar.html">
+    <entry file="file://$PROJECT_DIR$/Stock App Files/StockWorkspace/login.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="8" lean-forward="false" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="74" />
+        <state relative-caret-position="2310">
+          <caret line="70" column="0" lean-forward="true" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Stock App Files/SBAdminBootTemplate/login.html">
+    <entry file="file://$PROJECT_DIR$/Stock App Files/StockWorkspace/register.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1089">
+          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Stock App Files/TestingApplications/Firebase/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="2" lean-forward="true" selection-start-line="0" selection-start-column="2" selection-end-line="0" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Stock App Files/TestingApplications/Firebase/indexTest.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="891">
+          <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Stock App Files/StockWorkspace/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="363">
+          <caret line="11" column="28" lean-forward="false" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Stock App Files/StockWorkspace/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2310">
+          <caret line="70" column="6" lean-forward="false" selection-start-line="70" selection-start-column="6" selection-end-line="70" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Stock App Files/StockWorkspace/register.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1089">
+          <caret line="33" column="0" lean-forward="true" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Stock App Files/TestingApplications/Firebase/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="2" lean-forward="true" selection-start-line="0" selection-start-column="2" selection-end-line="0" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Stock App Files/TestingApplications/Firebase/indexTest.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="891">
+          <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Stock App Files/StockWorkspace/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -298,47 +403,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Stock App Files/SBAdminBootTemplate/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="901">
-          <caret line="53" column="36" lean-forward="false" selection-start-line="53" selection-start-column="36" selection-end-line="53" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Stock App Files/RandomizingFortune500/ConvertAndParse.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1462">
-          <caret line="86" column="41" lean-forward="false" selection-start-line="86" selection-start-column="41" selection-end-line="86" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Stock App Files/Testing Search Bar/Note.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="6" lean-forward="false" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Stock App Files/Testing Search Bar/TestSearchBar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="8" lean-forward="true" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="74" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Stock App Files/RandomizingFortune500/ConvertAndParse.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="52" lean-forward="true" selection-start-line="25" selection-start-column="52" selection-end-line="25" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Stock App Files/SBAdminBootTemplate/login.html">
+    <entry file="file://$PROJECT_DIR$/Stock App Files/StockWorkspace/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -346,129 +411,118 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Stock App Files/SBAdminBootTemplate/index.html">
+=======
+>>>>>>> Stashed changes
+    <entry file="file://$PROJECT_DIR$/Stock App Files/Testing Search Bar/Note.txt" />
+    <entry file="file://$PROJECT_DIR$/Stock App Files/Testing Search Bar/TestSearchBar.html" />
+    <entry file="file://$PROJECT_DIR$/Stock App Files/SBAdminBootTemplate/login.html" />
+    <entry file="file://$PROJECT_DIR$/Stock App Files/SBAdminBootTemplate/index.html" />
+    <entry file="file://$PROJECT_DIR$/Stock App Files/RandomizingFortune500/ConvertAndParse.html" />
+    <entry file="file://$PROJECT_DIR$/Stock App Files/Testing Search Bar/Note.txt" />
+    <entry file="file://$PROJECT_DIR$/Stock App Files/Testing Search Bar/TestSearchBar.html" />
+    <entry file="file://$PROJECT_DIR$/Stock App Files/RandomizingFortune500/ConvertAndParse.html" />
+    <entry file="file://$PROJECT_DIR$/Stock App Files/SBAdminBootTemplate/login.html" />
+    <entry file="file://$PROJECT_DIR$/Stock App Files/SBAdminBootTemplate/index.html" />
+    <entry file="file://$PROJECT_DIR$/Stock App Files/Testing Search Bar/Note.txt" />
+    <entry file="file://$PROJECT_DIR$/Stock App Files/SBAdminBootTemplate/index.html" />
+    <entry file="file://$PROJECT_DIR$/Stock App Files/Testing Search Bar/TestSearchBar.html" />
+    <entry file="file://$PROJECT_DIR$/Stock App Files/Testing Search Bar/Note.txt" />
+    <entry file="file://$PROJECT_DIR$/Stock App Files/Testing Search Bar/TestSearchBar.html" />
+    <entry file="file://$PROJECT_DIR$/Stock App Files/SBAdminBootTemplate/index.html" />
+    <entry file="file://$PROJECT_DIR$/Stock App Files/Testing Search Bar/Note.txt" />
+    <entry file="file://$PROJECT_DIR$/Stock App Files/Testing Search Bar/TestSearchBar.html" />
+<<<<<<< Updated upstream
+    <entry file="file://$PROJECT_DIR$/Stock App Files/Testing Search Bar/TestSearchBar.html" />
+    <entry file="file://$PROJECT_DIR$/Stock App Files/SBAdminBootTemplate/login.html" />
+    <entry file="file://$PROJECT_DIR$/Stock App Files/SBAdminBootTemplate/index.html" />
+    <entry file="file://$PROJECT_DIR$/Stock App Files/Testing Search Bar/Note.txt" />
+    <entry file="file://$PROJECT_DIR$/Stock App Files/RandomizingFortune500/ConvertAndParse.html" />
+    <entry file="file://$PROJECT_DIR$/Stock App Files/RandomizingFortune500/WebCrawler.html" />
+    <entry file="file://$PROJECT_DIR$/Stock App Files/StockWorkspace/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="901">
-          <caret line="53" column="36" lean-forward="true" selection-start-line="53" selection-start-column="36" selection-end-line="53" selection-end-column="36" />
+        <state relative-caret-position="363">
+          <caret line="11" column="28" lean-forward="false" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Stock App Files/Testing Search Bar/Note.txt">
+    <entry file="file://$PROJECT_DIR$/Stock App Files/StockWorkspace/login.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="6" lean-forward="false" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
+        <state relative-caret-position="2310">
+          <caret line="70" column="0" lean-forward="false" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Stock App Files/SBAdminBootTemplate/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" column="13" lean-forward="true" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Stock App Files/Testing Search Bar/TestSearchBar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="884">
-          <caret line="52" column="13" lean-forward="true" selection-start-line="52" selection-start-column="13" selection-end-line="52" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Stock App Files/Testing Search Bar/Note.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="6" lean-forward="false" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Stock App Files/Testing Search Bar/TestSearchBar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="33" lean-forward="false" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Stock App Files/SBAdminBootTemplate/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="38" column="37" lean-forward="false" selection-start-line="38" selection-start-column="37" selection-end-line="38" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Stock App Files/Testing Search Bar/Note.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="6" lean-forward="true" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Stock App Files/Testing Search Bar/TestSearchBar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" column="47" lean-forward="false" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+=======
+>>>>>>> Stashed changes
     <entry file="file://$PROJECT_DIR$/Stock App Files/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="39" column="55" lean-forward="false" selection-start-line="39" selection-start-column="55" selection-end-line="39" selection-end-column="55" />
+        <state relative-caret-position="528">
+          <caret line="16" column="26" lean-forward="false" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Stock App Files/Testing Search Bar/TestSearchBar.html">
+<<<<<<< Updated upstream
+    <entry file="file://$PROJECT_DIR$/Stock App Files/TestingApplications/Firebase/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="8" lean-forward="false" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="74" />
-          <folding />
+        <state relative-caret-position="858">
+          <caret line="26" column="35" lean-forward="true" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Stock App Files/SBAdminBootTemplate/login.html">
+    <entry file="file://$PROJECT_DIR$/Stock App Files/TestingApplications/Firebase/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
+          <caret line="0" column="2" lean-forward="false" selection-start-line="0" selection-start-column="2" selection-end-line="0" selection-end-column="2" />
+=======
+    <entry file="file://$PROJECT_DIR$/Stock App Files/Testing Search Bar/TestSearchBar.html" />
+    <entry file="file://$PROJECT_DIR$/Stock App Files/SBAdminBootTemplate/login.html" />
+    <entry file="file://$PROJECT_DIR$/Stock App Files/SBAdminBootTemplate/index.html" />
+    <entry file="file://$PROJECT_DIR$/Stock App Files/Testing Search Bar/Note.txt" />
+    <entry file="file://$PROJECT_DIR$/Stock App Files/RandomizingFortune500/ConvertAndParse.html" />
+    <entry file="file://$PROJECT_DIR$/Stock App Files/RandomizingFortune500/WebCrawler.html" />
+    <entry file="file://$PROJECT_DIR$/Stock App Files/StockWorkspace/js/sb-admin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2709">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Stock App Files/SBAdminBootTemplate/index.html">
+    <entry file="file://$PROJECT_DIR$/Stock App Files/StockWorkspace/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="901">
-          <caret line="53" column="36" lean-forward="false" selection-start-line="53" selection-start-column="36" selection-end-line="53" selection-end-column="36" />
+        <state relative-caret-position="1491">
+          <caret line="71" column="19" lean-forward="true" selection-start-line="71" selection-start-column="19" selection-end-line="71" selection-end-column="19" />
+>>>>>>> Stashed changes
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Stock App Files/Testing Search Bar/Note.txt">
+    <entry file="file://$PROJECT_DIR$/Stock App Files/StockWorkspace/register.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="6" lean-forward="false" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
+<<<<<<< Updated upstream
+        <state relative-caret-position="1089">
+          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+=======
+        <state relative-caret-position="329">
+          <caret line="97" column="0" lean-forward="false" selection-start-line="97" selection-start-column="0" selection-end-line="110" selection-end-column="9" />
+>>>>>>> Stashed changes
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Stock App Files/RandomizingFortune500/ConvertAndParse.html">
+<<<<<<< Updated upstream
+    <entry file="file://$PROJECT_DIR$/Stock App Files/TestingApplications/Firebase/indexTest.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="458">
-          <caret line="84" column="45" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="99" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Stock App Files/RandomizingFortune500/WebCrawler.html">
+        <state relative-caret-position="891">
+          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+=======
+    <entry file="file://$PROJECT_DIR$/Stock App Files/StockWorkspace/login.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="7" lean-forward="true" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
+        <state relative-caret-position="662">
+          <caret line="78" column="0" lean-forward="true" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
+>>>>>>> Stashed changes
           <folding />
         </state>
       </provider>

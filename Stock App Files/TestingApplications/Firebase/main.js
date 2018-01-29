@@ -16,8 +16,7 @@ var messagesRef = firebase.database().ref('messages');
 
 
 // Listen for form sumbit
-document.getElementById('contactForm').addEventListener('submit',
-    submitForm);
+document.getElementById('contactForm').addEventListener('submit', submitForm);
 
 // Sumbit form
 function submitForm(e){

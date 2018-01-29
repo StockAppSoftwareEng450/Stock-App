@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +9,7 @@
 
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>SB Admin - Start Bootstrap Template</title>
+    <title>StockApp - Login</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -22,35 +20,51 @@
     <!-- Custom styles for this template -->
     <link href="css/sb-admin.css" rel="stylesheet">
 
+    <!-- Specific css file-->
+    <link href="css/login.css" rel="stylesheet">
+
 </head>
 
 <body class="bg-dark">
 
 <div class="container">
+    <header class="stockHeaderLogin">
+        <h2>Stock Application</h2>
+    </header>
 
     <div class="card card-login mx-auto mt-5">
         <div class="card-header">
             Login
         </div>
         <div class="card-body">
-            <form>
+
+            <!-- Successful login Alert -->
+            <div class="login-alert"> Successfully Logged in. Transferring to homepage</div>
+
+            <!-- wrong credentials Alert -->
+            <div class="wrong-credentials"> Please enter valid credentials</div>
+
+            <form id="loginForm">
+
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+                           placeholder="Enter email">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Password">
                 </div>
-                <div class="form-group">
+                <!--<div class="form-group">
                     <div class="form-check">
                         <label class="form-check-label">
                             <input type="checkbox" class="form-check-input">
                             Remember Password
                         </label>
                     </div>
-                </div>
-                <a class="btn btn-primary btn-block" href="index.html">Login</a>
+                </div>-->
+                <button class="btn btn-primary btn-block" type="submit" >Login</button>
+                <!--<a class="btn btn-primary btn-block" href="index.html">Login</a>-->
             </form>
             <div class="text-center">
                 <a class="d-block small mt-3" href="register.html">Register an Account</a>
@@ -59,6 +73,15 @@
         </div>
     </div>
 </div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+
+<!-- Firebase Key init -->
+<script src="js/FirebaseInit.js"></script>
+
+<!-- Firebase login JS -->
+<script src="js/login.js"></script>
 
 <!-- Bootstrap core JavaScript -->
 <script src="vendor/jquery/jquery.min.js"></script>

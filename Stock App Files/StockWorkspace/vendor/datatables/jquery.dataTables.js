@@ -4755,7 +4755,7 @@
 						_fnAddData( settings, aData[i] );
 					}
 	
-					// Reset the init display for cookie saving. We've already done
+					// Reset the init display for URL DATA saving. We've already done
 					// a filter, and therefore cleared it before. So we need to make
 					// it appear 'fresh'
 					settings.iInitDisplayStart = iAjaxStart;

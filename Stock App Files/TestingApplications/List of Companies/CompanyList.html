@@ -1,0 +1,37 @@
+<!-- Checks whether input is a valid stock symbol or company name -->
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+    <head>
+        <meta charset="UTF-8">
+        <title>Company List</title>
+
+        <!-- Adding jquery -->
+        <script src="../TestingReply/jquery3_2_1.js"></script>
+
+    </head>
+    <body>
+
+        <!-- Input from textBox -->
+        <label for="myText">
+            <input type="text" id="myText">
+        </label>
+
+        <!-- On button click call search button -->
+        <button onclick="buttonPress()">Search</button>
+
+        <!-- Returning all symbols in the array -->
+        <script>
+
+            // On button press
+            function buttonPress() {
+                var input = document.getElementById("myText").value;
+                console.log("input: " + input);
+
+                console.log(global);
+
+            }
+
+        </script>
+    </body>
+</html>

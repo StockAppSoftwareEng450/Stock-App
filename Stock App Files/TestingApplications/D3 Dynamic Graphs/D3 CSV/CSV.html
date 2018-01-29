@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>D3 CSV</title>
+
+    <!-- D3 -->
+    <script src="../D3v4.js"></script>
+</head>
+<body>
+<div id="vizcontainer">
+    <svg style="width:500px;height:500px; "> </svg>
+</div>
+
+    <script>
+        d3.csv("cities.csv",function(error,data) {
+            dataViz(data);
+        });
+        function dataViz(incomingData) {
+            d3.select("body").selectAll("div.cities")
+                .data(incomingData)
+                .enter()
+                .append("div")
+                .attr("class", "cities")
+                .html(function (d, i) {
+                    return d.label;
+                });
+        }
+
+
+
+
+
+
+    </script>
+</body>
+</html>

@@ -17,79 +17,113 @@
 
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>SB Admin - Start Bootstrap Template</title>
+    <title>StockApp - Register Account</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom fonts for this template -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!--&lt;!&ndash; Custom fonts for this template &ndash;&gt;-->
+    <!--<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">-->
 
     <!-- Custom styles for this template -->
     <link href="css/sb-admin.css" rel="stylesheet">
+
+    <!-- Style Sheet for register -->
+    <link href="css/register.css" rel="stylesheet">
 
 </head>
 
 <body class="bg-dark">
 
 <div class="container">
+    <header class="stockHeaderRegister">
+        <h2>Stock Application</h2>
+    </header>
 
     <div class="card card-register mx-auto mt-5">
         <div class="card-header">
             Register an Account
         </div>
         <div class="card-body">
-            <form>
+
+            <!-- Successful Register Alert -->
+            <div class="successful-register"> Successful Register. Transferring to homepage</div>
+
+            <!-- Invalid Naming scheme -->
+            <div class="name-invalid"> Please Enter a Valid Name</div>
+
+            <form id="registerForm">
                 <div class="form-group">
                     <div class="form-row">
 
                         <!-- First Name Form -->
                         <div class="col-md-6">
-                            <label for="exampleInputName">First name</label>
-                            <input type="text" class="form-control" id="exampleInputName" aria-describedby="nameHelp" placeholder="Enter first name">
+                            <label for="fstName">First name</label>
+                            <input type="text" class="form-control" id="fstName" aria-describedby="nameHelp"
+                                   placeholder="Enter first name">
                         </div>
 
                         <!-- Last Name Form -->
                         <div class="col-md-6">
-                            <label for="exampleInputLastName">Last name</label>
-                            <input type="text" class="form-control" id="exampleInputLastName" aria-describedby="nameHelp" placeholder="Enter last name">
+                            <label for="lstName">Last name</label>
+                            <input type="text" class="form-control" id="lstName" aria-describedby="nameHelp"
+                                   placeholder="Enter last name">
                         </div>
                     </div>
                 </div>
 
+                <!-- Sending Alert That email is already in use -->
+                <div class="email-registered"> Email already registered</div>
+
+                <!-- Invalid Email Address  -->
+                <div class="email-invalid"> Please Enter a valid Email Address</div>
+
                 <!-- Email Form  -->
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+                           placeholder="Enter email">
                 </div>
+
+                <!-- Alert message that pops up -->
+                <div class="alert-message-valid-phone"> Please enter a valid phone number</div>
 
                 <!-- Telephone Form -->
                 <div class="form-group">
-                    <label for="exampleInputTelephone">Telephone</label>
-                    <input type="tel" class="form-control" id="exampleInputTelephone" aria-describedby="telHelp" placeholder="Enter Telephone">
+                    <label for="phone">Telephone</label>
+                    <input type="tel" class="form-control" id="phone" aria-describedby="telHelp"
+                           placeholder="Enter Telephone">
                 </div>
+
+                <!-- Invalid Password -->
+                <div class="password-invalid"> Please enter a valid password that includes
+                    8 characters, 1 Upper and 1 Lower</div>
 
                 <div class="form-group">
                     <div class="form-row">
 
                         <!-- Password Form -->
                         <div class="col-md-6">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                            <label for="password">Password</label>
+                            <!--Change back to password-->
+                            <input type="password" class="form-control" id="password"
+                                   placeholder="Password">
                         </div>
 
                         <!-- Confirm Password Form -->
                         <div class="col-md-6">
-                            <label for="exampleConfirmPassword">Confirm password</label>
-                            <input type="password" class="form-control" id="exampleConfirmPassword" placeholder="Confirm password">
+                            <label for="confirmPass">Confirm password</label>
+                            <!--Change back to password-->
+                            <input type="password" class="form-control" id="confirmPass"
+                                   placeholder="Confirm password">
                         </div>
                     </div>
                 </div>
-                <a class="btn btn-primary btn-block" href="login.html">Register</a>
+                <button class="btn btn-primary btn-block" type="submit">Register</button>
+
             </form>
             <div class="text-center">
                 <a class="d-block small mt-3" href="login.html">Login Page</a>
-                <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
             </div>
         </div>
     </div>
@@ -97,19 +131,12 @@
 
 <!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
-<script>
-    // Initialize Firebase
-    var config = {
-        apiKey: "AIzaSyBWRqFtzDSiyZfDD8WjvdERLo-NuraC8Bg",
-        authDomain: "stockapp-57f25.firebaseapp.com",
-        databaseURL: "https://stockapp-57f25.firebaseio.com",
-        projectId: "stockapp-57f25",
-        storageBucket: "",
-        messagingSenderId: "496167713307"
-    };
-    firebase.initializeApp(config);
-</script>
 
+<!-- Firebase Key init -->
+<script src="js/FirebaseInit.js"></script>
+
+<!-- Firebase Integration -->
+<script src="js/register.js"></script>
 
 <!-- Bootstrap core JavaScript -->
 <script src="vendor/jquery/jquery.min.js"></script>

@@ -43,6 +43,18 @@ body.fixed-nav {
 .o-hidden {
   overflow: hidden !important; }
 
+.stockHeaderRegister {
+  color: white;
+  text-align: center;
+  padding-top: 2.75%;
+}
+
+.stockHeaderLogin {
+    color: white;
+    text-align: center;
+    padding-top: 2.75%;
+}
+
 .z-0 {
   z-index: 0; }
 

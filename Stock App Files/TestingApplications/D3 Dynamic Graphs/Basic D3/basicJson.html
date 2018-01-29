@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Basic</title>
+
+    <style> /* set the CSS */
+    body {
+        font: 12px "Times New Roman";
+    }
+    path {
+        stroke: steelblue;
+        stroke-width: 2;
+        fill: none;
+    }
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: grey;
+        stroke-width: 1;
+        shape-rendering: crispEdges;
+    }
+    </style>
+</head>
+<body>
+
+
+<div class="svgGraph">
+    <svg width="1000" height="700" style="margin: 0 auto"></svg>
+    <button onclick="button5y()">5 Years</button>
+    <button onclick="button2y()">2 Years</button>
+    <button onclick="button1y()">1 Year</button>
+    <button onclick="buttonYtd()">Year to Date</button>
+    <button onclick="button6m()">6 Months</button>
+    <button onclick="button3m()">3 Months</button>
+    <button onclick="button1m()">1 Month</button>
+</div>
+
+
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="../jquery3_2_1.js"></script>
+<script>
+
+    // Function for 5Year button
+    function button5y() {
+
+        // Parse the quote to url
+        var url5y = "https://api.iextrading.com/1.0/stock/aapl/chart/5y";
+
+        graph5yUpdate(url5y);
+
+
+    }
+
+    // Updating the graph
+    function graph5yUpdate(url) {
+        $.ajax({
+            url: url,
+            success: function(data) {
+
+                // Setting global variable
+                var minimum = null;
+                var result = null;
+
+                // Get the data
+                d3.json(url, function (error, data) {
+                    data.forEach(function (d) {
+                        d.date = parseDate(d.date);
+                        d.close = +d.close;
+
+                        // Adding each result to the end of the array
+                        arrayClose.push(d.close);
+                        console.log(arrayClose);
+
+                        // Finding the minimum value in the close price in the JSON File
+                        minimum = Array.min(arrayClose);
+
+                        // Taking 10% off of graph to dynamically show white space at the bottom of the minimum value
+                        result = (10 / 100) * minimum;
+                        result = minimum - result;
+                        console.log(result)
+                    });
+
+                    // Scale the range of the data
+                    x.domain(d3.extent(data, function (d) {
+                        return d.date;
+                    }));
+                    y.domain([result, d3.max(data, function (d) {
+                        return d.close;
+                    })]);
+
+                    // Add the valueline path.
+                    svg.append("path")
+                        .attr("class", "line")
+                        .attr("d", valueline(data));
+
+                    // Add the X Axis
+                    svg.append("g")
+                        .attr("class", "x axis")
+                        .attr("transform", "translate(0," + height + ")")
+                        .call(xAxis);
+
+                    // Add the Y Axis
+                    svg.append("g")
+                        .attr("class", "y axis")
+                        .call(yAxis);
+
+                    // Add the text label for the X axis
+                    svg.append("text")
+                        .attr("x", width / 2)               //Dynamically moves with the graph
+                        .attr("y", height + margin.bottom)
+                        .style("text-anchor", "middle")
+                        .text("Date");
+
+                    // Add the text label for the Y axis
+                    svg.append("text")
+                        .attr("transform", "rotate(-90)")
+                        .attr("x", 0 - (height / 2))
+                        .attr("y", 0 - margin.left)
+                        .attr("dy", "1em")
+                        .style("text-anchor", "middle")
+                        .text("Price");
+
+                    // Adding the Title
+                    svg.append("text")
+                        .attr("x", (width / 2))
+                        .attr("y", 0 - (margin.top / 2))
+                        .attr("text-anchor", "middle")
+                        .style("font-size", "16px")
+                        .style("text-decoration", "underline")
+                        .text("Price to Date");
+                });
+            }
+        });
+    }
+
+    var url = "https://api.iextrading.com/1.0/stock/aapl/chart/1y";
+
+    // Set the dimensions of the canvas / graph
+    var margin = {
+            top: 30, right: 20, bottom: 30, left: 50
+        },
+        width = 960 - margin.left - margin.right,   //530
+        height = 600 - margin.top - margin.bottom;  //210
+
+    // Parse the date / time refer to
+    // https://github.com/d3/d3-time-format/blob/master/README.md#timeParse
+    var parseDate = d3.time.format("%Y-%m-%d").parse;
+
+    /** How D3 interprets the scaling **/
+        // ----------------------------------------
+        // | 0, height                width,height|     0,0   530,0
+        // |                                      |
+        // |                                      |
+        // |                                      |
+        // |  0,0                         width, 0|     0,210 530,210
+        // |---------------------------------------
+
+        // Set the ranges to the time ranges specified
+    var x = d3.time.scale().range([0, width]);
+    var y = d3.scale.linear().range([height, 0]);
+
+    // Define the axes
+    var xAxis = d3.svg.axis().scale(x)
+        .orient("bottom").ticks(5);
+    var yAxis = d3.svg.axis().scale(y)
+        .orient("left").ticks(5);
+
+    // Define the line which adjusts it for our desired coordinates
+    var valueline = d3.svg.line()
+    //.interpolate("basis")       // Smoothes the line
+        .x(function (d) {
+            return x(d.date);
+        })
+        .y(function (d) {
+            return y(d.close);
+        });
+
+    // Adds the svg canvas
+    var svg = d3.select("svg")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+
+    var arrayClose = [];
+
+    Array.min = function (array) {
+        return Math.min.apply(Math, array);
+    };
+
+    function updateData(){
+        $.ajax({
+            url: url,
+            success: function(data) {
+
+                // Setting global variable
+                var minimum = null;
+                var result = null;
+
+                // Get the data
+                d3.json(url, function (error, data) {
+                    data.forEach(function (d) {
+                        d.date = parseDate(d.date);
+                        d.close = +d.close;
+
+                        // Adding each result to the end of the array
+                        arrayClose.push(d.close);
+                        console.log(arrayClose);
+
+                        // Finding the minimum value in the close price in the JSON File
+                        minimum = Array.min(arrayClose);
+
+                        // Taking 10% off of graph to dynamically show white space at the bottom of the minimum value
+                        result = (10 / 100) * minimum;
+                        result = minimum - result;
+                        console.log(result)
+                    });
+
+                    // Scale the range of the data
+                    x.domain(d3.extent(data, function (d) {
+                        return d.date;
+                    }));
+                    y.domain([result, d3.max(data, function (d) {
+                        return d.close;
+                    })]);
+
+                    // Add the valueline path.
+                    svg.append("path")
+                        .attr("class", "line")
+                        .attr("d", valueline(data));
+
+                    // Add the X Axis
+                    svg.append("g")
+                        .attr("class", "x axis")
+                        .attr("transform", "translate(0," + height + ")")
+                        .call(xAxis);
+
+                    // Add the Y Axis
+                    svg.append("g")
+                        .attr("class", "y axis")
+                        .call(yAxis);
+
+                    // Add the text label for the X axis
+                    svg.append("text")
+                        .attr("x", width / 2)               //Dynamically moves with the graph
+                        .attr("y", height + margin.bottom)
+                        .style("text-anchor", "middle")
+                        .text("Date");
+
+                    // Add the text label for the Y axis
+                    svg.append("text")
+                        .attr("transform", "rotate(-90)")
+                        .attr("x", 0 - (height / 2))
+                        .attr("y", 0 - margin.left)
+                        .attr("dy", "1em")
+                        .style("text-anchor", "middle")
+                        .text("Price");
+
+                    // Adding the Title
+                    svg.append("text")
+                        .attr("x", (width / 2))
+                        .attr("y", 0 - (margin.top / 2))
+                        .attr("text-anchor", "middle")
+                        .style("font-size", "16px")
+                        .style("text-decoration", "underline")
+                        .text("Price to Date");
+                });
+            }
+        });
+    }
+
+    var inter = setInterval(function() {
+        updateData();
+    }, 1000);
+
+</script>
+
+</body>
+</html>
+
+<!--// First - set the value to 0
+            var stockSymbl = null;
+
+            // This variable will hold the setInterval's instance, so we can clear it later on
+            var interval;
+
+            function check() {
+                if (stockSymbl != null) {
+                    //alert("Value Is Set");
+
+                    // We don't need to interval the check function anymore,
+                    // clearInterval will stop its periodical execution.
+                    clearInterval(interval);
+                }
+            }
+
+            // Create an instance of the check function interval
+            interval = setInterval(check, 1000);
+
+            // Global quote to be referenced
+
+
+            /** Set automatically to 5 Years **/
+            var quote = "/chart/5y";
+            var percentage = 10;
+            var timeFrame = "5 Year";
+
+            // 5y button function call
+            function button5y() {
+                //d3.select(".body").selectAll("svg").remove();
+                quote = "/chart/5y";
+                percentage = 10;
+                timeFrame = "5 Years";
+            }
+
+            // 2y button function call
+            function button2y() {
+                quote = "/chart/2y";
+                test(quote);
+            }
+
+            // 1y button function call
+            function button1y() {
+                quote = "/chart/1y";
+                test(quote);
+            }
+
+            // ytd button function call
+            function buttonYtd() {
+                quote = "/chart/ytd";
+                test(quote);
+            }
+
+            // 6m button function call
+            function button6m() {
+                quote = "/chart/6m";
+                test(quote);
+            }
+
+            // 3m button function call
+            function button3m() {
+                quote = "/chart/3m";
+                test(quote);
+            }
+
+            // 1m button function call
+            function button1m() {
+                quote = "/chart/1m";
+                percentage = 2;
+                timeFrame = "1 Month";
+                test();
+            }
+
+            // Graph
+            function test(quote, percentage, timeFrame) {
+                setTimeout(function() {
+                    console.log("resultStockSymbol " + resultStockSymbol);
+
+                    stockSymbl = resultStockSymbol;
+                    console.log("resultStockSymbol: " + stockSymbl);
+
+                    // Parsing Stock Quote
+                    var parser = document.createElement('a');
+                    parser.href = "https://api.iextrading.com/1.0/stock/";
+                    parser.StockName = stockSymbl;
+                    var url = parser.href;
+                    var stockName = parser.StockName;
+                    var resultUrl = url + stockName;
+                    resultUrl = resultUrl + quote;
+
+                    console.log("resultUrl: " + resultUrl);
+
+
+                    /** Start of D3 **/
+
+                    // Set the dimensions of the canvas / graph
+                    var margin = {
+                            top: 30, right: 20, bottom: 30, left: 50
+                        },
+                        width = 960 - margin.left - margin.right,   //530
+                        height = 600 - margin.top - margin.bottom;  //210
+
+                    // Parse the date / time refer to
+                    // https://github.com/d3/d3-time-format/blob/master/README.md#timeParse
+                    var parseDate = null;
+
+                    parseDate = d3.time.format("%Y-%m-%d").parse;
+
+
+                    /** How D3 interprets the scaling **/
+                        // ----------------------------------------
+                        // | 0, height                width,height|     0,0   530,0
+                        // |                                      |
+                        // |                                      |
+                        // |                                      |
+                        // |  0,0                         width, 0|     0,210 530,210
+                        // |---------------------------------------
+
+                        // Set the ranges to the time ranges specified
+                    var x = d3.time.scale().range([0, width]);
+                    var y = d3.scale.linear().range([height, 0]);
+
+                    // Define the axes
+                    var xAxis = d3.svg.axis().scale(x)
+                        .orient("bottom").ticks(5);
+                    var yAxis = d3.svg.axis().scale(y)
+                        .orient("left").ticks(5);
+
+                    // Define the line which adjusts it for our desired coordinates
+                    var valueline = d3.svg.line()
+                    //.interpolate("basis")       // Smoothes the line
+                        .x(function (d) {
+                            return x(d.date);
+                        })
+                        .y(function (d) {
+                            return y(d.close);
+                        });
+
+                    // Adds the svg canvas
+                    var svg = d3.select("svg")
+                        .append("svg")
+                        .attr("width", width + margin.left + margin.right)
+                        .attr("height", height + margin.top + margin.bottom)
+                        .append("g")
+                        .attr("transform",
+                            "translate(" + margin.left + "," + margin.top + ")");
+
+                    var arrayClose = [];
+
+                    Array.min = function (array) {
+                        return Math.min.apply(Math, array);
+                    };
+
+                    Array.max = function (array) {
+                        return Math.max.apply(Math, array);
+                    };
+
+                    //function updateData() {
+                        $.ajax({
+                            url: resultUrl,
+                            success: function (data) {
+
+                                // Setting global variable
+                                var minimum = null;
+                                var maximum = null;
+                                var result = null;
+
+                                // Get the data
+                                d3.json(resultUrl, function (error, data) {
+                                    data.forEach(function (d) {
+                                        d.date = parseDate(d.date);
+                                        d.close = +d.close;
+
+                                        // Adding each result to the end of the array
+                                        arrayClose.push(d.close);
+                                        console.log(arrayClose);
+
+                                        // Finding the minimum and max value in the price in the array
+                                        minimum = Array.min(arrayClose);
+                                        maximum = Array.max(arrayClose);
+
+                                        // Taking 10% off of graph to dynamically show white space at the bottom of the
+                                        // minimum value
+                                        result = (percentage / 100) * minimum;
+                                        result = minimum - result;
+                                        console.log(result)
+                                    });
+
+                                    // Scale the range of the data
+                                    x.domain(d3.extent(data, function (d) {
+                                        return d.date;
+                                    }));
+                                    y.domain([result, d3.max(data, function (d) {
+                                        return d.close;
+                                    })]);
+
+                                    // Add the valueline path.
+                                    svg.append("path")
+                                        .attr("class", "line")
+                                        .attr("d", valueline(data));
+
+                                    // Add the X Axis
+                                    svg.append("g")
+                                        .attr("class", "x axis")
+                                        .attr("transform", "translate(0," + height + ")")
+                                        .call(xAxis);
+
+                                    // Add the Y Axis
+                                    svg.append("g")
+                                        .attr("class", "y axis")
+                                        .call(yAxis);
+
+                                    // Add the text label for the X axis
+                                    svg.append("text")
+                                        .attr("x", width / 2)              //Dynamically moves with the graph
+                                        .attr("y", height + margin.bottom )
+                                        .style("text-anchor", "middle")
+                                        .text("Date");
+
+                                    // Add the text label for the Y axis
+                                    svg.append("text")
+                                        .attr("transform", "rotate(-90)")
+                                        .attr("x", 0 - (height / 2))
+                                        .attr("y", 0 - margin.left)
+                                        .attr("dy", "1em")
+                                        .style("text-anchor", "middle")
+                                        .text("Price");
+
+                                    // Adding the Title
+                                    svg.append("text")
+                                        .attr("x", (width / 2))
+                                        .attr("y", 0 - (margin.top / 2))
+                                        .attr("text-anchor", "middle")
+                                        .style("font-size", "20px")
+                                        .text(timeFrame);
+                                });
+                            }
+                        });
+                    //}
+
+                    // var inter = setInterval(function () {
+                    //     updateData();
+                    // }, 3000);
+
+                }, 2000);
+
+            }-->
+
