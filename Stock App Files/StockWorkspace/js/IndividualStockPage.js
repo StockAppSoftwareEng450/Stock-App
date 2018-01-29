@@ -42,15 +42,34 @@ $(document).ready(
                         var response = (data);
                         var companyName = response.companyName;
                         var latestPrice = response.latestPrice;
+                        var symbol = response.symbol;
+
                         document.getElementById("CompanyName").innerHTML = companyName;
                         document.getElementById("StockPrice").innerHTML = latestPrice;
+                        document.getElementById("StockSymbolUpperCase").innerHTML = symbol;
 
                         //verifying information has been grabbed successfully
                         console.log(companyName);
                         console.log(latestPrice);
+                        console.log(symbol);
                     }
                 });
             }, 3000);
+
+            var peersUrl = "https://api.iextrading.com/1.0/stock/" + stockSymbol + "/peers";
+
+            // Ajax for Peers
+            $.ajax({
+                url: peersUrl,
+                success: function (dataPeers) {
+                    console.log("peers: " + dataPeers);
+
+                    var arrayPeers = [dataPeers];
+                    console.log(arrayPeers);
+                }
+            });
+
+
         } else {
             // No user is signed in.
             window.location.href = "login.html";

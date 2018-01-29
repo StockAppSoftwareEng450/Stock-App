@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<style> /* set the CSS */
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bttn.css/0.2.4/bttn.css">
+
+<style> /* set the CSS */
 svg {
     font: 10px "Times New Roman";
 }
 
 path {
-    stroke-width: 1.2;
+    stroke-width: 2;
     fill: none;
 }
 
@@ -22,8 +24,6 @@ path {
 <body>
 
 <!-- load the d3.js library -->
-
-
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="../jquery3_2_1.js"></script>
 
@@ -208,7 +208,7 @@ path {
 
     //1d (Change the parse date for this******)
     function update1Day () {
-        var url = "https://api.iextrading.com/1.0/stock/aapl/chart/1d";
+        var url = "https://api.iextrading.com/1.0/stock/msft/chart/1d";
 
         $.ajax({
             url: url,
@@ -220,6 +220,7 @@ path {
                 var lineColor = null;
                 var firstPrice = null;
                 var lastPrice = null;
+                var i = null;
 
                 // Get the data
                 d3.json(url, function (error, data) {
@@ -244,8 +245,10 @@ path {
 
                         // Finding last elm in array
                         lastPrice = arrayClose[arrayClose.length - 1];
+
                     });
 
+                    console.log("i: " + i);
                     // Updating Price, lineColor, data, and result
                     updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, data, result);
 
@@ -575,10 +578,13 @@ path {
 
 </script>
 
+<button class = "bttn-unite bttn-sm bttn-primary">Submit</button>
+
 <div id="option">
 
     <!-- 1 Day -->
-    <input name="updateButton"
+    <input class="bttn-minimal bttn-primary"
+            name="updateButton"
            type="button"
            value="1 Day"
            onclick="update1Day()" />
