@@ -1,15 +1,15 @@
 "use strict";
 
+var resultStockSymbol = null;
+
 $(document).ready(
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             // User is signed in.
-            console.log(user);
+//            console.log(user);
             // Array with stockSymbol in [0]
             var testDG = parseURLParams(window.location.href);
-            console.log(testDG);
             var variable1 = testDG['stock'];
-            console.log(variable1[0]);
             var stockSymbol = variable1[0];
 
             // On refresh loads back to screen 1
@@ -19,22 +19,24 @@ $(document).ready(
                 window.location.href = "index.html";
             }
 
+            resultStockSymbol = stockSymbol;
+
             // Parsing Stock Quote
             var parser = document.createElement('a');
             parser.href = "https://api.iextrading.com/1.0/stock/";
             parser.StockName = stockSymbol;
             var url = parser.href;
             var stockName = parser.StockName;
-            var result = url + stockName;
+            var resultUrl = url + stockName;
             var addQuote = "/quote";
-            result = result + addQuote;
+            resultUrl = resultUrl + addQuote;
 
             // Verifying the url
-            console.log(result);
+            console.log(resultUrl);
 
             setInterval(function () {
                 $.ajax({
-                    url: result,
+                    url: resultUrl,
                     success: function (data) {
                         console.log(data);
                         var response = (data);

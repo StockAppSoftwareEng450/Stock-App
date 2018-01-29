@@ -59,7 +59,6 @@
             background-color: #eee;
         }
 
-
     </style>
 
 
@@ -76,85 +75,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
 
-            <!-- My Portfolio Sidebar -->
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents"
-                   data-parent="#exampleAccordion">
-                    <i class="fa fa-fw fa-wrench"></i>
-                    <span class="nav-link-text">
-                My Portfolio</span>
-                </a>
-                <ul class="sidenav-second-level collapse" id="collapseComponents">
-                    <li>
-                        <a href="blank.html">Blank Page</a>
-                    </li>
-                    <li>
-                        <a href="#">Custom Card Examples</a>
-                    </li>
-                </ul>
-            </li>
-
-            <!-- WatchList Sidebar -->
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
-                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages"
-                   data-parent="#exampleAccordion">
-                    <i class="fa fa-fw fa-file"></i>
-                    <span class="nav-link-text">
-                Watch List</span>
-                </a>
-                <ul class="sidenav-second-level collapse" id="collapseExamplePages">
-                    <li>
-                        <a href="login.html">Login Page</a>
-                    </li>
-
-                    <li>
-                        <a href="register.html">Registration Page</a>
-                    </li>
-
-                    <li>
-                        <a href="forgot-password.html">Forgot Password Page</a>
-                    </li>
-
-                    <li>
-                        <a href="blank.html">Blank Page</a>
-                    </li>
-                </ul>
-            </li>
-
-            <!-- Trending Stocks Sidebar -->
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
-                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti"
-                   data-parent="#exampleAccordion">
-                    <i class="fa fa-fw fa-sitemap"></i>
-                    <span class="nav-link-text"> Trending Stocks</span>
-                </a>
-                <ul class="sidenav-second-level collapse" id="collapseMulti">
-                    <li>
-                        <a href="AAPLCommon.html">AAPL</a>
-                    </li>
-                    <li>
-                        <a href="#"> Hot Stocks </a>
-                    </li>
-                    <li>
-                        <a href="#"> My Suggestions </a>
-                    </li>
-                    <li>
-                        <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2">Third
-                            Level</a>
-                        <ul class="sidenav-third-level collapse" id="collapseMulti2">
-                            <li>
-                                <a href="#">Third Level Item</a>
-                            </li>
-                            <li>
-                                <a href="#">Third Level Item</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-        </ul>
         <ul class="navbar-nav sidenav-toggler">
             <li class="nav-item">
                 <a class="nav-link text-center" id="sidenavToggler">
@@ -163,6 +84,18 @@
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
+
+            <!-- @TODO Add Link to Trending Stocks -->
+            <!-- Trending Stocks -->
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" >
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href=""
+                   data-parent="#exampleAccordion" style="padding-right: 50px">
+                    <i class="fa fa-fw fa-sitemap"></i>
+                    <span class="nav-link-text"> Trending Stocks</span>
+                </a>
+            </li>
+
+            <!-- Messages -->
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle mr-lg-2" href="#" id="messagesDropdown" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
@@ -208,6 +141,8 @@
                     </a>
                 </div>
             </li>
+
+            <!-- Alert -->
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle mr-lg-2" href="#" id="alertsDropdown" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
@@ -265,8 +200,6 @@
                 </div>
             </li>
 
-
-            <!-- @TODO 1) Add Search for company or stock symbol.  2) Fix CSS to make it flush-->
             <!-- Search Bar -->
             <li class="nav-item">
                 <form class="form-inline my-2 my-lg-0 mr-lg-2">
