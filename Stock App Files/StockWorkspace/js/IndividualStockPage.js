@@ -56,18 +56,38 @@ $(document).ready(
                 });
             }, 3000);
 
-            var peersUrl = "https://api.iextrading.com/1.0/stock/" + stockSymbol + "/peers";
 
-            // Ajax for Peers
+            // Grabbing the peers(related Companies) and displaying them to an ul on the DOM
+            var peersUrl = "https://api.iextrading.com/1.0/stock/" + resultStockSymbol + "/peers";
+
+            console.log(peersUrl);
+
             $.ajax({
                 url: peersUrl,
-                success: function (dataPeers) {
-                    console.log("peers: " + dataPeers);
+                success: function (data) {
+                    d3.json(peersUrl, function (error, data) {
+                        console.log("peers: " + data);
 
-                    var arrayPeers = [dataPeers];
-                    console.log(arrayPeers);
+                        function makeUL(array) {
+                            var list = document.createElement('ul');
+
+                            for(var i = 0; i < array.length; i++) {
+                                var item = document.createElement('li');
+                                item.appendChild(document.createTextNode(array[i]));
+                                list.appendChild(item);
+                            }
+
+                            return list;
+                        }
+
+                        document.getElementById('peers').appendChild(makeUL(data));
+
+                    });
                 }
             });
+
+
+
 
 
         } else {

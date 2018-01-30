@@ -576,6 +576,75 @@ path {
         });
     }
 
+    // Peers to UL
+    var urlPeers = "https://api.iextrading.com/1.0/stock/aapl/peers";
+
+        $.ajax({
+            url: urlPeers,
+            success: function (data) {
+
+                // Get the data
+                d3.json(urlPeers, function (error, data) {
+                    console.log("peers: " + data);
+
+
+                    function makeUL(array) {
+                        var list = document.createElement('ul');
+
+                        for(var i = 0; i < array.length; i++) {
+                            var item = document.createElement('li');
+                            item.appendChild(document.createTextNode(array[i]));
+                            list.appendChild(item);
+                        }
+
+                        return list;
+                    }
+
+                    console.log(document.getElementById('peers').appendChild(makeUL(data)));
+
+                });
+            }
+        });
+
+
+    // Peers to UL
+    var urlNews = "https://api.iextrading.com/1.0/stock/msft/news/last/3";
+
+    $.ajax({
+        url: urlNews,
+        success: function (data) {
+
+            // Get the data
+            d3.json(urlNews, function (error, data) {
+                console.log("News: " + data);
+                for (var i = 0; i < data.length; i++){
+                    var headlineIndex = "headline";
+                    var sourceIndex = "source";
+                    var datetimeIndex = "datetime";
+
+                    var parser = data[i].datetime;
+                    var indexNumber = parser.indexOf("T");
+                    var dataParsed = parser.slice(0,indexNumber);
+
+                    headlineIndex = headlineIndex + i;
+                    sourceIndex =  sourceIndex + i;
+                    datetimeIndex = datetimeIndex + i;
+
+                    console.log(headlineIndex);
+                    console.log(data[i].headline);
+                    console.log(data[i].source);
+                    console.log(dataParsed);
+
+                    document.getElementById(headlineIndex).href = data[i].url;
+                    document.getElementById(headlineIndex).innerHTML = data[i].headline;
+                    document.getElementById(sourceIndex).innerHTML = data[i].source;
+                    document.getElementById(datetimeIndex).innerHTML = dataParsed;
+                }
+
+            });
+        }
+    });
+
 </script>
 
 <button class = "bttn-unite bttn-sm bttn-primary">Submit</button>
@@ -631,4 +700,21 @@ path {
            value="5 years"
            onclick="update5Year()" />
 </div>
+
+<div id="peers"></div>
+
+<a id="headline0"></a>
+<div id="datetime0"></div>
+<div id="source0"></div>
+<br>
+
+<a id="headline1"></a>
+<div id="datetime1"></div>
+<div id="source1"></div>
+<br>
+
+<a id="headline2"></a>
+<div id="datetime2"></div>
+<div id="source2"></div>
+
 </body>
