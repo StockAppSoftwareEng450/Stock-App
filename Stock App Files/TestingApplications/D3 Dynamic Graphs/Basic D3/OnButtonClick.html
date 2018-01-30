@@ -26,6 +26,9 @@ path {
 <!-- load the d3.js library -->
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="../jquery3_2_1.js"></script>
+<script src="Autocomplete.js"></script>
+
+<link rel="stylesheet" href="autocomplete.css">
 
 <!-- D3 Graph -->
 <script>
@@ -645,9 +648,55 @@ path {
         }
     });
 
-</script>
+    var autoURL = "https://api.iextrading.com/1.0/ref-data/symbols";
 
-<button class = "bttn-unite bttn-sm bttn-primary">Submit</button>
+    // Creating function outside to later pass to the search for stock
+    function AutoCompleteResult(value) {
+        $("#data-holder").val(value).trigger("change");
+
+        console.log(value);
+    }
+
+    // Auto complete
+    $.ajax({
+        url: autoURL,
+        success: function (data) {
+
+                var options = {
+                    url: autoURL,
+
+                    getValue: "name",
+
+                    template: {
+                        type: "custom",
+                        method: function(value, item) {
+                            return value + "  (" + item.symbol + ")";
+                        }
+                    },
+
+                    list: {
+                        match: {
+                            enabled: true
+                        },
+
+                        onClickEvent: function() {
+                            var value = $("#function-data").getSelectedItemData().symbol;
+                            AutoCompleteResult(value);
+                        }
+                    }
+                };
+
+                $("#function-data").easyAutocomplete(options);
+        }
+    });
+
+
+</script>
+<!--  -->
+<input id="function-data" />
+<input id="data-holder" />
+
+<!--<button class = "bttn-unite bttn-sm bttn-primary">Submit</button>-->
 
 <div id="option">
 
@@ -701,20 +750,43 @@ path {
            onclick="update5Year()" />
 </div>
 
+<!-- Peers -->
 <div id="peers"></div>
 
-<a id="headline0"></a>
-<div id="datetime0"></div>
-<div id="source0"></div>
-<br>
+<!-- News -->
+<ul>
+    <li>
+        <a id="headline0"></a>
+        <div id="datetime0"></div>
+        <div id="source0"></div>
+    </li>
+</ul>
 
-<a id="headline1"></a>
-<div id="datetime1"></div>
-<div id="source1"></div>
-<br>
 
-<a id="headline2"></a>
-<div id="datetime2"></div>
-<div id="source2"></div>
+
+<ul>
+    <li>
+        <a id="headline1"></a>
+        <div id="datetime1"></div>
+        <div id="source1"></div>
+    </li>
+</ul>
+
+
+<ul>
+    <li>
+        <a id="headline2"></a>
+        <div id="datetime2"></div>
+        <div id="source2"></div>
+    </li>
+</ul>
+
+
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+
 
 </body>
