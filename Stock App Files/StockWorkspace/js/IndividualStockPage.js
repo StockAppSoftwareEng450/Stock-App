@@ -2,11 +2,32 @@
 
 var resultStockSymbol = null;
 
-$(document).ready(
+// Takes in the url
+function parseURLParams(url) {
+    var queryStart = url.indexOf("?") + 1,
+        queryEnd = url.indexOf("#") + 1 || url.length + 1,
+        query = url.slice(queryStart, queryEnd - 1),
+        pairs = query.replace(/\+/g, " ").split("&"),
+        parms = [], i, n, v, nv;
+
+    if (query === url || query === "") return;
+
+    for (i = 0; i < pairs.length; i++) {
+        nv = pairs[i].split("=", 2);
+        n = decodeURIComponent(nv[0]);
+        v = decodeURIComponent(nv[1]);
+
+        if (!parms.hasOwnProperty(n)) parms[n] = [];
+        parms[n].push(nv.length === 2 ? v : null);
+    }
+    return parms;
+}
+
+$(document).ready(function() {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             // User is signed in.
-//            console.log(user);
+            console.log(window.location.href);
             // Array with stockSymbol in [0]
             var testDG = parseURLParams(window.location.href);
             var variable1 = testDG['stock'];
@@ -52,14 +73,18 @@ $(document).ready(
                         console.log(companyName);
                         console.log(latestPrice);
                         console.log(symbol);
+                    },
+                    error: function(error){
+                        // Handle Errors here.
+                        console.log(error.responseText);
+                        alert(error.responseText);
                     }
                 });
             }, 3000);
 
 
             // Grabbing the peers(related Companies) and displaying them to an ul on the DOM
-            var peersUrl = "https://api.iextrading.com/1.0/stock/" + resultStockSymbol + "/peers";
-
+            var peersUrl = "https://api.iextrading.com/1.0/stock/" + stockSymbol + "/peers";
             console.log(peersUrl);
 
             $.ajax({
@@ -71,7 +96,7 @@ $(document).ready(
                         function makeUL(array) {
                             var list = document.createElement('ul');
 
-                            for(var i = 0; i < array.length; i++) {
+                            for (var i = 0; i < array.length; i++) {
                                 var item = document.createElement('li');
                                 item.appendChild(document.createTextNode(array[i]));
                                 list.appendChild(item);
@@ -83,11 +108,14 @@ $(document).ready(
                         document.getElementById('peers').appendChild(makeUL(data));
 
                     });
+                },
+
+                error: function(error){
+                    // Handle Errors here.
+                    console.log(error.responseText);
+                    alert(error.responseText);
                 }
             });
-
-
-
 
 
         } else {
@@ -95,26 +123,4 @@ $(document).ready(
             window.location.href = "login.html";
         }
     })
-);
-
-
-// Takes in the url
-function parseURLParams(url) {
-    var queryStart = url.indexOf("?") + 1,
-        queryEnd = url.indexOf("#") + 1 || url.length + 1,
-        query = url.slice(queryStart, queryEnd - 1),
-        pairs = query.replace(/\+/g, " ").split("&"),
-        parms = [], i, n, v, nv;
-
-    if (query === url || query === "") return;
-
-    for (i = 0; i < pairs.length; i++) {
-        nv = pairs[i].split("=", 2);
-        n = decodeURIComponent(nv[0]);
-        v = decodeURIComponent(nv[1]);
-
-        if (!parms.hasOwnProperty(n)) parms[n] = [];
-        parms[n].push(nv.length === 2 ? v : null);
-    }
-    return parms;
-}
+});

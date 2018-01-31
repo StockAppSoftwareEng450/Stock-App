@@ -1,4 +1,4 @@
-$(document).ready(
+$(document).ready(function() {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             // User is signed in.
@@ -9,4 +9,4 @@ $(document).ready(
             window.location.href = "login.html";
         }
     })
-);
+});
