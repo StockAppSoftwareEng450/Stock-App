@@ -20,6 +20,70 @@ path {
     shape-rendering: crispEdges;
 }
 
+
+/** START SLIDER **/
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    display:none;}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+    /** END SLIDER **/
+
 </style>
 <body>
 
@@ -579,7 +643,7 @@ path {
         });
     }
 
-    // Peers to UL
+    // Displaying peers to the individual stock page.
     var urlPeers = "https://api.iextrading.com/1.0/stock/aapl/peers";
 
         $.ajax({
@@ -589,7 +653,6 @@ path {
                 // Get the data
                 d3.json(urlPeers, function (error, data) {
                     console.log("peers: " + data);
-
 
                     function makeUL(array) {
                         var list = document.createElement('ul');
@@ -610,8 +673,8 @@ path {
         });
 
 
-    // Peers to UL
-    var urlNews = "https://api.iextrading.com/1.0/stock/msft/news/last/3";
+    // Displaying News to individual stock page
+    var urlNews = "https://api.iextrading.com/1.0/stock/extr/news/last/3";
 
     $.ajax({
         url: urlNews,
@@ -652,12 +715,12 @@ path {
 
     // Creating function outside to later pass to the search for stock
     function AutoCompleteResult(value) {
-        $("#data-holder").val(value).trigger("change");
 
+        // Showing value on the click
         console.log(value);
     }
 
-    // Auto complete
+    // Auto complete for search for stock
     $.ajax({
         url: autoURL,
         success: function (data) {
@@ -680,21 +743,51 @@ path {
                         },
 
                         onClickEvent: function() {
-                            var value = $("#function-data").getSelectedItemData().symbol;
+                            var value = $("#MainInput").getSelectedItemData().symbol;
                             AutoCompleteResult(value);
                         }
                     }
                 };
 
-                $("#function-data").easyAutocomplete(options);
+                $("#MainInput").easyAutocomplete(options);
         }
+    });
+
+    var switchAlertValue = "off";
+
+    $(function(){
+        $('.slider').on('click', function(event){
+
+            if (switchAlertValue === "off"){
+                console.log("From off to on");
+                switchAlertValue = "on";
+
+                // ON
+                return switchAlertValue;
+            } else if(switchAlertValue === "on" )  {
+                console.log("From on to off");
+                switchAlertValue = "off";
+
+                // OFF
+                return switchAlertValue;
+            } else {
+                console.log("setting value to default");
+                switchAlertValue = "off";
+
+                // Incase off any errors
+                return switchAlertValue;
+            }
+
+
+
+        });
     });
 
 
 </script>
 <!--  -->
-<input id="function-data" />
-<input id="data-holder" />
+<input id="MainInput" />
+<!--<input id="data-holder" />-->
 
 <!--<button class = "bttn-unite bttn-sm bttn-primary">Submit</button>-->
 
@@ -750,6 +843,9 @@ path {
            onclick="update5Year()" />
 </div>
 
+<hr>
+<hr>
+
 <!-- Peers -->
 <div id="peers"></div>
 
@@ -780,6 +876,13 @@ path {
         <div id="source2"></div>
     </li>
 </ul>
+
+<!-- Label Switch for Edit Settings for toggling On and Off -->
+<label class="switch">
+    <input type="checkbox">
+    <span class="slider round"></span>
+</label>
+
 
 
 
