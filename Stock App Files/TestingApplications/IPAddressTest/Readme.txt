@@ -1,1 +1,0 @@
-This prints out users IP and country.
