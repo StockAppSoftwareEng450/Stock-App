@@ -77,11 +77,10 @@ $(document).ready(function() {
                     error: function(error){
                         // Handle Errors here.
                         console.log(error.responseText);
-                        alert(error.responseText);
+                        //alert(error.responseText);
                     }
                 });
             }, 3000);
-
 
             // Grabbing the peers(related Companies) and displaying them to an ul on the DOM
             var peersUrl = "https://api.iextrading.com/1.0/stock/" + stockSymbol + "/peers";
@@ -95,17 +94,36 @@ $(document).ready(function() {
 
                         function makeUL(array) {
                             var list = document.createElement('ul');
-
                             for (var i = 0; i < array.length; i++) {
                                 var item = document.createElement('li');
                                 item.appendChild(document.createTextNode(array[i]));
                                 list.appendChild(item);
                             }
-
                             return list;
                         }
 
                         document.getElementById('peers').appendChild(makeUL(data));
+                        //document.getElementById('peers').style.paddingLeft = "20px";
+                    });
+                },
+
+                error: function(error){
+                    // Handle Errors here.
+                    console.log(error.responseText);
+                    //alert(error.responseText);
+                }
+            });
+
+            // Company About Page
+            var companyDescriptionUrl = "https://api.iextrading.com/1.0/stock/" + stockSymbol + "/company";
+
+            $.ajax({
+                url: companyDescriptionUrl,
+                success: function (data) {
+                    d3.json(companyDescriptionUrl, function (error, data) {
+                        console.log(data.description);
+
+                        document.getElementById("aboutCompany").innerHTML = data.description;
 
                     });
                 },
@@ -113,9 +131,17 @@ $(document).ready(function() {
                 error: function(error){
                     // Handle Errors here.
                     console.log(error.responseText);
-                    alert(error.responseText);
+                    //alert(error.responseText);
                 }
             });
+
+
+
+
+
+
+
+
 
 
         } else {
