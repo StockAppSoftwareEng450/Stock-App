@@ -167,8 +167,8 @@
             <li class="breadcrumb-item active">My Dashboard</li>
         </ol>
 
-        <button onclick="AddToPortfolio()">Portfolio</button>
-        <button onclick="AddToWatchlist()">Watchlist</button>
+        <button id="portfolioButton" onclick="AddToPortfolio()" data-inPortfolio=false data-pk="" disabled>Portfolio</button>
+        <button id="watchlistButton" onclick="AddToWatchlist()" data-inWatchlist=false data-ok="" disabled>Watchlist</button>
 
         <!-- insert information here -->
         <div class="jumbotron" style="padding-bottom: 35px; padding-top: 35px;">
@@ -357,8 +357,6 @@
 
     <!-- JS that takes Search for Stock input a -->
     <script src="js/IndividualStockPage.js"></script>
-
-    <script src="js/AddToFirebase.js"></script>
 
 </body>
 </html>

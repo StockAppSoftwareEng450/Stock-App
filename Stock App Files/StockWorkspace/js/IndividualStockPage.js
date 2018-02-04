@@ -27,7 +27,6 @@ $(document).ready(function() {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             // User is signed in.
-            console.log(window.location.href);
             // Array with stockSymbol in [0]
             var testDG = parseURLParams(window.location.href);
             var variable1 = testDG['stock'];
@@ -39,8 +38,40 @@ $(document).ready(function() {
                 console.log("reached undefined");
                 window.location.href = "index.html";
             }
-
             resultStockSymbol = stockSymbol;
+
+            //getting portfolio information and save it
+            var refPortfolio = firebase.database().ref("Portfolios");
+            refPortfolio.orderByChild("userId").equalTo(user.uid).once("value", function(snapshot) {
+                if(snapshot.exists()){
+                    snapshot.forEach(function (value){
+                        console.log("StockSymbol: " + value.child("stockSymbol").val());
+                        if(stockSymbol == value.child("stockSymbol").val()){
+//change css to state "stock in symbole" + change custom-attribute
+                            document.getElementById("portfolioButton").setAttribute("data-inPortfolio", true);
+                            document.getElementById("portfolioButton").setAttribute("data-pk", value.key);
+                        }
+                    });
+                }
+                // activate portfolio button (deactivate it as default)
+                document.getElementById("portfolioButton").disabled = false;
+            });
+
+            //getting watchlist information and save it
+            var refWatchlist = firebase.database().ref("Watchlists");
+            refWatchlist.orderByChild("userId").equalTo(user.uid).once("value", function(snapshot) {
+                if(snapshot.exists()){
+                    snapshot.forEach(function (value){
+                        if(stockSymbol == value.child("stockSymbol").val()){
+//change css to state "stock in symbole" + change custom-attribute
+                            document.getElementById("watchlistButton").setAttribute("data-inWatchlist", true);
+                            document.getElementById("watchlistButton").setAttribute("data-pk", value.key);
+                        }
+                    });
+                }
+                // activate portfolio button (deactivate it as default)
+                document.getElementById("watchlistButton").disabled = false;
+            });
 
             // Parsing Stock Quote
             var parser = document.createElement('a');
@@ -53,13 +84,13 @@ $(document).ready(function() {
             resultUrl = resultUrl + addQuote;
 
             // Verifying the url
-            console.log(resultUrl);
+//            console.log(resultUrl);
 
             setInterval(function () {
                 $.ajax({
                     url: resultUrl,
                     success: function (data) {
-                        console.log(data);
+//                        console.log(data);
                         var response = (data);
                         var companyName = response.companyName;
                         var latestPrice = response.latestPrice;
@@ -70,9 +101,9 @@ $(document).ready(function() {
                         document.getElementById("StockSymbolUpperCase").innerHTML = symbol;
 
                         //verifying information has been grabbed successfully
-                        console.log(companyName);
-                        console.log(latestPrice);
-                        console.log(symbol);
+//                        console.log(companyName);
+//                        console.log(latestPrice);
+//                        console.log(symbol);
                     },
                     error: function(error){
                         // Handle Errors here.
@@ -84,13 +115,13 @@ $(document).ready(function() {
 
             // Grabbing the peers(related Companies) and displaying them to an ul on the DOM
             var peersUrl = "https://api.iextrading.com/1.0/stock/" + stockSymbol + "/peers";
-            console.log(peersUrl);
+//            console.log(peersUrl);
 
             $.ajax({
                 url: peersUrl,
                 success: function (data) {
                     d3.json(peersUrl, function (error, data) {
-                        console.log("peers: " + data);
+//                        console.log("peers: " + data);
 
                         function makeUL(array) {
                             var list = document.createElement('ul');
@@ -121,7 +152,7 @@ $(document).ready(function() {
                 url: companyDescriptionUrl,
                 success: function (data) {
                     d3.json(companyDescriptionUrl, function (error, data) {
-                        console.log(data.description);
+//                        console.log(data.description);
 
                         document.getElementById("aboutCompany").innerHTML = data.description;
 
@@ -141,3 +172,70 @@ $(document).ready(function() {
         }
     })
 });
+
+function AddToPortfolio () {
+    var user = firebase.auth().currentUser;
+
+    //console.log(document.getElementById("portfolioButton").getAttribute("data-inPortfolio"));
+    //console.log(document.getElementById("portfolioButton").getAttribute("data-pk"));
+
+    if(document.getElementById("portfolioButton").getAttribute("data-inPortfolio") === "true"){
+        firebase.database().ref("Portfolios/" + document.getElementById("portfolioButton").getAttribute("data-pk")).remove();
+
+        document.getElementById("portfolioButton").setAttribute("data-inPortfolio", false);
+        document.getElementById("portfolioButton").setAttribute("data-pk", null);
+    } else {
+        firebase.database().ref('Portfolios/').push().set({
+            userId: user.uid,
+            stockSymbol: resultStockSymbol
+        });
+
+        document.getElementById("portfolioButton").setAttribute("data-inPortfolio", true);
+        setPK("portfolioButton");
+    }
+}
+
+function AddToWatchlist () {
+    var user = firebase.auth().currentUser;
+
+    //console.log(document.getElementById("watchlistButton").getAttribute("data-inWatchlist"));
+    //console.log(document.getElementById("watchlistButton").getAttribute("data-pk"));
+
+    if(document.getElementById("watchlistButton").getAttribute("data-inWatchlist") === "true"){
+        firebase.database().ref("Watchlists/" + document.getElementById("watchlistButton").getAttribute("data-pk")).remove();
+
+        document.getElementById("watchlistButton").setAttribute("data-inWatchlist", false);
+        document.getElementById("watchlistButton").setAttribute("data-pk", null);
+    } else {
+        firebase.database().ref('Watchlists/').push().set({
+            userId: user.uid,
+            stockSymbol: resultStockSymbol
+        });
+
+        document.getElementById("watchlistButton").setAttribute("data-inWatchlist", true);
+        setPK("watchlistButton");
+    }
+
+}
+
+function setPK(button){
+    var user = firebase.auth().currentUser;
+
+    var ref = null;
+    if(button === "portfolioButton"){
+        ref = firebase.database().ref("Portfolios");
+    } else {
+        ref = firebase.database().ref("Watchlists");
+    }
+
+    ref.orderByChild("userId").equalTo(user.uid).once("value", function(snapshot) {
+        if(snapshot.exists()){
+            snapshot.forEach(function (value){
+                console.log("StockSymbol1: " + value.child("stockSymbol").val());
+                if(resultStockSymbol == value.child("stockSymbol").val()){
+                    document.getElementById(button).setAttribute("data-pk", value.key);
+                }
+            });
+        }
+    });
+}
