@@ -23,7 +23,11 @@
     <!-- Custom styles for this template -->
     <link href="css/sb-admin.css" rel="stylesheet">
 
+    <!-- Button CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bttn.css/0.2.4/bttn.css">
+
+    <!-- Auto complete  -->
+    <!--<link rel="stylesheet" href="css/autocomplete.css">-->
 
     <!-- Adding custom Stock Styling -->
     <!-- @TODO create separate D3 File -->
@@ -180,7 +184,7 @@
             <li class="nav-item">
                 <form class="form-inline my-2 my-lg-0 mr-lg-2">
                     <div class="input-group">
-                        <input type="text" id="myInput" class="form-control" onkeypress="return searchKeyPress(event);"
+                        <input type="text" id="myInput" style="" class="form-control" onkeypress="return searchKeyPress(event);"
                                placeholder="Search for..." title="Type in a stock Symbol">
                         <span class="input-group-btn">
                       <button id="btnSearch" class="btn btn-primary" type="button" onclick="UrlStringPass()"
@@ -224,10 +228,8 @@
             <div id="StockSymbolUpperCase"></div>
         </div>
 
-
-
         <!-- Company Information and Graph -->
-        <div class="container" style="padding-top: 0; margin-left: 0px; margin-right: 0">
+        <div class="container" style="padding-top: 0; margin-left: 0; margin-right: 0">
             <div class="row">
                 <div class="col-sm-4">
                     <h3>Company Information</h3>
@@ -301,8 +303,6 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
 
         <hr id="hrPageBreak">
@@ -373,10 +373,6 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <!-- @TODO Add generalization for individual input for instance any stock any where transfers to stock page. -->
-    <!-- JS that takes Search for Stock input a -->
-    <script src="js/IndividualStockPage.js"></script>
-
     <!-- D3 Library -->
     <script src="http://d3js.org/d3.v3.min.js"></script>
 
@@ -386,9 +382,6 @@
     <!-- Enter on Key press for Search for stocks -->
     <script src="js/EnterOnKeyPress.js"></script>
 
-    <!-- Search for stock application  -->
-    <script src="js/SearchForStock.js"></script>
-
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/popper/popper.min.js"></script>
@@ -396,12 +389,18 @@
 
     <!-- Plugin JavaScript -->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <!--<script src="vendor/chart.js/Chart.js"></script>-->
-    <!--<script src="vendor/datatables/jquery.dataTables.js"></script>-->
-    <!--<script src="vendor/datatables/dataTables.bootstrap4.js"></script>-->
+
+    <!-- Auto complete -->
+    <script src="js/Autocomplete.js"></script>
 
     <!-- Custom scripts for this template -->
     <script src="js/sb-admin.js"></script>
+
+    <!-- Search for stock application  -->
+    <script src="js/SearchForStock.js"></script>
+
+    <!-- JS that takes Search for Stock input a -->
+    <script src="js/IndividualStockPage.js"></script>
 
 </body>
 </html>
