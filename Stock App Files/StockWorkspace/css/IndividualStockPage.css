@@ -1,0 +1,61 @@
+#CompanyName, #StockPrice, #StockSymbolUpperCase {
+    display : inline;
+}
+
+#CompanyName, #StockSymbolUpperCase{
+    font-size: 170%
+}
+
+#StockPrice {
+    padding-left: 1%;
+    font-size: 140%
+}
+
+#StockSymbolUpperCase {
+    float: right;
+}
+
+path {
+    stroke-width: 1.2;
+    fill: none;
+}
+
+.axis path, .axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
+.SVGD3Parent {
+    float: left;
+    display: inline-block;
+    position: relative;
+    /*padding-left: 100px;*/
+    padding-right: 0;
+}
+
+ul {
+    padding-left: 30px;
+}
+
+#hrPageBreak {
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.overlay {
+    fill: none;
+    pointer-events: all;
+}
+
+.focus circle {
+    fill: none;
+    stroke: steelblue;
+}
+
+.container {
+    padding-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
