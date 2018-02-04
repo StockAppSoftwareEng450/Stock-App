@@ -135,15 +135,6 @@ $(document).ready(function() {
                 }
             });
 
-
-
-
-
-
-
-
-
-
         } else {
             // No user is signed in.
             window.location.href = "login.html";

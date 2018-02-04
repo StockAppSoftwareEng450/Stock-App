@@ -81,7 +81,15 @@
             margin-left: 5%;
         }
 
+        .overlay {
+            fill: none;
+            pointer-events: all;
+        }
 
+        .focus circle {
+            fill: none;
+            stroke: steelblue;
+        }
 
     </style>
 </head>
@@ -189,7 +197,6 @@
                                    class="form-control" onkeypress="return searchKeyPress(event);"
                                    placeholder="Search for Company"   title="Type in a stock Symbol">
                         </div>
-
                         <span class="input-group-btn">
                             <button id="btnSearch" class="btn btn-primary" type="button" onclick="UrlStringPass()" value="Search">
                                 <i class="fa fa-search"></i>
@@ -239,6 +246,12 @@
                     <h3>Company Information</h3>
                     <hr>
                     <div id="aboutCompany"></div>
+                    <br>
+                    <h3>Price</h3>
+                    <hr>
+
+                    <!-- Change to Add currency types later -->
+                    <h5 id="close"></h5>
                 </div>
 
                 <div class="SVGD3Parent">
