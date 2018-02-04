@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bttn.css/0.2.4/bttn.css">
 
     <!-- Auto complete  -->
-    <!--<link rel="stylesheet" href="css/autocomplete.css">-->
+    <link rel="stylesheet" href="css/autocomplete.css">
 
     <!-- Adding custom Stock Styling -->
     <!-- @TODO create separate D3 File -->
@@ -184,14 +184,18 @@
             <li class="nav-item">
                 <form class="form-inline my-2 my-lg-0 mr-lg-2">
                     <div class="input-group">
-                        <input type="text" id="myInput" style="" class="form-control" onkeypress="return searchKeyPress(event);"
-                               placeholder="Search for..." title="Type in a stock Symbol">
+                        <div class="easy-autocomplete" style="width: 200px;">
+                            <input type="text" id="myInput" style="width:200px; padding-bottom: 8px;padding-top: 8px;"
+                                   class="form-control" onkeypress="return searchKeyPress(event);"
+                                   placeholder="Search for Company"   title="Type in a stock Symbol">
+                        </div>
+
                         <span class="input-group-btn">
-                      <button id="btnSearch" class="btn btn-primary" type="button" onclick="UrlStringPass()"
-                              value="Search">
-                        <i class="fa fa-search"></i>
-                      </button>
-                    </span>
+                            <button id="btnSearch" class="btn btn-primary" type="button" onclick="UrlStringPass()" value="Search">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+
                     </div>
                 </form>
             </li>
