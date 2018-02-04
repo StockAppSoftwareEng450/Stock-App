@@ -75,7 +75,7 @@ $(document).ready(function() {
                         console.log(symbol);
                     },
                     error: function(error){
-                        // Handle Errors here.
+                        // Handle Errors here.  
                         console.log(error.responseText);
                         //alert(error.responseText);
                     }
