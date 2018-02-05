@@ -131,8 +131,8 @@
             <li class="nav-item">
                 <form class="form-inline my-2 my-lg-0 mr-lg-2">
                     <div class="input-group">
-                        <div class="easy-autocomplete" style="width: 200px;">
-                            <input type="text" id="myInput" style="width:200px; padding-bottom: 8px;padding-top: 8px;"
+                        <div class="easy-autocomplete" style="width: 225px;">
+                            <input type="text" id="myInput" style="width:225px; padding-bottom: 8px;padding-top: 8px;"
                                    class="form-control" onkeypress="return searchKeyPress(event);"
                                    placeholder="Search for Company"   title="Type in a stock Symbol">
                         </div>
@@ -167,14 +167,39 @@
             <li class="breadcrumb-item active">My Dashboard</li>
         </ol>
 
-        <button id="portfolioButton" onclick="AddToPortfolio()" data-inPortfolio=false data-pk="" disabled>Portfolio</button>
-        <button id="watchlistButton" onclick="AddToWatchlist()" data-inWatchlist=false data-ok="" disabled>Watchlist</button>
-
         <!-- insert information here -->
         <div class="jumbotron" style="padding-bottom: 35px; padding-top: 35px;">
             <div id="CompanyName"></div>
             <div id="StockPrice"></div>
             <div id="StockSymbolUpperCase"></div>
+
+            <div id="AddToSigns">
+                <!-- Watchlist Sign -->
+                <i onclick="AddToPortfolio()" class="fa fa-plus"
+                   style="float: right;
+                            padding: 10px;
+                            margin-right: 20px;
+                            font-size:20px;
+                            color:#007BFF;"
+                    id="portfolioButton"
+                    data-inPortfolio=false data-pk="">
+                </i>
+
+                <!-- Watchlist Sign -->
+                <i onclick="AddToWatchlist()" class="fa fa-plus"
+                   style="float: right;
+                            padding: 10px;
+                            font-size:20px;
+                            color:#007BFF;"
+                   id="watchlistButton"
+                   data-inWatchlist=false data-ok="">
+                </i>
+            </div>
+
+            <!--<button type="button" class="portButton" id="portfolioButton" onclick="AddToPortfolio()"-->
+                    <!--data-inPortfolio=false data-pk="" disabled>Add to Watchlist</button>-->
+            <!--<button type="button" class="watchButton" id="watchlistButton" onclick="AddToWatchlist()"-->
+                    <!--data-inWatchlist=false data-ok="" disabled>Add to Watchlist</button>-->
         </div>
 
         <!-- Company Information and Graph -->
@@ -183,13 +208,13 @@
                 <div class="col-sm-4">
                     <h3>Company Information</h3>
                     <hr>
-                    <div id="aboutCompany"></div>
-                    <br>
+                    <div id="aboutCompany"></div><br>
                     <h3>Price</h3>
                     <hr>
 
                     <!-- Change to Add currency types later -->
                     <h5 id="close">Hover to see price</h5>
+                    <h5 id="date">Date Listed</h5>
                 </div>
 
                 <div class="SVGD3Parent">
@@ -202,6 +227,8 @@
                     <div id="buttonOption">
                         <!-- 1 Day -->
                         <input class="bttn-unite bttn-sm bttn-primary"
+                               style="margin: 5px;"
+                               id="1DayButton"
                                name="updateButton"
                                type="button"
                                value="1 Day"
@@ -209,6 +236,8 @@
 
                         <!-- 1 Month -->
                         <input class="bttn-unite bttn-sm bttn-primary"
+                               style="margin: 5px;"
+                               id="1MonthButton"
                                name="updateButton"
                                type="button"
                                value="1 Month"
@@ -216,6 +245,8 @@
 
                         <!-- 3 Month -->
                         <input class="bttn-unite bttn-sm bttn-primary"
+                               style="margin: 5px;"
+                               id="3MonthButton"
                                name="updateButton"
                                type="button"
                                value="3 Month"
@@ -223,6 +254,8 @@
 
                         <!-- 6 Month -->
                         <input class="bttn-unite bttn-sm bttn-primary"
+                               style="margin: 5px;"
+                               id="6MonthButton"
                                name="updateButton"
                                type="button"
                                value="6 Month"
@@ -230,6 +263,8 @@
 
                         <!-- YTD -->
                         <input class="bttn-unite bttn-sm bttn-primary"
+                               style="margin: 5px;"
+                               id="YTDButton"
                                name="updateButton"
                                type="button"
                                value="Year To Date"
@@ -237,6 +272,8 @@
 
                         <!-- 1 Year -->
                         <input class="bttn-unite bttn-sm bttn-primary"
+                               style="margin: 5px;"
+                               id="1YearButton"
                                name="updateButton"
                                type="button"
                                value="1 year"
@@ -244,6 +281,8 @@
 
                         <!-- 2 Years -->
                         <input class="bttn-unite bttn-sm bttn-primary"
+                               style="margin: 5px;"
+                               id="2YearButton"
                                name="updateButton"
                                type="button"
                                value="2 years"
@@ -251,11 +290,16 @@
 
                         <!-- 5 Years -->
                         <input class="bttn-unite bttn-sm bttn-primary"
+                               style="margin: 5px;"
+                               id="5YearButton"
                                name="updateButton"
                                type="button"
                                value="5 years"
                                onclick="update5Year()" />
                     </div>
+                </div>
+                <div id="logodiv">
+                    <img id="logo" class = "logo" src="">
                 </div>
             </div>
         </div>
@@ -268,12 +312,45 @@
                 <div class="col-sm-4">
                     <h3>Stats</h3>
                     <hr>
+                    <ul>
+                        <li><p>Week 52 High: </p><p id="week52high"></p></li>
+                        <li><p>Week 52 Low: </p><p id="week52low"></p></li>
+                        <li><p>Dividend Rate: </p><p id="dividendRate"></p></li>
+                        <li><p>Latest EPS: </p><p id="latestEPS"></p></li>
+                        <li><p>Gross Profit: $</p><p id="grossProfit"></p></li>
+                        <li><p>Debt: $</p><p id="debt"></p></li>
+                    </ul>
                 </div>
                 <hr id="hrDown">
+
                 <div class="col-sm-4">
                     <h3>News</h3>
                     <hr>
+
+                    <!-- News -->
+                    <ul>
+                        <li>
+                            <a id="headline0"></a>
+                            <div id="datetime0"></div>
+                            <div id="source0"></div>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <a id="headline1"></a>
+                            <div id="datetime1"></div>
+                            <div id="source1"></div>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <a id="headline2"></a>
+                            <div id="datetime2"></div>
+                            <div id="source2"></div>
+                        </li>
+                    </ul>
                 </div>
+
                 <div class="col-sm-4">
                     <h3>Peers</h3>
                     <hr>

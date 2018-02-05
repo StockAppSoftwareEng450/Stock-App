@@ -183,7 +183,11 @@ setTimeout(function () {
                         d1 = data[i],
                         d = x0 - d0.date > d1.date - x0 ? d1 : d0;
                     focus.attr("transform", "translate(" + x(d.date) + "," + y(d.close) + ")");
-                    document.getElementById("close").innerHTML = d.close
+                    document.getElementById("close").innerHTML = d.close;
+
+                    // Date
+                    var newDate = d.date.toString();
+                    document.getElementById("date").innerHTML = newDate.slice(0,15);
 
                 }
             });

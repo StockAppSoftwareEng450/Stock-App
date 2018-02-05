@@ -58,4 +58,25 @@ ul {
     padding-top: 0;
     margin-left: 0;
     margin-right: 0;
+    max-width: 100%;
+}
+
+#buttonOption  {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+#logodiv {
+    text-align: right;
+    height: 128px;
+    width: 128px;
+}
+
+p {
+    display: inline;
+}
+
+#AddToSigns {
+    display: inline;
 }

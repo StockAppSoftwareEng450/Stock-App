@@ -19,6 +19,16 @@ $.ajax({
                 },
                 onClickEvent: function() {
                     var value = $("#myInput").getSelectedItemData().symbol;
+
+                    // Check for undefined value
+                    if (value === undefined ) {
+                        // Display error to the user and return user to homepage
+                        console.log("reached undefined");
+                        window.location.href = "index.html";
+                    }
+
+                    console.log(value);
+
                     UrlStringPass(value);
                     //console.log(value);
                 }
@@ -33,6 +43,14 @@ $.ajax({
 // Takes the input on button press and parses the string.
 function UrlStringPass(value) {
     console.log("Search for Stock input: " + value);
+
+    // Check for undefined value
+    if (value === undefined ) {
+        // Display error to the user and return user to homepage
+        console.log("reached undefined");
+        window.location.href = "index.html";
+    }
+
 
     // Passes string input through URL
     window.location.href = "IndividualStockPage.html?stock=" + value + "#";

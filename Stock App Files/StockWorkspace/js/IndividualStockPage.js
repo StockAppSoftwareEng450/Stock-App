@@ -47,9 +47,10 @@ $(document).ready(function() {
                     snapshot.forEach(function (value){
                         console.log("StockSymbol: " + value.child("stockSymbol").val());
                         if(stockSymbol == value.child("stockSymbol").val()){
-//change css to state "stock in symbole" + change custom-attribute
+                            //change css to state "stock in symbole" + change custom-attribute
                             document.getElementById("portfolioButton").setAttribute("data-inPortfolio", true);
                             document.getElementById("portfolioButton").setAttribute("data-pk", value.key);
+                            document.getElementById("portfolioButton").innerText = "Remove from Portfolio";
                         }
                     });
                 }
@@ -63,9 +64,10 @@ $(document).ready(function() {
                 if(snapshot.exists()){
                     snapshot.forEach(function (value){
                         if(stockSymbol == value.child("stockSymbol").val()){
-//change css to state "stock in symbole" + change custom-attribute
+                            //change css to state "stock in symbole" + change custom-attribute
                             document.getElementById("watchlistButton").setAttribute("data-inWatchlist", true);
                             document.getElementById("watchlistButton").setAttribute("data-pk", value.key);
+                            document.getElementById("watchlistButton").innerText = "Remove from Watchlist";
                         }
                     });
                 }
@@ -84,13 +86,13 @@ $(document).ready(function() {
             resultUrl = resultUrl + addQuote;
 
             // Verifying the url
-//            console.log(resultUrl);
+            // console.log(resultUrl);
 
             setInterval(function () {
                 $.ajax({
                     url: resultUrl,
                     success: function (data) {
-//                        console.log(data);
+                        //console.log(data);
                         var response = (data);
                         var companyName = response.companyName;
                         var latestPrice = response.latestPrice;
@@ -101,9 +103,9 @@ $(document).ready(function() {
                         document.getElementById("StockSymbolUpperCase").innerHTML = symbol;
 
                         //verifying information has been grabbed successfully
-//                        console.log(companyName);
-//                        console.log(latestPrice);
-//                        console.log(symbol);
+                        // console.log(companyName);
+                        // console.log(latestPrice);
+                        // console.log(symbol);
                     },
                     error: function(error){
                         // Handle Errors here.
@@ -115,13 +117,13 @@ $(document).ready(function() {
 
             // Grabbing the peers(related Companies) and displaying them to an ul on the DOM
             var peersUrl = "https://api.iextrading.com/1.0/stock/" + stockSymbol + "/peers";
-//            console.log(peersUrl);
+            //console.log(peersUrl);
 
             $.ajax({
                 url: peersUrl,
                 success: function (data) {
                     d3.json(peersUrl, function (error, data) {
-//                        console.log("peers: " + data);
+                    //console.log("peers: " + data);
 
                         function makeUL(array) {
                             var list = document.createElement('ul');
@@ -152,7 +154,7 @@ $(document).ready(function() {
                 url: companyDescriptionUrl,
                 success: function (data) {
                     d3.json(companyDescriptionUrl, function (error, data) {
-//                        console.log(data.description);
+                    // console.log(data.description);
 
                         document.getElementById("aboutCompany").innerHTML = data.description;
 
@@ -166,12 +168,95 @@ $(document).ready(function() {
                 }
             });
 
+            // Displaying News to individual stock page
+            var urlNews = "https://api.iextrading.com/1.0/stock/" + stockSymbol + "/news/last/3";
+
+            $.ajax({
+                url: urlNews,
+                success: function (data) {
+
+                    // Get the data
+                    d3.json(urlNews, function (error, data) {
+                        console.log("News: " + data);
+                        for (var i = 0; i < data.length; i++){
+                            var headlineIndex = "headline";
+                            var sourceIndex = "source";
+                            var datetimeIndex = "datetime";
+
+                            var parser = data[i].datetime;
+                            var indexNumber = parser.indexOf("T");
+                            var dataParsed = parser.slice(0,indexNumber);
+
+                            headlineIndex = headlineIndex + i;
+                            sourceIndex =  sourceIndex + i;
+                            datetimeIndex = datetimeIndex + i;
+
+                            console.log(headlineIndex);
+                            console.log(data[i].headline);
+                            console.log(data[i].source);
+                            console.log(dataParsed);
+
+                            document.getElementById(headlineIndex).href = data[i].url;
+                            document.getElementById(headlineIndex).innerHTML = data[i].headline;
+                            document.getElementById(sourceIndex).innerHTML = data[i].source;
+                            document.getElementById(datetimeIndex).innerHTML = dataParsed;
+                        }
+
+                    });
+                }, error: function(error){
+                    // Handle Errors here.
+                    console.log(error.responseText);
+                    //alert(error.responseText);
+                }
+            });
+
+            // Displaying Key Stats to individual stock page
+            var urlKeyStats = "https://api.iextrading.com/1.0/stock/" + stockSymbol + "/stats";
+
+            $.ajax({
+                url: urlKeyStats,
+                success: function (data) {
+
+                    // Get the data
+                    d3.json(urlKeyStats, function (error, data) {
+                        console.log("Key Stats: " + data);
+
+                        var response = (data);
+                        var week52high = response.week52high;
+                        var week52low = response.week52low;
+                        var dividendRate = response.dividendRate;
+                        var latestEPS = response.latestEPS;
+                        var grossProfit = response.grossProfit;
+                        var debt = response.debt;
+
+                        document.getElementById("week52high").innerHTML = week52high;
+                        document.getElementById("week52low").innerHTML = week52low;
+                        document.getElementById("dividendRate").innerHTML = dividendRate;
+                        document.getElementById("latestEPS").innerHTML = latestEPS;
+                        document.getElementById("grossProfit").innerHTML = grossProfit;
+                        document.getElementById("debt").innerHTML = debt;
+                    });
+                }, error: function(error){
+                    // Handle Errors here.
+                    console.log(error.responseText);
+                    //alert(error.responseText);
+                }
+            });
+
+            // Convert symbol to uppercase
+            var uppercaseStockSymbol = stockSymbol.toUpperCase();
+
+            // Displaying Logo
+            var logoUrl = "https://storage.googleapis.com/iex/api/logos/" + uppercaseStockSymbol + ".png";
+            $("#logo").attr("src", logoUrl);
+
         } else {
             // No user is signed in.
             window.location.href = "login.html";
         }
     })
 });
+
 
 function AddToPortfolio () {
     var user = firebase.auth().currentUser;
@@ -184,6 +269,7 @@ function AddToPortfolio () {
 
         document.getElementById("portfolioButton").setAttribute("data-inPortfolio", false);
         document.getElementById("portfolioButton").setAttribute("data-pk", null);
+        document.getElementById("portfolioButton").innerText = "Add to Portfolio";
     } else {
         firebase.database().ref('Portfolios/').push().set({
             userId: user.uid,
@@ -192,8 +278,12 @@ function AddToPortfolio () {
 
         document.getElementById("portfolioButton").setAttribute("data-inPortfolio", true);
         setPK("portfolioButton");
+        document.getElementById("portfolioButton").innerText = "Remove from Portfolio";
     }
 }
+
+// Check status
+var addToWatchStatus = false;
 
 function AddToWatchlist () {
     var user = firebase.auth().currentUser;
@@ -206,6 +296,7 @@ function AddToWatchlist () {
 
         document.getElementById("watchlistButton").setAttribute("data-inWatchlist", false);
         document.getElementById("watchlistButton").setAttribute("data-pk", null);
+        document.getElementById("watchlistButton").innerText = "Add to Watchlist";
     } else {
         firebase.database().ref('Watchlists/').push().set({
             userId: user.uid,
@@ -214,6 +305,7 @@ function AddToWatchlist () {
 
         document.getElementById("watchlistButton").setAttribute("data-inWatchlist", true);
         setPK("watchlistButton");
+        document.getElementById("watchlistButton").innerText = "Remove from Watchlist";
     }
 
 }
