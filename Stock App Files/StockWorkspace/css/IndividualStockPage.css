@@ -78,5 +78,88 @@ p {
 }
 
 #AddToSigns {
-    display: inline;
+    /*display: inline;*/
 }
+
+/* Portfolio Button */
+.PortfolioSpanButton {
+    position: relative;
+    display: inline-block;
+    float: right;
+    /* border-bottom: 1px dotted black; */
+}
+
+.PortfolioSpanButton .PorfolioHover {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px;
+}
+
+.PortfolioSpanButton:hover .PorfolioHover {
+    visibility: visible;
+}
+
+/* Watchlist Button */
+.WatchlistSpanButton {
+    position: relative;
+    display: inline-block;
+    float: right;
+    /* border-bottom: 1px dotted black; */
+}
+
+.WatchlistSpanButton .WatchlistHover {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px;
+}
+
+.WatchlistSpanButton:hover .WatchlistHover {
+    visibility: visible;
+}
+
+#week52high:before  {
+    content: "$";
+ }
+
+#week52low:before  {
+    content: "\00a0$";
+}
+
+#dividendRate:before {
+    content: "\00a0";
+}
+
+#latestEPS:before {
+    content: "\00a0\00a0";
+}
+
+#grossProfit:before {
+    content: "\00a0\00a0\00a0$";
+}
+
+#debt:before {
+    content: "\00a0\00a0\00a0$";
+}
+

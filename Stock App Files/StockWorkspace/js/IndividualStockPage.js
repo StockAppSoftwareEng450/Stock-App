@@ -50,7 +50,9 @@ $(document).ready(function() {
                             //change css to state "stock in symbole" + change custom-attribute
                             document.getElementById("portfolioButton").setAttribute("data-inPortfolio", true);
                             document.getElementById("portfolioButton").setAttribute("data-pk", value.key);
-                            document.getElementById("portfolioButton").innerText = "Remove from Portfolio";
+                            //document.getElementById("portfolioButton").innerText = " Remove from Portfolio";
+
+                            $("#portfolioButton").addClass("fa fa-minus");
                         }
                     });
                 }
@@ -67,7 +69,9 @@ $(document).ready(function() {
                             //change css to state "stock in symbole" + change custom-attribute
                             document.getElementById("watchlistButton").setAttribute("data-inWatchlist", true);
                             document.getElementById("watchlistButton").setAttribute("data-pk", value.key);
-                            document.getElementById("watchlistButton").innerText = "Remove from Watchlist";
+                            //document.getElementById("watchlistButton").innerText = " Remove from Watchlist";
+
+                            $("#watchlistButton").addClass("fa fa-minus");
                         }
                     });
                 }
@@ -269,7 +273,12 @@ function AddToPortfolio () {
 
         document.getElementById("portfolioButton").setAttribute("data-inPortfolio", false);
         document.getElementById("portfolioButton").setAttribute("data-pk", null);
-        document.getElementById("portfolioButton").innerText = "Add to Portfolio";
+        //document.getElementById("portfolioButton").innerText = " Add to Portfolio";
+
+        $("#portfolioButton").removeClass("fa fa-minus");
+        $("#portfolioButton").addClass("fa fa-plus");
+
+
     } else {
         firebase.database().ref('Portfolios/').push().set({
             userId: user.uid,
@@ -278,12 +287,13 @@ function AddToPortfolio () {
 
         document.getElementById("portfolioButton").setAttribute("data-inPortfolio", true);
         setPK("portfolioButton");
-        document.getElementById("portfolioButton").innerText = "Remove from Portfolio";
+        //document.getElementById("portfolioButton").innerText = " Remove from Portfolio";
+
+        $("#portfolioButton").removeClass("fa fa-plus");
+        $("#portfolioButton").addClass("fa fa-minus");
     }
 }
 
-// Check status
-var addToWatchStatus = false;
 
 function AddToWatchlist () {
     var user = firebase.auth().currentUser;
@@ -296,7 +306,12 @@ function AddToWatchlist () {
 
         document.getElementById("watchlistButton").setAttribute("data-inWatchlist", false);
         document.getElementById("watchlistButton").setAttribute("data-pk", null);
-        document.getElementById("watchlistButton").innerText = "Add to Watchlist";
+        //document.getElementById("watchlistButton").innerText = " Add to Watchlist";
+
+        $("#watchlistButton").removeClass("fa fa-minus");
+        $("#watchlistButton").addClass("fa fa-plus");
+
+
     } else {
         firebase.database().ref('Watchlists/').push().set({
             userId: user.uid,
@@ -305,7 +320,11 @@ function AddToWatchlist () {
 
         document.getElementById("watchlistButton").setAttribute("data-inWatchlist", true);
         setPK("watchlistButton");
-        document.getElementById("watchlistButton").innerText = "Remove from Watchlist";
+        //document.getElementById("watchlistButton").innerText = " Remove from Watchlist";
+
+        $("#watchlistButton").removeClass("fa fa-plus");
+        $("#watchlistButton").addClass("fa fa-minus");
+
     }
 
 }

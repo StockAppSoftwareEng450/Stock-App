@@ -173,8 +173,8 @@
             <div id="StockPrice"></div>
             <div id="StockSymbolUpperCase"></div>
 
-            <div id="AddToSigns">
-                <!-- Watchlist Sign -->
+            <!-- Portfolio Sign -->
+            <div class="PortfolioSpanButton">
                 <i onclick="AddToPortfolio()" class="fa fa-plus"
                    style="float: right;
                             padding: 10px;
@@ -184,8 +184,11 @@
                     id="portfolioButton"
                     data-inPortfolio=false data-pk="">
                 </i>
+                <span class="PorfolioHover">Porfolio</span>
+            </div>
 
-                <!-- Watchlist Sign -->
+            <!-- Watchlist Sign -->
+            <div class="WatchlistSpanButton">
                 <i onclick="AddToWatchlist()" class="fa fa-plus"
                    style="float: right;
                             padding: 10px;
@@ -194,12 +197,8 @@
                    id="watchlistButton"
                    data-inWatchlist=false data-ok="">
                 </i>
+                <span class="WatchlistHover">Watchlist</span>
             </div>
-
-            <!--<button type="button" class="portButton" id="portfolioButton" onclick="AddToPortfolio()"-->
-                    <!--data-inPortfolio=false data-pk="" disabled>Add to Watchlist</button>-->
-            <!--<button type="button" class="watchButton" id="watchlistButton" onclick="AddToWatchlist()"-->
-                    <!--data-inWatchlist=false data-ok="" disabled>Add to Watchlist</button>-->
         </div>
 
         <!-- Company Information and Graph -->
@@ -313,12 +312,30 @@
                     <h3>Stats</h3>
                     <hr>
                     <ul>
-                        <li><p>Week 52 High: </p><p id="week52high"></p></li>
-                        <li><p>Week 52 Low: </p><p id="week52low"></p></li>
-                        <li><p>Dividend Rate: </p><p id="dividendRate"></p></li>
-                        <li><p>Latest EPS: </p><p id="latestEPS"></p></li>
-                        <li><p>Gross Profit: $</p><p id="grossProfit"></p></li>
-                        <li><p>Debt: $</p><p id="debt"></p></li>
+                        <li>
+                            <p>Week 52 High: </p>
+                            <strong style="padding-left:5em" id="week52high"></strong>
+                        </li>
+                        <li>
+                            <p>Week 52 Low: </p>
+                            <strong style="padding-left:5em" id="week52low"></strong>
+                        </li>
+                        <li>
+                            <p>Dividend Rate: </p>
+                            <strong style="padding-left:5em" id="dividendRate"></strong>
+                        </li>
+                        <li>
+                            <p>Latest EPS: </p>
+                            <strong style="padding-left:6.5em" id="latestEPS"></strong>
+                        </li>
+                        <li>
+                            <p>Gross Profit: </p>
+                            <strong style="padding-left:5em" id="grossProfit"></strong>
+                        </li>
+                        <li>
+                            <p>Debt: </p>
+                            <strong style="padding-left:8em" id="debt"></strong>
+                        </li>
                     </ul>
                 </div>
                 <hr id="hrDown">
@@ -404,6 +421,7 @@
     <!-- Firebase Key init -->
     <script src="js/FirebaseInit.js"></script>
 
+    <!-- Jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <!-- D3 Library -->
