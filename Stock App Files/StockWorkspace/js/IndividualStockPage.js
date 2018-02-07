@@ -127,29 +127,27 @@ $(document).ready(function() {
                 url: peersUrl,
                 success: function (data) {
                     d3.json(peersUrl, function (error, data) {
-                    //console.log("peers: " + data);
+                    console.log("peers: " + data);
 
-                        function makeUL(array) {
-                            var list = document.createElement('ul');
-                            for (var i = 0; i < array.length; i++) {
-                                var item = document.createElement('li');
-                                item.appendChild(document.createTextNode(array[i]));
-                                list.appendChild(item);
-                            }
-                            return list;
+                        // for each peer in the list
+                        for (var i = 0; i < data.length; i++){
+                            console.log(i + " " + data[i]);
+
+                            var peersStatsURL = "https://api.iextrading.com/1.0/stock/" + data[i] + "/stats";
+                            var peerName = data[i];
+
+                            var price = grabpeerStockPrice(peerName);
+                            console.log(price);
+                            peersStatsUrlGrab(peersStatsURL, peerName, price);
+
                         }
-
-                        document.getElementById('peers').appendChild(makeUL(data));
-                        //document.getElementById('peers').style.paddingLeft = "20px";
                     });
                 },
 
+                // Error checking
                 error: function(error){
-                    // Handle Errors here.
                     console.log(error.responseText);
-                    //alert(error.responseText);
 
-                    // Handling undefined Exception
                     if (error.responseText === "Unknown symbol"){
                         console.log("Reached Error");
 
@@ -166,17 +164,12 @@ $(document).ready(function() {
                 url: companyDescriptionUrl,
                 success: function (data) {
                     d3.json(companyDescriptionUrl, function (error, data) {
-                    // console.log(data.description);
-
                         document.getElementById("aboutCompany").innerHTML = data.description;
-
                     });
                 },
 
                 error: function(error){
-                    // Handle Errors here.
                     console.log(error.responseText);
-                    //alert(error.responseText);
 
                     // Handling undefined Exception
                     if (error.responseText === "Unknown symbol"){
@@ -293,6 +286,55 @@ $(document).ready(function() {
     })
 });
 
+function grabpeerStockPrice (peerName) {
+
+    var peerStockPriceUrl = "https://api.iextrading.com/1.0/stock/" + peerName +  "/price";
+
+    var price = 0;
+
+    $.ajax({
+        url: peerStockPriceUrl,
+        success: function (data) {
+            d3.json(peerStockPriceUrl, function (error, data) {
+                price = data;
+                console.log("price"+ price);
+
+            });
+        }
+    });
+
+    return price;
+}
+
+
+function peersStatsUrlGrab (url, name, price) {
+    // for each peer in data, issue an ajax to grab; 6m% and 1y%
+    $.ajax({
+        url: url,
+        success: function (data) {
+            d3.json(url, function (error, data) {
+
+                // 1 year
+                var percent1y = data.year1ChangePercent;
+                var percentage1y = percent1y * 100;
+                percentage1y = percentage1y.toFixed(2);
+
+                console.log(name + "1y: " + percentage1y);
+
+                // 6 month
+                var percent6m = data.month6ChangePercent;
+                var percentage6m = percent6m * 100;
+                percentage6m = percentage6m.toFixed(2);
+
+                console.log(name + "6m: " + percentage6m);
+
+                console.log(name + "price: " + price);
+
+
+            });
+        }
+    });
+}
 
 function AddToPortfolio () {
     var user = firebase.auth().currentUser;
