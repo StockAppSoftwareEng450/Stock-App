@@ -161,6 +161,16 @@ setTimeout(function () {
                     .attr("class", "focus")
                     .style("display", "none");
 
+                focus.append("line")
+                    .attr("class", "x-hover-line hover-line")
+                    .attr("y1", 0)
+                    .attr("y2", height);
+
+                focus.append("line")
+                    .attr("class", "y-hover-line hover-line")
+                    .attr("x1", width)
+                    .attr("x2", width);
+
                 focus.append("circle")
                     .attr("r", 4.5);
 
@@ -183,6 +193,8 @@ setTimeout(function () {
                         d1 = data[i],
                         d = x0 - d0.date > d1.date - x0 ? d1 : d0;
                     focus.attr("transform", "translate(" + x(d.date) + "," + y(d.close) + ")");
+                    focus.select(".x-hover-line").attr("y2", height - y(d.close));
+                    focus.select(".y-hover-line").attr("x2", width + width);
                     document.getElementById("close").innerHTML = d.close;
 
                     // Date

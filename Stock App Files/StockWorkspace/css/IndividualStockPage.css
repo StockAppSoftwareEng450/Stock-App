@@ -51,7 +51,13 @@ ul {
 
 .focus circle {
     fill: none;
-    stroke: steelblue;
+    stroke: #0079FB;
+
+}
+.hover-line {
+    stroke: #0079FB;
+    stroke-width: 2px;
+    stroke-dasharray: 3,3;
 }
 
 .container {
