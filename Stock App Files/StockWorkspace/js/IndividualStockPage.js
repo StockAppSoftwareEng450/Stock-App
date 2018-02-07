@@ -126,22 +126,21 @@ $(document).ready(function() {
             $.ajax({
                 url: peersUrl,
                 success: function (data) {
-                    d3.json(peersUrl, function (error, data) {
+
                     console.log("peers: " + data);
 
                         // for each peer in the list
                         for (var i = 0; i < data.length; i++){
                             console.log(i + " " + data[i]);
 
-                            var peersStatsURL = "https://api.iextrading.com/1.0/stock/" + data[i] + "/stats";
                             var peerName = data[i];
 
-                            var price = grabpeerStockPrice(peerName);
-                            console.log(price);
-                            peersStatsUrlGrab(peersStatsURL, peerName, price);
+                            // var returnedprice = grabpeerStockPrice(peerName);
+                            // console.log(returnedprice);
+                            peersStatsUrlGrab(peerName);
 
                         }
-                    });
+
                 },
 
                 // Error checking
@@ -286,52 +285,59 @@ $(document).ready(function() {
     })
 });
 
-function grabpeerStockPrice (peerName) {
 
-    var peerStockPriceUrl = "https://api.iextrading.com/1.0/stock/" + peerName +  "/price";
+function peersStatsUrlGrab (name) {
 
-    var price = 0;
+    // getting table
+    var table = document.getElementById("myTable");
+    var row = table.insertRow(1);
+
+    // Inserting name
+    var cell0 = row.insertCell(0);
+    cell0.innerHTML = name;
+
+    // grab latest stock price
+    var peerStockPriceUrl = "https://api.iextrading.com/1.0/stock/" + name +  "/quote";
 
     $.ajax({
         url: peerStockPriceUrl,
         success: function (data) {
-            d3.json(peerStockPriceUrl, function (error, data) {
-                price = data;
-                console.log("price"+ price);
 
-            });
+            var price = data.latestPrice;
+            var cell1 = row.insertCell(1);
+            cell1.innerHTML = price;
+
         }
     });
 
-    return price;
-}
-
-
-function peersStatsUrlGrab (url, name, price) {
     // for each peer in data, issue an ajax to grab; 6m% and 1y%
+    var peerStatusURL = "https://api.iextrading.com/1.0/stock/" + name +  "/stats";
+
     $.ajax({
-        url: url,
+        url: peerStatusURL,
         success: function (data) {
-            d3.json(url, function (error, data) {
+            // 1 year
+            var percent1y = data.year1ChangePercent;
+            var percentage1y = percent1y * 100;
+            percentage1y = percentage1y.toFixed(2);
 
-                // 1 year
-                var percent1y = data.year1ChangePercent;
-                var percentage1y = percent1y * 100;
-                percentage1y = percentage1y.toFixed(2);
+            // insert into tabel
+            var cell2 = row.insertCell(2);
+            cell2.innerHTML = percentage1y.toString();
 
-                console.log(name + "1y: " + percentage1y);
+            console.log(name + "1y: " + percentage1y);
 
-                // 6 month
-                var percent6m = data.month6ChangePercent;
-                var percentage6m = percent6m * 100;
-                percentage6m = percentage6m.toFixed(2);
+            // 6 month
+            var percent6m = data.month6ChangePercent;
+            var percentage6m = percent6m * 100;
+            percentage6m = percentage6m.toFixed(2);
 
-                console.log(name + "6m: " + percentage6m);
+            //inserting into table
+            var cell3 = row.insertCell(3);
+            var percentStr6m = percentage6m.toString();
+            cell3.innerHTML = percentStr6m;
 
-                console.log(name + "price: " + price);
-
-
-            });
+            console.log(name + "6m: " + percentage6m);
         }
     });
 }
