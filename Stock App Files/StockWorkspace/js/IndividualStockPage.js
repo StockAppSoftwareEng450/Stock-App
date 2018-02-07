@@ -148,6 +148,14 @@ $(document).ready(function() {
                     // Handle Errors here.
                     console.log(error.responseText);
                     //alert(error.responseText);
+
+                    // Handling undefined Exception
+                    if (error.responseText === "Unknown symbol"){
+                        console.log("Reached Error");
+
+                        // Transfer to the homepage
+                        window.location.href = "index.html";
+                    }
                 }
             });
 
@@ -169,6 +177,14 @@ $(document).ready(function() {
                     // Handle Errors here.
                     console.log(error.responseText);
                     //alert(error.responseText);
+
+                    // Handling undefined Exception
+                    if (error.responseText === "Unknown symbol"){
+                        console.log("Reached Error");
+
+                        // Transfer to the homepage
+                        window.location.href = "index.html";
+                    }
                 }
             });
 
@@ -211,6 +227,14 @@ $(document).ready(function() {
                     // Handle Errors here.
                     console.log(error.responseText);
                     //alert(error.responseText);
+
+                    // Handling undefined Exception
+                    if (error.responseText === "Unknown symbol"){
+                        console.log("Reached Error");
+
+                        // Transfer to the homepage
+                        window.location.href = "index.html";
+                    }
                 }
             });
 
@@ -244,6 +268,14 @@ $(document).ready(function() {
                     // Handle Errors here.
                     console.log(error.responseText);
                     //alert(error.responseText);
+
+                    // Handling undefined Exception
+                    if (error.responseText === "Unknown symbol"){
+                        console.log("Reached Error");
+
+                        // Transfer to the homepage
+                        window.location.href = "index.html";
+                    }
                 }
             });
 
