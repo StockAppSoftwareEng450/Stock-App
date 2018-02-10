@@ -199,7 +199,28 @@
                 </i>
                 <span class="WatchlistHover">Watchlist</span>
             </div>
+            <br>
+
+            <!-- Add Stock to Portfolio and sync to Firebase -->
+            <div id="AddStocktoPortfolio">
+
+                <!-- Date Purchased -->
+                <label for="datePortfolio" style=" margin-top: 6px; margin-left: 6px;">Date Purchased</label>
+                <input type="text" name="date" id="datePortfolio" placeholder="12/02/2013"><br>
+
+                <!-- Quantity Purchased -->
+                <label for="quantityPortfolio" style=" margin-top: 6px; margin-left: 6px;">Quantity</label>
+                <input type="number" name="quantityStock" id="quantityPortfolio" placeholder="Amount purchased">
+
+                <br><br>
+
+                <!-- Enter button -->
+                <button onclick="getStockDateAndQuantity()" id="enterButtonAddToStock">Enter</button>
+
+            </div>
         </div>
+
+
 
         <!-- Company Information and Graph -->
         <div class="container" >
@@ -297,9 +318,13 @@
                                onclick="update5Year()" />
                     </div>
                 </div>
+
+                <!-- Logo -->
                 <div id="logodiv">
                     <img id="logo" class = "logo" src="">
                 </div>
+
+
             </div>
         </div>
 
@@ -374,7 +399,7 @@
                     <div id="peers"></div>
 
                     <!-- Inserting table -->
-                    <table id="myTable">
+                    <table id="myTable" border="2">
                         <tr>
                             <td>Symbol</td>
                             <td>Price</td>

@@ -53,6 +53,11 @@ $(document).ready(function() {
                             //document.getElementById("portfolioButton").innerText = " Remove from Portfolio";
 
                             $("#portfolioButton").addClass("fa fa-minus");
+
+                            // Toggle off the addstockportfolio div
+                            var div1 = document.getElementById('AddStocktoPortfolio');
+                            div1.style.display = "none";
+                            console.log("onstart");
                         }
                     });
                 }
@@ -285,7 +290,8 @@ $(document).ready(function() {
     })
 });
 
-
+// Adding peer stats
+// @TODO FIX table issue
 function peersStatsUrlGrab (name) {
 
     // getting table
@@ -313,35 +319,91 @@ function peersStatsUrlGrab (name) {
     // for each peer in data, issue an ajax to grab; 6m% and 1y%
     var peerStatusURL = "https://api.iextrading.com/1.0/stock/" + name +  "/stats";
 
-    $.ajax({
-        url: peerStatusURL,
-        success: function (data) {
-            // 1 year
-            var percent1y = data.year1ChangePercent;
-            var percentage1y = percent1y * 100;
-            percentage1y = percentage1y.toFixed(2);
+    setTimeout(function () {
+        $.ajax({
+            url: peerStatusURL,
+            success: function (data) {
+                // 1 year
+                var percent1y = data.year1ChangePercent;
+                var percentage1y = percent1y * 100;
+                percentage1y = percentage1y.toFixed(2);
 
-            // insert into tabel
-            var cell2 = row.insertCell(2);
-            cell2.innerHTML = percentage1y.toString();
+                // insert into tabel
+                var cell2 = row.insertCell(2);
+                cell2.innerHTML = percentage1y.toString();
 
-            console.log(name + "1y: " + percentage1y);
+                console.log(name + "1y: " + percentage1y);
 
-            // 6 month
-            var percent6m = data.month6ChangePercent;
-            var percentage6m = percent6m * 100;
-            percentage6m = percentage6m.toFixed(2);
+                // 6 month
+                var percent6m = data.month6ChangePercent;
+                var percentage6m = percent6m * 100;
+                percentage6m = percentage6m.toFixed(2);
 
-            //inserting into table
-            var cell3 = row.insertCell(3);
-            var percentStr6m = percentage6m.toString();
-            cell3.innerHTML = percentStr6m;
+                //inserting into table
+                var cell3 = row.insertCell(3);
+                var percentStr6m = percentage6m.toString();
+                cell3.innerHTML = percentStr6m;
 
-            console.log(name + "6m: " + percentage6m);
-        }
-    });
+                console.log(name + "6m: " + percentage6m);
+            }
+        });
+    }, 2000);
 }
 
+// GET the date and quanity of stock price
+function getStockDateAndQuantity(){
+
+    var date = null;
+    var number = null;
+
+    date = document.getElementById("datePortfolio").value;
+    number = document.getElementById("quantityPortfolio").value;
+
+    console.log(date);
+
+    // MSG to the user Please renter both
+    if (date === null || number === null){
+        // generic CSS
+
+    }
+
+    // UPDATE TO FIREBASE
+    var resDate = checkDate(date);
+    var resNumber = checkNumber(number);
+}
+
+// Regex date
+function checkDate(date) {
+    var date_regex = /^\d{2}\/\d{2}\/\d{4}$/ ;
+    var checkRegex = date_regex.test(date);
+
+    if (checkRegex === false){
+        // display css that reports error to enter correct number
+
+
+    } else if (checkRegex === true){
+        return date;
+    }
+}
+
+// Regex Number
+function checkNumber(number) {
+    var reg = /^\d+$/;
+    var checkRegex = reg.test(number);
+
+    if (checkRegex === false){
+        // display css that reports error to enter correct number
+
+
+    } else if (checkRegex === true){
+        return number;
+    }
+
+}
+
+// Adding to portfolio and syncing to the database
+// @TODO ADD date and quantity bought
+    // Integrate ETRADE later???
 function AddToPortfolio () {
     var user = firebase.auth().currentUser;
 
@@ -359,6 +421,11 @@ function AddToPortfolio () {
         $("#portfolioButton").addClass("fa fa-plus");
 
 
+        // Toggle off the addstockportfolio div
+        var div1 = document.getElementById('AddStocktoPortfolio');
+        div1.style.display = "none";
+        console.log("div1");
+
     } else {
         firebase.database().ref('Portfolios/').push().set({
             userId: user.uid,
@@ -371,10 +438,17 @@ function AddToPortfolio () {
 
         $("#portfolioButton").removeClass("fa fa-plus");
         $("#portfolioButton").addClass("fa fa-minus");
+
+        $("#AddStocktoPortfolio").fadeIn("slow");
+        // Toggle off the addstockportfolio div
+        var div2 = document.getElementById('AddStocktoPortfolio');
+        div2.style.display = "block";
+        console.log("div2");
+
     }
 }
 
-
+// Adding to watchlist and syncing to the database
 function AddToWatchlist () {
     var user = firebase.auth().currentUser;
 

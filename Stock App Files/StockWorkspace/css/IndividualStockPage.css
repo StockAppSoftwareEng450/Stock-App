@@ -169,3 +169,32 @@ p {
     content: "\00a0\00a0\00a0$";
 }
 
+#AddStocktoPortfolio {
+    position: relative;
+    border-radius: 25px;
+    display: none;
+    float: right;
+    background-color: #e9ecef;
+    height: 100%;
+    width: auto;
+    color: black;
+    border: 2px solid;
+}
+
+#datePortfolio, #quantityPortfolio {
+    /*margin: 6px;*/
+    display: inline-block;
+    float: right;
+    margin-top: 6px;
+    margin-right: 10px;
+}
+
+#enterButtonAddToStock {
+    float: right;
+    margin-right: 10px;
+    margin-bottom: 8px;
+}
+
+
+
+
