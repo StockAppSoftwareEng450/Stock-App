@@ -267,25 +267,182 @@
 
         <h1>Settings</h1>
         <hr>
-        </hr> 
-            <form id="settingsForm">
+        </hr>
+
+        <!-- Email Form -->
+        <div class="form-group">
+            <div class="form-row">
+
                 <div class="col-md-6">
-                            <label for="email">Email</label>
-                            <!--Change back to email-->
-                            <input type="email" class="form-control" id="email"
-                                   placeholder="email">
+                    <label for="email">Email</label>
                 </div>
+
                 <div class="col-md-6">
-                            <label for="password">Password</label>
-                            <!--Change back to password-->
-                            <input type="password" class="form-control" id="password"
-                                   placeholder="Password">
+                    <input type="email" class="form-control" id="email"
+                           placeholder="email">
                 </div>
+
+            </div>
+        </div>
+
+        <!-- Password Form -->
+        <div class="form-group">
+            <div class="form-row">
+
+                <!-- Password Form -->
                 <div class="col-md-6">
-                    <label for="phone">Phone Number</label>
-                            <!--Change back to phone-->
+                    <label for="password">New Password</label>
+                    <!--Change back to password-->
+                    <input type="password" class="form-control" id="password"
+                           placeholder="Password">
+                </div>
+
+                <!-- Confirm Password Form -->
+                <div class="col-md-6">
+                    <label for="confirmPass">Confirm password</label>
+                    <!--Change back to password-->
+                    <input type="password" class="form-control" id="confirmPass"
+                           placeholder="Confirm password">
+                </div>
+            </div>
+        </div>
+
+    <button class="btn btn-primary btn-block" onclick="submitUserForm()">Submit</button>
+
+
+        <hr>
+        </hr>
+
+        <form id="settingsForm">
+                <div class="form-group">
+                    <div class="form-row">
+
+                        <!-- First Name Form -->
+                        <div class="col-md-6">
+                            <label for="fstName">First name</label>
+                            <input type="text" class="form-control" id="fstName" aria-describedby="nameHelp"
+                                   placeholder="Enter first name">
+                        </div>
+
+                        <!-- Last Name Form -->
+                        <div class="col-md-6">
+                            <label for="lstName">Last name</label>
+                            <input type="text" class="form-control" id="lstName" aria-describedby="nameHelp"
+                                   placeholder="Enter last name">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phone Form -->
+                <div class="form-group">
+                    <div class="form-row">
+
+                        <div class="col-md-6">
+                            <label for="phone">Phone Number</label>
+                        </div>
+
+                        <div class="col-md-6">
                             <input type="tel" class="form-control" id="phone"
                                    placeholder="Phone">
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Currency Form -->
+                <div class="form-group">
+                    <div class="form-row">
+
+                        <div class="col-md-6">
+                            <label for="phone">Currency</label>
+                        </div>
+
+                        <div class="col-md-6">
+<!-- change to dropdown -->
+                            <input type="text" class="form-control" id="currency"
+                                   placeholder="change to Dropdown">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upper Bound Portfolio Form -->
+                <div class="form-group">
+                    <div class="form-row">
+
+                        <div class="col-md-6">
+                            <label for="phone">Upper Bound Portfolio</label>
+                        </div>
+
+                        <div class="col-md-6">
+                        <input type="range" class="form-control" id="ubPortfolio"
+                               min="0" max="100" value="20" step="1">
+                        </div>
+
+                        <div class="col-md-6">
+                            <input type="number" class="form-control" id="ubPortfolioText"
+                                   min="0" max="100" value="20" step="1">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lower Bound Portfolio Form -->
+                <div class="form-group">
+                    <div class="form-row">
+
+                        <div class="col-md-6">
+                            <label for="phone">Lower Bound Portfolio</label>
+                        </div>
+
+                        <div class="col-md-6">
+                            <input type="range" class="form-control" id="lbPortfolio"
+                                   min="0" max="100" value="20" step="1">
+                        </div>
+
+                        <div class="col-md-6">
+                            <input type="number" class="form-control" id="lbPortfolioText"
+                                   min="0" max="100" value="20" step="1">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upper Bound Watchlist Form -->
+                <div class="form-group">
+                    <div class="form-row">
+
+                        <div class="col-md-6">
+                            <label for="phone">Upper Bound Watchlist</label>
+                        </div>
+
+                        <div class="col-md-6">
+                            <input type="range" class="form-control" id="ubWatchlist"
+                                   min="0" max="100" value="20" step="1">
+                        </div>
+
+                        <div class="col-md-6">
+                            <input type="number" class="form-control" id="ubWatchlistText"
+                                   min="0" max="100" value="20" step="1">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lower Bound Watchlist Form -->
+                <div class="form-group">
+                    <div class="form-row">
+
+                        <div class="col-md-6">
+                            <label for="phone">Lower Bound Watchlist</label>
+                        </div>
+
+                        <div class="col-md-6">
+                            <input type="range" class="form-control" id="lbWatchlist"
+                                   min="0" max="100" value="20" step="1">
+                        </div>
+
+                        <div class="col-md-6">
+                            <input type="number" class="form-control" id="lbWatchlistText"
+                                   min="0" max="100" value="20" step="1">
+                        </div>
+                    </div>
                 </div>
                 
                 <button class="btn btn-primary btn-block" type="submit">Submit</button>
@@ -332,6 +489,11 @@
     </div>
 </div>
 
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+<!-- Firebase Key init -->
+<script src="js/FirebaseInit.js"></script>
+
 <!-- Bootstrap core JavaScript -->
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/popper/popper.min.js"></script>
@@ -339,9 +501,17 @@
 
 <!-- Plugin JavaScript -->
 <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!--<!-- Bootstrap core JavaScript &ndash;&gt;
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/popper/popper.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+&lt;!&ndash; Plugin JavaScript &ndash;&gt;
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 <script src="vendor/chart.js/Chart.min.js"></script>
 <script src="vendor/datatables/jquery.dataTables.js"></script>
-<script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+<script src="vendor/datatables/dataTables.bootstrap4.js"></script>-->
 
 <!-- Custom scripts for this template -->
 <script src="js/sb-admin.min.js"></script>
