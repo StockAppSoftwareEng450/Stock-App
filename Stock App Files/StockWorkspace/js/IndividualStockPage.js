@@ -367,9 +367,42 @@ function getStockDateAndQuantity(){
 
     }
 
-    // UPDATE TO FIREBASE
+    // check date then convert to make ajax request to grab the price
     var resDate = checkDate(date);
+    console.log("resDate: " + resDate);
+
+    // Make ajax request that grabs price on specific date
+    var urlDate = "https://api.iextrading.com/1.0/stock/" + resultStockSymbol + "/chart/5y";
+
+    var closePriceForDate = null;
+
+    $.ajax({
+        url: urlDate,
+        success: function (data) {
+
+            // Get the data
+            d3.json(urlDate, function (error, data) {
+                // Returning the entire array
+                console.log(data);
+
+                // Defaint JS makes Searching very Easy ;)
+                var query = '//*[date="' + resDate + '"]';
+                var queryResult = JSON.search(data,query);
+
+                // Searching for date within JSON
+                for (var i=0; i < queryResult.length; i++) {
+                    closePriceForDate = queryResult[i].close;
+                    console.log(i + " " + closePriceForDate);
+                }
+            });
+        }
+    });
+
     var resNumber = checkNumber(number);
+
+    // @TODO SEND to firebase  (resDate, resNumber, resultStockSymbol, closePriceForDate)
+    // Since closePriceForDate is made from ajax request you might have to use a promise or wait a couple of seconds
+    // to send it firebase
 }
 
 // Regex date
@@ -380,9 +413,21 @@ function checkDate(date) {
     if (checkRegex === false){
         // display css that reports error to enter correct number
 
-
     } else if (checkRegex === true){
-        return date;
+
+        // convert date from 12/03/1996 to 20180129
+        // var year = date.slice(6,10);
+        // var month = date.slice(0,2);
+        // var day = date.slice(3,5);
+
+        // convert date from 12/03/1996 to 2013-02-11
+        var year = date.slice(6,10);
+        var month = date.slice(0,2);
+        var day = date.slice(3,5);
+
+        console.log("grabbing specific from last 5y : " + year + "-" + month + "-" + day);
+
+        return year + "-" + month + "-" + day;
     }
 }
 
