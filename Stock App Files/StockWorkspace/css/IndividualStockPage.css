@@ -83,10 +83,6 @@ p {
     display: inline;
 }
 
-#AddToSigns {
-    /*display: inline;*/
-}
-
 /* Portfolio Button */
 .PortfolioSpanButton {
     position: relative;
@@ -194,6 +190,8 @@ p {
     margin-right: 10px;
     margin-bottom: 8px;
 }
+
+
 
 
 

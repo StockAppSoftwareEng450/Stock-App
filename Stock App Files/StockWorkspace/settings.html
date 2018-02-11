@@ -23,6 +23,12 @@
     <!-- Custom styles for this template -->
     <link href="css/sb-admin.css" rel="stylesheet">
 
+    <!-- Auto complete  -->
+    <link rel="stylesheet" href="css/autocomplete.css">
+
+    <!-- Stock Page for Conformity -->
+    <link rel="stylesheet" href="css/IndividualStockPage.css">
+
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -133,12 +139,17 @@
             <li class="nav-item">
                 <form class="form-inline my-2 my-lg-0 mr-lg-2">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for...">
+                        <div class="easy-autocomplete" style="width: 200px;">
+                            <input type="text" id="myInput" style="width:200px; padding-bottom: 8px;padding-top: 8px;"
+                                   class="form-control" onkeypress=" return searchKeyPress(event);"
+                                   placeholder="Search for a Company" title="Company Search">
+                        </div>
                         <span class="input-group-btn">
-                  <button class="btn btn-primary" type="button">
-                    <i class="fa fa-search"></i>
-                  </button>
-                </span>
+                              <button id="btnSearch" class="btn btn-primary" type="button" onclick="UrlStringPass()"
+                                      value="Search" >
+                                <i class="fa fa-search"></i>
+                              </button>
+                        </span>
                     </div>
                 </form>
             </li>
@@ -389,11 +400,6 @@
     </div>
 </div>
 
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
-<!-- Firebase Key init -->
-<script src="js/FirebaseInit.js"></script>
-
 <!-- Bootstrap core JavaScript -->
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/popper/popper.min.js"></script>
@@ -402,20 +408,23 @@
 <!-- Plugin JavaScript -->
 <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-<!--<!-- Bootstrap core JavaScript &ndash;&gt;
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/popper/popper.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
 
-&lt;!&ndash; Plugin JavaScript &ndash;&gt;
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="vendor/chart.js/Chart.min.js"></script>
-<script src="vendor/datatables/jquery.dataTables.js"></script>
-<script src="vendor/datatables/dataTables.bootstrap4.js"></script>-->
+<!-- Firebase Key init -->
+<script src="js/FirebaseInit.js"></script>
 
-<!-- Custom scripts for this template -->
-<script src="js/sb-admin.min.js"></script>
+<script src="js/Autocomplete.js"></script>
+
+<!-- Enter on Keypress for Search for Stocks -->
+<script src="js/EnterOnKeyPress.js"></script>
+
+<!-- Testing the Search script -->
+<script src="js/SearchForStock.js"></script>
+
+<!-- Settings Js file -->
 <script src="js/settings.js"></script>
+
 </body>
 
 </html>
