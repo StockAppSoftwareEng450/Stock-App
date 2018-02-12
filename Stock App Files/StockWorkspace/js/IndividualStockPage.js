@@ -296,17 +296,18 @@ function peersStatsUrlGrab (name) {
 
     document.getElementById("genericSymbol").innerHTML = resultStockSymbol;
 
+    // each peer in peer table is clickable and will transfer to specific page
+    var stockTransferURL = "IndividualStockPage.html?stock=" + name + "#";
+
     // getting table
     var table = document.getElementById("myTable");
     var row = table.insertRow(-1);
 
     // Inserting name
     var cell0 = row.insertCell(0);
-    cell0.innerHTML = name;
+    cell0.innerHTML = name.link(stockTransferURL);
 
-    // grab latest stock price
-    var peerStockPriceUrl = "https://api.iextrading.com/1.0/stock/" + name +  "/quote";
-
+    // unicode for UP and DOWN arrows
     var unicodeUp = '\u25B2';
     var unicodeDown = '\u25BC';
 
@@ -314,18 +315,21 @@ function peersStatsUrlGrab (name) {
     unicodeUp = unicodeUp.fontcolor("green");
     unicodeDown = unicodeDown.fontcolor("red");
 
+    // grab latest stock price for peers
+    var peerStockPriceUrl = "https://api.iextrading.com/1.0/stock/" + name +  "/quote";
+
     $.ajax({
         url: peerStockPriceUrl,
         success: function (data) {
 
             var price = data.latestPrice;
             var cell1 = row.insertCell(1);
-            cell1.innerHTML = price;
+            cell1.innerHTML = "$" + price;
 
         }
     });
 
-    // grab latest stock price from current stock on page
+    // grab latest stock price from the current stock on page
     var stockSymbolStockPriceUrl = "https://api.iextrading.com/1.0/stock/" + resultStockSymbol +  "/quote";
 
     $.ajax({
@@ -336,7 +340,7 @@ function peersStatsUrlGrab (name) {
             stockprice = stockprice.toString();
             stockprice = stockprice.bold();
 
-            document.getElementById("myTable").rows[1].cells[1].innerHTML = stockprice;
+            document.getElementById("myTable").rows[1].cells[1].innerHTML = "$" + stockprice;
         }
     });
 
@@ -381,7 +385,7 @@ function peersStatsUrlGrab (name) {
         });
     }, 2000);
 
-    // for each peer in data, issue an ajax to grab; 6m% and 1y%
+    // for current stock on page, issue a /stats request to grab info to compare to peers
     var stockSymbolStatusURL = "https://api.iextrading.com/1.0/stock/" + name +  "/stats";
 
     setTimeout(function () {
@@ -427,7 +431,6 @@ function peersStatsUrlGrab (name) {
                 } else {
                     document.getElementById("myTable").rows[1].cells[3].innerHTML = percentStr6m + percentSign + unicodeUp;
                 }
-
             }
         });
     }, 2000);

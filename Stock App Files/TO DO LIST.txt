@@ -1,6 +1,6 @@
 To Do List
 
-	- Add to portfolio --> sync to firebase	
+	- Add to portfolio --> sync to Fire base
 	- portfolio summary 
 	- portfolio D3 Graphs
 	- Fix 1 Day 
@@ -15,6 +15,13 @@ To Do List
 	- revamp stats
 	- fix css in Settings HTML Page
 	- add to portfolio display bug
-	- clickable peers table that transfers to given peer
+	- Click-able peers table that transfers to given peer
 	- fix styling on settings JS 
 	- view navigation slider fix bug
+	- Make sure RAD is up to date
+	- Generalize JS Files for
+	- Finish writing Test Cases
+	- Start Testing the Application
+	- Add more checking to login, register, and forgot password
+	- css for forgot password
+	- css for add to portfolio "added"
