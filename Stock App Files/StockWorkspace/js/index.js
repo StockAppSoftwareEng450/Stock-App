@@ -37,6 +37,10 @@ function getFullPortfolio(){
                     });
                 }
             }).then(function(){
+//work with data in here ... fill donut and so on
+                //array looks like this:
+                //[[userId, stockSymbol, date, price, quantity],[userId, stockSymbol, date, price, quantity],...]
+
                 console.log(fullPortfolio);
             });
         } else {
@@ -67,6 +71,10 @@ function getFullWatchlist(){
                     });
                 }
             }).then(function(){
+//work with data in here ... fill donut and so on
+                //array looks like this:
+                //[[userId, stockSymbol],[userId, stockSymbol],...]
+
                 console.log(fullWatchlist);
             });
         } else {

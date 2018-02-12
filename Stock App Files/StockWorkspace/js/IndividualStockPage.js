@@ -500,11 +500,10 @@ console.log("empty");
                     price: closePriceForDate,
                     quantity: quantity,
                     date: date
+                }).then(function(){
+                    document.getElementById("portfolioButton").setAttribute("data-inPortfolio", true);
+                    setPK("portfolioButton");
                 });
-
-                document.getElementById("portfolioButton").setAttribute("data-inPortfolio", true);
-                setPK("portfolioButton");
-
             } else {
 //NEED!!!!!!!!    // MSG to the user
                 // generic CSS
@@ -571,10 +570,11 @@ function AddToWatchlist () {
         firebase.database().ref('Watchlists/').push().set({
             userId: user.uid,
             stockSymbol: resultStockSymbol
+        }).then(function(){
+            document.getElementById("watchlistButton").setAttribute("data-inWatchlist", true);
+            setPK("watchlistButton");
         });
 
-        document.getElementById("watchlistButton").setAttribute("data-inWatchlist", true);
-        setPK("watchlistButton");
 
         $("#watchlistButton").removeClass("fa fa-plus");
         $("#watchlistButton").addClass("fa fa-minus");
