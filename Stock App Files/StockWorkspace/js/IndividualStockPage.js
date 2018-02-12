@@ -325,13 +325,18 @@ function peersStatsUrlGrab (name) {
         }
     });
 
-    // grab latest stock price
+    // grab latest stock price from current stock on page
     var stockSymbolStockPriceUrl = "https://api.iextrading.com/1.0/stock/" + resultStockSymbol +  "/quote";
 
     $.ajax({
         url: stockSymbolStockPriceUrl,
         success: function (data) {
-            document.getElementById("myTable").rows[1].cells[1].innerHTML = data.latestPrice;
+
+            var stockprice = data.latestPrice;
+            stockprice = stockprice.toString();
+            stockprice = stockprice.bold();
+
+            document.getElementById("myTable").rows[1].cells[1].innerHTML = stockprice;
         }
     });
 
@@ -384,19 +389,25 @@ function peersStatsUrlGrab (name) {
             url: stockSymbolStatusURL,
             success: function (data) {
 
+                // Bold the percent sign
+                var percentSign = '%';
+                percentSign = percentSign.bold();
+
                 // 1 year
                 var percent1y = data.year1ChangePercent;
                 var percentage1y = percent1y * 100;
                 percentage1y = percentage1y.toFixed(2);
 
                 // insert 1 year into table
-                //var cell2 = row.insertCell(2);
                 var percentStr1y = percentage1y.toString();
 
+                // Bold the text
+                percentStr1y = percentStr1y.bold();
+
                 if (percent1y < 0){
-                    document.getElementById("myTable").rows[1].cells[2].innerHTML = percentStr1y + "%" + unicodeDown;
+                    document.getElementById("myTable").rows[1].cells[2].innerHTML = percentStr1y + percentSign + unicodeDown;
                 } else {
-                    document.getElementById("myTable").rows[1].cells[2].innerHTML = percentStr1y + "%" + unicodeUp;
+                    document.getElementById("myTable").rows[1].cells[2].innerHTML = percentStr1y + percentSign + unicodeUp;
                 }
 
                 // 6 month
@@ -407,11 +418,14 @@ function peersStatsUrlGrab (name) {
                 //inserting 6 month into table
                 var percentStr6m = percentage6m.toString();
 
+                // Bold the text
+                percentStr6m = percentStr6m.bold();
+
                 // Test to see if percentage is negative
                 if (percent6m < 0){
-                    document.getElementById("myTable").rows[1].cells[3].innerHTML = percentStr6m + "%" + unicodeDown;
+                    document.getElementById("myTable").rows[1].cells[3].innerHTML = percentStr6m + percentSign + unicodeDown;
                 } else {
-                    document.getElementById("myTable").rows[1].cells[3].innerHTML = percentStr6m + "%" + unicodeUp;
+                    document.getElementById("myTable").rows[1].cells[3].innerHTML = percentStr6m + percentSign + unicodeUp;
                 }
 
             }
