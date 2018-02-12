@@ -17,3 +17,4 @@ To Do List
 	- add to portfolio display bug
 	- clickable peers table that transfers to given peer
 	- fix styling on settings JS 
+	- view navigation slider fix bug
