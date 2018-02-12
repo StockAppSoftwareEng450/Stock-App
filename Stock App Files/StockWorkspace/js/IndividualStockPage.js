@@ -294,9 +294,11 @@ $(document).ready(function() {
 // @TODO FIX table issue
 function peersStatsUrlGrab (name) {
 
+    document.getElementById("genericSymbol").innerHTML = resultStockSymbol;
+
     // getting table
     var table = document.getElementById("myTable");
-    var row = table.insertRow(1);
+    var row = table.insertRow(-1);
 
     // Inserting name
     var cell0 = row.insertCell(0);
@@ -304,6 +306,13 @@ function peersStatsUrlGrab (name) {
 
     // grab latest stock price
     var peerStockPriceUrl = "https://api.iextrading.com/1.0/stock/" + name +  "/quote";
+
+    var unicodeUp = '\u25B2';
+    var unicodeDown = '\u25BC';
+
+    // adding color
+    unicodeUp = unicodeUp.fontcolor("green");
+    unicodeDown = unicodeDown.fontcolor("red");
 
     $.ajax({
         url: peerStockPriceUrl,
@@ -313,6 +322,16 @@ function peersStatsUrlGrab (name) {
             var cell1 = row.insertCell(1);
             cell1.innerHTML = price;
 
+        }
+    });
+
+    // grab latest stock price
+    var stockSymbolStockPriceUrl = "https://api.iextrading.com/1.0/stock/" + resultStockSymbol +  "/quote";
+
+    $.ajax({
+        url: stockSymbolStockPriceUrl,
+        success: function (data) {
+            document.getElementById("myTable").rows[1].cells[1].innerHTML = data.latestPrice;
         }
     });
 
@@ -328,23 +347,73 @@ function peersStatsUrlGrab (name) {
                 var percentage1y = percent1y * 100;
                 percentage1y = percentage1y.toFixed(2);
 
-                // insert into tabel
+                // insert 1 year into table
                 var cell2 = row.insertCell(2);
-                cell2.innerHTML = percentage1y.toString();
+                var percentStr1y = percentage1y.toString();
 
-                console.log(name + "1y: " + percentage1y);
+                if (percent1y < 0){
+                    cell2.innerHTML = percentStr1y + "%" + unicodeDown;
+                } else {
+                    cell2.innerHTML = percentStr1y + "%" + unicodeUp;
+                }
 
                 // 6 month
                 var percent6m = data.month6ChangePercent;
                 var percentage6m = percent6m * 100;
                 percentage6m = percentage6m.toFixed(2);
 
-                //inserting into table
+                //inserting 6 month into table
                 var cell3 = row.insertCell(3);
                 var percentStr6m = percentage6m.toString();
-                cell3.innerHTML = percentStr6m;
 
-                console.log(name + "6m: " + percentage6m);
+                // Test to see if percentage is negative
+                if (percent6m < 0){
+                    cell3.innerHTML = percentStr6m + "%" + "\t" + unicodeDown;
+                } else {
+                    cell3.innerHTML = percentStr6m + "%" + "\t" + unicodeUp;
+                }
+            }
+        });
+    }, 2000);
+
+    // for each peer in data, issue an ajax to grab; 6m% and 1y%
+    var stockSymbolStatusURL = "https://api.iextrading.com/1.0/stock/" + name +  "/stats";
+
+    setTimeout(function () {
+        $.ajax({
+            url: stockSymbolStatusURL,
+            success: function (data) {
+
+                // 1 year
+                var percent1y = data.year1ChangePercent;
+                var percentage1y = percent1y * 100;
+                percentage1y = percentage1y.toFixed(2);
+
+                // insert 1 year into table
+                //var cell2 = row.insertCell(2);
+                var percentStr1y = percentage1y.toString();
+
+                if (percent1y < 0){
+                    document.getElementById("myTable").rows[1].cells[2].innerHTML = percentStr1y + "%" + unicodeDown;
+                } else {
+                    document.getElementById("myTable").rows[1].cells[2].innerHTML = percentStr1y + "%" + unicodeUp;
+                }
+
+                // 6 month
+                var percent6m = data.month6ChangePercent;
+                var percentage6m = percent6m * 100;
+                percentage6m = percentage6m.toFixed(2);
+
+                //inserting 6 month into table
+                var percentStr6m = percentage6m.toString();
+
+                // Test to see if percentage is negative
+                if (percent6m < 0){
+                    document.getElementById("myTable").rows[1].cells[3].innerHTML = percentStr6m + "%" + unicodeDown;
+                } else {
+                    document.getElementById("myTable").rows[1].cells[3].innerHTML = percentStr6m + "%" + unicodeUp;
+                }
+
             }
         });
     }, 2000);

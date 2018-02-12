@@ -191,6 +191,30 @@ p {
     margin-bottom: 8px;
 }
 
+/* Table Styling */
+#myTable {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#myTable td, #customers th {
+    border: 1px solid #ddd;
+    padding: 6px;
+}
+
+#myTable tr:nth-child(even){background-color: #f2f2f2;}
+
+#myTable tr:hover {background-color: #ddd;}
+
+#myTable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #007bff;
+    color: white;
+}
+
 
 
 
