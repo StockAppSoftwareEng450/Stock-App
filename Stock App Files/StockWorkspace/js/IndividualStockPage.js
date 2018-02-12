@@ -483,6 +483,10 @@ console.log("empty");
             })
         }
 
+        $("#portfolioButton").removeClass("fa fa-plus");
+        $("#portfolioButton").addClass("fa fa-minus");
+        $("#AddStocktoPortfolio").fadeOut("slow");
+
         //wait for ajax response
         setTimeout(function(){
             // @TODO SEND to firebase  (resDate, resNumber, resultStockSymbol, closePriceForDate)
@@ -501,9 +505,6 @@ console.log("empty");
                 document.getElementById("portfolioButton").setAttribute("data-inPortfolio", true);
                 setPK("portfolioButton");
 
-                $("#portfolioButton").removeClass("fa fa-plus");
-                $("#portfolioButton").addClass("fa fa-minus");
-                $("#AddStocktoPortfolio").fadeOut("slow");
             } else {
 //NEED!!!!!!!!    // MSG to the user
                 // generic CSS
