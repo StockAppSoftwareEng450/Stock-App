@@ -107,9 +107,7 @@ input:checked + .slider:before {
 <!-- load the d3.js library -->
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="../../CommonLinkedFiles/jquery3_2_1.js"></script>
-<script src="Autocomplete.js"></script>
 
-<link rel="stylesheet" href="autocomplete.css">
 
 <!-- D3 Graph -->
 <script>
@@ -710,115 +708,7 @@ input:checked + .slider:before {
         });
     }
 
-    // Displaying peers to the individual stock page.
-    var urlPeers = "https://api.iextrading.com/1.0/stock/aapl/peers";
 
-        $.ajax({
-            url: urlPeers,
-            success: function (data) {
-
-                // Get the data
-                d3.json(urlPeers, function (error, data) {
-                    console.log("peers: " + data);
-
-                    function makeUL(array) {
-                        var list = document.createElement('ul');
-
-                        for(var i = 0; i < array.length; i++) {
-                            var item = document.createElement('li');
-                            item.appendChild(document.createTextNode(array[i]));
-                            list.appendChild(item);
-                        }
-
-                        return list;
-                    }
-
-                    console.log(document.getElementById('peers').appendChild(makeUL(data)));
-
-                });
-            }
-        });
-
-
-    // Displaying News to individual stock page
-    var urlNews = "https://api.iextrading.com/1.0/stock/extr/news/last/3";
-
-    $.ajax({
-        url: urlNews,
-        success: function (data) {
-
-            // Get the data
-            d3.json(urlNews, function (error, data) {
-                console.log("News: " + data);
-                for (var i = 0; i < data.length; i++){
-                    var headlineIndex = "headline";
-                    var sourceIndex = "source";
-                    var datetimeIndex = "datetime";
-
-                    var parser = data[i].datetime;
-                    var indexNumber = parser.indexOf("T");
-                    var dataParsed = parser.slice(0,indexNumber);
-
-                    headlineIndex = headlineIndex + i;
-                    sourceIndex =  sourceIndex + i;
-                    datetimeIndex = datetimeIndex + i;
-
-                    console.log(headlineIndex);
-                    console.log(data[i].headline);
-                    console.log(data[i].source);
-                    console.log(dataParsed);
-
-                    document.getElementById(headlineIndex).href = data[i].url;
-                    document.getElementById(headlineIndex).innerHTML = data[i].headline;
-                    document.getElementById(sourceIndex).innerHTML = data[i].source;
-                    document.getElementById(datetimeIndex).innerHTML = dataParsed;
-                }
-
-            });
-        }
-    });
-
-    var autoURL = "https://api.iextrading.com/1.0/ref-data/symbols";
-
-    // Creating function outside to later pass to the search for stock
-    function AutoCompleteResult(value) {
-
-        // Showing value on the click
-        console.log(value);
-    }
-
-    // Auto complete for search for stock
-    $.ajax({
-        url: autoURL,
-        success: function (data) {
-
-                var options = {
-                    url: autoURL,
-
-                    getValue: "name",
-
-                    template: {
-                        type: "custom",
-                        method: function(value, item) {
-                            return value + "  (" + item.symbol + ")";
-                        }
-                    },
-
-                    list: {
-                        match: {
-                            enabled: true
-                        },
-
-                        onClickEvent: function() {
-                            var value = $("#MainInput").getSelectedItemData().symbol;
-                            AutoCompleteResult(value);
-                        }
-                    }
-                };
-
-                $("#MainInput").easyAutocomplete(options);
-        }
-    });
 
     var switchAlertValue = "off";
 
@@ -849,6 +739,106 @@ input:checked + .slider:before {
 
         });
     });
+
+    var stockSymbol = "AAPL";
+
+    //Peers
+    // Grabbing the peers(related Companies) and displaying them to an ul on the DOM
+    var peersUrl = "https://api.iextrading.com/1.0/stock/" + stockSymbol + "/peers";
+    //console.log(peersUrl);
+
+    $.ajax({
+        url: peersUrl,
+        success: function (data) {
+
+            console.log("peers: " + data);
+
+            // for each peer in the list
+            for (var i = 0; i < data.length; i++){
+                console.log(i + " " + data[i]);
+
+                var peerName = data[i];
+
+                // var returnedprice = grabpeerStockPrice(peerName);
+                // console.log(returnedprice);
+                peersStatsUrlGrab(peerName);
+
+            }
+
+        },
+
+        // Error checking
+        error: function(error){
+            console.log(error.responseText);
+
+            if (error.responseText === "Unknown symbol"){
+                console.log("Reached Error");
+
+                // Transfer to the homepage
+                window.location.href = "index.html";
+            }
+        }
+    });
+
+    // Adding peer stats
+    // @TODO FIX table issue
+    function peersStatsUrlGrab (name) {
+
+        // getting table
+        var table = document.getElementById("myTable");
+        var row = table.insertRow(1);
+
+        // Inserting name
+        var cell0 = row.insertCell(0);
+        cell0.innerHTML = name;
+
+        // grab latest stock price
+        var peerStockPriceUrl = "https://api.iextrading.com/1.0/stock/" + name +  "/quote";
+
+        $.ajax({
+            url: peerStockPriceUrl,
+            success: function (data) {
+
+                var price = data.latestPrice;
+                var cell1 = row.insertCell(1);
+                cell1.innerHTML = price;
+
+            }
+        });
+
+        // for each peer in data, issue an ajax to grab; 6m% and 1y%
+        var peerStatusURL = "https://api.iextrading.com/1.0/stock/" + name +  "/stats";
+
+        setTimeout(function () {
+            $.ajax({
+                url: peerStatusURL,
+                success: function (data) {
+                    // 1 year
+                    var percent1y = data.year1ChangePercent;
+                    var percentage1y = percent1y * 100;
+                    percentage1y = percentage1y.toFixed(2);
+
+                    // insert into tabel
+                    var cell2 = row.insertCell(2);
+                    cell2.innerHTML = percentage1y.toString();
+
+                    console.log(name + "1y: " + percentage1y);
+
+                    // 6 month
+                    var percent6m = data.month6ChangePercent;
+                    var percentage6m = percent6m * 100;
+                    percentage6m = percentage6m.toFixed(2);
+
+                    //inserting into table
+                    var cell3 = row.insertCell(3);
+                    var percentStr6m = percentage6m.toString();
+                    cell3.innerHTML = percentStr6m;
+
+                    console.log(name + "6m: " + percentage6m);
+                }
+            });
+        }, 2000);
+    }
 
 
 </script>
@@ -913,8 +903,6 @@ input:checked + .slider:before {
 <hr>
 <hr>
 
-<!-- Peers -->
-<div id="peers"></div>
 
 <!-- News -->
 <ul>
@@ -954,6 +942,25 @@ input:checked + .slider:before {
     <input type="checkbox">
     <span class="slider round"></span>
 </label>
+<hr>
+<hr>
+<hr>
+<!-- Peers -->
+<div class="col-sm-4">
+    <h3>Peers</h3>
+    <hr>
+    <div id="peers"></div>
+
+    <!-- Inserting table -->
+    <table id="myTable" border="2">
+        <tr>
+            <td>Symbol</td>
+            <td>Price</td>
+            <td>6m%</td>
+            <td>1y%</td>
+        </tr>
+    </table>
+</div>
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
