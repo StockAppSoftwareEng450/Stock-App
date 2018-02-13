@@ -1,5 +1,6 @@
 To Do List
 
+    ✔ login search bar to match individual search bar width             JH - 2/13/18
 	- Add to portfolio --> sync to Fire base
 	- portfolio summary 
 	- portfolio D3 Graphs
@@ -17,7 +18,7 @@ To Do List
 	- add to portfolio display bug
 	- Click-able peers table that transfers to given peer
 	- fix styling on settings JS 
-	- view navigation slider fix bug
+	✔ view navigation slider fix bug                                    JH - 2/13/2018
 	- Make sure RAD is up to date
 	- Generalize JS Files for
 	- Finish writing Test Cases
@@ -25,3 +26,4 @@ To Do List
 	- Add more checking to login, register, and forgot password
 	- css for forgot password
 	- css for add to portfolio "added"
+

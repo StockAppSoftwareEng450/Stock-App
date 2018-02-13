@@ -361,9 +361,9 @@ function peersStatsUrlGrab (name) {
                 var percentStr1y = percentage1y.toString();
 
                 if (percent1y < 0){
-                    cell2.innerHTML = percentStr1y + "%" + unicodeDown;
+                    cell2.innerHTML = unicodeDown + " " + percentStr1y + "%";
                 } else {
-                    cell2.innerHTML = percentStr1y + "%" + unicodeUp;
+                    cell2.innerHTML = unicodeUp + "  " + percentStr1y + "%";
                 }
 
                 // 6 month
@@ -377,9 +377,9 @@ function peersStatsUrlGrab (name) {
 
                 // Test to see if percentage is negative
                 if (percent6m < 0){
-                    cell3.innerHTML = percentStr6m + "%" + "\t" + unicodeDown;
+                    cell3.innerHTML = unicodeDown + " " + percentStr6m + "%";
                 } else {
-                    cell3.innerHTML = percentStr6m + "%" + "\t" + unicodeUp;
+                    cell3.innerHTML = unicodeUp + "  " + percentStr6m + "%";
                 }
             }
         });
@@ -409,9 +409,9 @@ function peersStatsUrlGrab (name) {
                 percentStr1y = percentStr1y.bold();
 
                 if (percent1y < 0){
-                    document.getElementById("myTable").rows[1].cells[2].innerHTML = percentStr1y + percentSign + unicodeDown;
+                    document.getElementById("myTable").rows[1].cells[2].innerHTML = unicodeDown + " " + percentStr1y + percentSign;
                 } else {
-                    document.getElementById("myTable").rows[1].cells[2].innerHTML = percentStr1y + percentSign + unicodeUp;
+                    document.getElementById("myTable").rows[1].cells[2].innerHTML = unicodeUp + "  " + percentStr1y + percentSign;
                 }
 
                 // 6 month
@@ -427,9 +427,9 @@ function peersStatsUrlGrab (name) {
 
                 // Test to see if percentage is negative
                 if (percent6m < 0){
-                    document.getElementById("myTable").rows[1].cells[3].innerHTML = percentStr6m + percentSign + unicodeDown;
+                    document.getElementById("myTable").rows[1].cells[3].innerHTML = unicodeDown + " " + percentStr6m + percentSign;
                 } else {
-                    document.getElementById("myTable").rows[1].cells[3].innerHTML = percentStr6m + percentSign + unicodeUp;
+                    document.getElementById("myTable").rows[1].cells[3].innerHTML = unicodeUp + "  " + percentStr6m + percentSign;
                 }
             }
         });
