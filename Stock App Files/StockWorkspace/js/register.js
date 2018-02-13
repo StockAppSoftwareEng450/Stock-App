@@ -225,7 +225,12 @@ function saveMessage(userId, fstName, lstName, phone){
     firebase.database().ref('Users/' + userId).set({
         firstName: fstName,
         lastName: lstName,
-        phone: phone
+        phone: phone,
+        currency: "$",
+        upperBoundPortfolio: 15,
+        lowerBoundPortfolio: 5,
+        upperBoundWatchlist: 20,
+        lowerBoundWatchlist: 10
     });
 
     console.log("Sent");

@@ -1,0 +1,29 @@
+To Do List
+
+    ✔ login search bar to match individual search bar width             JH - 2/13/18
+	- Add to portfolio --> sync to Fire base
+	- portfolio summary 
+	- portfolio D3 Graphs
+	- Fix 1 Day 
+	- Add 12 hour, and Live feature
+	- handle no logo
+	- add Transparency 
+	- loading screen css spinner
+	- handle no peers
+	- handle login 404() error
+	- Add weekly gainers on index
+	- handle no debt
+	- revamp stats
+	- fix css in Settings HTML Page
+	- add to portfolio display bug
+	- Click-able peers table that transfers to given peer
+	- fix styling on settings JS 
+	✔ view navigation slider fix bug                                    JH - 2/13/2018
+	- Make sure RAD is up to date
+	- Generalize JS Files for
+	- Finish writing Test Cases
+	- Start Testing the Application
+	- Add more checking to login, register, and forgot password
+	- css for forgot password
+	- css for add to portfolio "added"
+

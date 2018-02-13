@@ -1,0 +1,226 @@
+#CompanyName, #StockPrice, #StockSymbolUpperCase {
+    display : inline;
+}
+
+#CompanyName, #StockSymbolUpperCase{
+    font-size: 170%
+}
+
+#StockPrice {
+    padding-left: 1%;
+    font-size: 140%
+}
+
+#StockSymbolUpperCase {
+    float: right;
+}
+
+path {
+    stroke-width: 1.2;
+    fill: none;
+}
+
+.axis path, .axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
+.SVGD3Parent {
+    float: left;
+    display: inline-block;
+    position: relative;
+    /*padding-left: 100px;*/
+    padding-right: 0;
+}
+
+ul {
+    padding-left: 30px;
+}
+
+#hrPageBreak {
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.overlay {
+    fill: none;
+    pointer-events: all;
+}
+
+.focus circle {
+    fill: none;
+    stroke: #0079FB;
+
+}
+.hover-line {
+    stroke: #0079FB;
+    stroke-width: 2px;
+    stroke-dasharray: 3,3;
+}
+
+.container {
+    padding-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 100%;
+}
+
+#buttonOption  {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+#logodiv {
+    text-align: right;
+    height: 128px;
+    width: 128px;
+}
+
+p {
+    display: inline;
+}
+
+/* Portfolio Button */
+.PortfolioSpanButton {
+    position: relative;
+    display: inline-block;
+    float: right;
+    /* border-bottom: 1px dotted black; */
+}
+
+.PortfolioSpanButton .PorfolioHover {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px;
+}
+
+.PortfolioSpanButton:hover .PorfolioHover {
+    visibility: visible;
+}
+
+/* Watchlist Button */
+.WatchlistSpanButton {
+    position: relative;
+    display: inline-block;
+    float: right;
+    /* border-bottom: 1px dotted black; */
+}
+
+.WatchlistSpanButton .WatchlistHover {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px;
+}
+
+.WatchlistSpanButton:hover .WatchlistHover {
+    visibility: visible;
+}
+
+#week52high:before  {
+    content: "$";
+ }
+
+#week52low:before  {
+    content: "\00a0$";
+}
+
+#dividendRate:before {
+    content: "\00a0";
+}
+
+#latestEPS:before {
+    content: "\00a0\00a0";
+}
+
+#grossProfit:before {
+    content: "\00a0\00a0\00a0$";
+}
+
+#debt:before {
+    content: "\00a0\00a0\00a0$";
+}
+
+#AddStocktoPortfolio {
+    position: relative;
+    border-radius: 25px;
+    display: none;
+    float: right;
+    background-color: #e9ecef;
+    height: 100%;
+    width: auto;
+    color: black;
+    border: 2px solid;
+}
+
+#datePortfolio, #quantityPortfolio {
+    /*margin: 6px;*/
+    display: inline-block;
+    float: right;
+    margin-top: 6px;
+    margin-right: 10px;
+}
+
+#enterButtonAddToStock {
+    float: right;
+    margin-right: 10px;
+    margin-bottom: 8px;
+}
+
+/* Table Styling */
+#myTable {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#myTable td, #customers th {
+    border: 1px solid #ddd;
+    padding: 6px;
+}
+
+#myTable tr:nth-child(even){background-color: #f2f2f2;}
+
+#myTable tr:hover {background-color: #ddd;}
+
+#myTable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #007bff;
+    color: white;
+}
+
+#genericSymbol {
+    font-weight: bold;
+}
+
+
+
+
+
+

@@ -23,32 +23,14 @@
     <!-- Custom styles for this template -->
     <link href="css/sb-admin.css" rel="stylesheet">
 
-    <!-- Adding custom Stock Styling -->
-    <style>
-        #CompanyName, #StockPrice {
-            display : inline;
-        }
+    <!-- Button CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bttn.css/0.2.4/bttn.css">
 
-        #CompanyName {
-            font-size: 150%
-        }
-        svg {
-            font: 10px "Times New Roman";
-        }
+    <!-- Auto complete  -->
+    <link rel="stylesheet" href="css/autocomplete.css">
 
-        path {
-            stroke-width: 1.2;
-            fill: none;
-        }
-
-        .axis path, .axis line {
-            fill: none;
-            stroke: grey;
-            stroke-width: 1;
-            shape-rendering: crispEdges;
-        }
-
-    </style>
+    <!-- Stock Page for Conformity -->
+    <link rel="stylesheet" href="css/IndividualStockPage.css">
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -62,206 +44,36 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-
-            <!-- My Portfolio Sidebar -->
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents"
-                   data-parent="#exampleAccordion">
-                    <i class="fa fa-fw fa-wrench"></i>
-                    <span class="nav-link-text">
-                    My Portfolio</span>
-                </a>
-                <ul class="sidenav-second-level collapse" id="collapseComponents">
-                    <li>
-                        <a href="blank.html">Blank Page</a>
-                    </li>
-                    <li>
-                        <a href="#">Custom Card Examples</a>
-                    </li>
-                </ul>
-            </li>
-
-            <!-- WatchList Sidebar -->
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
-                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages"
-                   data-parent="#exampleAccordion">
-                    <i class="fa fa-fw fa-file"></i>
-                    <span class="nav-link-text">
-                    Watch List</span>
-                </a>
-                <ul class="sidenav-second-level collapse" id="collapseExamplePages">
-                    <li>
-                        <a href="login.html">Login Page</a>
-                    </li>
-                    <li>
-                        <a href="register.html">Registration Page</a>
-                    </li>
-                    <li>
-                        <a href="forgot-password.html">Forgot Password Page</a>
-                    </li>
-                    <li>
-                        <a href="blank.html">Blank Page</a>
-                    </li>
-                </ul>
-            </li>
-
-            <!-- Common Stocks Sidebar -->
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
-                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti"
-                   data-parent="#exampleAccordion">
-                    <i class="fa fa-fw fa-sitemap"></i>
-                    <span class="nav-link-text">
-                    Common Stocks</span>
-                </a>
-                <ul class="sidenav-second-level collapse" id="collapseMulti">
-                    <li>
-                        <a href="AAPLCommon.html"> AAPL </a>
-                    </li>
-                    <li>
-                        <a href="#">Second Level Item</a>
-                    </li>
-                    <li>
-                        <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2">Third
-                            Level</a>
-                        <ul class="sidenav-third-level collapse" id="collapseMulti2">
-                            <li>
-                                <a href="#">Third Level Item</a>
-                            </li>
-                            <li>
-                                <a href="#">Third Level Item</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-        <!-- End sidebar -->
-
         <ul class="navbar-nav sidenav-toggler">
-            <li class="nav-item">
-                <a class="nav-link text-center" id="sidenavToggler">
-                    <i class="fa fa-fw fa-angle-left"></i>
-                </a>
-            </li>
         </ul>
+
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle mr-lg-2" href="#" id="messagesDropdown" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-fw fa-envelope"></i>
-                    <span class="d-lg-none">Messages
-                    <span class="badge badge-pill badge-primary">12 New</span>
-                  </span>
-                    <span class="new-indicator text-primary d-none d-lg-block">
-                    <i class="fa fa-fw fa-circle"></i>
-                    <span class="number">12</span>
-                  </span>
+
+            <!-- Settings Page -->
+            <li class="nav-item" id="settingsGear">
+                <a class="nav-link mr-lg-2" href="settings.html" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-fw fa-gear"></i>
                 </a>
-                <div class="dropdown-menu" aria-labelledby="messagesDropdown">
-                    <h6 class="dropdown-header">New Messages:</h6>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">
-                        <strong>David Miller</strong>
-                        <span class="small float-right text-muted">11:21 AM</span>
-                        <div class="dropdown-message small">Hey there! This new version of SB Admin is pretty awesome!
-                            These messages clip off when they reach the end of the box so they don't overflow over to
-                            the sides!
-                        </div>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">
-                        <strong>Jane Smith</strong>
-                        <span class="small float-right text-muted">11:21 AM</span>
-                        <div class="dropdown-message small">I was wondering if you could meet for an appointment at 3:00
-                            instead of 4:00. Thanks!
-                        </div>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">
-                        <strong>John Doe</strong>
-                        <span class="small float-right text-muted">11:21 AM</span>
-                        <div class="dropdown-message small">I've sent the final files over to you for review. When
-                            you're able to sign off of them let me know and we can discuss distribution.
-                        </div>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item small" href="#">
-                        View all messages
-                    </a>
-                </div>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle mr-lg-2" href="#" id="alertsDropdown" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-fw fa-bell"></i>
-                    <span class="d-lg-none">Alerts
-                    <span class="badge badge-pill badge-warning">6 New</span>
-                  </span>
-                    <span class="new-indicator text-warning d-none d-lg-block">
-                    <i class="fa fa-fw fa-circle"></i>
-                    <span class="number">6</span>
-                  </span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="alertsDropdown">
-                    <h6 class="dropdown-header">New Alerts:</h6>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">
-                    <span class="text-success">
-                      <strong>
-                        <i class="fa fa-long-arrow-up"></i>
-                        Status Update</strong>
-                    </span>
-                        <span class="small float-right text-muted">11:21 AM</span>
-                        <div class="dropdown-message small">This is an automated server response message. All systems
-                            are online.
-                        </div>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">
-                    <span class="text-danger">
-                      <strong>
-                        <i class="fa fa-long-arrow-down"></i>
-                        Status Update</strong>
-                    </span>
-                        <span class="small float-right text-muted">11:21 AM</span>
-                        <div class="dropdown-message small">This is an automated server response message. All systems
-                            are online.
-                        </div>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">
-                    <span class="text-success">
-                      <strong>
-                        <i class="fa fa-long-arrow-up"></i>
-                        Status Update</strong>
-                    </span>
-                        <span class="small float-right text-muted">11:21 AM</span>
-                        <div class="dropdown-message small">This is an automated server response message. All systems
-                            are online.
-                        </div>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item small" href="#">
-                        View all alerts
-                    </a>
-                </div>
-            </li>
+
+            <!-- Search Bar -->
             <li class="nav-item">
                 <form class="form-inline my-2 my-lg-0 mr-lg-2">
                     <div class="input-group">
-                        <input type="text" id="myInput" class="form-control" onkeypress="return searchKeyPress(event);"
-                               placeholder="Search for..." title="Type in a stock Symbol">
+                        <div class="easy-autocomplete" style="width: 225px;">
+                            <input type="text" id="myInput" style="width:225px; padding-bottom: 8px;padding-top: 8px;"
+                                   class="form-control" onkeypress="return searchKeyPress(event);"
+                                   placeholder="Search for a Company"  title="Type in a stock Symbol">
+                        </div>
                         <span class="input-group-btn">
-                      <button id="btnSearch" class="btn btn-primary" type="button" onclick="UrlStringPass()"
-                              value="Search">
-                        <i class="fa fa-search"></i>
-                      </button>
-                    </span>
+                            <button id="btnSearch" class="btn btn-primary" type="button" onclick="UrlStringPass()" value="Search">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+
                     </div>
                 </form>
             </li>
-
 
             <li class="nav-item">
                 <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
@@ -273,8 +85,7 @@
 </nav>
 
 <!---------------------------------------------------------------------------------------------->
-<div class="content-wrapper">
-
+<div class="content-wrapper" style="margin-left: 0">
     <div class="container-fluid">
 
         <!-- Breadcrumbs -->
@@ -286,666 +97,265 @@
         </ol>
 
         <!-- insert information here -->
-        <div class="jumbotron" style="padding-bottom: 3%; padding-top: 3%;">
-            <!-- Company Name -->
+        <div class="jumbotron" style="padding-bottom: 35px; padding-top: 35px;">
             <div id="CompanyName"></div>
-            <!-- Stock Price -->
             <div id="StockPrice"></div>
-        </div>
-
-        <div>
-            <svg width="650" height="300"></svg>
-        </div>
-
-        <script src="http://d3js.org/d3.v3.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-        <!-- D3 Graph -->
-        <script>
-
-
-            // Set the dimensions of the canvas / graph
-            var margin = {top: 30, right: 20, bottom: 30, left: 50},
-                width = 600 - margin.left - margin.right,
-                height = 270 - margin.top - margin.bottom;
-
-            // Parse the date / time
-            var parseDate = d3.time.format("%Y-%m-%d").parse;
-
-            // Parse the time for the Day
-            var parseMinute = d3.time.format("%H:%M").parse;
-
-            // Set the ranges
-            var x = d3.time.scale().range([0, width]);
-            var y = d3.scale.linear().range([height, 0]);
-
-            // Define the axes
-            var xAxis = d3.svg.axis().scale(x)
-                .orient("bottom").ticks(5);
-
-            var yAxis = d3.svg.axis().scale(y)
-                .orient("left").ticks(5);
-
-            // Define the line
-            var valueline = d3.svg.line()
-            //.interpolate("basis")
-                .x(function(d) { return x(d.date); })
-                .y(function(d) { return y(d.close); });
-
-            // Adds the svg canvas
-            var svg = d3.select("svg")
-                .append("svg")
-                .attr("width", width + margin.left + margin.right)
-                .attr("height", height + margin.top + margin.bottom)
-                .append("g")
-                .attr("transform",
-                    "translate(" + margin.left + "," + margin.top + ")");
-
-
-            // Get the minumum Value from the array to add space at the bottom of the graph
-            Array.min = function (array) {
-                return Math.min.apply(Math, array);
-            };
-
-            var url = "https://api.iextrading.com/1.0/stock/aapl/chart/5y";
-
-            // Get the data
-            $.ajax({
-                url: url,
-                success: function(data) {
-
-                    // Setting global variable
-                    var arrayClose = [];
-                    var firstPrice = null;
-                    var lastPrice = null;
-                    var minimum = null;
-                    var result = null;
-                    var lineColor = null;
-
-                    // Get the data
-                    d3.json(url, function (error, data) {
-                        data.forEach(function (d) {
-                            d.date = parseDate(d.date);
-                            d.close = +d.close;
-
-                            // Adding each result to the end of the array
-                            arrayClose.push(d.close);
-
-                            // Finding the minimum value in the close price in the JSON File
-                            minimum = Array.min(arrayClose);
-
-                            // Taking .05% off of graph to dynamically show white space at the bottom of the minimum value
-                            result = (10 / 100) * minimum;
-                            result = minimum - result;
-
-                            // Finding first elm in array
-                            firstPrice = arrayClose[0];
-
-                            // Finding last elm in array
-                            lastPrice = arrayClose[arrayClose.length - 1];
-                        });
-
-                        if (firstPrice > lastPrice){
-                            lineColor = "red";
-                        } else {
-                            lineColor = "green";
-                        }
-
-                        // Scale the range of the data
-                        x.domain(d3.extent(data, function (d) {
-                            return d.date;
-                        }));
-                        y.domain([result, d3.max(data, function (d) {
-                            return d.close;
-                        })]);
-
-                        // Add the valueline path.
-                        svg.append("path")
-                            .transition()
-                            .attr("class", "line")
-                            .attr("stroke", lineColor)
-                            .attr("d", valueline(data));
-
-                        // Add the X Axis
-                        svg.append("g")
-                            .attr("class", "x axis")
-                            .attr("transform", "translate(0," + height + ")")
-                            .call(xAxis);
-
-                        // Add the Y Axis
-                        svg.append("g")
-                            .attr("class", "y axis")
-                            .call(yAxis);
-
-                        // Add the text label for the X axis
-                        svg.append("text")
-                            .attr("x", width / 2)               //Dynamically moves with the graph
-                            .attr("y", height + margin.bottom)
-                            .style("text-anchor", "middle")
-                            .text("Date");
-
-                        // Add the text label for the Y axis
-                        svg.append("text")
-                            .attr("transform", "rotate(-90)")
-                            .attr("x", 0 - (height / 2))
-                            .attr("y", 0 - margin.left)
-                            .attr("dy", "1em")
-                            .style("text-anchor", "middle")
-                            .text("Price");
-
-                        // Adding the Title
-                        svg.append("text")
-                            .attr("x", (width / 2))
-                            .attr("y", 0 - (margin.top / 2))
-                            .attr("text-anchor", "middle")
-                            .style("font-size", "16px")
-                            .style("text-decoration", "underline")
-                            .text("Price to Date");
-                    });
-                }
-            });
-
-            // Updating Price, lineColor, data, and result
-            function updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, data, result) {
-                // Checks to see if the first price is lower than the last price if = change color
-                if (firstPrice > lastPrice){
-                    lineColor = "red";
-                } else {
-                    lineColor = "green";
-                }
-
-                // Scale the range of the data again
-                x.domain(d3.extent(data, function(d) {
-                    return d.date;
-                }));
-                y.domain([result, d3.max(data, function(d) {
-                    return d.close;
-                })]);
-
-                // Select the section we want to apply our changes to
-                var svg = d3.select("body").transition();
-
-                // Make the changes
-                svg.select(".line")   // change the line
-                    .transition()
-                    .duration(750)
-                    .attr("stroke", lineColor)
-                    .attr("d", valueline(data));
-                svg.select(".x.axis") // change the x axis
-                    .duration(750)
-                    .call(xAxis);
-                svg.select(".y.axis") // change the y axis
-                    .duration(750)
-                    .call(yAxis);
-
-            }
-
-            //1d (Change the parse date for this******)
-            function update1Day () {
-                var url = "https://api.iextrading.com/1.0/stock/aapl/chart/1d";
-
-                $.ajax({
-                    url: url,
-                    success: function(data) {
-
-                        var arrayClose = [];
-                        var minimum = null;
-                        var result = null;
-                        var lineColor = null;
-                        var firstPrice = null;
-                        var lastPrice = null;
-
-                        // Get the data
-                        d3.json(url, function (error, data) {
-                            data.forEach(function (d) {
-
-                                // Parsing the minute instead of conventional date
-                                d.date = parseMinute(d.minute);
-                                d.close = +d.average;
-
-                                // Adding each result to the end of the array
-                                arrayClose.push(d.close);
-
-                                // Finding the minimum value in the close price in the JSON File
-                                minimum = Array.min(arrayClose);
-
-                                // Taking .05% off of graph to dynamically show white space at the bottom of the minimum value
-                                result = (.05 / 100) * minimum;
-                                result = minimum - result;
-
-                                // Finding first elm in array
-                                firstPrice = arrayClose[0];
-
-                                // Finding last elm in array
-                                lastPrice = arrayClose[arrayClose.length - 1];
-                            });
-
-                            // Updating Price, lineColor, data, and result
-                            updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, data, result);
-
-                        });
-                    }
-                });
-            }
-
-            //1m
-            function update1Month () {
-                var url = "https://api.iextrading.com/1.0/stock/aapl/chart/1m";
-
-                $.ajax({
-                    url: url,
-                    success: function(data) {
-
-                        var arrayClose = [];
-                        var minimum = null;
-                        var result = null;
-                        var lineColor = null;
-                        var firstPrice = null;
-                        var lastPrice = null;
-
-                        // Get the data
-                        d3.json(url, function (error, data) {
-                            data.forEach(function (d) {
-                                d.date = parseDate(d.date);
-                                d.close = +d.close;
-
-                                // Adding each result to the end of the array
-                                arrayClose.push(d.close);
-
-                                // Finding the minimum value in the close price in the JSON File
-                                minimum = Array.min(arrayClose);
-
-                                // Taking 5% off of graph to dynamically show white space at the bottom of the minimum value
-                                result = (.25 / 100) * minimum;
-                                result = minimum - result;
-
-                                // Finding first elm in array
-                                firstPrice = arrayClose[0];
-
-                                // Finding last elm in array
-                                lastPrice = arrayClose[arrayClose.length - 1];
-                            });
-
-                            // Updating Price, lineColor, data, and result
-                            updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, data, result);
-                        });
-                    }
-                });
-            }
-
-            //3m
-            function update3Month() {
-                var url = "https://api.iextrading.com/1.0/stock/aapl/chart/3m";
-
-                $.ajax({
-                    url: url,
-                    success: function(data) {
-
-                        var arrayClose = [];
-                        var minimum = null;
-                        var result = null;
-                        var lineColor = null;
-                        var firstPrice = null;
-                        var lastPrice = null;
-
-                        // Get the data
-                        d3.json(url, function (error, data) {
-                            data.forEach(function (d) {
-                                d.date = parseDate(d.date);
-                                d.close = +d.close;
-
-                                // Adding each result to the end of the array
-                                arrayClose.push(d.close);
-
-                                // Finding the minimum value in the close price in the JSON File
-                                minimum = Array.min(arrayClose);
-
-                                // Taking .05% off of graph to dynamically show white space at the bottom of the minimum value
-                                result = (.05 / 100) * minimum;
-                                result = minimum - result;
-
-                                // Finding first elm in array
-                                firstPrice = arrayClose[0];
-
-                                // Finding last elm in array
-                                lastPrice = arrayClose[arrayClose.length - 1];
-                            });
-
-                            // Updating Price, lineColor, data, and result
-                            updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, data, result);
-                        });
-                    }
-                });
-            }
-
-            //6m
-            function update6Month () {
-                var url = "https://api.iextrading.com/1.0/stock/aapl/chart/6m";
-
-                $.ajax({
-                    url: url,
-                    success: function(data) {
-
-                        var arrayClose = [];
-                        var minimum = null;
-                        var result = null;
-                        var lineColor = null;
-                        var firstPrice = null;
-                        var lastPrice = null;
-
-                        // Get the data
-                        d3.json(url, function (error, data) {
-                            data.forEach(function (d) {
-                                d.date = parseDate(d.date);
-                                d.close = +d.close;
-
-                                // Adding each result to the end of the array
-                                arrayClose.push(d.close);
-
-                                // Finding the minimum value in the close price in the JSON File
-                                minimum = Array.min(arrayClose);
-
-                                // Taking .05% off of graph to dynamically show white space at the bottom of the minimum value
-                                result = (.5 / 100) * minimum;
-                                result = minimum - result;
-
-                                // Finding first elm in array
-                                firstPrice = arrayClose[0];
-
-                                // Finding last elm in array
-                                lastPrice = arrayClose[arrayClose.length - 1];
-                            });
-
-                            // Updating Price, lineColor, data, and result
-                            updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, data, result);
-                        });
-                    }
-                });
-            }
-
-
-            // ytd
-            function updateYearToDate () {
-                var url = "https://api.iextrading.com/1.0/stock/aapl/chart/ytd";
-
-                $.ajax({
-                    url: url,
-                    success: function(data) {
-
-                        var arrayClose = [];
-                        var minimum = null;
-                        var result = null;
-                        var lineColor = null;
-                        var firstPrice = null;
-                        var lastPrice = null;
-
-                        // Get the data
-                        d3.json(url, function (error, data) {
-                            data.forEach(function (d) {
-                                d.date = parseDate(d.date);
-                                d.close = +d.close;
-
-                                // Adding each result to the end of the array
-                                arrayClose.push(d.close);
-
-                                // Finding the minimum value in the close price in the JSON File
-                                minimum = Array.min(arrayClose);
-
-                                // Taking .05% off of graph to dynamically show white space at the bottom of the minimum value
-                                result = (.1 / 100) * minimum;
-                                result = minimum - result;
-
-                                // Finding first elm in array
-                                firstPrice = arrayClose[0];
-
-                                // Finding last elm in array
-                                lastPrice = arrayClose[arrayClose.length - 1];
-                            });
-
-                            // Updating Price, lineColor, data, and result
-                            updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, data, result);
-                        });
-                    }
-                });
-            }
-
-            // Update to 1 yEar
-            function update1Year() {
-
-                var url = "https://api.iextrading.com/1.0/stock/aapl/chart/1y";
-
-                $.ajax({
-                    url: url,
-                    success: function(data) {
-
-                        var arrayClose = [];
-                        var minimum = null;
-                        var result = null;
-                        var lineColor = null;
-                        var firstPrice = null;
-                        var lastPrice = null;
-
-                        // Get the data
-                        d3.json(url, function (error, data) {
-                            data.forEach(function (d) {
-                                d.date = parseDate(d.date);
-                                d.close = +d.close;
-
-                                // Adding each result to the end of the array
-                                arrayClose.push(d.close);
-
-                                // Finding the minimum value in the close price in the JSON File
-                                minimum = Array.min(arrayClose);
-
-                                // Taking .05% off of graph to dynamically show white space at the bottom of the minimum value
-                                result = (1 / 100) * minimum;
-                                result = minimum - result;
-
-                                // Finding first elm in array
-                                firstPrice = arrayClose[0];
-
-                                // Finding last elm in array
-                                lastPrice = arrayClose[arrayClose.length - 1];
-                            });
-
-                            // Updating Price, lineColor, data, and result
-                            updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, data, result);
-                        });
-                    }
-                });
-            }
-
-            // Change graph to 2 year
-            function update2Year() {
-
-                var url = "https://api.iextrading.com/1.0/stock/aapl/chart/2y";
-
-                $.ajax({
-                    url: url,
-                    success: function (data) {
-
-                        var arrayClose = [];
-                        var minimum = null;
-                        var result = null;
-                        var lineColor = null;
-                        var firstPrice = null;
-                        var lastPrice = null;
-
-                        // Get the data
-                        d3.json(url, function (error, data) {
-                            data.forEach(function (d) {
-                                d.date = parseDate(d.date);
-                                d.close = +d.close;
-
-                                // Adding each result to the end of the array
-                                arrayClose.push(d.close);
-
-                                // Finding the minimum value in the close price in the JSON File
-                                minimum = Array.min(arrayClose);
-
-                                // Taking .05% off of graph to dynamically show white space at the bottom of the minimum value
-                                result = (5 / 100) * minimum;
-                                result = minimum - result;
-
-                                // Finding first elm in array
-                                firstPrice = arrayClose[0];
-
-                                // Finding last elm in array
-                                lastPrice = arrayClose[arrayClose.length - 1];
-                            });
-
-                            // Updating Price, lineColor, data, and result
-                            updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, data, result);
-                        });
-                    }
-                });
-            }
-
-            // Change graph to 5 Year
-            function update5Year() {
-
-                var url = "https://api.iextrading.com/1.0/stock/aapl/chart/5y";
-
-                $.ajax({
-                    url: url,
-                    success: function (data) {
-
-                        var arrayClose = [];
-                        var minimum = null;
-                        var result = null;
-                        var lineColor = null;
-                        var firstPrice = null;
-                        var lastPrice = null;
-
-                        // Get the data
-                        d3.json(url, function (error, data) {
-                            data.forEach(function (d) {
-                                d.date = parseDate(d.date);
-                                d.close = +d.close;
-
-                                // Adding each result to the end of the array
-                                arrayClose.push(d.close);
-
-                                // Finding the minimum value in the close price in the JSON File
-                                minimum = Array.min(arrayClose);
-
-                                // Taking .05% off of graph to dynamically show white space at the bottom of the minimum value
-                                result = (10 / 100) * minimum;
-                                result = minimum - result;
-
-                                // Finding first elm in array
-                                firstPrice = arrayClose[0];
-
-                                // Finding last elm in array
-                                lastPrice = arrayClose[arrayClose.length - 1];
-                            });
-
-                            // Updating Price, lineColor, data, and result
-                            updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, data, result);
-                        });
-                    }
-                });
-            }
-
-        </script>
-
-        <div id="option">
-
-            <!-- 1 Day -->
-            <input name="updateButton"
-                   type="button"
-                   value="1 Day"
-                   onclick="update1Day()" />
-
-            <!-- 1 Month -->
-            <input name="updateButton"
-                   type="button"
-                   value="1 Month"
-                   onclick="update1Month()" />
-
-            <!-- 3 Month -->
-            <input name="updateButton"
-                   type="button"
-                   value="3 Month"
-                   onclick="update3Month()" />
-
-            <!-- 6 Month -->
-            <input name="updateButton"
-                   type="button"
-                   value="6 Month"
-                   onclick="update6Month()" />
-
-            <!-- YTD -->
-            <input name="updateButton"
-                   type="button"
-                   value="Year To Date"
-                   onclick="updateYearToDate()" />
-
-            <!-- 1 Year -->
-            <input name="updateButton"
-                   type="button"
-                   value="1 year"
-                   onclick="update1Year()" />
-
-            <!-- 2 Years -->
-            <input name="updateButton"
-                   type="button"
-                   value="2 years"
-                   onclick="update2Year()" />
-
-            <!-- 5 Years -->
-            <input name="updateButton"
-                   type="button"
-                   value="5 years"
-                   onclick="update5Year()" />
+            <div id="StockSymbolUpperCase"></div>
+
+            <!-- Portfolio Sign -->
+            <div class="PortfolioSpanButton">
+                <i onclick="AddToPortfolio()" class="fa fa-plus"
+                   style="float: right;
+                            padding: 10px;
+                            margin-right: 20px;
+                            font-size:20px;
+                            color:#007BFF;"
+                    id="portfolioButton"
+                    data-inPortfolio=false data-pk="">
+                </i>
+                <span class="PorfolioHover">Porfolio</span>
+            </div>
+
+            <!-- Watchlist Sign -->
+            <div class="WatchlistSpanButton">
+                <i onclick="AddToWatchlist()" class="fa fa-plus"
+                   style="float: right;
+                            padding: 10px;
+                            font-size:20px;
+                            color:#007BFF;"
+                   id="watchlistButton"
+                   data-inWatchlist=false data-ok="">
+                </i>
+                <span class="WatchlistHover">Watchlist</span>
+            </div>
+            <br>
+
+            <!-- Add Stock to Portfolio and sync to Firebase -->
+            <div id="AddStocktoPortfolio">
+
+                <!-- Date Purchased -->
+                <label for="datePortfolio" style=" margin-top: 6px; margin-left: 6px;">Date Purchased</label>
+                <input type="date" name="date" id="datePortfolio"><br>
+
+                <!-- Price Purchased -->
+                <label for="pricePortfolio" style=" margin-top: 6px; margin-left: 6px;">Price</label>
+                <input type="number" name="quantityStock" id="pricePortfolio" placeholder="Price">
+
+                <!-- Quantity Purchased -->
+                <label for="quantityPortfolio" style=" margin-top: 6px; margin-left: 6px;">Quantity</label>
+                <input type="number" name="quantityStock" id="quantityPortfolio" placeholder="Amount purchased">
+
+                <br><br>
+
+                <!-- Enter button -->
+                <button onclick="getStockDateAndQuantity()" id="enterButtonAddToStock">Enter</button>
+
+            </div>
         </div>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <div class="container">
+        <!-- Company Information and Graph -->
+        <div class="container" >
             <div class="row">
                 <div class="col-sm-4">
-                    <h3>Column 1</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+                    <h3>Company Information</h3>
+                    <hr>
+                    <div id="aboutCompany"></div><br>
+                    <h3>Price</h3>
+                    <hr>
+
+                    <!-- Change to Add currency types later -->
+                    <h5 id="close">Hover to see price</h5>
+                    <h5 id="date">Date Listed</h5>
                 </div>
-                <div class="col-sm-4">
-                    <h3>Column 2</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+
+                <div class="SVGD3Parent">
+                    <!-- D3 Graph -->
+                    <div>
+                        <svg width="760" height="300"></svg>
+                    </div>
+
+                    <!-- Buttons to Manipulate Data -->
+                    <div id="buttonOption">
+                        <!-- 1 Day -->
+                        <input class="bttn-unite bttn-sm bttn-primary"
+                               style="margin: 5px;"
+                               id="1DayButton"
+                               name="updateButton"
+                               type="button"
+                               value="1 Day"
+                               onclick="update1Day()" />
+
+                        <!-- 1 Month -->
+                        <input class="bttn-unite bttn-sm bttn-primary"
+                               style="margin: 5px;"
+                               id="1MonthButton"
+                               name="updateButton"
+                               type="button"
+                               value="1 Month"
+                               onclick="update1Month()" />
+
+                        <!-- 3 Month -->
+                        <input class="bttn-unite bttn-sm bttn-primary"
+                               style="margin: 5px;"
+                               id="3MonthButton"
+                               name="updateButton"
+                               type="button"
+                               value="3 Month"
+                               onclick="update3Month()" />
+
+                        <!-- 6 Month -->
+                        <input class="bttn-unite bttn-sm bttn-primary"
+                               style="margin: 5px;"
+                               id="6MonthButton"
+                               name="updateButton"
+                               type="button"
+                               value="6 Month"
+                               onclick="update6Month()" />
+
+                        <!-- YTD -->
+                        <input class="bttn-unite bttn-sm bttn-primary"
+                               style="margin: 5px;"
+                               id="YTDButton"
+                               name="updateButton"
+                               type="button"
+                               value="Year To Date"
+                               onclick="updateYearToDate()" />
+
+                        <!-- 1 Year -->
+                        <input class="bttn-unite bttn-sm bttn-primary"
+                               style="margin: 5px;"
+                               id="1YearButton"
+                               name="updateButton"
+                               type="button"
+                               value="1 year"
+                               onclick="update1Year()" />
+
+                        <!-- 2 Years -->
+                        <input class="bttn-unite bttn-sm bttn-primary"
+                               style="margin: 5px;"
+                               id="2YearButton"
+                               name="updateButton"
+                               type="button"
+                               value="2 years"
+                               onclick="update2Year()" />
+
+                        <!-- 5 Years -->
+                        <input class="bttn-unite bttn-sm bttn-primary"
+                               style="margin: 5px;"
+                               id="5YearButton"
+                               name="updateButton"
+                               type="button"
+                               value="5 years"
+                               onclick="update5Year()" />
+                    </div>
                 </div>
+
+                <!-- Logo -->
+                <div id="logodiv">
+                    <img id="logo" class = "logo" src="">
+                </div>
+
+
+            </div>
+        </div>
+
+        <hr id="hrPageBreak">
+
+        <!-- Columns -->
+        <div class="container" style="padding-top: 3%">
+            <div class="row">
                 <div class="col-sm-4">
-                    <h3>Column 3</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+                    <h3>Stats</h3>
+                    <hr>
+                    <ul>
+                        <li>
+                            <p>Week 52 High: </p>
+                            <strong style="padding-left:5em" id="week52high"></strong>
+                        </li>
+                        <li>
+                            <p>Week 52 Low: </p>
+                            <strong style="padding-left:5em" id="week52low"></strong>
+                        </li>
+                        <li>
+                            <p>Dividend Rate: </p>
+                            <strong style="padding-left:5em" id="dividendRate"></strong>
+                        </li>
+                        <li>
+                            <p>Latest EPS: </p>
+                            <strong style="padding-left:6.5em" id="latestEPS"></strong>
+                        </li>
+                        <li>
+                            <p>Gross Profit: </p>
+                            <strong style="padding-left:5em" id="grossProfit"></strong>
+                        </li>
+                        <li>
+                            <p>Debt: </p>
+                            <strong style="padding-left:8em" id="debt"></strong>
+                        </li>
+                    </ul>
+                </div>
+                <hr id="hrDown">
+
+                <div class="col-sm-4">
+                    <h3>News</h3>
+                    <hr>
+
+                    <!-- News -->
+                    <ul>
+                        <li>
+                            <a id="headline0"></a>
+                            <div id="datetime0"></div>
+                            <div id="source0"></div>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <a id="headline1"></a>
+                            <div id="datetime1"></div>
+                            <div id="source1"></div>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <a id="headline2"></a>
+                            <div id="datetime2"></div>
+                            <div id="source2"></div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Peers -->
+                <div class="col-sm-4" style="padding-bottom: 15px">
+                    <h3>Peers</h3>
+                    <hr>
+                    <div id="peers"></div>
+
+                    <!-- Inserting table -->
+                    <table id="myTable" border="2">
+                        <tr>
+                            <th>Symbol</th>
+                            <th>Price</th>
+                            <th>6m%</th>
+                            <th>1y%</th>
+                        </tr>
+                        <tr>
+                            <td id="genericSymbol"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
-    <!-- /.container-fluid -->
 </div>
-<!-- /.content-wrapper -->
 
+<!---------------------------------------------------------------------------------------------->
+
+<!-- Footer -->
 <footer class="sticky-footer">
     <div class="container">
         <div class="text-center">
@@ -953,7 +363,6 @@
         </div>
     </div>
 </footer>
-<!---------------------------------------------------------------------------------------------->
 
 <!-- Scroll to Top Button -->
 <a class="scroll-to-top rounded" href="#page-top">
@@ -982,6 +391,26 @@
     </div>
 </div>
 
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <!-- Firebase Key init -->
+    <script src="js/FirebaseInit.js"></script>
+
+    <!-- Jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Defiant for JSON Parsing (Trying it out) -->
+    <script src="js/DefiantJSforJSONParsing.js"></script>
+
+    <!-- D3 Library -->
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+
+    <!-- D3 Graph -->
+    <script src=js/D3LineGraph.js>  </script>
+
+    <!-- Enter on Key press for Search for stocks -->
+    <script src="js/EnterOnKeyPress.js"></script>
+
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/popper/popper.min.js"></script>
@@ -989,33 +418,18 @@
 
     <!-- Plugin JavaScript -->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="vendor/chart.js/Chart.min.js"></script>
-    <script src="vendor/datatables/jquery.dataTables.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+
+    <!-- Auto complete -->
+    <script src="js/Autocomplete.js"></script>
 
     <!-- Custom scripts for this template -->
-    <script src="js/sb-admin.min.js"></script>
-
-    <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
-
-    <!-- Firebase Key init -->
-    <script src="js/FirebaseInit.js"></script>
-
-    <!-- @TODO Add generalization for individual input for instance any stock any where transfers to stock page. -->
-    <!-- JS that takes Search for Stock input a -->
-    <script src="js/IndividualStockPage.js"></script>
-
-    <!-- Enter on Key press for Search for stocks -->
-    <script src="js/EnterOnKeyPress.js"></script>
+    <script src="js/sb-admin.js"></script>
 
     <!-- Search for stock application  -->
     <script src="js/SearchForStock.js"></script>
 
-    <script src="http://d3js.org/d3.v3.min.js"></script>
-    <script>
+    <!-- JS that takes Search for Stock input a -->
+    <script src="js/IndividualStockPage.js"></script>
 
-
-    </script>
 </body>
 </html>

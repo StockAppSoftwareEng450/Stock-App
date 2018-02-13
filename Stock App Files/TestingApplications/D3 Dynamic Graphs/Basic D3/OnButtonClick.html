@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<style> /* set the CSS */
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bttn.css/0.2.4/bttn.css">
+
+<style> /* set the CSS */
 svg {
     font: 10px "Times New Roman";
 }
 
 path {
-    stroke-width: 1.2;
+    stroke-width: 2;
     fill: none;
 }
 
@@ -18,14 +20,121 @@ path {
     shape-rendering: crispEdges;
 }
 
+
+/** START SLIDER **/
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    display:none;}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+    /** END SLIDER **/
+    /** D3 GRAPH **/
+
+.overlay {
+    fill: none;
+    pointer-events: all;
+}
+
+.focus circle {
+    fill: none;
+    stroke: steelblue;
+
+}
+.hover-line {
+    stroke: steelblue;
+    stroke-width: 2px;
+    stroke-dasharray: 3,3;
+}
+
+#myTable {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 25%;
+}
+
+#myTable td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#myTable tr:nth-child(even){background-color: #f2f2f2;}
+
+#myTable tr:hover {background-color: #ddd;}
+
+#myTable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #007bff;
+    color: white;
+}
+
+#genericSymbol {
+    font-weight: bold;
+}
+
 </style>
 <body>
 
 <!-- load the d3.js library -->
-
-
 <script src="http://d3js.org/d3.v3.min.js"></script>
-<script src="../jquery3_2_1.js"></script>
+<script src="../../CommonLinkedFiles/jquery3_2_1.js"></script>
+
 
 <!-- D3 Graph -->
 <script>
@@ -39,7 +148,10 @@ path {
     var parseDate = d3.time.format("%Y-%m-%d").parse;
 
     // Parse the time for the Day
-    var parseMinute = d3.time.format("%H:%M").parse;
+    var parseMinute = d3.time.format("%H:%M").parse,
+        bisectDate = d3.bisector(function(d) { return d.date; }).left,
+        formatValue = d3.format(",.2f"),
+        formatCurrency = function(d) { return "$" + formatValue(d);};
 
     // Set the ranges
     var x = d3.time.scale().range([0, width]);
@@ -72,6 +184,7 @@ path {
     Array.min = function (array) {
         return Math.min.apply(Math, array);
     };
+
 
     var url = "https://api.iextrading.com/1.0/stock/aapl/chart/5y";
 
@@ -130,7 +243,8 @@ path {
                     .transition()
                     .attr("class", "line")
                     .attr("stroke", lineColor)
-                    .attr("d", valueline(data));
+                    .attr("d", valueline(data))
+                ;
 
                 // Add the X Axis
                 svg.append("g")
@@ -167,6 +281,52 @@ path {
                     .style("font-size", "16px")
                     .style("text-decoration", "underline")
                     .text("Price to Date");
+
+                //Mouseover
+
+                var focus = svg.append("g")
+                    .attr("class", "focus")
+                    .style("display", "none");
+
+                focus.append("line")
+                    .attr("class", "x-hover-line hover-line")
+                    .attr("y1", 0)
+                    .attr("y2", height);
+
+                focus.append("line")
+                    .attr("class", "y-hover-line hover-line")
+                    .attr("x1", width)
+                    .attr("x2", width);
+
+                focus.append("circle")
+                    .attr("r", 4.5);
+
+                focus.append("text")
+                    .attr("x", 9)
+                    .attr("dy", ".35em");
+
+
+
+                svg.append("rect")
+                    .attr("class", "overlay")
+                    .attr("width", width)
+                    .attr("height", height)
+                    .on("mouseover", function() { focus.style("display", null); })
+                    .on("mouseout", function() { focus.style("display", "none"); })
+                    .on("mousemove", mousemove);
+
+                function mousemove() {
+                    var x0 = x.invert(d3.mouse(this)[0]),
+                        i = bisectDate(data, x0, 1),
+                        d0 = data[i - 1],
+                        d1 = data[i],
+                        d = x0 - d0.date > d1.date - x0 ? d1 : d0;
+                    focus.attr("transform", "translate(" + x(d.date) + "," + y(d.close) + ")");
+                    focus.select(".x-hover-line").attr("y2", height - y(d.close));
+                    focus.select(".y-hover-line").attr("x2", width + width);
+                    document.getElementById("close").innerHTML = d.close
+
+                }
             });
         }
     });
@@ -203,12 +363,11 @@ path {
         svg.select(".y.axis") // change the y axis
             .duration(750)
             .call(yAxis);
-
     }
 
     //1d (Change the parse date for this******)
     function update1Day () {
-        var url = "https://api.iextrading.com/1.0/stock/aapl/chart/1d";
+        var url = "https://api.iextrading.com/1.0/stock/msft/chart/1d";
 
         $.ajax({
             url: url,
@@ -220,6 +379,7 @@ path {
                 var lineColor = null;
                 var firstPrice = null;
                 var lastPrice = null;
+                var i = null;
 
                 // Get the data
                 d3.json(url, function (error, data) {
@@ -244,8 +404,10 @@ path {
 
                         // Finding last elm in array
                         lastPrice = arrayClose[arrayClose.length - 1];
+
                     });
 
+                    console.log("i: " + i);
                     // Updating Price, lineColor, data, and result
                     updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, data, result);
 
@@ -435,7 +597,7 @@ path {
         });
     }
 
-    // Update to 1 yEar
+    // Update to 1 year
     function update1Year() {
 
         var url = "https://api.iextrading.com/1.0/stock/aapl/chart/1y";
@@ -573,12 +735,229 @@ path {
         });
     }
 
+
+
+    var switchAlertValue = "off";
+
+    $(function(){
+        $('.slider').on('click', function(event){
+
+            if (switchAlertValue === "off"){
+                console.log("From off to on");
+                switchAlertValue = "on";
+
+                // ON
+                return switchAlertValue;
+            } else if(switchAlertValue === "on" )  {
+                console.log("From on to off");
+                switchAlertValue = "off";
+
+                // OFF
+                return switchAlertValue;
+            } else {
+                console.log("setting value to default");
+                switchAlertValue = "off";
+
+                // Incase off any errors
+                return switchAlertValue;
+            }
+
+
+
+        });
+    });
+
+    var stockSymbol = "AAPL";
+
+    //Peers
+    // Grabbing the peers(related Companies) and displaying them to an ul on the DOM
+    var peersUrl = "https://api.iextrading.com/1.0/stock/" + stockSymbol + "/peers";
+    //console.log(peersUrl);
+
+    $.ajax({
+        url: peersUrl,
+        success: function (data) {
+
+            console.log("peers: " + data);
+
+            // for each peer in the list
+            for (var i = 0; i < data.length; i++){
+                console.log(i + " " + data[i]);
+
+                var peerName = data[i];
+
+                // var returnedprice = grabpeerStockPrice(peerName);
+                // console.log(returnedprice);
+                peersStatsUrlGrab(peerName);
+
+            }
+
+        },
+
+        // Error checking
+        error: function(error){
+            console.log(error.responseText);
+
+            if (error.responseText === "Unknown symbol"){
+                console.log("Reached Error");
+
+                // Transfer to the homepage
+                window.location.href = "index.html";
+            }
+        }
+    });
+
+    // Adding peer stats
+    // @TODO FIX table issue
+    function peersStatsUrlGrab (name) {
+
+        document.getElementById("genericSymbol").innerHTML = stockSymbol;
+
+        // getting table
+        var table = document.getElementById("myTable");
+        var row = table.insertRow(-1);
+
+        // Inserting name
+        var cell0 = row.insertCell(0);
+        cell0.innerHTML = name;
+
+        // grab latest stock price
+        var peerStockPriceUrl = "https://api.iextrading.com/1.0/stock/" + name +  "/quote";
+
+        var unicodeUp = '\u25B2';
+        var unicodeDown = '\u25BC';
+
+        // adding color
+        unicodeUp = unicodeUp.fontcolor("green");
+        unicodeDown = unicodeDown.fontcolor("red");
+
+        $.ajax({
+            url: peerStockPriceUrl,
+            success: function (data) {
+
+                var price = data.latestPrice;
+                var cell1 = row.insertCell(1);
+                cell1.innerHTML = price;
+            }
+        });
+
+        // grab latest stock price
+        var stockSymbolStockPriceUrl = "https://api.iextrading.com/1.0/stock/" + stockSymbol +  "/quote";
+
+        $.ajax({
+            url: stockSymbolStockPriceUrl,
+            success: function (data) {
+                var stockprice = data.latestPrice;
+                stockprice = stockprice.toString();
+                stockprice = stockprice.bold();
+
+                document.getElementById("myTable").rows[1].cells[1].innerHTML = stockprice;
+            }
+        });
+
+        // for each peer in data, issue an ajax to grab; 6m% and 1y%
+        var peerStatusURL = "https://api.iextrading.com/1.0/stock/" + name +  "/stats";
+
+        setTimeout(function () {
+            $.ajax({
+                url: peerStatusURL,
+                success: function (data) {
+
+                    // 1 year
+                    var percent1y = data.year1ChangePercent;
+                    var percentage1y = percent1y * 100;
+                    percentage1y = percentage1y.toFixed(2);
+
+                    // insert 1 year into table
+                    var cell2 = row.insertCell(2);
+                    var percentStr1y = percentage1y.toString();
+
+                    if (percent1y < 0){
+                        cell2.innerHTML = percentStr1y + "%" + unicodeDown;
+                    } else {
+                        cell2.innerHTML = percentStr1y + "%" + unicodeUp;
+                      }
+
+                    // 6 month
+                    var percent6m = data.month6ChangePercent;
+                    var percentage6m = percent6m * 100;
+                    percentage6m = percentage6m.toFixed(2);
+
+                    //inserting 6 month into table
+                    var cell3 = row.insertCell(3);
+                    var percentStr6m = percentage6m.toString();
+
+                    // Test to see if percentage is negative
+                    if (percent6m < 0){
+                        cell3.innerHTML = percentStr6m + "%" + "\t" + unicodeDown;
+                    } else {
+                        cell3.innerHTML = percentStr6m + "%" + "\t" + unicodeUp;
+                    }
+
+                }
+            });
+        }, 2000);
+
+        // for each peer in data, issue an ajax to grab; 6m% and 1y%
+        var stockSymbolStatusURL = "https://api.iextrading.com/1.0/stock/" + name +  "/stats";
+
+        setTimeout(function () {
+            $.ajax({
+                url: stockSymbolStatusURL,
+                success: function (data) {
+
+                    // Bold the percent sign
+                    var percentSign = '%';
+                    percentSign = percentSign.bold();
+
+                    // 1 year
+                    var percent1y = data.year1ChangePercent;
+                    var percentage1y = percent1y * 100;
+                    percentage1y = percentage1y.toFixed(2);
+
+                    // insert 1 year into table
+                    var percentStr1y = percentage1y.toString();
+
+                    // Bold the text
+                    percentStr1y = percentStr1y.bold();
+
+                    if (percent1y < 0){
+                        document.getElementById("myTable").rows[1].cells[2].innerHTML = percentStr1y + percentSign + unicodeDown;
+                    } else {
+                        document.getElementById("myTable").rows[1].cells[2].innerHTML = percentStr1y + percentSign + unicodeUp;
+                    }
+
+                    // 6 month
+                    var percent6m = data.month6ChangePercent;
+                    var percentage6m = percent6m * 100;
+                    percentage6m = percentage6m.toFixed(2);
+
+                    //inserting 6 month into table
+                    var percentStr6m = percentage6m.toString();
+
+                    // Bold the text
+                    percentStr6m = percentStr6m.bold();
+
+                    // Test to see if percentage is negative
+                    if (percent6m < 0){
+                        document.getElementById("myTable").rows[1].cells[3].innerHTML = percentStr6m + percentSign + unicodeDown;
+                    } else {
+                        document.getElementById("myTable").rows[1].cells[3].innerHTML = percentStr6m + percentSign + unicodeUp;
+                    }
+
+                }
+            });
+        }, 2000);
+    }
+
+
 </script>
 
 <div id="option">
 
     <!-- 1 Day -->
-    <input name="updateButton"
+    <input class="bttn-minimal bttn-primary"
+            name="updateButton"
            type="button"
            value="1 Day"
            onclick="update1Day()" />
@@ -625,4 +1004,76 @@ path {
            value="5 years"
            onclick="update5Year()" />
 </div>
+
+<hr>
+<hr>
+
+
+<!-- News -->
+<ul>
+    <li>
+        <a id="headline0"></a>
+        <div id="datetime0"></div>
+        <div id="source0"></div>
+    </li>
+</ul>
+
+
+
+<ul>
+    <li>
+        <a id="headline1"></a>
+        <div id="datetime1"></div>
+        <div id="source1"></div>
+    </li>
+</ul>
+
+
+<ul>
+    <li>
+        <a id="headline2"></a>
+        <div id="datetime2"></div>
+        <div id="source2"></div>
+    </li>
+</ul>
+
+
+<h3>Price</h3>
+<div id = "close">
+</div>
+
+<!-- Label Switch for Edit Settings for toggling On and Off -->
+<label class="switch">
+    <input type="checkbox">
+    <span class="slider round"></span>
+</label>
+<hr>
+<hr>
+<hr>
+
+<!-- Peers -->
+<div class="col-sm-4">
+    <h3>Peers</h3>
+    <hr>
+    <div id="peers"></div>
+
+    <!-- Inserting table -->
+    <table id="myTable" border="2">
+        <tr>
+            <th>Symbol</th>
+            <th>Price</th>
+            <th>6m%</th>
+            <th>1y%</th>
+        </tr>
+        <tr>
+            <td id="genericSymbol"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+</div>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
 </body>

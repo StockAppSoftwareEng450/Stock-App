@@ -24,7 +24,9 @@ function submitForm(e){
 
     var user = firebase.auth().currentUser;
 
-    user.sendEmailVerification().then(function() {
+console.log(user);
+
+    /*user.sendEmailVerification().then(function() {
         // Email sent.
         console.log("Email sent");
     }).catch(function(error) {
@@ -34,7 +36,7 @@ function submitForm(e){
         console.log(errorCode);
         console.log(errorMessage);
         // ...
-    });
+    });*/
 
 }
 
