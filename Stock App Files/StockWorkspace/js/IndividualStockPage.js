@@ -438,98 +438,79 @@ function peersStatsUrlGrab (name) {
 
 // GET the date and quanity of stock price
 function getStockDateAndQuantity(){
+    var user = firebase.auth().currentUser;
 
     var date = null;
-    var number = null;
+    var quantity = null;
+    var price = null;
 
     date = document.getElementById("datePortfolio").value;
-    number = document.getElementById("quantityPortfolio").value;
+    quantity = document.getElementById("quantityPortfolio").value;
+    price = document.getElementById("pricePortfolio").value;
 
-    console.log(date);
-
-    // MSG to the user Please renter both
-    if (date === null || number === null){
+//NEED!!!!!!!!    // MSG to the user Please renter both
+    if (!date || !quantity){
         // generic CSS
+console.log("empty");
 
-    }
+    } else {
+        //user put in a price?
+        var closePriceForDate = price;
+        if (Number(price) <= 0) {
+            // Make ajax request that grabs price on specific date
+            var urlDate = "https://api.iextrading.com/1.0/stock/" + resultStockSymbol + "/chart/5y";
 
-    // check date then convert to make ajax request to grab the price
-    var resDate = checkDate(date);
-    console.log("resDate: " + resDate);
+            $.ajax({
+                url: urlDate,
+                success: function (data) {
 
-    // Make ajax request that grabs price on specific date
-    var urlDate = "https://api.iextrading.com/1.0/stock/" + resultStockSymbol + "/chart/5y";
+                    // Get the data
+                    d3.json(urlDate, function (error, data) {
+                        // Returning the entire array
+                        console.log(data);
+//if date in the last three days ==> different axaj request!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                        // Defaint JS makes Searching very Easy ;)
+                        var query = '//*[date="' + date + '"]';
+                        var queryResult = JSON.search(data, query);
 
-    var closePriceForDate = null;
-
-    $.ajax({
-        url: urlDate,
-        success: function (data) {
-
-            // Get the data
-            d3.json(urlDate, function (error, data) {
-                // Returning the entire array
-                console.log(data);
-
-                // Defaint JS makes Searching very Easy ;)
-                var query = '//*[date="' + resDate + '"]';
-                var queryResult = JSON.search(data,query);
-
-                // Searching for date within JSON
-                for (var i=0; i < queryResult.length; i++) {
-                    closePriceForDate = queryResult[i].close;
-                    console.log(i + " " + closePriceForDate);
+                        // Searching for date within JSON
+                        for (var i = 0; i < queryResult.length; i++) {
+                            closePriceForDate = queryResult[i].close;
+                            console.log(i + " " + closePriceForDate);
+                        }
+                    });
                 }
-            });
+            })
         }
-    });
 
-    var resNumber = checkNumber(number);
+        $("#portfolioButton").removeClass("fa fa-plus");
+        $("#portfolioButton").addClass("fa fa-minus");
+        $("#AddStocktoPortfolio").fadeOut("slow");
 
-    // @TODO SEND to firebase  (resDate, resNumber, resultStockSymbol, closePriceForDate)
-    // Since closePriceForDate is made from ajax request you might have to use a promise or wait a couple of seconds
-    // to send it firebase
-}
+        //wait for ajax response
+        setTimeout(function(){
+            // @TODO SEND to firebase  (resDate, resNumber, resultStockSymbol, closePriceForDate)
+            // Since closePriceForDate is made from ajax request you might have to use a promise or wait a couple of seconds
+            // to send it firebase
 
-// Regex date
-function checkDate(date) {
-    var date_regex = /^\d{2}\/\d{2}\/\d{4}$/ ;
-    var checkRegex = date_regex.test(date);
-
-    if (checkRegex === false){
-        // display css that reports error to enter correct number
-
-    } else if (checkRegex === true){
-
-        // convert date from 12/03/1996 to 20180129
-        // var year = date.slice(6,10);
-        // var month = date.slice(0,2);
-        // var day = date.slice(3,5);
-
-        // convert date from 12/03/1996 to 2013-02-11
-        var year = date.slice(6,10);
-        var month = date.slice(0,2);
-        var day = date.slice(3,5);
-
-        console.log("grabbing specific from last 5y : " + year + "-" + month + "-" + day);
-
-        return year + "-" + month + "-" + day;
+            if(closePriceForDate) {
+                firebase.database().ref('Portfolios/').push().set({
+                    userId: user.uid,
+                    stockSymbol: resultStockSymbol,
+                    price: closePriceForDate,
+                    quantity: quantity,
+                    date: date
+                }).then(function(){
+                    document.getElementById("portfolioButton").setAttribute("data-inPortfolio", true);
+                    setPK("portfolioButton");
+                });
+            } else {
+//NEED!!!!!!!!    // MSG to the user
+                // generic CSS
+                console.log("empty");
+            }
+        }, 2000);
     }
-}
-
-// Regex Number
-function checkNumber(number) {
-    var reg = /^\d+$/;
-    var checkRegex = reg.test(number);
-
-    if (checkRegex === false){
-        // display css that reports error to enter correct number
-
-
-    } else if (checkRegex === true){
-        return number;
-    }
-
 }
 
 // Adding to portfolio and syncing to the database
@@ -546,7 +527,6 @@ function AddToPortfolio () {
 
         document.getElementById("portfolioButton").setAttribute("data-inPortfolio", false);
         document.getElementById("portfolioButton").setAttribute("data-pk", null);
-        //document.getElementById("portfolioButton").innerText = " Add to Portfolio";
 
         $("#portfolioButton").removeClass("fa fa-minus");
         $("#portfolioButton").addClass("fa fa-plus");
@@ -555,43 +535,32 @@ function AddToPortfolio () {
         // Toggle off the addstockportfolio div
         var div1 = document.getElementById('AddStocktoPortfolio');
         div1.style.display = "none";
-        console.log("div1");
-
     } else {
-        firebase.database().ref('Portfolios/').push().set({
-            userId: user.uid,
-            stockSymbol: resultStockSymbol
-        });
-
-        document.getElementById("portfolioButton").setAttribute("data-inPortfolio", true);
-        setPK("portfolioButton");
-        //document.getElementById("portfolioButton").innerText = " Remove from Portfolio";
-
-        $("#portfolioButton").removeClass("fa fa-plus");
-        $("#portfolioButton").addClass("fa fa-minus");
-
-        $("#AddStocktoPortfolio").fadeIn("slow");
+        //toggle overlay add
+        $("#AddStocktoPortfolio").fadeToggle("slow");
+        $('#datePortfolio').val(new Date().toDateInputValue());
         // Toggle off the addstockportfolio div
         var div2 = document.getElementById('AddStocktoPortfolio');
         div2.style.display = "block";
-        console.log("div2");
-
     }
 }
+
+//get Today
+Date.prototype.toDateInputValue = (function() {
+    var local = new Date(this);
+    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+    return local.toJSON().slice(0,10);
+});
 
 // Adding to watchlist and syncing to the database
 function AddToWatchlist () {
     var user = firebase.auth().currentUser;
-
-    //console.log(document.getElementById("watchlistButton").getAttribute("data-inWatchlist"));
-    //console.log(document.getElementById("watchlistButton").getAttribute("data-pk"));
 
     if(document.getElementById("watchlistButton").getAttribute("data-inWatchlist") === "true"){
         firebase.database().ref("Watchlists/" + document.getElementById("watchlistButton").getAttribute("data-pk")).remove();
 
         document.getElementById("watchlistButton").setAttribute("data-inWatchlist", false);
         document.getElementById("watchlistButton").setAttribute("data-pk", null);
-        //document.getElementById("watchlistButton").innerText = " Add to Watchlist";
 
         $("#watchlistButton").removeClass("fa fa-minus");
         $("#watchlistButton").addClass("fa fa-plus");
@@ -601,11 +570,11 @@ function AddToWatchlist () {
         firebase.database().ref('Watchlists/').push().set({
             userId: user.uid,
             stockSymbol: resultStockSymbol
+        }).then(function(){
+            document.getElementById("watchlistButton").setAttribute("data-inWatchlist", true);
+            setPK("watchlistButton");
         });
 
-        document.getElementById("watchlistButton").setAttribute("data-inWatchlist", true);
-        setPK("watchlistButton");
-        //document.getElementById("watchlistButton").innerText = " Remove from Watchlist";
 
         $("#watchlistButton").removeClass("fa fa-plus");
         $("#watchlistButton").addClass("fa fa-minus");
