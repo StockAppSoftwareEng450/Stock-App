@@ -195,7 +195,7 @@ setTimeout(function () {
                     focus.attr("transform", "translate(" + x(d.date) + "," + y(d.close) + ")");
                     focus.select(".x-hover-line").attr("y2", height - y(d.close));
                     focus.select(".y-hover-line").attr("x2", width + width);
-                    document.getElementById("close").innerHTML = d.close;
+                    document.getElementById("close").innerHTML = "$" + d.close;
 
                     // Date
                     var newDate = d.date.toString();

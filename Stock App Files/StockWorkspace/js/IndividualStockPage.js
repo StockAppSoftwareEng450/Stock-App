@@ -1,5 +1,6 @@
 "use strict";
 
+// Globalizing the Stock Symbol
 var resultStockSymbol = null;
 
 // Takes in the url
@@ -46,7 +47,7 @@ $(document).ready(function() {
                 if(snapshot.exists()){
                     snapshot.forEach(function (value){
                         console.log("StockSymbol: " + value.child("stockSymbol").val());
-                        if(stockSymbol == value.child("stockSymbol").val()){
+                        if(stockSymbol === value.child("stockSymbol").val()){
                             //change css to state "stock in symbole" + change custom-attribute
                             document.getElementById("portfolioButton").setAttribute("data-inPortfolio", true);
                             document.getElementById("portfolioButton").setAttribute("data-pk", value.key);
@@ -70,7 +71,7 @@ $(document).ready(function() {
             refWatchlist.orderByChild("userId").equalTo(user.uid).once("value", function(snapshot) {
                 if(snapshot.exists()){
                     snapshot.forEach(function (value){
-                        if(stockSymbol == value.child("stockSymbol").val()){
+                        if(stockSymbol === value.child("stockSymbol").val()){
                             //change css to state "stock in symbole" + change custom-attribute
                             document.getElementById("watchlistButton").setAttribute("data-inWatchlist", true);
                             document.getElementById("watchlistButton").setAttribute("data-pk", value.key);
@@ -94,27 +95,21 @@ $(document).ready(function() {
             var addQuote = "/quote";
             resultUrl = resultUrl + addQuote;
 
-            // Verifying the url
-            // console.log(resultUrl);
-
+            /** Updating price every 3 seconds **/
             setInterval(function () {
                 $.ajax({
                     url: resultUrl,
                     success: function (data) {
-                        //console.log(data);
-                        var response = (data);
-                        var companyName = response.companyName;
-                        var latestPrice = response.latestPrice;
-                        var symbol = response.symbol;
+                        var stockprice = data.latestPrice;
 
-                        document.getElementById("CompanyName").innerHTML = companyName;
-                        document.getElementById("StockPrice").innerHTML = latestPrice;
-                        document.getElementById("StockSymbolUpperCase").innerHTML = symbol;
+                        document.getElementById("StockPrice").innerHTML = stockprice;
 
-                        //verifying information has been grabbed successfully
-                        // console.log(companyName);
-                        // console.log(latestPrice);
-                        // console.log(symbol);
+                        stockprice = stockprice.toString();
+                        stockprice = stockprice.bold();
+
+                        // Send price to the peers table
+                        document.getElementById("myTable").rows[1].cells[1].innerHTML = "$" + stockprice;
+
                     },
                     error: function(error){
                         // Handle Errors here.
@@ -124,32 +119,38 @@ $(document).ready(function() {
                 });
             }, 3000);
 
-            // Grabbing the peers(related Companies) and displaying them to an ul on the DOM
+            /** Updating Name and Symbol Once **/
+            setTimeout(function () {
+                $.ajax({
+                    url: resultUrl,
+                    success: function (data) {
+                        var companyName = data.companyName;
+                        var symbol = data.symbol;
+
+                        document.getElementById("CompanyName").innerHTML = companyName;
+                        document.getElementById("StockSymbolUpperCase").innerHTML = symbol;
+                    },
+                    error: function(error){
+                        // Handle Errors here.
+                        console.log(error.responseText);
+                        //alert(error.responseText);
+                    }
+                });
+            }, 2000);
+
+            /** Peers Section  **/
             var peersUrl = "https://api.iextrading.com/1.0/stock/" + stockSymbol + "/peers";
-            //console.log(peersUrl);
 
             $.ajax({
                 url: peersUrl,
                 success: function (data) {
+                    for (var i = 0; i < data.length; i++){
+                        var peerName = data[i];
 
-                    console.log("peers: " + data);
-
-                        // for each peer in the list
-                        for (var i = 0; i < data.length; i++){
-                            console.log(i + " " + data[i]);
-
-                            var peerName = data[i];
-
-                            // var returnedprice = grabpeerStockPrice(peerName);
-                            // console.log(returnedprice);
-                            peersStatsUrlGrab(peerName);
-
-                        }
-
-                },
-
-                // Error checking
-                error: function(error){
+                        // for each peer name (grab stats)
+                        peersStatsUrlGrab(peerName);
+                    }
+                }, error: function(error){
                     console.log(error.responseText);
 
                     if (error.responseText === "Unknown symbol"){
@@ -161,7 +162,7 @@ $(document).ready(function() {
                 }
             });
 
-            // Company About Page
+            /** Company About Page **/
             var companyDescriptionUrl = "https://api.iextrading.com/1.0/stock/" + stockSymbol + "/company";
 
             $.ajax({
@@ -170,9 +171,7 @@ $(document).ready(function() {
                     d3.json(companyDescriptionUrl, function (error, data) {
                         document.getElementById("aboutCompany").innerHTML = data.description;
                     });
-                },
-
-                error: function(error){
+                }, error: function(error){
                     console.log(error.responseText);
 
                     // Handling undefined Exception
@@ -185,14 +184,12 @@ $(document).ready(function() {
                 }
             });
 
-            // Displaying News to individual stock page
+            /** Displaying News to individual stock page **/
             var urlNews = "https://api.iextrading.com/1.0/stock/" + stockSymbol + "/news/last/3";
 
             $.ajax({
                 url: urlNews,
                 success: function (data) {
-
-                    // Get the data
                     d3.json(urlNews, function (error, data) {
                         console.log("News: " + data);
                         for (var i = 0; i < data.length; i++){
@@ -218,12 +215,9 @@ $(document).ready(function() {
                             document.getElementById(sourceIndex).innerHTML = data[i].source;
                             document.getElementById(datetimeIndex).innerHTML = dataParsed;
                         }
-
                     });
                 }, error: function(error){
-                    // Handle Errors here.
                     console.log(error.responseText);
-                    //alert(error.responseText);
 
                     // Handling undefined Exception
                     if (error.responseText === "Unknown symbol"){
@@ -235,14 +229,12 @@ $(document).ready(function() {
                 }
             });
 
-            // Displaying Key Stats to individual stock page
+            /** Key Stats to **/
             var urlKeyStats = "https://api.iextrading.com/1.0/stock/" + stockSymbol + "/stats";
 
             $.ajax({
                 url: urlKeyStats,
                 success: function (data) {
-
-                    // Get the data
                     d3.json(urlKeyStats, function (error, data) {
                         console.log("Key Stats: " + data);
 
@@ -262,7 +254,6 @@ $(document).ready(function() {
                         document.getElementById("debt").innerHTML = debt;
                     });
                 }, error: function(error){
-                    // Handle Errors here.
                     console.log(error.responseText);
                     //alert(error.responseText);
 
@@ -276,21 +267,20 @@ $(document).ready(function() {
                 }
             });
 
-            // Convert symbol to uppercase
-            var uppercaseStockSymbol = stockSymbol.toUpperCase();
-
-            // Displaying Logo
-            var logoUrl = "https://storage.googleapis.com/iex/api/logos/" + uppercaseStockSymbol + ".png";
+            /** Displaying Logo **/
+            var logoUrl = "https://storage.googleapis.com/iex/api/logos/" + stockSymbol.toUpperCase() + ".png";
             $("#logo").attr("src", logoUrl);
 
+            //@TODO Covert to base64 and remove white pixels
+
         } else {
-            // No user is signed in.
+            // if no user is signed in, return to the login screen.
             window.location.href = "login.html";
         }
     })
 });
 
-// Adding peer stats
+/** Peer Stats for Peers Table **/
 function peersStatsUrlGrab (name) {
 
     document.getElementById("genericSymbol").innerHTML = resultStockSymbol;
@@ -314,7 +304,7 @@ function peersStatsUrlGrab (name) {
     unicodeUp = unicodeUp.fontcolor("green");
     unicodeDown = unicodeDown.fontcolor("red");
 
-    // grab latest stock price for peers
+    /** Stock price for Every Peer **/
     var peerStockPriceUrl = "https://api.iextrading.com/1.0/stock/" + name +  "/quote";
 
     $.ajax({
@@ -328,22 +318,7 @@ function peersStatsUrlGrab (name) {
         }
     });
 
-    // grab latest stock price from the current stock on page
-    var stockSymbolStockPriceUrl = "https://api.iextrading.com/1.0/stock/" + resultStockSymbol +  "/quote";
-
-    $.ajax({
-        url: stockSymbolStockPriceUrl,
-        success: function (data) {
-
-            var stockprice = data.latestPrice;
-            stockprice = stockprice.toString();
-            stockprice = stockprice.bold();
-
-            document.getElementById("myTable").rows[1].cells[1].innerHTML = "$" + stockprice;
-        }
-    });
-
-    // for each peer in data, issue an ajax to grab; 6m% and 1y%
+    /** Grabbing 6m% and 1y% for Each Peer **/
     var peerStatusURL = "https://api.iextrading.com/1.0/stock/" + name +  "/stats";
 
     setTimeout(function () {
@@ -384,7 +359,7 @@ function peersStatsUrlGrab (name) {
         });
     }, 2000);
 
-    // for current stock on page, issue a /stats request to grab info to compare to peers
+    /** Grabbing 6m% and 1y% for Current Stock **/
     var stockSymbolStatusURL = "https://api.iextrading.com/1.0/stock/" + name +  "/stats";
 
     setTimeout(function () {
@@ -435,7 +410,7 @@ function peersStatsUrlGrab (name) {
     }, 2000);
 }
 
-// GET the date and quanity of stock price
+/** GET the date and quantity of stock price **/
 function getStockDateAndQuantity(){
     var user = firebase.auth().currentUser;
 
@@ -447,10 +422,12 @@ function getStockDateAndQuantity(){
     quantity = document.getElementById("quantityPortfolio").value;
     price = document.getElementById("pricePortfolio").value;
 
-//NEED!!!!!!!!    // MSG to the user Please renter both
-    if (!date || !quantity){
-        // generic CSS
-console.log("empty");
+    //NEED!!!!!!!!    // MSG to the user Please renter both
+    if (!date || !quantity || date == null || quantity == null){
+        // MSG to the User Please Enter
+        document.getElementById("addToPorfolioError").style.visibility = "visible";
+
+        console.log("Please enter valid Add to portfolio inputs");
 
     } else {
         //user put in a price?
@@ -512,9 +489,7 @@ console.log("empty");
     }
 }
 
-// Adding to portfolio and syncing to the database
-// @TODO ADD date and quantity bought
-    // Integrate ETRADE later???
+/** Adding to portfolio and syncing to the database **/
 function AddToPortfolio () {
     var user = firebase.auth().currentUser;
 
@@ -544,14 +519,14 @@ function AddToPortfolio () {
     }
 }
 
-//get Today
+/** get Today **/
 Date.prototype.toDateInputValue = (function() {
     var local = new Date(this);
     local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
     return local.toJSON().slice(0,10);
 });
 
-// Adding to watchlist and syncing to the database
+/** Adding to watchlist and syncing to the database **/
 function AddToWatchlist () {
     var user = firebase.auth().currentUser;
 
@@ -582,6 +557,7 @@ function AddToWatchlist () {
 
 }
 
+/** Setting Primary Key **/
 function setPK(button){
     var user = firebase.auth().currentUser;
 

@@ -181,6 +181,7 @@ p {
 }
 
 #datePortfolio, #quantityPortfolio, #pricePortfolio {
+    width: 181px;
     display: inline-block;
     float: right;
     margin-top: 6px;
@@ -192,10 +193,6 @@ p {
     float: right;
     margin-right: 10px;
     margin-bottom: 8px;
-}
-
-#datePortfolio {
-    width: 188px;
 }
 
 /* Table Styling */
@@ -250,6 +247,17 @@ p {
     background-color: #2a96ff;
     box-shadow: 0 3px #666;
     transform: translateY(4px);
+}
+
+#addToPorfolioError {
+    vertical-align: middle;
+    margin-top: 10px;
+    margin-left: 6px;
+    visibility: hidden;
+    text-align: center;
+    height: 20px;
+    width: 330px;
+    background-color: red;
 }
 
 

@@ -1,0 +1,2 @@
+This file makes it easier for ISM to Update documentation
+    - Individual stock page html (adding to portfolio) - "Please enter valid inputs"
