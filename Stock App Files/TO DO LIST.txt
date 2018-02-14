@@ -16,7 +16,7 @@ To Do List
 	- revamp stats
 	- fix css in Settings HTML Page
 	- add to portfolio display bug
-	- Click-able peers table that transfers to given peer
+	✔ Click-able peers table that transfers to given peer               JH - 2/12/2018
 	- fix styling on settings JS 
 	✔ view navigation slider fix bug                                    JH - 2/13/2018
 	- Make sure RAD is up to date

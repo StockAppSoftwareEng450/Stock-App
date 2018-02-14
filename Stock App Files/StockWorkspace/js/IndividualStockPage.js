@@ -291,7 +291,6 @@ $(document).ready(function() {
 });
 
 // Adding peer stats
-// @TODO FIX table issue
 function peersStatsUrlGrab (name) {
 
     document.getElementById("genericSymbol").innerHTML = resultStockSymbol;

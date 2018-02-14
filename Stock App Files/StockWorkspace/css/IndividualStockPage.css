@@ -165,23 +165,26 @@ p {
     content: "\00a0\00a0\00a0$";
 }
 
+/* Add to stock to the users portfolio */
 #AddStocktoPortfolio {
-    position: relative;
+    right: 15px;
+    z-index: 99999;
+    position: absolute;
     border-radius: 25px;
     display: none;
     float: right;
     background-color: #e9ecef;
-    height: 100%;
-    width: auto;
-    color: black;
+    height: 190px;
+    width: 350px;
+    color: #343a40;
     border: 2px solid;
 }
 
-#datePortfolio, #quantityPortfolio {
-    /*margin: 6px;*/
+#datePortfolio, #quantityPortfolio, #pricePortfolio {
     display: inline-block;
     float: right;
     margin-top: 6px;
+    margin-left: 6px;
     margin-right: 10px;
 }
 
@@ -189,6 +192,10 @@ p {
     float: right;
     margin-right: 10px;
     margin-bottom: 8px;
+}
+
+#datePortfolio {
+    width: 188px;
 }
 
 /* Table Styling */
@@ -217,6 +224,32 @@ p {
 
 #genericSymbol {
     font-weight: bold;
+}
+
+/* Add to portfolio button css for enter*/
+.enterButton {
+    margin-bottom: 0;
+    margin-top: 12px;
+    padding: 10px 20px;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 6px #999;
+}
+
+.enterButton:hover {
+    background-color: #2a96ff
+}
+
+.enterButton:active {
+    background-color: #2a96ff;
+    box-shadow: 0 3px #666;
+    transform: translateY(4px);
 }
 
 
