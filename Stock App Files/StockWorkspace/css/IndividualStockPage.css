@@ -174,7 +174,7 @@ p {
     display: none;
     float: right;
     background-color: #e9ecef;
-    height: 190px;
+    height: 230px;
     width: 350px;
     color: #343a40;
     border: 2px solid;
@@ -255,9 +255,22 @@ p {
     margin-left: 6px;
     visibility: hidden;
     text-align: center;
-    height: 20px;
+    height: 30px;
     width: 330px;
+    color: white;
     background-color: red;
+}
+
+#addToPorfolioSuccess {
+    vertical-align: middle;
+    margin-top: 10px;
+    margin-left: 6px;
+    visibility: hidden;
+    text-align: center;
+    height: 30px;
+    width: 330px;
+    color: white;
+    background-color: green;
 }
 
 

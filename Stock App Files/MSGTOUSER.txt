@@ -1,2 +1,3 @@
 This file makes it easier for ISM to Update documentation
-    - Individual stock page html (adding to portfolio) - "Please enter valid inputs"
+    - Individual stock page html (adding to portfolio) - "Please enter valid inputs" (error)
+    - Individual stock page html (adding to portfolio) - "Added Stock To Portfolio"  (success)
