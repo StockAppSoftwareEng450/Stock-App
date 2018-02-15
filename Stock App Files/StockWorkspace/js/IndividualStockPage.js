@@ -95,6 +95,11 @@ $(document).ready(function() {
             var addQuote = "/quote";
             resultUrl = resultUrl + addQuote;
 
+            // date to decide if current time is later than closing stock market
+            var dateArray = [];
+            dateWeekTime();
+
+
             /** Updating price every 3 seconds **/
             setInterval(function () {
                 $.ajax({
@@ -117,7 +122,7 @@ $(document).ready(function() {
                         //alert(error.responseText);
                     }
                 });
-            }, 3000);
+            }, 2500);
 
             /** Updating Name and Symbol Once **/
             setTimeout(function () {
@@ -410,7 +415,7 @@ function peersStatsUrlGrab (name) {
     }, 2000);
 }
 
-/** GET the date and quantity of stock price **/
+/** GET the date and quantity of stock price (On enter bttn) **/
 function getStockDateAndQuantity(){
     var user = firebase.auth().currentUser;
 
@@ -430,6 +435,8 @@ function getStockDateAndQuantity(){
         console.log("Please enter valid Add to portfolio inputs");
 
     } else {
+        document.getElementById("addToPorfolioSuccess").style.visibility = "visible";
+
         //user put in a price?
         var closePriceForDate = price;
         if (Number(price) <= 0) {
@@ -444,7 +451,7 @@ function getStockDateAndQuantity(){
                     d3.json(urlDate, function (error, data) {
                         // Returning the entire array
                         console.log(data);
-//if date in the last three days ==> different axaj request!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                        //if date in the last three days ==> different axaj request!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                         // Defaint JS makes Searching very Easy ;)
                         var query = '//*[date="' + date + '"]';
                         var queryResult = JSON.search(data, query);
@@ -461,7 +468,9 @@ function getStockDateAndQuantity(){
 
         $("#portfolioButton").removeClass("fa fa-plus");
         $("#portfolioButton").addClass("fa fa-minus");
-        $("#AddStocktoPortfolio").fadeOut("slow");
+
+        // Fading out on 3 seconds
+        $("#AddStocktoPortfolio").fadeOut(3000);
 
         //wait for ajax response
         setTimeout(function(){
@@ -493,6 +502,8 @@ function getStockDateAndQuantity(){
 function AddToPortfolio () {
     var user = firebase.auth().currentUser;
 
+    document.getElementById("addToPorfolioError").style.visibility = "hidden";
+
     //console.log(document.getElementById("portfolioButton").getAttribute("data-inPortfolio"));
     //console.log(document.getElementById("portfolioButton").getAttribute("data-pk"));
 
@@ -513,6 +524,7 @@ function AddToPortfolio () {
         //toggle overlay add
         $("#AddStocktoPortfolio").fadeToggle("slow");
         $('#datePortfolio').val(new Date().toDateInputValue());
+
         // Toggle off the addstockportfolio div
         var div2 = document.getElementById('AddStocktoPortfolio');
         div2.style.display = "block";
@@ -525,6 +537,17 @@ Date.prototype.toDateInputValue = (function() {
     local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
     return local.toJSON().slice(0,10);
 });
+
+/** Getting day of week and time of day **/
+function dateWeekTime() {
+
+    var dateArray  = [];
+    var d = new Date();
+    console.log("Date for closing: " + d);
+
+    // var weekDay = d.slice(0,3);
+    // console.log(weekDay);
+}
 
 /** Adding to watchlist and syncing to the database **/
 function AddToWatchlist () {
