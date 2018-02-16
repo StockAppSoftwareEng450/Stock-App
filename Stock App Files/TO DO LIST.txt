@@ -6,8 +6,9 @@ To Do List
 	- portfolio D3 Graphs
 	- Fix 1 Day 
 	- Add 12 hour, and Live feature
-	- handle no logo
-	- add Transparency 
+	- update individual ghant chart
+	✔ handle no logo                                                    JH - 2/15/18
+	- add Transparency
 	- loading screen css spinner
 	- handle no peers
 	- handle login 404() error
@@ -33,4 +34,5 @@ To Do List
 	- Cleanup all CSS into CSS files only
 	- scale D3 graph based resolution of monitor
     - if after 7 oclock implement setTimeOut instead of 2.5 seconds
+    ✔ clear form on click for add to portfolio                          JH - 2/13/18
 

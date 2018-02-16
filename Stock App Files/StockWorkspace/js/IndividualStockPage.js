@@ -102,6 +102,7 @@ $(document).ready(function() {
 
             /** Updating price every 3 seconds **/
             setInterval(function () {
+
                 $.ajax({
                     url: resultUrl,
                     success: function (data) {
@@ -367,7 +368,10 @@ function peersStatsUrlGrab (name) {
     /** Grabbing 6m% and 1y% for Current Stock **/
     var stockSymbolStatusURL = "https://api.iextrading.com/1.0/stock/" + name +  "/stats";
 
+
+
     setTimeout(function () {
+
         $.ajax({
             url: stockSymbolStatusURL,
             success: function (data) {
@@ -525,9 +529,13 @@ function AddToPortfolio () {
         $("#AddStocktoPortfolio").fadeToggle("slow");
         $('#datePortfolio').val(new Date().toDateInputValue());
 
+        // Clearing input on click
+        document.getElementById("pricePortfolio").value = '';
+        document.getElementById("quantityPortfolio").value = '';
+
         // Toggle off the addstockportfolio div
-        var div2 = document.getElementById('AddStocktoPortfolio');
-        div2.style.display = "block";
+        var addStock = document.getElementById('AddStocktoPortfolio');
+        addStock.style.display = "block";
     }
 }
 
@@ -602,3 +610,17 @@ function setPK(button){
         }
     });
 }
+
+/** Logo Handling **/
+function imgError(image) {
+    image.onerror = "";
+    image.src = "";
+    return image.src;
+}
+
+
+
+
+
+
+

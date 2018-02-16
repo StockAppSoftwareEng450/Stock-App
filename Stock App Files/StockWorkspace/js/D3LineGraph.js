@@ -15,9 +15,10 @@ function check() {
 interval = setInterval(check, 1000);
 
 // Set the dimensions of the canvas / graph
-var margin = {top: 30, right: 20, bottom: 30, left: 50},
+var margin = {
+    top: 30, right: 20, bottom: 30, left: 50},
     width = 760 - margin.left - margin.right,
-    height = 300 - margin.top - margin.bottom;
+    height = 300 - margin.top - margin.bottom -15;
 
 // Parse the date / time
 var parseDate = d3.time.format("%Y-%m-%d").parse,
@@ -39,6 +40,7 @@ var xAxis = d3.svg.axis().scale(x)
 var yAxis = d3.svg.axis().scale(y)
     .orient("left").ticks(5);
 
+
 // Define the line
 var valueline = d3.svg.line()
 //.interpolate("basis")
@@ -48,12 +50,11 @@ var valueline = d3.svg.line()
 // Adds the svg canvas
 var svg = d3.select("svg")
     .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
+    .attr("width", width + margin.left + margin.right )
+    .attr("height", height + margin.top + margin.bottom + 15 )
     .append("g")
     .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
-
 
 // Get the minumum Value from the array to add space at the bottom of the graph
 Array.min = function (array) {
@@ -134,14 +135,14 @@ setTimeout(function () {
                 // Add the text label for the X axis
                 svg.append("text")
                     .attr("x", width / 2)               //Dynamically moves with the graph
-                    .attr("y", height + margin.bottom)
+                    .attr("y", height + margin.bottom + 10)
                     .style("text-anchor", "middle")
                     .text("Date");
 
                 // Add the text label for the Y axis
                 svg.append("text")
                     .attr("transform", "rotate(-90)")
-                    .attr("x", 0 - (height / 2))
+                    .attr("x", 0 - (height / 2) - 15)
                     .attr("y", 0 - margin.left)
                     .attr("dy", "1em")
                     .style("text-anchor", "middle")
@@ -280,7 +281,6 @@ function update1Day () {
                     result = (5 / 100) * minimum;
                     result = minimum - result;
 
-                    result = 0;
 
                     // Finding first elm in array
                     firstPrice = arrayClose[0];

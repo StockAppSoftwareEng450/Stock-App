@@ -31,7 +31,6 @@ path {
     float: left;
     display: inline-block;
     position: relative;
-    /*padding-left: 100px;*/
     padding-right: 0;
 }
 
@@ -174,7 +173,7 @@ p {
     display: none;
     float: right;
     background-color: #e9ecef;
-    height: 230px;
+    height: 275px;
     width: 350px;
     color: #343a40;
     border: 2px solid;
@@ -272,6 +271,8 @@ p {
     color: white;
     background-color: green;
 }
+
+
 
 
 
