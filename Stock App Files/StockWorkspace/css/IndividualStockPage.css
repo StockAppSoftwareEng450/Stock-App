@@ -1,18 +1,34 @@
 #CompanyName, #StockPrice, #StockSymbolUpperCase {
     display : inline;
+    float: left;
 }
 
 #CompanyName, #StockSymbolUpperCase{
     font-size: 170%
 }
 
+#CompanyName {
+    padding-top: 4px;
+    padding-left: 10px;
+}
+
 #StockPrice {
+    padding-top: 10px;
     padding-left: 1%;
     font-size: 140%
 }
 
+#portfolioButton {
+    margin-top: 7px;
+}
+
+#watchlistButton {
+    margin-top: 7px;
+}
+
 #StockSymbolUpperCase {
     float: right;
+    padding-top: 4px;
 }
 
 path {
@@ -272,6 +288,9 @@ p {
     background-color: green;
 }
 
+#modified {
+    float: left !important;
+}
 
 
 

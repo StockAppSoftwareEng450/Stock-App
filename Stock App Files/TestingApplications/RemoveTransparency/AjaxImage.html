@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Ajax Image</title>
+
+        <style>
+            body {
+                background: blue;
+            }
+
+            .text {
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+
+        <!-- Original -->
+        <h3 class="text">Original</h3>
+        <img src="" id="original">
+
+        <!-- Modified -->
+        <h3 class="text">Modified</h3>
+        <canvas id="modified"></canvas>
+
+        <script src="../CommonLinkedFiles/jquery3_2_1.js"></script>
+        <script>
+
+            var stockSymbol = "aapl";
+            var logoUrl = "https://storage.googleapis.com/iex/api/logos/" + stockSymbol.toUpperCase() + ".png";
+
+            // Converting URL to Base64 with the use of a proxy
+            var getDataUri = function (targetUrl, callback) {
+                var xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    var reader = new FileReader();
+                    reader.onloadend = function () {
+                        callback(reader.result);
+                    };
+                    reader.readAsDataURL(xhr.response);
+                };
+                var proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+                xhr.open('GET', proxyUrl + targetUrl);
+                xhr.responseType = 'blob';
+                xhr.send();
+            };
+
+            // Returns Base 64 of image
+            getDataUri(logoUrl, function (base64) {
+                console.log('RESULT:', base64);
+
+                //original
+                $("#original").attr("src", base64);
+                $("#original").on("load", function() {
+                    var canvas = document.getElementById("modified"),
+                        ctx = canvas.getContext("2d"),
+                        image = document.getElementById("original");
+
+                    // This size can change
+                    canvas.height = canvas.width = 50;
+
+                    console.log(canvas.height);
+                    console.log(canvas.width);
+
+                    ctx.drawImage(image,0,0, image.width, image.height, 0, 0, canvas.width, canvas.height);
+
+                    var imgd = ctx.getImageData(0, 0, 1000, 1000),
+                        pix = imgd.data,
+                        newColor = {r:0,g:0,b:0, a:0};
+
+                    for (var i = 0, n = pix.length; i <n; i += 4) {
+                        var r = pix[i],
+                            g = pix[i+1],
+                            b = pix[i+2];
+
+                        if(r >= 250&& g >= 250 && b >= 250){
+                            // Change the white to the new color.
+                            pix[i] = newColor.r;
+                            pix[i+1] = newColor.g;
+                            pix[i+2] = newColor.b;
+                            pix[i+3] = newColor.a;
+                        }
+                    }
+
+                    ctx.putImageData(imgd, 0, 0);
+                })
+            });
+        </script>
+    </body>
+</html>

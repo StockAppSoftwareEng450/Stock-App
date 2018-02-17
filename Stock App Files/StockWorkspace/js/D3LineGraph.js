@@ -18,7 +18,7 @@ interval = setInterval(check, 1000);
 var margin = {
     top: 30, right: 20, bottom: 30, left: 50},
     width = 760 - margin.left - margin.right,
-    height = 300 - margin.top - margin.bottom -15;
+    height = 300 - margin.top - margin.bottom -20;
 
 // Parse the date / time
 var parseDate = d3.time.format("%Y-%m-%d").parse,
@@ -50,8 +50,9 @@ var valueline = d3.svg.line()
 // Adds the svg canvas
 var svg = d3.select("svg")
     .append("svg")
-    .attr("width", width + margin.left + margin.right )
-    .attr("height", height + margin.top + margin.bottom + 15 )
+    // .attr("width", width + margin.left + margin.right )
+    // .attr("height", height + margin.top + margin.bottom + 15 )
+    .attr("viewBox", "0 0 " + (width + margin.left + margin.right) + " " + (height + margin.top + margin.bottom))
     .append("g")
     .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
