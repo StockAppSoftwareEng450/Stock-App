@@ -59,6 +59,41 @@ function getFullPortfolio(){
 
                     var cell3 = row.insertCell((3));
                     cell3.innerHTML = fullPortfolio[i].quantity;
+
+                    //add delete button
+                    var cel4 = row.insertCell((4));
+                    //set button class
+                    cel4.setAttribute("class", "deleteButton");
+                    //centralize content
+                    cel4.style.display = 'flex';
+                    cel4.style.alignItems = 'center';
+                    cel4.style.justifyContent = 'center';
+
+                    var buttonDelete = document.createElement("BUTTON");
+                    buttonDelete.appendChild(document.createTextNode("Delete"));
+                    buttonDelete.addEventListener(
+                    'click',
+                    function(button){
+                        var row = button.path[2];
+                        var stockSymbol = row.firstChild.firstChild.innerHTML
+
+                        //removes the row from table
+                        row.parentNode.removeChild(row);
+
+                        //removes the firebase portfolio entry for this user and stock
+                        var ref = firebase.database().ref("Portfolios");
+                        ref.orderByChild("userId").equalTo(user.uid).once("value", function(snapshot) {
+                            if(snapshot.exists()){
+                                snapshot.forEach(function (value){
+                                    if(stockSymbol === value.child("stockSymbol").val()){
+                                        firebase.database().ref("Portfolios/" + value.key).remove();
+                                    }
+                                });
+                            }
+                        });
+                    });
+                    cel4.appendChild(buttonDelete);
+
                 }
             });
         } else {
@@ -102,6 +137,40 @@ function getFullWatchlist(){
 
                     var cell0 = row.insertCell((0));
                     cell0.innerHTML = fullWatchlist[i].stockSymbol.link(stockTransferURL);
+
+                    //add delete button
+                    var cel1 = row.insertCell((1));
+                    //set button class
+                    cel1.setAttribute("class", "deleteButton");
+                    //centralize content
+                    cel1.style.display = 'flex';
+                    cel1.style.alignItems = 'center';
+                    cel1.style.justifyContent = 'center';
+
+                    var buttonDelete = document.createElement("BUTTON");
+                    buttonDelete.appendChild(document.createTextNode("Delete"));
+                    buttonDelete.addEventListener(
+                        'click',
+                        function(button){
+                            var row = button.path[2];
+                            var stockSymbol = row.firstChild.firstChild.innerHTML
+
+                            //removes the row from table
+                            row.parentNode.removeChild(row);
+
+                            //removes the firebase portfolio entry for this user and stock
+                            var ref = firebase.database().ref("Watchlists");
+                            ref.orderByChild("userId").equalTo(user.uid).once("value", function(snapshot) {
+                                if(snapshot.exists()){
+                                    snapshot.forEach(function (value){
+                                        if(stockSymbol === value.child("stockSymbol").val()){
+                                            firebase.database().ref("Watchlists/" + value.key).remove();
+                                        }
+                                    });
+                                }
+                            });
+                        });
+                    cel1.appendChild(buttonDelete);
                 }
             });
         } else {
