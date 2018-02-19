@@ -307,6 +307,18 @@ function DisplayLogo(){
     getDataUri(logoUrl, function (base64) {
         console.log('RESULT:', base64);
 
+        //handling no Logo
+        if (base64 === "data:image/png;base64,Cg=="){
+            console.log("Reached No Logo");
+
+            // Setting logo to not display
+            document.getElementById("modified").style.display = "none";
+            document.getElementById("original").style.display = "none";
+
+            // reducing padding if no logo
+            document.getElementById("CompanyName").style.paddingLeft = "0px";
+        }
+
         //original
         $("#original").attr("src", base64);
         $("#original").on("load", function() {

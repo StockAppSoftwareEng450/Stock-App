@@ -35,4 +35,7 @@ To Do List
 	- scale D3 graph based resolution of monitor
     - if after 7 oclock implement setTimeOut instead of 2.5 seconds
     ✔ clear form on click for add to portfolio                          JH - 2/13/18
+    ✔ Reduce padding if no Logo                                         JH - 2/17/18
+    ✔ Handle no logo                                                    JH - 2/17/18
+    - Add Dollar Sign in front of Price in individual stock
 
