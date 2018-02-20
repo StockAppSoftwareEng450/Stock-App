@@ -13,6 +13,8 @@ $(document).ready(function() {
     })
 });
 
+var stockSymbolIndex = null;
+
 function getFullPortfolio(){
 
     //getting portfolio information and save it
@@ -44,38 +46,60 @@ function getFullPortfolio(){
 
                 //populate portfolioTable
                 var table = document.getElementById("portfolioTable");
-                for(var i=0; i<fullPortfolio.length;i++){
+                for(var i = 0; i < fullPortfolio.length; i++){
                     var stockTransferURL = "IndividualStockPage.html?stock=" + fullPortfolio[i].stockSymbol + "#";
                     var row = table.insertRow(i+1);
 
+                    stockSymbolIndex = fullPortfolio[i].stockSymbol;
+
+                    // Stock Symbol
                     var cell0 = row.insertCell((0));
                     cell0.innerHTML = fullPortfolio[i].stockSymbol.link(stockTransferURL);
 
+                    // Date purchased
                     var cell1 = row.insertCell((1));
                     cell1.innerHTML = fullPortfolio[i].date;
 
+                    // Purchased Price
                     var cell2 = row.insertCell((2));
                     cell2.innerHTML = "$" + fullPortfolio[i].price;
 
+                    // Current Price
                     var cell3 = row.insertCell((3));
-                    cell3.innerHTML = fullPortfolio[i].quantity;
 
-                    //add delete button
-                    var cel4 = row.insertCell((4));
+                    // Quantity
+                    var cell4 = row.insertCell((4));
+                    cell4.innerHTML = fullPortfolio[i].quantity;
+
+                    // Purchased Equity
+                    var cell5 = row.insertCell((5));
+                    var purchasedEquity = fullPortfolio[i].price * fullPortfolio[i].quantity;
+                    console.log("Purchased equity: " + purchasedEquity);
+                    cell5.innerHTML = "$" + purchasedEquity.toString();
+
+                    // Current Equity
+                    var cell6 = row.insertCell((6));
+
+                    // Current Percent Change
+                    var cell7 = row.insertCell((7));
+
+                    var passArray = [stockSymbolIndex, "price", cell3, cell6, fullPortfolio[i].quantity, fullPortfolio[i].price, cell7 ];
+                    getValue(passArray);
+
+                    // Add delete button
+                    var cell8 = row.insertCell((8));
                     //set button class
-                    cel4.setAttribute("class", "deleteButton");
+                    cell8.setAttribute("class", "deleteButton");
                     //centralize content
-                    cel4.style.display = 'flex';
-                    cel4.style.alignItems = 'center';
-                    cel4.style.justifyContent = 'center';
+                    cell8.style.display = 'flex';
+                    cell8.style.alignItems = 'center';
+                    cell8.style.justifyContent = 'center';
 
                     var buttonDelete = document.createElement("BUTTON");
                     buttonDelete.appendChild(document.createTextNode("Delete"));
-                    buttonDelete.addEventListener(
-                    'click',
-                    function(button){
+                    buttonDelete.addEventListener('click', function(button){
                         var row = button.path[2];
-                        var stockSymbol = row.firstChild.firstChild.innerHTML
+                        var stockSymbol = row.firstChild.firstChild.innerHTML;
 
                         //removes the row from table
                         row.parentNode.removeChild(row);
@@ -92,7 +116,7 @@ function getFullPortfolio(){
                             }
                         });
                     });
-                    cel4.appendChild(buttonDelete);
+                    cell8.appendChild(buttonDelete);
 
                 }
             });
@@ -153,7 +177,7 @@ function getFullWatchlist(){
                         'click',
                         function(button){
                             var row = button.path[2];
-                            var stockSymbol = row.firstChild.firstChild.innerHTML
+                            var stockSymbol = row.firstChild.firstChild.innerHTML;
 
                             //removes the row from table
                             row.parentNode.removeChild(row);
@@ -178,4 +202,56 @@ function getFullWatchlist(){
             window.location.href = "login.html";
         }
     });
+}
+
+/** Generic Ajax **/
+function getValue(array){
+
+    // unicode for UP and DOWN arrows
+    var unicodeUp = '\u25B2';
+    var unicodeDown = '\u25BC';
+
+    // adding color
+    unicodeUp = unicodeUp.fontcolor("green");
+    unicodeDown = unicodeDown.fontcolor("red");
+
+    var                 stockSymbol =   array[0],
+                        keyValue = array[1],
+                        cell0 = array[2],
+                        cell1 = array[3],
+                        otherValue  = array[4],
+                        otherCell   = array[5],
+                        cell2 = array[6];
+
+    var getValueUrl = "https://api.iextrading.com/1.0/stock/" + stockSymbol + "/quote";
+
+    if (keyValue === "price"){
+        // Get price from stock symbol
+
+        setInterval(function () {
+            $.ajax({
+                async: false,
+                url: getValueUrl,
+                success: function (data) {
+
+                    //Calculating percent change
+                    var percent = percentChange(otherCell, data.latestPrice);
+
+                    if (percent < 0){
+                        cell2.innerHTML = unicodeDown + " " + percent.toFixed(2) + "%";
+                    } else {
+                        cell2.innerHTML = unicodeUp + " " + percent.toFixed(2) + "%";
+                    }
+
+                    cell0.innerHTML = "$" + data.latestPrice;
+                    cell1.innerHTML = "$" + (data.latestPrice * otherValue);
+                }
+            });
+        }, 3000);
+    }
+}
+
+/** Percent Change **/
+function percentChange (y1, y2) {
+    return (((y2 - y1) / y1)*100)
 }
