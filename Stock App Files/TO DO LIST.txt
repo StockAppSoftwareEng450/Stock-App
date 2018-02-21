@@ -14,7 +14,7 @@ To Do List
 	- handle login 404() error
 	- Add weekly gainers on index
 	- handle no debt
-	- revamp stats
+	- revamp stats (make it prettier)
 	- fix css in Settings HTML Page
 	- add to portfolio display bug
 	✔ Click-able peers table that transfers to given peer               JH - 2/12/2018
@@ -32,10 +32,15 @@ To Do List
 	- create AJAX function with key and url as the parameters
 	✔ Cleanup comments in Individual Stock Page JS                      JH - 2/13/2018
 	- Cleanup all CSS into CSS files only
-	- scale D3 graph based resolution of monitor
     - if after 7 oclock implement setTimeOut instead of 2.5 seconds
     ✔ clear form on click for add to portfolio                          JH - 2/13/18
     ✔ Reduce padding if no Logo                                         JH - 2/17/18
     ✔ Handle no logo                                                    JH - 2/17/18
     - Add Dollar Sign in front of Price in individual stock
+    - Add More information to watchlist 3month price, current price
+    - Handle Bugs like BDCS where Name is too long
+    - Add tax calculator
+    - revamp news (make it prettier)
+    - Add Trending stocks top page
+    - Delete view navigation slider from RAD and from
 

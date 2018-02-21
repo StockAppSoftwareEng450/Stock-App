@@ -13,7 +13,8 @@ $(document).ready(function() {
     })
 });
 
-var stockSymbolIndex = null;
+var stockSymbolIndexP = null;
+var stockSymbolIndexW = null;
 
 function getFullPortfolio(){
 
@@ -50,7 +51,7 @@ function getFullPortfolio(){
                     var stockTransferURL = "IndividualStockPage.html?stock=" + fullPortfolio[i].stockSymbol + "#";
                     var row = table.insertRow(i+1);
 
-                    stockSymbolIndex = fullPortfolio[i].stockSymbol;
+                    stockSymbolIndexP = fullPortfolio[i].stockSymbol;
 
                     // Stock Symbol
                     var cell0 = row.insertCell((0));
@@ -75,6 +76,7 @@ function getFullPortfolio(){
                     var cell5 = row.insertCell((5));
                     var purchasedEquity = fullPortfolio[i].price * fullPortfolio[i].quantity;
                     console.log("Purchased equity: " + purchasedEquity);
+                    purchasedEquity = purchasedEquity.toFixed(2);
                     cell5.innerHTML = "$" + purchasedEquity.toString();
 
                     // Current Equity
@@ -83,8 +85,7 @@ function getFullPortfolio(){
                     // Current Percent Change
                     var cell7 = row.insertCell((7));
 
-                    var passArray = [stockSymbolIndex, "price", cell3, cell6, fullPortfolio[i].quantity, fullPortfolio[i].price, cell7 ];
-                    getValue(passArray);
+                    getPortfolioValue(stockSymbolIndexP, "price", cell3, cell6, cell7, fullPortfolio[i].price, fullPortfolio[i].quantity);
 
                     // Add delete button
                     var cell8 = row.insertCell((8));
@@ -159,23 +160,39 @@ function getFullWatchlist(){
                     var stockTransferURL = "IndividualStockPage.html?stock=" + fullWatchlist[i].stockSymbol + "#";
                     var row = table.insertRow(i+1);
 
+                    stockSymbolIndexW = fullWatchlist[i].stockSymbol;
+                    console.log("W:" + stockSymbolIndexW);
+
+                    // stock symbol
                     var cell0 = row.insertCell((0));
                     cell0.innerHTML = fullWatchlist[i].stockSymbol.link(stockTransferURL);
 
+                    // Current Stock price
+                    var cell2 = row.insertCell((1));
+
+                    // Current 3m%
+                    var cell3 = row.insertCell((2));
+
+                    // Current 6m%
+                    var cell4 = row.insertCell((3));
+
+                    // Current 1Y%
+                    var cell5 = row.insertCell((4));
+
+                    getWatchlistValue(stockSymbolIndexW, cell2, cell3, cell4, cell5);
+
                     //add delete button
-                    var cel1 = row.insertCell((1));
+                    var cell6 = row.insertCell((5));
                     //set button class
-                    cel1.setAttribute("class", "deleteButton");
+                    cell6.setAttribute("class", "deleteButton");
                     //centralize content
-                    cel1.style.display = 'flex';
-                    cel1.style.alignItems = 'center';
-                    cel1.style.justifyContent = 'center';
+                    cell6.style.display = 'flex';
+                    cell6.style.alignItems = 'center';
+                    cell6.style.justifyContent = 'center';
 
                     var buttonDelete = document.createElement("BUTTON");
                     buttonDelete.appendChild(document.createTextNode("Delete"));
-                    buttonDelete.addEventListener(
-                        'click',
-                        function(button){
+                    buttonDelete.addEventListener('click', function(button){
                             var row = button.path[2];
                             var stockSymbol = row.firstChild.firstChild.innerHTML;
 
@@ -194,7 +211,7 @@ function getFullWatchlist(){
                                 }
                             });
                         });
-                    cel1.appendChild(buttonDelete);
+                    cell6.appendChild(buttonDelete);
                 }
             });
         } else {
@@ -204,24 +221,17 @@ function getFullWatchlist(){
     });
 }
 
+// Unicode for UP and DOWN arrows
+var unicodeUp = '\u25B2';
+var unicodeDown = '\u25BC';
+
+// Adding color
+unicodeUp = unicodeUp.fontcolor("green");
+unicodeDown = unicodeDown.fontcolor("red");
+
+
 /** Generic Ajax **/
-function getValue(array){
-
-    // unicode for UP and DOWN arrows
-    var unicodeUp = '\u25B2';
-    var unicodeDown = '\u25BC';
-
-    // adding color
-    unicodeUp = unicodeUp.fontcolor("green");
-    unicodeDown = unicodeDown.fontcolor("red");
-
-    var                 stockSymbol =   array[0],
-                        keyValue = array[1],
-                        cell0 = array[2],
-                        cell1 = array[3],
-                        otherValue  = array[4],
-                        otherCell   = array[5],
-                        cell2 = array[6];
+function getPortfolioValue(stockSymbol, keyValue, cell0, cell1, cell2, cell3, otherValue){
 
     var getValueUrl = "https://api.iextrading.com/1.0/stock/" + stockSymbol + "/quote";
 
@@ -235,7 +245,7 @@ function getValue(array){
                 success: function (data) {
 
                     //Calculating percent change
-                    var percent = percentChange(otherCell, data.latestPrice);
+                    var percent = percentChange(cell3, data.latestPrice);
 
                     if (percent < 0){
                         cell2.innerHTML = unicodeDown + " " + percent.toFixed(2) + "%";
@@ -243,13 +253,67 @@ function getValue(array){
                         cell2.innerHTML = unicodeUp + " " + percent.toFixed(2) + "%";
                     }
 
-                    cell0.innerHTML = "$" + data.latestPrice;
-                    cell1.innerHTML = "$" + (data.latestPrice * otherValue);
+                    // Latest price
+                    cell0.innerHTML = "$" + data.latestPrice.toFixed(2);
+
+                    // Current equity
+                    cell1.innerHTML = "$" + (data.latestPrice * otherValue).toFixed(2);
                 }
             });
         }, 3000);
     }
 }
+
+/** Grabbing Watchlist Values **/
+function getWatchlistValue(stockSymbolIndexW, currentPCell, threeMonthCell, sixMonthCell, oneYearCell) {
+
+    /** Grabbing Current Price **/
+    var getValueUrl = "https://api.iextrading.com/1.0/stock/" + stockSymbolIndexW + "/quote";
+
+    setInterval(function () {
+        $.ajax({
+            async: false,
+            url: getValueUrl,
+            success: function (data) {
+                currentPCell.innerHTML = "$" + data.latestPrice.toFixed(3);
+            }
+        });
+    }, 3000);
+
+    /** Showing Stats **/
+    var percentUrl = "https://api.iextrading.com/1.0/stock/" + stockSymbolIndexW +  "/stats";
+
+    setTimeout(function () {
+        $.ajax({
+            url: percentUrl,
+            success: function (data) {
+                console.log("percent: " + data);
+
+                // 3 month percent change
+                if (data.month3ChangePercent < 0){
+                    threeMonthCell.innerHTML = unicodeDown + " " + (data.month3ChangePercent * 100).toFixed(2) + "%";
+                } else {
+                    threeMonthCell.innerHTML = unicodeUp + " " + (data.month3ChangePercent * 100).toFixed(2) + "%";
+                }
+
+                // 6 month
+                if (data.month6ChangePercent < 0) {
+                    sixMonthCell.innerHTML = unicodeDown + " " + (data.month6ChangePercent * 100).toFixed(2) + "%";
+                } else {
+                    sixMonthCell.innerHTML = unicodeUp + " " + (data.month6ChangePercent * 100).toFixed(2) + "%";
+                }
+
+                // 1 year
+                if (data.year1ChangePercent < 0) {
+                    oneYearCell.innerHTML = unicodeDown + " " + (data.year1ChangePercent * 100).toFixed(2) + "%";
+                } else {
+                    oneYearCell.innerHTML = unicodeUp + " " + (data.year1ChangePercent * 100).toFixed(2) + "%";
+                }
+            }
+        });
+    }, 2000);
+}
+
 
 /** Percent Change **/
 function percentChange (y1, y2) {

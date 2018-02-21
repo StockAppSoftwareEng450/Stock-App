@@ -282,7 +282,6 @@ function update1Day () {
                     result = (5 / 100) * minimum;
                     result = minimum - result;
 
-
                     // Finding first elm in array
                     firstPrice = arrayClose[0];
 
@@ -296,8 +295,6 @@ function update1Day () {
             });
         }
     });
-
-
 }
 
 //1m

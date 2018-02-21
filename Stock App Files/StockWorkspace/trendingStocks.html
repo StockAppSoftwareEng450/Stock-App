@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>SB Admin - Start Bootstrap Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Plugin CSS -->
+    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+    <!-- Auto complete  -->
+    <link rel="stylesheet" href="css/autocomplete.css">
+
+    <!-- Stock Page for Conformity -->
+    <link rel="stylesheet" href="css/IndividualStockPage.css">
+
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href="#">Start Bootstrap</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+        </ul>
+        <!-- End sidebar -->
+
+        <ul class="navbar-nav sidenav-toggler">
+        </ul>
+        <!-- Include ME in every Page! Settings PAGE LINK -->
+        <ul class="navbar-nav ml-auto">
+
+            <!-- Settigns Page -->
+            <li class="nav-item">
+                <a class="nav-link mr-lg-2" href="settings.html" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-fw fa-gear"></i>
+                </a>
+            </li>
+
+            <!-- Search Bar -->
+            <li class="nav-item">
+                <form class="form-inline my-2 my-lg-0 mr-lg-2">
+                    <div class="input-group">
+                        <div class="easy-autocomplete" style="width: 225px;">
+                            <input type="text" id="myInput" style="width:225px; padding-bottom: 8px;padding-top: 8px;"
+                                   class="form-control" onkeypress=" return searchKeyPress(event);"
+                                   placeholder="Search for a Company" title="Company Search">
+                        </div>
+                        <span class="input-group-btn">
+                              <button id="btnSearch" class="btn btn-primary" type="button" onclick="UrlStringPass()"
+                                      value="Search" >
+                                <i class="fa fa-search"></i>
+                              </button>
+                        </span>
+                    </div>
+                </form>
+            </li>
+
+            <!-- Logging out -->
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                    <i class="fa fa-fw fa-sign-out"></i>
+                    Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<!--------------------------------------------------------------------------------->
+<div class="content-wrapper" style="margin-left: 0">
+
+    <div class="container-fluid">
+
+        <!-- Breadcrumbs -->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="index.html">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">My Dashboard</li>
+        </ol>
+
+        <h1>Trending Stocks</h1>
+
+    </div>
+    <!-- /.container-fluid -->
+
+</div>
+<!-- /.content-wrapper -->
+
+<!--------------------------------------------------------------------------------->
+
+<footer class="sticky-footer">
+    <div class="container">
+        <div class="text-center">
+            <small>Copyright &copy; Your Website 2017</small>
+        </div>
+    </div>
+</footer>
+
+<!-- Scroll to Top Button -->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fa fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Select "Logout" below if you are ready to end your current session.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="login.html">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/popper/popper.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+
+<!-- Firebase Key init -->
+<script src="js/FirebaseInit.js"></script>
+
+<script src="js/Autocomplete.js"></script>
+
+<!-- Enter on Keypress for Search for Stocks -->
+<script src="js/EnterOnKeyPress.js"></script>
+
+<!-- Testing the Search script -->
+<script src="js/SearchForStock.js"></script>
+
+<!-- Settings Js file -->
+<script src="js/settings.js"></script>
+
+</body>
+
+</html>

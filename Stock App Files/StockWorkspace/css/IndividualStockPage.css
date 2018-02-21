@@ -182,6 +182,7 @@ p {
 
 /* Add to stock to the users portfolio */
 #AddStocktoPortfolio {
+    top: 225px;
     right: 15px;
     z-index: 99999;
     position: absolute;

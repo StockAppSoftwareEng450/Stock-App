@@ -439,8 +439,6 @@ function peersStatsUrlGrab (name) {
     /** Grabbing 6m% and 1y% for Current Stock **/
     var stockSymbolStatusURL = "https://api.iextrading.com/1.0/stock/" + name +  "/stats";
 
-
-
     setTimeout(function () {
 
         $.ajax({
@@ -565,7 +563,7 @@ function getStockDateAndQuantity(){
                     setPK("portfolioButton");
                 });
             } else {
-//NEED!!!!!!!!    // MSG to the user
+                //NEED!!!!!!!!    // MSG to the user
                 // generic CSS
                 console.log("empty");
             }
@@ -680,13 +678,6 @@ function setPK(button){
             });
         }
     });
-}
-
-/** Logo Handling **/
-function imgError(image) {
-    image.onerror = "";
-    image.src = "";
-    return image.src;
 }
 
 
