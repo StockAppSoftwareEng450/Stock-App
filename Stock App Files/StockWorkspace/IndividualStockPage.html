@@ -101,7 +101,7 @@
 
             <!-- Logo -->
             <img src="" id="original" style="display:none;">
-            <canvas id="modified"></canvas>
+            <canvas id="modified" style="display: none"></canvas>
 
             <div id="CompanyName"></div>
             <!--<p id="dollarSign">$</p>-->
@@ -165,8 +165,6 @@
             </div>
         </div>
 
-
-
         <!-- Company Information and Graph -->
         <div class="container" >
             <div class="row">
@@ -182,14 +180,33 @@
                     <h5 id="date">Date Listed</h5>
                 </div>
 
-                <div class="SVGD3Parent">
+                <div class="SVGD3Parent" style="width: 66%">
                     <!-- D3 Graph -->
-                    <div class="parentSVG">
-                        <svg width="760" height="300" ></svg>
+                    <div id="D3LineGraph" class="parentSVG" style="padding: 10px;">
+                        <!--<svg width="760" height="300" ></svg>-->
                     </div>
 
                     <!-- Buttons to Manipulate Data -->
                     <div id="buttonOption">
+
+                        <!--&lt;!&ndash; Live &ndash;&gt;-->
+                        <!--<input class="bttn-unite bttn-sm bttn-primary"-->
+                               <!--style="margin: 5px;"-->
+                               <!--id="1DayButton"-->
+                               <!--name="updateButton"-->
+                               <!--type="button"-->
+                               <!--value="1 Day"-->
+                               <!--onclick="update1Day()" />-->
+                        <!--&lt;!&ndash; 6 Hours &ndash;&gt;-->
+                        <!--<input class="bttn-unite bttn-sm bttn-primary"-->
+                               <!--style="margin: 5px;"-->
+                               <!--id="1DayButton"-->
+                               <!--name="updateButton"-->
+                               <!--type="button"-->
+                               <!--value="1 Day"-->
+                               <!--onclick="update1Day()" />-->
+
+
                         <!-- 1 Day -->
                         <input class="bttn-unite bttn-sm bttn-primary"
                                style="margin: 5px;"
@@ -263,13 +280,6 @@
                                onclick="update5Year()" />
                     </div>
                 </div>
-
-                <!-- Logo -->
-                <div id="logodiv">
-                    <img id="logo" class = "logo" src="" />
-                </div>
-
-
             </div>
         </div>
 

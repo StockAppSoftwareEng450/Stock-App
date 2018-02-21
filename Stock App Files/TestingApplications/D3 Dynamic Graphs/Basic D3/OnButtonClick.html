@@ -131,6 +131,8 @@ input:checked + .slider:before {
 </style>
 <body>
 
+<div style="padding-left: 600px; padding-right: 600px; padding-top: 200px" id="d3table"></div>
+
 <!-- load the d3.js library -->
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="../../CommonLinkedFiles/jquery3_2_1.js"></script>
@@ -171,7 +173,7 @@ input:checked + .slider:before {
         .y(function(d) { return y(d.close); });
 
     // Adds the svg canvas
-    var svg = d3.select("body")
+    var svg = d3.select("#d3table")
         .append("svg")
         .attr("viewBox", "0 0 " + (width + margin.left + margin.right) + " " + (height + margin.top + margin.bottom))
         .append("g")
@@ -318,6 +320,65 @@ input:checked + .slider:before {
         svg.select(".y.axis") // change the y axis
             .duration(750)
             .call(yAxis);
+    }
+
+    var liveArray = [];
+
+    function updatePriceLive(data, iteration){
+        console.log("every 2 Sec : " + data);
+        console.log("count: " + iteration);
+
+
+        // Print array to see all elements
+
+        // set first index = to global then check if each value after it is less than or equal to determine color
+
+        // if less than 60
+            // update graph with new value
+
+        // else
+            // update the 0 index (global) to be the 1st index
+            // add data to the end
+
+
+        if(liveArray.length <= 60){
+            liveArray.push(data);
+        } else {
+
+        }
+
+    }
+
+    // Live
+    function updateLive () {
+        var priceURl = "https://api.iextrading.com/1.0/stock/msft/price";
+
+        setTimeout(function () {
+            $.ajax({
+                url: priceURl,
+                success: function(data) {
+
+                    console.log("fast: " + data);
+
+                    // // Updating Price, lineColor, data, and result
+                    // updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, data, result);
+
+
+                }
+            });
+        });
+
+        var iteration = 0;
+        setInterval(function () {
+            $.ajax({
+                url: priceURl,
+                success: function(data) {
+                    iteration++;
+
+                    updatePriceLive(data, iteration)
+                }
+            });
+        }, 2000);
     }
 
     //1d (Change the parse date for this******)
@@ -909,6 +970,13 @@ input:checked + .slider:before {
 </script>
 
 <div id="option">
+
+    <!-- Live -->
+    <input class="bttn-minimal bttn-primary"
+           name="updateButton"
+           type="button"
+           value="Live"
+           onclick="updateLive()" />
 
     <!-- 1 Day -->
     <input class="bttn-minimal bttn-primary"

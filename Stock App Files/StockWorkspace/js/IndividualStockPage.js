@@ -332,6 +332,9 @@ function DisplayLogo(){
             console.log(canvas.height);
             console.log(canvas.width);
 
+            // Updating modified id to display
+            document.getElementById("modified").style.display = "block";
+
             ctx.drawImage(image,0,0, image.width, image.height, 0, 0, canvas.width, canvas.height);
 
             var imgd = ctx.getImageData(0, 0, 1000, 1000),

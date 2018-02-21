@@ -1,6 +1,12 @@
+body {}
+
 #CompanyName, #StockPrice, #StockSymbolUpperCase {
     display : inline;
     float: left;
+}
+
+.axis {
+    font: 10px sans-serif;
 }
 
 #CompanyName, #StockSymbolUpperCase{

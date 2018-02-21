@@ -31,7 +31,7 @@
 
 </head>
 
-<div class="chart-container"></div>
+<div id="chart-container" style="padding: 50px"></div>
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 
@@ -82,7 +82,7 @@
         });
 
     // Adds the svg canvas
-    var svg = d3.select("body")
+    var svg = d3.select("#chart-container")
         .append("svg")
         .attr("viewBox", "0 0 " + (width + margin.left + margin.right) + " " + (height + margin.top + margin.bottom))
         .append("g")

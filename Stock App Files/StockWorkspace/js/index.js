@@ -314,7 +314,6 @@ function getWatchlistValue(stockSymbolIndexW, currentPCell, threeMonthCell, sixM
     }, 2000);
 }
 
-
 /** Percent Change **/
 function percentChange (y1, y2) {
     return (((y2 - y1) / y1)*100)

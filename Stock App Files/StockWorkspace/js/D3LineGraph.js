@@ -48,11 +48,11 @@ var valueline = d3.svg.line()
     .y(function(d) { return y(d.close); });
 
 // Adds the svg canvas
-var svg = d3.select("svg")
+var svg = d3.select("#D3LineGraph")
     .append("svg")
     // .attr("width", width + margin.left + margin.right )
     // .attr("height", height + margin.top + margin.bottom + 15 )
-    .attr("viewBox", "0 0 " + (width + margin.left + margin.right) + " " + (height + margin.top + margin.bottom))
+    .attr("viewBox", "0 0 " + (width + margin.left + margin.right) + " " + (height + margin.top + margin.bottom + 10))
     .append("g")
     .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
@@ -124,17 +124,20 @@ setTimeout(function () {
 
                 // Add the X Axis
                 svg.append("g")
+                    .attr("class", "axis")
                     .attr("class", "x axis")
                     .attr("transform", "translate(0," + height + ")")
                     .call(xAxis);
 
                 // Add the Y Axis
                 svg.append("g")
+                    .attr("class", "axis")
                     .attr("class", "y axis")
                     .call(yAxis);
 
                 // Add the text label for the X axis
                 svg.append("text")
+                    .style("font-size", "13px")
                     .attr("x", width / 2)               //Dynamically moves with the graph
                     .attr("y", height + margin.bottom + 10)
                     .style("text-anchor", "middle")
@@ -142,9 +145,10 @@ setTimeout(function () {
 
                 // Add the text label for the Y axis
                 svg.append("text")
+                    .style("font-size", "13px")
                     .attr("transform", "rotate(-90)")
-                    .attr("x", 0 - (height / 2) - 15)
-                    .attr("y", 0 - margin.left)
+                    .attr("x", 0 - (height / 2))
+                    .attr("y", 0 - margin.left + 3)
                     .attr("dy", "1em")
                     .style("text-anchor", "middle")
                     .text("Price");
@@ -154,7 +158,7 @@ setTimeout(function () {
                     .attr("x", (width / 2))
                     .attr("y", 0 - (margin.top / 2))
                     .attr("text-anchor", "middle")
-                    .style("font-size", "16px")
+                    .style("font-size", "13px")
                     .style("text-decoration", "underline")
                     .text("Price to Date");
 

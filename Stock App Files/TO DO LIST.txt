@@ -15,7 +15,7 @@ To Do List
 	- Add weekly gainers on index
 	- handle no debt
 	- revamp stats (make it prettier)
-	- fix css in Settings HTML Page
+	✔ fix css in Settings HTML Page                                     IJ - 2/20/2018
 	- add to portfolio display bug
 	✔ Click-able peers table that transfers to given peer               JH - 2/12/2018
 	- fix styling on settings JS 
@@ -28,7 +28,7 @@ To Do List
 	- css for forgot password
 	- css for add to portfolio "added"
 	✔ css for no inputs                                                 JH - 2/14/2018
-	- scale D3 for larger displays
+	✔ scale D3 for larger displays                                      JH - 2/20/2018
 	- create AJAX function with key and url as the parameters
 	✔ Cleanup comments in Individual Stock Page JS                      JH - 2/13/2018
 	- Cleanup all CSS into CSS files only
@@ -43,4 +43,5 @@ To Do List
     - revamp news (make it prettier)
     - Add Trending stocks top page
     - Delete view navigation slider from RAD and from
+    - Fix Price Label d3 graph
 
