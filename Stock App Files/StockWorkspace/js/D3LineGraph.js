@@ -275,7 +275,7 @@ function updateLiveButton () {
     var url = "https://api.iextrading.com/1.0/stock/" + stockSymbl + "/price";
 
     // Every two seconds grabs price and sends that to the
-    setInterval(function () {
+    var id = setInterval(function () {
         $.ajax({
             url: url,
             success: function(data) {
@@ -287,28 +287,28 @@ function updateLiveButton () {
                 currDate = today;
                 currPrice = data;
 
-                console.log("currentDate \t[" + count + "] " + currDate);
-                console.log("currentPrice \t[" + count + "] " + currPrice);
+                //console.log("currentDate \t[" + count + "] " + currDate);
+                //console.log("currentPrice \t[" + count + "] " + currPrice);
 
                 objectInner.date = currDate;
                 objectInner.close = currPrice;
 
-                console.log("objDate \t\t[" + count + "] " + objectInner.date);
-                console.log("objClose \t\t[" + count + "] " + objectInner.close);
+                //console.log("objDate \t\t[" + count + "] " + objectInner.date);
+                //console.log("objClose \t\t[" + count + "] " + objectInner.close);
 
-                // objectPrice.push([objectInner.date,objectInner.close]);
-                objectPrice.push(objectInner);
+//you need to make a deep copy and not just use a reference bc you are updating the reference but not saveing the actual values
+                objectPrice.push(jQuery.extend(true, {}, objectInner));
 
                 console.log("objectPrice \t[" + count + "] " + objectPrice);
                 console.log(objectInner);
                 console.log("-----------------------------------------------");
 
                 if (count > 1){
-                    objectPrice.forEach(function (d) {
+                    objectPrice.forEach(function (ele) {
                         // console.log(d);
 
                         // Adding each result to the end of the array
-                        arrayClose.push(d.close);
+                        arrayClose.push(ele.close);
 
                         // Finding the minimum value in the close price in the JSON File
                         minimum = Array.min(arrayClose);
@@ -345,15 +345,12 @@ function updateLiveButton () {
 
                 count++;
 
-                if (count >= 10) {
+                if (count > 1) {
                     console.log("reached 10!");
-
 
                     // Updating Price, lineColor, data, and result
                     updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, objectPrice, result);
                 }
-
-
 
             }
         });
