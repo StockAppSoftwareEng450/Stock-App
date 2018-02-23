@@ -3,6 +3,14 @@
 // Globalizing the Stock Symbol
 var resultStockSymbol = null;
 
+// unicode for UP and DOWN arrows
+var unicodeUp = '\u25B2';
+var unicodeDown = '\u25BC';
+
+// adding color
+unicodeUp = unicodeUp.fontcolor("green");
+unicodeDown = unicodeDown.fontcolor("red");
+
 // Takes in the url
 function parseURLParams(url) {
     var queryStart = url.indexOf("?") + 1,
@@ -36,7 +44,7 @@ $(document).ready(function() {
             // On refresh loads back to screen 1
             if (stockSymbol === undefined) {
                 // Display error to the user and return user to homepage
-                console.log("reached undefined");
+                // console.log("reached undefined");
                 window.location.href = "index.html";
             }
             resultStockSymbol = stockSymbol;
@@ -46,7 +54,7 @@ $(document).ready(function() {
             refPortfolio.orderByChild("userId").equalTo(user.uid).once("value", function(snapshot) {
                 if(snapshot.exists()){
                     snapshot.forEach(function (value){
-                        console.log("StockSymbol: " + value.child("stockSymbol").val());
+                        // console.log("StockSymbol: " + value.child("stockSymbol").val());
                         if(stockSymbol === value.child("stockSymbol").val()){
                             //change css to state "stock in symbole" + change custom-attribute
                             document.getElementById("portfolioButton").setAttribute("data-inPortfolio", true);
@@ -58,7 +66,7 @@ $(document).ready(function() {
                             // Toggle off the addstockportfolio div
                             var div1 = document.getElementById('AddStocktoPortfolio');
                             div1.style.display = "none";
-                            console.log("onstart");
+                            // console.log("onstart");
                         }
                     });
                 }
@@ -95,35 +103,19 @@ $(document).ready(function() {
             var addQuote = "/quote";
             resultUrl = resultUrl + addQuote;
 
-            // date to decide if current time is later than closing stock market
-            var dateArray = [];
-            dateWeekTime();
+            /** If stock Market is open **/
+            var d = new Date();
+            var currentHour = d.getHours();
+            var day = d.getDay();
+            // console.log("day: " + day);
 
-
-            /** Updating price every 3 seconds **/
-            setInterval(function () {
-
-                $.ajax({
-                    url: resultUrl,
-                    success: function (data) {
-                        var stockprice = data.latestPrice;
-
-                        document.getElementById("StockPrice").innerHTML = stockprice;
-
-                        stockprice = stockprice.toString();
-                        stockprice = stockprice.bold();
-
-                        // Send price to the peers table
-                        document.getElementById("myTable").rows[1].cells[1].innerHTML = "$" + stockprice;
-
-                    },
-                    error: function(error){
-                        // Handle Errors here.
-                        console.log(error.responseText);
-                        //alert(error.responseText);
-                    }
-                });
-            }, 2500);
+            if ((currentHour > 7 && currentHour < 18) && (day >= 1 && day <= 5)) {
+                // console.log("interval");
+                setIntervalPrice(resultUrl);
+            } else {
+                // console.log("timeout");
+                setTimeoutPrice(resultUrl);
+            }
 
             /** Updating Name and Symbol Once **/
             setTimeout(function () {
@@ -131,18 +123,37 @@ $(document).ready(function() {
                     url: resultUrl,
                     success: function (data) {
                         var companyName = data.companyName;
-                        var symbol = data.symbol;
+                        var revisedCompany = null;
 
-                        document.getElementById("CompanyName").innerHTML = companyName;
-                        document.getElementById("StockSymbolUpperCase").innerHTML = symbol;
+                        // Check for length of company name
+                        if (companyName.length > 20){
+                            revisedCompany = companyName.slice(0,50);
+                            document.getElementById("CompanyName").innerHTML = revisedCompany + "...";
+
+                            // Calling tooltip
+                            $('#CompanyName').tooltip({
+                                title: hoverGetData(companyName),
+                                html: true,
+                                container: 'body'
+                            });
+
+                        } else {
+                            document.getElementById("CompanyName").innerHTML = companyName;
+                        }
+
+                        // Symbol
+                        document.getElementById("StockSymbolUpperCase").innerHTML = data.symbol;
                     },
                     error: function(error){
                         // Handle Errors here.
-                        console.log(error.responseText);
+                        // console.log(error.responseText);
                         //alert(error.responseText);
                     }
                 });
             }, 2000);
+
+            // calling current stock symbol
+            currentStockStats();
 
             /** Peers Section  **/
             var peersUrl = "https://api.iextrading.com/1.0/stock/" + stockSymbol + "/peers";
@@ -157,10 +168,10 @@ $(document).ready(function() {
                         peersStatsUrlGrab(peerName);
                     }
                 }, error: function(error){
-                    console.log(error.responseText);
+                    // console.log(error.responseText);
 
                     if (error.responseText === "Unknown symbol"){
-                        console.log("Reached Error");
+                        // console.log("Reached Error");
 
                         // Transfer to the homepage
                         window.location.href = "index.html";
@@ -178,11 +189,11 @@ $(document).ready(function() {
                         document.getElementById("aboutCompany").innerHTML = data.description;
                     });
                 }, error: function(error){
-                    console.log(error.responseText);
+                    // console.log(error.responseText);
 
                     // Handling undefined Exception
                     if (error.responseText === "Unknown symbol"){
-                        console.log("Reached Error");
+                        // console.log("Reached Error");
 
                         // Transfer to the homepage
                         window.location.href = "index.html";
@@ -197,7 +208,7 @@ $(document).ready(function() {
                 url: urlNews,
                 success: function (data) {
                     d3.json(urlNews, function (error, data) {
-                        console.log("News: " + data);
+                        // console.log("News: " + data);
                         for (var i = 0; i < data.length; i++){
                             var headlineIndex = "headline";
                             var sourceIndex = "source";
@@ -211,10 +222,10 @@ $(document).ready(function() {
                             sourceIndex =  sourceIndex + i;
                             datetimeIndex = datetimeIndex + i;
 
-                            console.log(headlineIndex);
-                            console.log(data[i].headline);
-                            console.log(data[i].source);
-                            console.log(dataParsed);
+                            // console.log(headlineIndex);
+                            // console.log(data[i].headline);
+                            // console.log(data[i].source);
+                            // console.log(dataParsed);
 
                             document.getElementById(headlineIndex).href = data[i].url;
                             document.getElementById(headlineIndex).innerHTML = data[i].headline;
@@ -223,11 +234,11 @@ $(document).ready(function() {
                         }
                     });
                 }, error: function(error){
-                    console.log(error.responseText);
+                    // console.log(error.responseText);
 
                     // Handling undefined Exception
                     if (error.responseText === "Unknown symbol"){
-                        console.log("Reached Error");
+                        // console.log("Reached Error");
 
                         // Transfer to the homepage
                         window.location.href = "index.html";
@@ -242,7 +253,7 @@ $(document).ready(function() {
                 url: urlKeyStats,
                 success: function (data) {
                     d3.json(urlKeyStats, function (error, data) {
-                        console.log("Key Stats: " + data);
+                        // console.log("Key Stats: " + data);
 
                         var response = (data);
                         var week52high = response.week52high;
@@ -260,7 +271,7 @@ $(document).ready(function() {
                         document.getElementById("debt").innerHTML = debt;
                     });
                 }, error: function(error){
-                    console.log(error.responseText);
+                    // console.log(error.responseText);
                     //alert(error.responseText);
 
                     // Handling undefined Exception
@@ -305,11 +316,11 @@ function DisplayLogo(){
 
     // Returns Base 64 of image
     getDataUri(logoUrl, function (base64) {
-        console.log('RESULT:', base64);
+        // console.log('RESULT:', base64);
 
         //handling no Logo
         if (base64 === "data:image/png;base64,Cg=="){
-            console.log("Reached No Logo");
+            // console.log("Reached No Logo");
 
             // Setting logo to not display
             document.getElementById("modified").style.display = "none";
@@ -329,8 +340,8 @@ function DisplayLogo(){
             // This size can change
             canvas.height = canvas.width = 50;
 
-            console.log(canvas.height);
-            console.log(canvas.width);
+            // console.log(canvas.height);
+            // console.log(canvas.width);
 
             // Updating modified id to display
             document.getElementById("modified").style.display = "block";
@@ -375,14 +386,6 @@ function peersStatsUrlGrab (name) {
     // Inserting name
     var cell0 = row.insertCell(0);
     cell0.innerHTML = name.link(stockTransferURL);
-
-    // unicode for UP and DOWN arrows
-    var unicodeUp = '\u25B2';
-    var unicodeDown = '\u25BC';
-
-    // adding color
-    unicodeUp = unicodeUp.fontcolor("green");
-    unicodeDown = unicodeDown.fontcolor("red");
 
     /** Stock price for Every Peer **/
     var peerStockPriceUrl = "https://api.iextrading.com/1.0/stock/" + name +  "/quote";
@@ -508,7 +511,7 @@ function getStockDateAndQuantity(){
         // MSG to the User Please Enter
         document.getElementById("addToPorfolioError").style.visibility = "visible";
 
-        console.log("Please enter valid Add to portfolio inputs");
+        // console.log("Please enter valid Add to portfolio inputs");
 
     } else {
         document.getElementById("addToPorfolioSuccess").style.visibility = "visible";
@@ -526,7 +529,7 @@ function getStockDateAndQuantity(){
                     // Get the data
                     d3.json(urlDate, function (error, data) {
                         // Returning the entire array
-                        console.log(data);
+                        // console.log(data);
                         //if date in the last three days ==> different axaj request!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                         // Defaint JS makes Searching very Easy ;)
                         var query = '//*[date="' + date + '"]';
@@ -535,7 +538,7 @@ function getStockDateAndQuantity(){
                         // Searching for date within JSON
                         for (var i = 0; i < queryResult.length; i++) {
                             closePriceForDate = queryResult[i].close;
-                            console.log(i + " " + closePriceForDate);
+                            // console.log(i + " " + closePriceForDate);
                         }
                     });
                 }
@@ -568,7 +571,7 @@ function getStockDateAndQuantity(){
             } else {
                 //NEED!!!!!!!!    // MSG to the user
                 // generic CSS
-                console.log("empty");
+                // console.log("empty");
             }
         }, 2000);
     }
@@ -623,7 +626,7 @@ function dateWeekTime() {
 
     var dateArray  = [];
     var d = new Date();
-    console.log("Date for closing: " + d);
+    // console.log("Date for closing: " + d);
 
     // var weekDay = d.slice(0,3);
     // console.log(weekDay);
@@ -657,7 +660,6 @@ function AddToWatchlist () {
         $("#watchlistButton").addClass("fa fa-minus");
 
     }
-
 }
 
 /** Setting Primary Key **/
@@ -682,6 +684,136 @@ function setPK(button){
         }
     });
 }
+
+/** Dynamic ToolTip **/
+var cachedData = Array();
+function hoverGetData(companyName){
+    var element = $(this);
+
+    var id = element.data('id');
+
+    if(id in cachedData){
+        return cachedData[id];
+    }
+
+    var localData = companyName;
+    cachedData[id] = localData;
+
+    return localData;
+}
+
+/** Handling if no peers are returned **/
+function currentStockStats() {
+
+    document.getElementById("genericSymbol").innerHTML = resultStockSymbol;
+
+    /** Grabbing 6m% and 1y% for Current Stock **/
+    var stockSymbolStatusURL = "https://api.iextrading.com/1.0/stock/" + resultStockSymbol +  "/stats";
+
+    setTimeout(function () {
+
+        $.ajax({
+            url: stockSymbolStatusURL,
+            success: function (data) {
+
+                // console.log(data);
+
+                // Bold the percent sign
+                var percentSign = '%';
+                percentSign = percentSign.bold();
+
+                // 1 year
+                var percent1y = data.year1ChangePercent;
+                var percentage1y = percent1y * 100;
+                percentage1y = percentage1y.toFixed(2);
+
+                // insert 1 year into table
+                var percentStr1y = percentage1y.toString();
+
+                // Bold the text
+                percentStr1y = percentStr1y.bold();
+
+                if (percent1y < 0){
+                    document.getElementById("myTable").rows[1].cells[2].innerHTML = unicodeDown + " " + percentStr1y + percentSign;
+                } else {
+                    document.getElementById("myTable").rows[1].cells[2].innerHTML = unicodeUp + "  " + percentStr1y + percentSign;
+                }
+
+                // 6 month
+                var percent6m = data.month6ChangePercent;
+                var percentage6m = percent6m * 100;
+                percentage6m = percentage6m.toFixed(2);
+
+                //inserting 6 month into table
+                var percentStr6m = percentage6m.toString();
+
+                // Bold the text
+                percentStr6m = percentStr6m.bold();
+
+                // Test to see if percentage is negative
+                if (percent6m < 0){
+                    document.getElementById("myTable").rows[1].cells[3].innerHTML = unicodeDown + " " + percentStr6m + percentSign;
+                } else {
+                    document.getElementById("myTable").rows[1].cells[3].innerHTML = unicodeUp + "  " + percentStr6m + percentSign;
+                }
+            }
+        });
+    });
+}
+
+/** Updating price every 3 seconds **/
+function setIntervalPrice(resultUrl) {
+    setInterval(function () {
+        $.ajax({
+            url: resultUrl,
+            success: function (data) {
+                var stockprice = data.latestPrice;
+
+                document.getElementById("StockPrice").innerHTML = stockprice;
+
+                stockprice = stockprice.toString();
+                stockprice = stockprice.bold();
+
+                // Send price to the peers table
+                document.getElementById("myTable").rows[1].cells[1].innerHTML = "$" + stockprice;
+
+            },
+            error: function(error){
+                // Handle Errors here.
+                // console.log(error.responseText);
+                //alert(error.responseText);
+            }
+        });
+    }, 2500);
+}
+
+/** Updating price every 3 seconds **/
+function setTimeoutPrice(resultUrl) {
+    setTimeout(function () {
+        $.ajax({
+            url: resultUrl,
+            success: function (data) {
+                var stockprice = data.latestPrice;
+
+                document.getElementById("StockPrice").innerHTML = stockprice;
+
+                stockprice = stockprice.toString();
+                stockprice = stockprice.bold();
+
+                // Send price to the peers table
+                document.getElementById("myTable").rows[1].cells[1].innerHTML = "$" + stockprice;
+
+            },
+            error: function(error){
+                // Handle Errors here.
+                // console.log(error.responseText);
+                //alert(error.responseText);
+            }
+        });
+    });
+}
+
+
 
 
 

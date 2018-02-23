@@ -20,8 +20,6 @@ To Do List
 	✔ Click-able peers table that transfers to given peer               JH - 2/12/2018
 	- fix styling on settings JS 
 	✔ view navigation slider fix bug                                    JH - 2/13/2018
-	- Make sure RAD is up to date
-	- Generalize JS Files for
 	- Finish writing Test Cases
 	- Start Testing the Application
 	- Add more checking to login, register, and forgot password
@@ -29,10 +27,8 @@ To Do List
 	- css for add to portfolio "added"
 	✔ css for no inputs                                                 JH - 2/14/2018
 	✔ scale D3 for larger displays                                      JH - 2/20/2018
-	- create AJAX function with key and url as the parameters
 	✔ Cleanup comments in Individual Stock Page JS                      JH - 2/13/2018
-	- Cleanup all CSS into CSS files only
-    - if after 7 oclock implement setTimeOut instead of 2.5 seconds
+	✔ if after 7 oclock implement setTimeOut instead of 2.5 seconds     JH - 2/21/2018
     ✔ clear form on click for add to portfolio                          JH - 2/13/18
     ✔ Reduce padding if no Logo                                         JH - 2/17/18
     ✔ Handle no logo                                                    JH - 2/17/18
@@ -41,7 +37,7 @@ To Do List
     - Handle Bugs like BDCS where Name is too long
     - Add tax calculator
     - revamp news (make it prettier)
-    - Add Trending stocks top page
+    - Add Trending stocks top of every page
     - Delete view navigation slider from RAD and from
-    - Fix Price Label d3 graph
+    ✔ Fix Price Label d3 graph                                          JH - 2/21/18
 

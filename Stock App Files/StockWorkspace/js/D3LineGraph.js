@@ -6,7 +6,7 @@ var interval;
 function check() {
     if (resultStockSymbol != null) {
         stockSymbl = resultStockSymbol;
-        console.log("stockSymbl: " + stockSymbl);
+        // console.log("stockSymbl: " + stockSymbl);
         clearInterval(interval);
     }
 }
@@ -249,7 +249,118 @@ function updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, data, result) {
 
 }
 
-//1d (Change the parse date for this******)
+/** Live Button **/
+function updateLiveButton () {
+
+    var revDate = null;
+    var count = 0;
+
+    var objectPrice = [];
+    var objectInner = {};
+
+    objectInner.date = null;
+    objectInner.close = null;
+
+    var arrayClose = [];
+    var minimum = null;
+    var result = null;
+    var firstPrice = null;
+    var lastPrice = null;
+    var lineColor = null;
+    var currPrice = null;
+    var currDate = null;
+
+    var objName = null;
+
+    var url = "https://api.iextrading.com/1.0/stock/" + stockSymbl + "/price";
+
+    // Every two seconds grabs price and sends that to the
+    setInterval(function () {
+        $.ajax({
+            url: url,
+            success: function(data) {
+
+                // Mon Jan 22 2018 00:00:00 GMT-0500
+                var today = new Date();
+                // console.log(typeof today);
+
+                currDate = today;
+                currPrice = data;
+
+                console.log("currentDate \t[" + count + "] " + currDate);
+                console.log("currentPrice \t[" + count + "] " + currPrice);
+
+                objectInner.date = currDate;
+                objectInner.close = currPrice;
+
+                console.log("objDate \t\t[" + count + "] " + objectInner.date);
+                console.log("objClose \t\t[" + count + "] " + objectInner.close);
+
+                // objectPrice.push([objectInner.date,objectInner.close]);
+                objectPrice.push(objectInner);
+
+                console.log("objectPrice \t[" + count + "] " + objectPrice);
+                console.log(objectInner);
+                console.log("-----------------------------------------------");
+
+                if (count > 1){
+                    objectPrice.forEach(function (d) {
+                        // console.log(d);
+
+                        // Adding each result to the end of the array
+                        arrayClose.push(d.close);
+
+                        // Finding the minimum value in the close price in the JSON File
+                        minimum = Array.min(arrayClose);
+                        console.log("minimum: " + minimum);
+
+                        // Taking 5% off of graph to dynamically show white space at the bottom of the minimum value
+                        result = (.05 / 100) * minimum;
+                        result = minimum - result;
+
+                        // Finding first elm in array
+                        firstPrice = arrayClose[0];
+
+                        // Finding last elm in array
+                        lastPrice = arrayClose[arrayClose.length - 1];
+                    });
+                }
+
+                    /** GOAL
+                     * [
+                     *      {
+                     *        "date": "20180222",
+                     *        "close": 150,
+                     *      }
+                     *      {
+                     *        "date": "20180222",
+                     *        "close": 151,
+                     *      }
+                     *      {
+                     *        "date": "20180222",
+                     *        "close": 152,
+                     *      }
+                     * ]
+                     */
+
+                count++;
+
+                if (count >= 10) {
+                    console.log("reached 10!");
+
+
+                    // Updating Price, lineColor, data, and result
+                    updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, objectPrice, result);
+                }
+
+
+
+            }
+        });
+    }, 2000);
+}
+
+//1d
 function update1Day () {
 
     var url = "https://api.iextrading.com/1.0/stock/" + stockSymbl + "/chart/1d";
@@ -273,8 +384,8 @@ function update1Day () {
                     d.date = parseMinute(d.minute);
                     d.close = +d.average;
 
-                    console.log("d.date" + d.date);
-                    console.log("d.close " + d.close );
+                    // console.log("d.date" + d.date);
+                    // console.log("d.close " + d.close );
 
                     // Adding each result to the end of the array
                     arrayClose.push(d.close);
@@ -283,7 +394,7 @@ function update1Day () {
                     minimum = Array.min(arrayClose);
 
                     // Taking .05% off of graph to dynamically show white space at the bottom of the minimum value
-                    result = (5 / 100) * minimum;
+                    result = (.05 / 100) * minimum;
                     result = minimum - result;
 
                     // Finding first elm in array
@@ -319,7 +430,8 @@ function update1Month () {
             d3.json(url, function (error, data) {
                 data.forEach(function (d) {
                     d.date = parseDate(d.date);
-                    d.close = +d.close;
+                    // console.log(d.date);
+                    // d.close = +d.close;
 
                     // Adding each result to the end of the array
                     arrayClose.push(d.close);
@@ -619,3 +731,14 @@ function update5Year() {
         }
     });
 }
+
+
+Date.prototype.yyyymmdd = function() {
+    var mm = this.getMonth() + 1; // getMonth() is zero-based
+    var dd = this.getDate();
+
+    return [this.getFullYear(),
+        (mm>9 ? '' : '0') + mm,
+        (dd>9 ? '' : '0') + dd
+    ].join('');
+};
