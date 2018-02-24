@@ -1,4 +1,9 @@
 var stockSymbl = null;
+var setInterLive = null;
+var title = null;
+var yAxisPrice = null;
+var priceTitle = null;
+var currentGraph = "5 Years";
 
 // This variable will hold the setInterval's instance, so we can clear it later on
 var interval;
@@ -120,6 +125,7 @@ setTimeout(function () {
                     .transition()
                     .attr("class", "line")
                     .attr("stroke", lineColor)
+                    .style("font-size", "12px")
                     .attr("d", valueline(data));
 
                 // Add the X Axis
@@ -127,25 +133,27 @@ setTimeout(function () {
                     .attr("class", "axis")
                     .attr("class", "x axis")
                     .attr("transform", "translate(0," + height + ")")
+                    .style("font-size", "12px")
                     .call(xAxis);
 
                 // Add the Y Axis
-                svg.append("g")
+                yAxisPrice = svg.append("g")
                     .attr("class", "axis")
                     .attr("class", "y axis")
+                    .style("font-size", "12px")
                     .call(yAxis);
 
                 // Add the text label for the X axis
                 svg.append("text")
-                    .style("font-size", "13px")
+                    .style("font-size", "12px")
                     .attr("x", width / 2)               //Dynamically moves with the graph
                     .attr("y", height + margin.bottom + 10)
                     .style("text-anchor", "middle")
                     .text("Date");
 
                 // Add the text label for the Y axis
-                svg.append("text")
-                    .style("font-size", "13px")
+                priceTitle = svg.append("text")
+                    .style("font-size", "12px")
                     .attr("transform", "rotate(-90)")
                     .attr("x", 0 - (height / 2))
                     .attr("y", 0 - margin.left + 3)
@@ -154,13 +162,14 @@ setTimeout(function () {
                     .text("Price");
 
                 // Adding the Title
-                svg.append("text")
+                title = svg.append("text")
                     .attr("x", (width / 2))
                     .attr("y", 0 - (margin.top / 2))
                     .attr("text-anchor", "middle")
-                    .style("font-size", "13px")
+                    .style("font-size", "12px")
                     .style("text-decoration", "underline")
-                    .text("Price to Date");
+                    // .text("Price to Date");
+                    .text(currentGraph);
 
                 //Mouseover
                 var focus = svg.append("g")
@@ -196,7 +205,12 @@ setTimeout(function () {
                     var x0 = x.invert(d3.mouse(this)[0]),
                         i = bisectDate(data, x0, 1),
                         d0 = data[i - 1],
-                        d1 = data[i],
+                        d1 = data[i];
+
+                        // console.log("first: " + x0 - d0.date);
+                        // console.log("second: " + d1.date - x0 ? d1 : d0);
+                        // console.log("combination: " + x0 - d0.date > d1.date - x0 ? d1 : d0);
+
                         d = x0 - d0.date > d1.date - x0 ? d1 : d0;
                     focus.attr("transform", "translate(" + x(d.date) + "," + y(d.close) + ")");
                     focus.select(".x-hover-line").attr("y2", height - y(d.close));
@@ -215,7 +229,7 @@ setTimeout(function () {
 }, 2000);
 
 // Updating Price, lineColor, data, and result
-function updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, data, result) {
+function updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, data, result, currentGraph) {
     // Checks to see if the first price is lower than the last price if = change color
     if (firstPrice > lastPrice){
         lineColor = "red";
@@ -247,12 +261,27 @@ function updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, data, result) {
         .duration(750)
         .call(yAxis);
 
+    // Adding the Title
+    title.text(function(d) {
+        return currentGraph
+    });
+
+    if (currentGraph === "Live"){
+        priceTitle.style("font-size", "9px");
+        yAxisPrice.style("font-size", "9px");
+    } else {
+        // Changing back font sizes
+        priceTitle.style("font-size", "12px");
+        yAxisPrice.style("font-size", "11px");
+    }
+
+
+
 }
 
 /** Live Button **/
 function updateLiveButton () {
 
-    var revDate = null;
     var count = 0;
 
     var objectPrice = [];
@@ -270,38 +299,24 @@ function updateLiveButton () {
     var currPrice = null;
     var currDate = null;
 
-    var objName = null;
+    currentGraph = "Live";
 
     var url = "https://api.iextrading.com/1.0/stock/" + stockSymbl + "/price";
 
     // Every two seconds grabs price and sends that to the
-    var id = setInterval(function () {
+    setInterLive = setInterval(function () {
         $.ajax({
             url: url,
             success: function(data) {
 
                 // Mon Jan 22 2018 00:00:00 GMT-0500
-                var today = new Date();
-                // console.log(typeof today);
-
-                currDate = today;
+                currDate = new Date();
                 currPrice = data;
-
-                //console.log("currentDate \t[" + count + "] " + currDate);
-                //console.log("currentPrice \t[" + count + "] " + currPrice);
 
                 objectInner.date = currDate;
                 objectInner.close = currPrice;
 
-                //console.log("objDate \t\t[" + count + "] " + objectInner.date);
-                //console.log("objClose \t\t[" + count + "] " + objectInner.close);
-
-//you need to make a deep copy and not just use a reference bc you are updating the reference but not saveing the actual values
                 objectPrice.push(jQuery.extend(true, {}, objectInner));
-
-                console.log("objectPrice \t[" + count + "] " + objectPrice);
-                console.log(objectInner);
-                console.log("-----------------------------------------------");
 
                 if (count > 1){
                     objectPrice.forEach(function (ele) {
@@ -326,30 +341,13 @@ function updateLiveButton () {
                     });
                 }
 
-                    /** GOAL
-                     * [
-                     *      {
-                     *        "date": "20180222",
-                     *        "close": 150,
-                     *      }
-                     *      {
-                     *        "date": "20180222",
-                     *        "close": 151,
-                     *      }
-                     *      {
-                     *        "date": "20180222",
-                     *        "close": 152,
-                     *      }
-                     * ]
-                     */
-
                 count++;
 
                 if (count > 1) {
                     console.log("reached 10!");
 
                     // Updating Price, lineColor, data, and result
-                    updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, objectPrice, result);
+                    updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, objectPrice, result, currentGraph);
                 }
 
             }
@@ -359,6 +357,14 @@ function updateLiveButton () {
 
 //1d
 function update1Day () {
+
+    // Breaking forEach for faster break of loop to transfer to 1Month
+    var BreakException = {};
+
+    // Clearing Live button
+    clearInterval(setInterLive);
+
+    currentGraph = "1 Day";
 
     var url = "https://api.iextrading.com/1.0/stock/" + stockSymbl + "/chart/1d";
 
@@ -375,34 +381,42 @@ function update1Day () {
 
             // Get the data
             d3.json(url, function (error, data) {
-                data.forEach(function (d) {
+                try {
+                    data.forEach(function (d) {
 
-                    // Parsing the minute instead of conventional date
-                    d.date = parseMinute(d.minute);
-                    d.close = +d.average;
+                        // Parsing the minute instead of conventional date
+                        d.date = parseMinute(d.minute);
+                        d.close = +d.average;
 
-                    // console.log("d.date" + d.date);
-                    // console.log("d.close " + d.close );
+                        // Adding each result to the end of the array
+                        arrayClose.push(d.close);
 
-                    // Adding each result to the end of the array
-                    arrayClose.push(d.close);
+                        // Finding the minimum value in the close price in the JSON File
+                        minimum = Array.min(arrayClose);
 
-                    // Finding the minimum value in the close price in the JSON File
-                    minimum = Array.min(arrayClose);
+                        // Handle faulty API call
+                        if (minimum === 0) throw BreakException;
 
-                    // Taking .05% off of graph to dynamically show white space at the bottom of the minimum value
-                    result = (.05 / 100) * minimum;
-                    result = minimum - result;
+                        // Taking .05% off of graph to dynamically show white space at the bottom of the minimum value
+                        result = (.05 / 100) * minimum;
+                        result = minimum - result;
 
-                    // Finding first elm in array
-                    firstPrice = arrayClose[0];
+                        // Finding first elm in array
+                        firstPrice = arrayClose[0];
 
-                    // Finding last elm in array
-                    lastPrice = arrayClose[arrayClose.length - 1];
-                });
+                        // Finding last elm in array
+                        lastPrice = arrayClose[arrayClose.length - 1];
+                    });
 
-                // Updating Price, lineColor, data, and result
-                updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, data, result);
+                    // Updating Price, lineColor, data, and result
+                    updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, data, result, currentGraph);
+
+                } catch (e) {
+                    if (e !== BreakException) throw e;
+
+                    // Transferring to 1Month
+                    update1Month();
+                }
 
             });
         }
@@ -411,7 +425,14 @@ function update1Day () {
 
 //1m
 function update1Month () {
+
+    // Clearing Live button
+    clearInterval(setInterLive);
+
+    currentGraph = "1 Month";
+
     var url = "https://api.iextrading.com/1.0/stock/" + stockSymbl + "/chart/1m";
+
     $.ajax({
         url: url,
         success: function(data) {
@@ -448,7 +469,7 @@ function update1Month () {
                 });
 
                 // Updating Price, lineColor, data, and result
-                updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, data, result);
+                updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, data, result, currentGraph);
             });
         }
     });
@@ -456,6 +477,12 @@ function update1Month () {
 
 //3m
 function update3Month() {
+
+    // Clearing Live button
+    clearInterval(setInterLive);
+
+    currentGraph = "3 Month";
+
     var url = "https://api.iextrading.com/1.0/stock/" + stockSymbl + "/chart/3m";
 
     $.ajax({
@@ -493,7 +520,7 @@ function update3Month() {
                 });
 
                 // Updating Price, lineColor, data, and result
-                updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, data, result);
+                updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, data, result, currentGraph);
             });
         }
     });
@@ -501,6 +528,12 @@ function update3Month() {
 
 //6m
 function update6Month () {
+
+    // Clearing Live button
+    clearInterval(setInterLive);
+
+    currentGraph = "6 Month";
+
     var url = "https://api.iextrading.com/1.0/stock/" + stockSymbl + "/chart/6m";
 
     $.ajax({
@@ -538,7 +571,7 @@ function update6Month () {
                 });
 
                 // Updating Price, lineColor, data, and result
-                updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, data, result);
+                updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, data, result, currentGraph);
             });
         }
     });
@@ -547,6 +580,12 @@ function update6Month () {
 
 // ytd
 function updateYearToDate () {
+
+    // Clearing Live button
+    clearInterval(setInterLive);
+
+    currentGraph = "Year to Date";
+
     var url = "https://api.iextrading.com/1.0/stock/" + stockSymbl + "/chart/ytd";
 
     $.ajax({
@@ -584,7 +623,7 @@ function updateYearToDate () {
                 });
 
                 // Updating Price, lineColor, data, and result
-                updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, data, result);
+                updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, data, result, currentGraph);
             });
         }
     });
@@ -592,6 +631,11 @@ function updateYearToDate () {
 
 // Update to 1 yEar
 function update1Year() {
+
+    // Clearing Live button
+    clearInterval(setInterLive);
+
+    currentGraph = "1 Year";
 
     var url = "https://api.iextrading.com/1.0/stock/" + stockSymbl + "/chart/1y";
 
@@ -630,7 +674,7 @@ function update1Year() {
                 });
 
                 // Updating Price, lineColor, data, and result
-                updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, data, result);
+                updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, data, result, currentGraph);
             });
         }
     });
@@ -638,6 +682,11 @@ function update1Year() {
 
 // Change graph to 2 year
 function update2Year() {
+
+    // Clearing Live button
+    clearInterval(setInterLive);
+
+    currentGraph = "2 Years";
 
     var url = "https://api.iextrading.com/1.0/stock/"  + stockSymbl + "/chart/2y";
 
@@ -676,7 +725,7 @@ function update2Year() {
                 });
 
                 // Updating Price, lineColor, data, and result
-                updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, data, result);
+                updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, data, result, currentGraph);
             });
         }
     });
@@ -684,6 +733,11 @@ function update2Year() {
 
 // Change graph to 5 Year
 function update5Year() {
+
+    // Clearing Live button
+    clearInterval(setInterLive);
+
+    currentGraph = "5 Years";
 
     var url = "https://api.iextrading.com/1.0/stock/"  + stockSymbl + "/chart/5y";
 
@@ -723,7 +777,7 @@ function update5Year() {
                 });
 
                 // Updating Price, lineColor, data, and result
-                updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, data, result);
+                updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, data, result, currentGraph);
             });
         }
     });

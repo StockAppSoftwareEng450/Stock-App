@@ -213,6 +213,7 @@ $(document).ready(function() {
                             var headlineIndex = "headline";
                             var sourceIndex = "source";
                             var datetimeIndex = "datetime";
+                            var linkIndex = "linkIndex";
 
                             var parser = data[i].datetime;
                             var indexNumber = parser.indexOf("T");
@@ -221,15 +222,17 @@ $(document).ready(function() {
                             headlineIndex = headlineIndex + i;
                             sourceIndex =  sourceIndex + i;
                             datetimeIndex = datetimeIndex + i;
+                            linkIndex = linkIndex + i;
 
-                            // console.log(headlineIndex);
-                            // console.log(data[i].headline);
-                            // console.log(data[i].source);
-                            // console.log(dataParsed);
+                            var revLink = "http://www." + data[i].source + ".com";
+                            console.log("source:" + data[i].source);
+                            console.log("revLink:" + revLink);
 
-                            document.getElementById(headlineIndex).href = data[i].url;
+
+                            document.getElementById(linkIndex).href = data[i].url;
                             document.getElementById(headlineIndex).innerHTML = data[i].headline;
                             document.getElementById(sourceIndex).innerHTML = data[i].source;
+                            document.getElementById(sourceIndex).href = revLink;
                             document.getElementById(datetimeIndex).innerHTML = dataParsed;
                         }
                     });
