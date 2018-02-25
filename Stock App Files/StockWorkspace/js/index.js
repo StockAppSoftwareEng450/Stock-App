@@ -26,10 +26,11 @@ function getFullPortfolio(){
 
             var refPortfolio = firebase.database().ref("Portfolios");
             refPortfolio.orderByChild("userId").equalTo(user.uid).once("value", function(snapshot) {
-                var result = [];
+
                 if(snapshot.exists()){
                     snapshot.forEach(function (value){
                         var help = [];
+                        help["pk"] = value.key;
                         help["userId"] = value.child("userId").val();
                         help["stockSymbol"] = value.child("stockSymbol").val();
                         help["date"] = value.child("date").val();
@@ -37,6 +38,11 @@ function getFullPortfolio(){
                         help["quantity"] = value.child("quantity").val();
 
                         fullPortfolio.push(help);
+                    });
+
+                    //sort in order stocksymbole
+                    fullPortfolio.sort( function (a, b) {
+                        return a.stockSymbol.localeCompare(b.stockSymbol);
                     });
                 }
             }).then(function(){
@@ -49,7 +55,9 @@ function getFullPortfolio(){
                 var table = document.getElementById("portfolioTable");
                 for(var i = 0; i < fullPortfolio.length; i++){
                     var stockTransferURL = "IndividualStockPage.html?stock=" + fullPortfolio[i].stockSymbol + "#";
+
                     var row = table.insertRow(i+1);
+                    row.setAttribute("data-pk", fullPortfolio[i].pk);
 
                     stockSymbolIndexP = fullPortfolio[i].stockSymbol;
 
@@ -98,24 +106,14 @@ function getFullPortfolio(){
 
                     var buttonDelete = document.createElement("BUTTON");
                     buttonDelete.appendChild(document.createTextNode("Delete"));
-                    buttonDelete.addEventListener('click', function(button){
+                    buttonDelete.addEventListener('click', function (button) {
                         var row = button.path[2];
                         var stockSymbol = row.firstChild.firstChild.innerHTML;
 
                         //removes the row from table
                         row.parentNode.removeChild(row);
+                        firebase.database().ref("Portfolios/" + row.getAttribute("data-pk")).remove();
 
-                        //removes the firebase portfolio entry for this user and stock
-                        var ref = firebase.database().ref("Portfolios");
-                        ref.orderByChild("userId").equalTo(user.uid).once("value", function(snapshot) {
-                            if(snapshot.exists()){
-                                snapshot.forEach(function (value){
-                                    if(stockSymbol === value.child("stockSymbol").val()){
-                                        firebase.database().ref("Portfolios/" + value.key).remove();
-                                    }
-                                });
-                            }
-                        });
                     });
                     cell8.appendChild(buttonDelete);
 
@@ -142,10 +140,16 @@ function getFullWatchlist(){
                 if(snapshot.exists()){
                     snapshot.forEach(function (value){
                         var help = [];
+                        help["pk"] = value.key;
                         help["userId"] = value.child("userId").val();
                         help["stockSymbol"] = value.child("stockSymbol").val();
 
                         fullWatchlist.push(help);
+                    });
+
+                    //sort in order stocksymbole
+                    fullWatchlist.sort( function (a, b) {
+                        return a.stockSymbol.localeCompare(b.stockSymbol);
                     });
                 }
             }).then(function(){
@@ -158,7 +162,9 @@ function getFullWatchlist(){
                 var table = document.getElementById("watchlistTable");
                 for(var i=0; i<fullWatchlist.length;i++){
                     var stockTransferURL = "IndividualStockPage.html?stock=" + fullWatchlist[i].stockSymbol + "#";
+
                     var row = table.insertRow(i+1);
+                    row.setAttribute("data-pk", fullWatchlist[i].pk);
 
                     stockSymbolIndexW = fullWatchlist[i].stockSymbol;
                     console.log("W:" + stockSymbolIndexW);
@@ -192,25 +198,15 @@ function getFullWatchlist(){
 
                     var buttonDelete = document.createElement("BUTTON");
                     buttonDelete.appendChild(document.createTextNode("Delete"));
-                    buttonDelete.addEventListener('click', function(button){
-                            var row = button.path[2];
-                            var stockSymbol = row.firstChild.firstChild.innerHTML;
+                    buttonDelete.addEventListener('click', function (button) {
+                        var row = button.path[2];
+                        var stockSymbol = row.firstChild.firstChild.innerHTML;
 
-                            //removes the row from table
-                            row.parentNode.removeChild(row);
+                        //removes the row from table
+                        row.parentNode.removeChild(row);
+                        firebase.database().ref("Watchlists/" + row.getAttribute("data-pk")).remove();
 
-                            //removes the firebase portfolio entry for this user and stock
-                            var ref = firebase.database().ref("Watchlists");
-                            ref.orderByChild("userId").equalTo(user.uid).once("value", function(snapshot) {
-                                if(snapshot.exists()){
-                                    snapshot.forEach(function (value){
-                                        if(stockSymbol === value.child("stockSymbol").val()){
-                                            firebase.database().ref("Watchlists/" + value.key).remove();
-                                        }
-                                    });
-                                }
-                            });
-                        });
+                    });
                     cell6.appendChild(buttonDelete);
                 }
             });

@@ -148,7 +148,7 @@
             <br>
 
             <!-- Add Stock to Portfolio and sync to Firebase -->
-            <div id="AddStocktoPortfolio">
+            <div id="AddStocktoPortfolio" data-hidden="true">
 
                 <!-- Date Purchased -->
                 <label for="datePortfolio" style=" margin-top: 6px; margin-left: 6px; ">Date Purchased</label>
@@ -172,6 +172,16 @@
 
                 <!-- Enter button -->
                 <button onclick="getStockDateAndQuantity()" class="enterButton" id="enterButtonAddToStock">Enter</button>
+
+                <!-- Inserting table -->
+                <table id="portfolioTable" class="table">
+                    <tr>
+                        <th scope="col">Date Purchased</th>         <!-- 0 -->
+                        <th scope="col">Purchase Price</th>         <!-- 1 -->
+                        <th scope="col">Quantity</th>               <!-- 2 -->
+                        <th scope="col">Delete?</th>                <!-- 3 -->
+                    </tr>
+                </table>
 
             </div>
         </div>
