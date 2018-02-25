@@ -515,11 +515,13 @@ function getStockDateAndQuantity() {
     if (!date || !quantity || date == null || quantity == null) {
         // MSG to the User Please Enter
         document.getElementById("addToPorfolioError").style.visibility = "visible";
+        document.getElementById("addToPorfolioError").style.display = "block";
 
         // console.log("Please enter valid Add to portfolio inputs");
 
     } else {
         document.getElementById("addToPorfolioSuccess").style.visibility = "visible";
+        document.getElementById("addToPorfolioSuccess").style.display = "block";
 
         //user put in a price?
         var closePriceForDate = price;
@@ -584,7 +586,9 @@ function getStockDateAndQuantity() {
 function AddToPortfolio() {
     var user = firebase.auth().currentUser;
 
+    document.getElementById("addToPorfolioError").style.display = "none";
     document.getElementById("addToPorfolioError").style.visibility = "hidden";
+
 
     if (document.getElementById("AddStocktoPortfolio").getAttribute("data-hidden") === "true") {
 
@@ -620,6 +624,9 @@ function AddToPortfolio() {
 
                 var row = header.insertRow(0);
 
+                //document.getElementById("myBtn").style.height =+ "50px";
+                var divHeight = document.getElementById("AddStocktoPortfolio").style.height;
+
                 // Date purchased
                 var cell1 = row.insertCell((0));
                 cell1.innerHTML = "<b>Date Purchased</b>";
@@ -637,6 +644,10 @@ function AddToPortfolio() {
                 cell4.innerHTML = "<b>Delete?</b>";
 
                 for (var i = 0; i < fullPortfolio.length; i++) {
+
+                    divHeight = divHeight + 200;
+                    document.getElementById("AddStocktoPortfolio").style.height = divHeight;
+
                     row = body.insertRow(i);
 
                     row.setAttribute("data-pk", fullPortfolio[i].pk);

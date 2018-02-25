@@ -16,6 +16,11 @@ $(document).ready(function() {
 var stockSymbolIndexP = null;
 var stockSymbolIndexW = null;
 
+var cardArrayP = [];
+var cardArrayW = [];
+
+var fourCardArray = [];
+
 function getFullPortfolio(){
 
     //getting portfolio information and save it
@@ -60,6 +65,7 @@ function getFullPortfolio(){
                     row.setAttribute("data-pk", fullPortfolio[i].pk);
 
                     stockSymbolIndexP = fullPortfolio[i].stockSymbol;
+                    cardArrayP.push(fullPortfolio[i].stockSymbol);
 
                     // Stock Symbol
                     var cell0 = row.insertCell((0));
@@ -167,7 +173,7 @@ function getFullWatchlist(){
                     row.setAttribute("data-pk", fullWatchlist[i].pk);
 
                     stockSymbolIndexW = fullWatchlist[i].stockSymbol;
-                    console.log("W:" + stockSymbolIndexW);
+                    cardArrayW.push(fullWatchlist[i].stockSymbol);
 
                     // stock symbol
                     var cell0 = row.insertCell((0));
@@ -215,6 +221,8 @@ function getFullWatchlist(){
             window.location.href = "login.html";
         }
     });
+
+    CardFunction();
 }
 
 // Unicode for UP and DOWN arrows
@@ -313,4 +321,121 @@ function getWatchlistValue(stockSymbolIndexW, currentPCell, threeMonthCell, sixM
 /** Percent Change **/
 function percentChange (y1, y2) {
     return (((y2 - y1) / y1)*100)
+}
+
+
+
+/** Top Cards **/
+function CardFunction() {
+
+    var timeResult = stockMarketTime();
+
+    console.log("portfolio",cardArrayP);
+    console.log("watchlist",cardArrayW);
+
+    // Determine if portfolio is empty
+    if (cardArrayP.length > 0){
+        console.log("Portfolio empty");
+    } else {
+
+        // Finding the length of the items in portfolio
+        var pLength = cardArrayP.length;
+        var wLength = cardArrayW.length;
+
+        console.log("portfolio",pLength);
+        console.log("watchlist",wLength);
+
+        // if not then determine if it is greater than four
+        if (pLength >= 4 ){
+            fourCardArray.push(cardArrayP[0]);
+            fourCardArray.push(cardArrayP[1]);
+            fourCardArray.push(cardArrayP[2]);
+            fourCardArray.push(cardArrayP[3]);
+
+            console.log(fourCardArray);
+        } else if(pLength === 3 && wLength >= 1 ) {
+            fourCardArray.push(cardArrayP[0]);
+            fourCardArray.push(cardArrayP[1]);
+            fourCardArray.push(cardArrayP[2]);
+            fourCardArray.push(cardArrayW[0]);
+
+            console.log(fourCardArray);
+        } else if(pLength === 2 && wLength >= 2) {
+            fourCardArray.push(cardArrayP[0]);
+            fourCardArray.push(cardArrayP[1]);
+            fourCardArray.push(cardArrayW[0]);
+            fourCardArray.push(cardArrayW[1]);
+
+            console.log(fourCardArray);
+        } else {
+            console.log(fourCardArray);
+        }
+    }
+
+    // if (timeResult === "open"){
+    //     // Load SetTimeout First then SetInterval
+    //     setTimeout(function() {
+    //         $.ajax({
+    //             url: "https://api.iextrading.com/1.0/stock/" +  + "/quote",
+    //             success: function(data) {
+    //                 console.log(data);
+    //                 var response = (data);
+    //                 document.getElementById("CompanyName").innerHTML = response.companyName;
+    //                 document.getElementById("StockPrice").innerHTML = response.latestPrice;
+    //                 console.log(response.latestPrice);
+    //             }
+    //         });
+    //     });
+    //
+    //     setInterval(function() {
+    //         $.ajax({
+    //             url: "https://api.iextrading.com/1.0/stock/" +  + "/quote",
+    //             success: function(data) {
+    //                 console.log(data);
+    //                 var response = (data);
+    //                 document.getElementById("CompanyName").innerHTML = response.companyName;
+    //                 document.getElementById("StockPrice").innerHTML = response.latestPrice;
+    //                 console.log(response.latestPrice);
+    //             }
+    //         });
+    //
+    //         // Change me later
+    //     }, 3000);
+    // } else {
+    //     setTimeout(function() {
+    //         $.ajax({
+    //             url: "https://api.iextrading.com/1.0/stock/" +  + "/quote",
+    //             success: function(data) {
+    //                 console.log(data);
+    //                 var response = (data);
+    //                 document.getElementById("CompanyName").innerHTML = response.companyName;
+    //                 document.getElementById("StockPrice").innerHTML = response.latestPrice;
+    //                 console.log(response.latestPrice);
+    //             }
+    //         });
+    //     });
+    // }
+}
+
+/** Calculate if Stock Market is open **/
+function stockMarketTime() {
+
+    /** Only 9:30am - 4:00pm M-F **/
+    var date = new Date();
+    var today = date.getDay();
+
+    if (today >= 1 && today <= 5) {
+
+        // Determine the time
+        var time = date.getHours();
+        if (time >= 9 && time <= 16) {
+            return "open";
+        } else {
+            return "closed";
+        }
+
+    } else {
+        console.log("closed");
+        return "closed";
+    }
 }

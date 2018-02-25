@@ -151,7 +151,7 @@
             <div id="AddStocktoPortfolio" data-hidden="true">
 
                 <!-- Date Purchased -->
-                <label for="datePortfolio" style=" margin-top: 6px; margin-left: 6px; ">Date Purchased</label>
+                <label for="datePortfolio" style=" margin-top: 6px; margin-left: 6px;">Date Purchased</label>
                 <input type="date" name="date" id="datePortfolio"><br>
 
                 <!-- Price Purchased -->
@@ -165,24 +165,23 @@
                 <br>
 
                 <!-- Displaying error MSG -->
-                <div id="addToPorfolioError">Please enter valid inputs</div>
+                <div id="addToPorfolioError" style="display: none">Please enter valid inputs</div>
 
                 <!-- Displaying Added MSG -->
-                <div id="addToPorfolioSuccess">Added Stock To Portfolio</div>
+                <div id="addToPorfolioSuccess" style="display: none;">Added Stock To Portfolio</div>
 
                 <!-- Enter button -->
                 <button onclick="getStockDateAndQuantity()" class="enterButton" id="enterButtonAddToStock">Enter</button>
 
                 <!-- Inserting table -->
-                <table id="portfolioTable" class="table">
-                    <tr>
+                <table id="portfolioTable" class="table" style="font-size: smaller;">
+                    <tr id="portfolioTableCol">
                         <th scope="col">Date Purchased</th>         <!-- 0 -->
                         <th scope="col">Purchase Price</th>         <!-- 1 -->
                         <th scope="col">Quantity</th>               <!-- 2 -->
                         <th scope="col">Delete?</th>                <!-- 3 -->
                     </tr>
                 </table>
-
             </div>
         </div>
 

@@ -481,7 +481,7 @@ function update3Month() {
     // Clearing Live button
     clearInterval(setInterLive);
 
-    currentGraph = "3 Month";
+    currentGraph = "3 Months";
 
     var url = "https://api.iextrading.com/1.0/stock/" + stockSymbl + "/chart/3m";
 
@@ -532,7 +532,7 @@ function update6Month () {
     // Clearing Live button
     clearInterval(setInterLive);
 
-    currentGraph = "6 Month";
+    currentGraph = "6 Months";
 
     var url = "https://api.iextrading.com/1.0/stock/" + stockSymbl + "/chart/6m";
 
