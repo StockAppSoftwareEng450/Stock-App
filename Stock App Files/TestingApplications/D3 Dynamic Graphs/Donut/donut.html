@@ -10,23 +10,48 @@
 </head>
 <body>
 
-<div id="chart"></div>
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fa fa-pie-chart"></i>
+        Pie Chart Example
+    </div>
+    <div class="card-body">
+        <div id= "hart" width="1000" height="1000"></div>
+    </div>
+    <div class="card-footer small text-muted">
+        Updated yesterday at 11:59 PM
+    </div>
+</div>
+
+<!--div id="chart"></div>-->
 
 <script>
+
+    var data = [
+        {StockSymbol: "A", Quantity:32},
+        {StockSymbol: "B", Quantity:53},
+        {StockSymbol: "C", Quantity:23},
+        {StockSymbol: "D", Quantity:3},
+        {StockSymbol: "E", Quantity:45},
+        {StockSymbol: "F", Quantity:28},
+        {StockSymbol: "G", Quantity:30},
+        {StockSymbol: "H", Quantity:54},
+        {StockSymbol: "I", Quantity:22},
+        {StockSymbol: "J", Quantity:44},
+        {StockSymbol: "K", Quantity:72},
+    ];
     var donut = donutChart()
         .width(960)
         .height(500)
         .cornerRadius(3) // sets how rounded the corners are on each slice
         .padAngle(0.015) // effectively dictates the gap between slices
-        .variable('Probability')
-        .category('Species');
+        .variable('Quantity')
+        .category('StockSymbol');
 
-    d3.tsv('species.tsv', function(error, data) {
-        if (error) throw error;
-        d3.select('#chart')
+
+        d3.select('#hart')
             .datum(data) // bind data to the div
             .call(donut); // draw chart in div
-    });
 
 </script>
 

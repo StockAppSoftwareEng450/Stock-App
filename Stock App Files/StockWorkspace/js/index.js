@@ -23,7 +23,9 @@ var returnedCompanyName = null;
 var returnedStockPrice = null;
 
 var fourCardArray = [];
-var j = 0;
+var donutQuantityArray = [{StockSymbol: "A", Quantity:32},
+    {StockSymbol: "B", Quantity:53},
+    {StockSymbol: "C", Quantity:23},];
 
 var returnedCardArray = [];
 
@@ -97,6 +99,9 @@ function getFullPortfolio(){
                     // Quantity
                     var cell4 = row.insertCell((4));
                     cell4.innerHTML = fullPortfolio[i].quantity;
+
+                    //entering info to donutQuantityArray
+                    donutQuantityArray[i] = {StockSymbol:fullPortfolio[i].stockSymbol,Quantity:fullPortfolio[i].quantity}
 
                     // Purchased Equity
                     var cell5 = row.insertCell((5));
@@ -289,6 +294,26 @@ function getPortfolioValue(stockSymbol, keyValue, cell0, cell1, cell2, cell3, ot
         }, 3000);
     }
 }
+function fillDonut(){
+    var donut = donut()
+        .width(200)
+        .height(200)
+        .cornerRadius(3) // sets how rounded the corners are on each slice
+        .padAngle(0.015) // effectively dictates the gap between slices
+        .variable('Quantity')
+        .category('StockSymbol');
+
+
+    d3.select('#Chart')
+        .datum(donutQuantityArray) // bind data to the div
+        .call(donut); // draw chart in div
+}
+
+
+
+
+
+
 
 /** Grabbing Watchlist Values **/
 function getWatchlistValue(stockSymbolIndexW, currentPCell, threeMonthCell, sixMonthCell, oneYearCell) {
