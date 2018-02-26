@@ -29,6 +29,39 @@
     <!-- Auto complete  -->
     <link rel="stylesheet" href="css/autocomplete.css">
 
+    <!--&lt;!&ndash; Linking D3 Index Graph CSS &ndash;&gt;-->
+    <!--<link rel="stylesheet" href="css/d3Index.css">-->
+
+    <style>
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: #000;
+            shape-rendering: crispEdges;
+        }
+
+        .grid path,
+        .grid line {
+            fill: none;
+            stroke: rgba(0, 0, 0, 0.25);
+            shape-rendering: crispEdges;
+        }
+
+        .x.axis path {
+            display: none;
+        }
+
+        .line {
+            fill: none;
+            stroke-width: 2.5px;
+        }
+
+        #percentChange {
+            /*background: cornsilk;*/
+            z-index: 2;
+        }
+    </style>
+
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -109,8 +142,8 @@
                         <div class="mr-5">
 
                             <!-- Testing Stock Code -->
-                            <div id="CompanyName"></div>
-                            <div id="StockPrice"></div>
+                            <div id="CompanyName1"></div>
+                            <div id="StockPrice1"></div>
                         </div>
                     </div>
 
@@ -128,14 +161,11 @@
                     <div class="card-body">
                         <div class="mr-5">
 
-
                             <!-- Testing Stock Code -->
-                            <div id="CompanyNameCard2"></div>
-                            <div id="StockPriceCard2">
+                            <div id="CompanyName2"></div>
+                            <div id="StockPrice2">
                                 <!-- Entering TEST MSFT -->
                             </div>
-
-
                         </div>
                     </div>
                     <a href="#" class="card-footer text-white clearfix small z-1">
@@ -151,14 +181,11 @@
                     <div class="card-body">
                         <div class="mr-5">
 
-
                             <!-- Testing Stock Code -->
-                            <div id="CompanyNameCard3"></div>
-                            <div id="StockPriceCard3">
+                            <div id="CompanyName3"></div>
+                            <div id="StockPrice3">
                                 <!-- Entering TEST TSLA -->
                             </div>
-
-
                         </div>
                     </div>
                     <a href="#" class="card-footer text-white clearfix small z-1">
@@ -174,14 +201,11 @@
                     <div class="card-body">
                         <div class="mr-5">
 
-
                             <!-- Testing Stock Code -->
-                            <div id="CompanyNameCard4"></div>
-                            <div id="StockPriceCard4">
+                            <div id="CompanyName4"></div>
+                            <div id="StockPrice4">
                                 <!-- Entering TEST TSLA -->
                             </div>
-
-
                         </div>
                     </div>
                     <a href="#" class="card-footer text-white clearfix small z-1">
@@ -195,7 +219,7 @@
         </div>
 
         <!-- Area Chart Example -->
-        <div class="card mb-3">
+        <div class="card mb-3" style="display: none">
             <div class="card-header">
                 <i class="fa fa-area-chart"></i>
                 Area Chart Example
@@ -205,6 +229,17 @@
             </div>
             <div class="card-footer small text-muted">
                 Updated yesterday at 11:59 PM
+            </div>
+        </div>
+
+        <!-- D3 Chart  -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-area-chart"></i>
+                Percent Change Graph
+            </div>
+            <div class="card-body">
+                <div id="PortfolioGrowth" style="height: 100%; width: 100%"></div>
             </div>
         </div>
 
@@ -356,12 +391,12 @@
 <script src="vendor/popper/popper.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 
+<!-- D3 -->
+<script src="../TestingApplications/CommonLinkedFiles/D3v3.js"></script>
+
 <!-- Plugin JavaScript -->
 <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 <script src="vendor/chart.js/Chart.min.js"></script>
-
-<!-- Custom scripts for this template -->
-<script src="js/sb-admin.min.js"></script>
 
 <!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
@@ -369,7 +404,9 @@
 <!-- Firebase Key init -->
 <script src="js/FirebaseInit.js"></script>
 
-<!-- @TODO Add generalization for individual input for instance any stock any where transfers to stock page. -->
+<!-- Useful scrips -->
+<script src="js/UsefulScripts.js"></script>
+
 <!-- JS that takes Search for Stock input a -->
 <script src="js/index.js"></script>
 
@@ -382,11 +419,12 @@
 <!-- Testing the Search script -->
 <script src="js/SearchForStock.js"></script>
 
-<!-- Stock API References  -->
-<script src="../TestingApplications/AjaxRequestTesting/StockReply.js"></script>
-<script src="../TestingApplications/AjaxRequestTesting/StockReply2.js"></script>
-<script src="../TestingApplications/AjaxRequestTesting/StockReply3.js"></script>
-<script src="../TestingApplications/AjaxRequestTesting/StockReply4.js"></script>
+<!-- Custom scripts for this template -->
+<script src="js/sbAdmin.js"></script>
+
+<!-- D3 Percent Change Graph -->
+<script src="js/D3PortfolioGrowth.js"></script>
+
 
 </body>
 

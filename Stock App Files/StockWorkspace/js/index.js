@@ -19,7 +19,16 @@ var stockSymbolIndexW = null;
 var cardArrayP = [];
 var cardArrayW = [];
 
+var returnedCompanyName = null;
+var returnedStockPrice = null;
+
 var fourCardArray = [];
+var j = 0;
+
+var returnedCardArray = [];
+
+var companyNameVar = "CompanyName";
+var stockPriceVar = "StockPrice";
 
 function getFullPortfolio(){
 
@@ -54,7 +63,7 @@ function getFullPortfolio(){
                 //work with data in here ... fill donut and so on
                 //array looks like this:
                 //[[userId, stockSymbol, date, price, quantity],[userId, stockSymbol, date, price, quantity],...]
-                console.log(fullPortfolio);
+                // console.log(fullPortfolio);
 
                 //populate portfolioTable
                 var table = document.getElementById("portfolioTable");
@@ -66,6 +75,9 @@ function getFullPortfolio(){
 
                     stockSymbolIndexP = fullPortfolio[i].stockSymbol;
                     cardArrayP.push(fullPortfolio[i].stockSymbol);
+
+                    // Send Symbols to D3 percent Change graph
+                    getPortfolioGrowth(fullPortfolio[i].stockSymbol);
 
                     // Stock Symbol
                     var cell0 = row.insertCell((0));
@@ -89,7 +101,7 @@ function getFullPortfolio(){
                     // Purchased Equity
                     var cell5 = row.insertCell((5));
                     var purchasedEquity = fullPortfolio[i].price * fullPortfolio[i].quantity;
-                    console.log("Purchased equity: " + purchasedEquity);
+                    // console.log("Purchased equity: " + purchasedEquity);
                     purchasedEquity = purchasedEquity.toFixed(2);
                     cell5.innerHTML = "$" + purchasedEquity.toString();
 
@@ -162,7 +174,7 @@ function getFullWatchlist(){
                 //work with data in here ... fill donut and so on
                 //array looks like this:
                 //[[userId, stockSymbol],[userId, stockSymbol],...]
-                console.log(fullWatchlist);
+                // console.log(fullWatchlist);
 
                 //populate portfolioTable
                 var table = document.getElementById("watchlistTable");
@@ -174,6 +186,11 @@ function getFullWatchlist(){
 
                     stockSymbolIndexW = fullWatchlist[i].stockSymbol;
                     cardArrayW.push(fullWatchlist[i].stockSymbol);
+
+                    CardFunction();
+
+                    // // Send Symbols to D3 percent Change graph
+                    // getPercentChangeData(fullWatchlist[i].stockSymbol);
 
                     // stock symbol
                     var cell0 = row.insertCell((0));
@@ -222,7 +239,7 @@ function getFullWatchlist(){
         }
     });
 
-    CardFunction();
+
 }
 
 // Unicode for UP and DOWN arrows
@@ -248,6 +265,8 @@ function getPortfolioValue(stockSymbol, keyValue, cell0, cell1, cell2, cell3, ot
                 url: getValueUrl,
                 success: function (data) {
 
+                    // @TODO Create Tooltip for table
+
                     //Calculating percent change
                     var percent = percentChange(cell3, data.latestPrice);
 
@@ -256,6 +275,9 @@ function getPortfolioValue(stockSymbol, keyValue, cell0, cell1, cell2, cell3, ot
                     } else {
                         cell2.innerHTML = unicodeUp + " " + percent.toFixed(2) + "%";
                     }
+
+                    // Sending percent to Bar Chart
+                    grabPercentChange(stockSymbol, percent);
 
                     // Latest price
                     cell0.innerHTML = "$" + data.latestPrice.toFixed(2);
@@ -291,7 +313,6 @@ function getWatchlistValue(stockSymbolIndexW, currentPCell, threeMonthCell, sixM
         $.ajax({
             url: percentUrl,
             success: function (data) {
-                console.log("percent: " + data);
 
                 // 3 month percent change
                 if (data.month3ChangePercent < 0){
@@ -315,7 +336,7 @@ function getWatchlistValue(stockSymbolIndexW, currentPCell, threeMonthCell, sixM
                 }
             }
         });
-    }, 2000);
+    });
 }
 
 /** Percent Change **/
@@ -323,98 +344,167 @@ function percentChange (y1, y2) {
     return (((y2 - y1) / y1)*100)
 }
 
-
-
 /** Top Cards **/
 function CardFunction() {
 
     var timeResult = stockMarketTime();
 
-    console.log("portfolio",cardArrayP);
-    console.log("watchlist",cardArrayW);
+    // if the portfolio has 4 stocks push to cards
+    if (cardArrayP.length >= 4) {
 
-    // Determine if portfolio is empty
-    if (cardArrayP.length > 0){
-        console.log("Portfolio empty");
+        // Pushing all Stocks to the cards
+        for (var j = 0; j < cardArrayP.length; j++){
+            fourCardArray.push(cardArrayP[j]);
+        }
+
+        console.log("portfolio full")
     } else {
 
-        // Finding the length of the items in portfolio
-        var pLength = cardArrayP.length;
-        var wLength = cardArrayW.length;
+        // Less than four Stocks in the array
+        if (cardArrayP !== undefined || cardArrayP.length !== 0){
 
-        console.log("portfolio",pLength);
-        console.log("watchlist",wLength);
+            console.log("portfolio is not empty");
 
-        // if not then determine if it is greater than four
-        if (pLength >= 4 ){
-            fourCardArray.push(cardArrayP[0]);
-            fourCardArray.push(cardArrayP[1]);
-            fourCardArray.push(cardArrayP[2]);
-            fourCardArray.push(cardArrayP[3]);
+            // Pushing all available Stocks in the portfolio to the cards
+            for (var z = 0; z < cardArrayP.length; z++){
+                fourCardArray.push(cardArrayP[z]);
+            }
 
-            console.log(fourCardArray);
-        } else if(pLength === 3 && wLength >= 1 ) {
-            fourCardArray.push(cardArrayP[0]);
-            fourCardArray.push(cardArrayP[1]);
-            fourCardArray.push(cardArrayP[2]);
-            fourCardArray.push(cardArrayW[0]);
+            if (fourCardArray.length < 4) {
+                // Pushing all available Stocks in the portfolio to the cards
+                for (var y = 0; y < cardArrayW.length; y++){
+                    fourCardArray.push(cardArrayW[y]);
+                }
 
-            console.log(fourCardArray);
-        } else if(pLength === 2 && wLength >= 2) {
-            fourCardArray.push(cardArrayP[0]);
-            fourCardArray.push(cardArrayP[1]);
-            fourCardArray.push(cardArrayW[0]);
-            fourCardArray.push(cardArrayW[1]);
-
-            console.log(fourCardArray);
+                if (fourCardArray.length < 4) {
+                    console.log("nothing in either")
+                }
+            }
+        } else if(cardArrayW !== undefined || cardArrayW.length !== 0){
+            // Pushing all available Stocks in the portfolio to the cards
+            for (var y = 0; y < cardArrayW.length; y++){
+                fourCardArray.push(cardArrayW[y]);
+            }
         } else {
-            console.log(fourCardArray);
+
         }
+
     }
 
-    // if (timeResult === "open"){
-    //     // Load SetTimeout First then SetInterval
-    //     setTimeout(function() {
-    //         $.ajax({
-    //             url: "https://api.iextrading.com/1.0/stock/" +  + "/quote",
-    //             success: function(data) {
-    //                 console.log(data);
-    //                 var response = (data);
-    //                 document.getElementById("CompanyName").innerHTML = response.companyName;
-    //                 document.getElementById("StockPrice").innerHTML = response.latestPrice;
-    //                 console.log(response.latestPrice);
-    //             }
-    //         });
-    //     });
-    //
-    //     setInterval(function() {
-    //         $.ajax({
-    //             url: "https://api.iextrading.com/1.0/stock/" +  + "/quote",
-    //             success: function(data) {
-    //                 console.log(data);
-    //                 var response = (data);
-    //                 document.getElementById("CompanyName").innerHTML = response.companyName;
-    //                 document.getElementById("StockPrice").innerHTML = response.latestPrice;
-    //                 console.log(response.latestPrice);
-    //             }
-    //         });
-    //
-    //         // Change me later
-    //     }, 3000);
-    // } else {
-    //     setTimeout(function() {
-    //         $.ajax({
-    //             url: "https://api.iextrading.com/1.0/stock/" +  + "/quote",
-    //             success: function(data) {
-    //                 console.log(data);
-    //                 var response = (data);
-    //                 document.getElementById("CompanyName").innerHTML = response.companyName;
-    //                 document.getElementById("StockPrice").innerHTML = response.latestPrice;
-    //                 console.log(response.latestPrice);
-    //             }
-    //         });
-    //     });
-    // }
+    console.log(fourCardArray);
+
+    if (timeResult === "open"){
+
+        /** Stock Market Open SetTimeOut **/
+        setTimeout(function() {
+            for (j = 0; j < fourCardArray.length; j++){
+
+                $.ajax({
+                    url: "https://api.iextrading.com/1.0/stock/" + fourCardArray[j] + "/quote",
+                    success: function(data) {
+                        console.log(data);
+
+                        if (count === 0){
+                            companyNameVar = "CompanyName" + 1;
+                            stockPriceVar = "StockPrice" + 1;
+                        } else if (count === 1) {
+                            companyNameVar = "CompanyName" + 2;
+                            stockPriceVar = "StockPrice" + 2;
+                        } else if (count === 2) {
+                            companyNameVar = "CompanyName" + 3;
+                            stockPriceVar = "StockPrice" + 3;
+                        } else {
+                            companyNameVar = "CompanyName" + 4;
+                            stockPriceVar = "StockPrice" + 4;
+                        }
+
+                        console.log("companyName",companyNameVar);
+                        console.log("stockPrice",stockPriceVar);
+
+                        document.getElementById(companyNameVar).innerHTML = data.companyName;
+                        document.getElementById(stockPriceVar).innerHTML = data.latestPrice;
+
+                        count++;
+                    }
+                });
+            }
+        });
+
+        /** Stock Market Open setInterval **/
+        setInterval(function() {
+            for (j = 0; j < fourCardArray.length; j++){
+
+                $.ajax({
+                    url: "https://api.iextrading.com/1.0/stock/" + fourCardArray[j] + "/quote",
+                    success: function(data) {
+                        console.log(data);
+
+                        if (count === 0){
+                            companyNameVar = "CompanyName" + 1;
+                            stockPriceVar = "StockPrice" + 1;
+                        } else if (count === 1) {
+                            companyNameVar = "CompanyName" + 2;
+                            stockPriceVar = "StockPrice" + 2;
+                        } else if (count === 2) {
+                            companyNameVar = "CompanyName" + 3;
+                            stockPriceVar = "StockPrice" + 3;
+                        } else {
+                            companyNameVar = "CompanyName" + 4;
+                            stockPriceVar = "StockPrice" + 4;
+                        }
+
+                        console.log("companyName",companyNameVar);
+                        console.log("stockPrice",stockPriceVar);
+
+                        document.getElementById(companyNameVar).innerHTML = data.companyName;
+                        document.getElementById(stockPriceVar).innerHTML = data.latestPrice;
+
+                        count++;
+                    }
+                });
+            }
+
+            // Change me later
+        }, 3000);
+    } else {
+
+        /** Stock Market Closed SetTimeOut **/
+        var count = 0;
+
+        setTimeout(function() {
+            for (j = 0; j < fourCardArray.length; j++){
+
+                $.ajax({
+                    url: "https://api.iextrading.com/1.0/stock/" + fourCardArray[j] + "/quote",
+                    success: function(data) {
+                        console.log(data);
+
+                        if (count === 0){
+                            companyNameVar = "CompanyName" + 1;
+                            stockPriceVar = "StockPrice" + 1;
+                        } else if (count === 1) {
+                            companyNameVar = "CompanyName" + 2;
+                            stockPriceVar = "StockPrice" + 2;
+                        } else if (count === 2) {
+                            companyNameVar = "CompanyName" + 3;
+                            stockPriceVar = "StockPrice" + 3;
+                        } else {
+                            companyNameVar = "CompanyName" + 4;
+                            stockPriceVar = "StockPrice" + 4;
+                        }
+
+                        console.log("companyName",companyNameVar);
+                        console.log("stockPrice",stockPriceVar);
+
+                        document.getElementById(companyNameVar).innerHTML = data.companyName;
+                        document.getElementById(stockPriceVar).innerHTML = data.latestPrice;
+
+                        count++;
+                    }
+                });
+            }
+        });
+    }
 }
 
 /** Calculate if Stock Market is open **/

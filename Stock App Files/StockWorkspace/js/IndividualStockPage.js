@@ -133,7 +133,7 @@ $(document).ready(function () {
                             document.getElementById("CompanyName").innerHTML = revisedCompany + "...";
 
                             // Calling tooltip
-                            $('#CompanyName').tooltip({
+                            companyName.tooltip({
                                 title: hoverGetData(companyName),
                                 html: true,
                                 container: 'body'
@@ -152,7 +152,7 @@ $(document).ready(function () {
                         //alert(error.responseText);
                     }
                 });
-            }, 2000);
+            });
 
             // calling current stock symbol
             currentStockStats();
@@ -302,6 +302,14 @@ $(document).ready(function () {
 /** Deleting White Space Logo */
 function DisplayLogo() {
     var logoUrl = "https://storage.googleapis.com/iex/api/logos/" + resultStockSymbol.toUpperCase() + ".png";
+    // var backgroundUrl = "url(" + "'" + logoUrl +  "'" +  ")" + "no-repeat right top";
+    //
+    // console.log(backgroundUrl);
+    // // document.getElementsByClassName('.blog-card .photo.photo1').backgroundImage = backgroundUrl;
+    // document.getElementById('#blog-cardPic').style.background = backgroundUrl;
+    //
+    // // document.body.style.background = "#f3f3f3 url('img_tree.png') no-repeat right top";
+
 
     // Converting URL to Base64 with the use of a proxy
     var getDataUri = function (targetUrl, callback) {
@@ -344,9 +352,6 @@ function DisplayLogo() {
 
             // This size can change
             canvas.height = canvas.width = 50;
-
-            // console.log(canvas.height);
-            // console.log(canvas.width);
 
             // Updating modified id to display
             document.getElementById("modified").style.display = "block";
@@ -445,7 +450,7 @@ function peersStatsUrlGrab(name) {
                 }
             }
         });
-    }, 2000);
+    }, 250);
 
     /** Grabbing 6m% and 1y% for Current Stock **/
     var stockSymbolStatusURL = "https://api.iextrading.com/1.0/stock/" + name + "/stats";
@@ -496,7 +501,7 @@ function peersStatsUrlGrab(name) {
                 }
             }
         });
-    }, 2000);
+    });
 }
 
 /** GET the date and quantity of stock price (On enter button) **/
@@ -578,7 +583,7 @@ function getStockDateAndQuantity() {
                 // generic CSS
                 // console.log("empty");
             }
-        }, 2000);
+        });
     }
 }
 
@@ -809,8 +814,6 @@ function currentStockStats() {
             url: stockSymbolStatusURL,
             success: function (data) {
 
-                // console.log(data);
-
                 // Bold the percent sign
                 var percentSign = '%';
                 percentSign = percentSign.bold();
@@ -856,6 +859,10 @@ function currentStockStats() {
 
 /** Updating price every 3 seconds **/
 function setIntervalPrice(resultUrl) {
+
+    var result = stockMarketTime();
+    console.log(result);
+
     setInterval(function () {
         $.ajax({
             url: resultUrl,
@@ -880,7 +887,7 @@ function setIntervalPrice(resultUrl) {
     }, 2500);
 }
 
-/** Updating price every 3 seconds **/
+/** Updating price once **/
 function setTimeoutPrice(resultUrl) {
     setTimeout(function () {
         $.ajax({
