@@ -108,7 +108,14 @@
         </ol>
 
         <h1>Trending Stocks</h1>
-
+        <table id="trendingTable" class="table" style="font-size: smaller;">
+            <tr id="trendingTableCol">
+                <th scope="col">Date Purchased</th>         <!-- 0 -->
+                <th scope="col">Purchase Price</th>         <!-- 1 -->
+                <th scope="col">Quantity</th>               <!-- 2 -->
+                <th scope="col">Delete?</th>                <!-- 3 -->
+            </tr>
+        </table>
     </div>
     <!-- /.container-fluid -->
 
@@ -176,6 +183,8 @@
 
 <!-- Settings Js file -->
 <script src="js/settings.js"></script>
+
+<script src="js/trendingStocks.js"></script>
 
 </body>
 
