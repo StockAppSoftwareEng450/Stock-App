@@ -6,6 +6,7 @@ $(document).ready(function() {
             // User is signed in.
             getFullPortfolio();
             getFullWatchlist();
+            fillDonut();
         } else {
             // No user is signed in.
             window.location.href = "login.html";
@@ -295,7 +296,7 @@ function getPortfolioValue(stockSymbol, keyValue, cell0, cell1, cell2, cell3, ot
     }
 }
 function fillDonut(){
-    var donut = donut()
+    var donut = donutChart()
         .width(200)
         .height(200)
         .cornerRadius(3) // sets how rounded the corners are on each slice
@@ -304,7 +305,7 @@ function fillDonut(){
         .category('StockSymbol');
 
 
-    d3.select('#Chart')
+    d3.select('#art')
         .datum(donutQuantityArray) // bind data to the div
         .call(donut); // draw chart in div
 }

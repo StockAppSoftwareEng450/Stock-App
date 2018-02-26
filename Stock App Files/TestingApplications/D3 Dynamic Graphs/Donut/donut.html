@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Reusable Donut Chart in D3 v4</title>
-    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
     <link rel="stylesheet" href="donut.css">
     <script src="donut.js"></script>
@@ -13,7 +13,7 @@
 <div class="card mb-3">
     <div class="card-header">
         <i class="fa fa-pie-chart"></i>
-        Pie Chart Example
+        Pie Chart Example test bitch
     </div>
     <div class="card-body">
         <div id= "hart" width="1000" height="1000"></div>
@@ -41,8 +41,8 @@
         {StockSymbol: "K", Quantity:72},
     ];
     var donut = donutChart()
-        .width(960)
-        .height(500)
+        .width(1000)
+        .height(1000)
         .cornerRadius(3) // sets how rounded the corners are on each slice
         .padAngle(0.015) // effectively dictates the gap between slices
         .variable('Quantity')
