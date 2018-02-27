@@ -1,3 +1,10 @@
+
+
+
+d3.select('#hart')
+    .datum(data) // bind data to the div
+    .call(donut); // draw chart in div
+
 function donutChart() {
     var width,
         height,

@@ -133,7 +133,7 @@ $(document).ready(function () {
                             document.getElementById("CompanyName").innerHTML = revisedCompany + "...";
 
                             // Calling tooltip
-                            companyName.tooltip({
+                            $('#CompanyName').tooltip({
                                 title: hoverGetData(companyName),
                                 html: true,
                                 container: 'body'

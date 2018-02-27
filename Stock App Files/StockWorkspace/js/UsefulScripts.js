@@ -38,5 +38,11 @@ function hoverGetData(companyName) {
     return localData;
 }
 
-var purchasedEquity = 1156 + 529;
-var currentEquity = 5865.00 + 2109.79;
+
+/** Unicode for UP and DOWN **/
+var unicodeUp = '\u25B2';
+var unicodeDown = '\u25BC';
+
+// Adding color
+unicodeUp = unicodeUp.fontcolor("green");
+unicodeDown = unicodeDown.fontcolor("red");
