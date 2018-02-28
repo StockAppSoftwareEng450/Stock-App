@@ -1,24 +1,7 @@
-function scrapeStock(){
+var url = "https://cors-anywhere.herokuapp.com/" + "http://money.cnn.com/";
+$.get(url, function(response) {
+    //var cnnTable = response.replace(/<strong class="e63d1fd7">FCX/g).match(/FCX/g).length;
+    //console.log(cnnTable);
+    document.body.innerHTML = response;
+});
 
-
-    var getDataUri = function (targetUrl, callback) {
-        var xhr = new XMLHttpRequest();
-        xhr.onload = function () {
-            var reader = new FileReader();
-            reader.onloadend = function () {
-                callback(reader.result);
-            };
-            reader.readAsDataURL(xhr.response);
-        };
-        var proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-        xhr.open('GET', proxyUrl + targetUrl);
-        xhr.responseType = 'blob';
-        xhr.send();
-    };
-
-    // $.get('http://www.wallstreetsurvivor.com/investing-ideas/trending', function(response) {
-    //     console.log(response);
-    // });
-}
-
-scrapeStock();
