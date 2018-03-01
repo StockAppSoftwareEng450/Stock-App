@@ -148,10 +148,10 @@
             <br>
 
             <!-- Add Stock to Portfolio and sync to Firebase -->
-            <div id="AddStocktoPortfolio">
+            <div id="AddStocktoPortfolio" data-hidden="true">
 
                 <!-- Date Purchased -->
-                <label for="datePortfolio" style=" margin-top: 6px; margin-left: 6px; ">Date Purchased</label>
+                <label for="datePortfolio" style=" margin-top: 6px; margin-left: 6px;">Date Purchased</label>
                 <input type="date" name="date" id="datePortfolio"><br>
 
                 <!-- Price Purchased -->
@@ -165,14 +165,23 @@
                 <br>
 
                 <!-- Displaying error MSG -->
-                <div id="addToPorfolioError">Please enter valid inputs</div>
+                <div id="addToPorfolioError" style="display: none">Please enter valid inputs</div>
 
                 <!-- Displaying Added MSG -->
-                <div id="addToPorfolioSuccess">Added Stock To Portfolio</div>
+                <div id="addToPorfolioSuccess" style="display: none;">Added Stock To Portfolio</div>
 
                 <!-- Enter button -->
                 <button onclick="getStockDateAndQuantity()" class="enterButton" id="enterButtonAddToStock">Enter</button>
 
+                <!-- Inserting table -->
+                <table id="portfolioTable" class="table" style="font-size: smaller;">
+                    <tr id="portfolioTableCol">
+                        <th scope="col">Date Purchased</th>         <!-- 0 -->
+                        <th scope="col">Purchase Price</th>         <!-- 1 -->
+                        <th scope="col">Quantity</th>               <!-- 2 -->
+                        <th scope="col">Delete?</th>                <!-- 3 -->
+                    </tr>
+                </table>
             </div>
         </div>
 
@@ -326,32 +335,9 @@
                     <h3>News</h3>
                     <hr>
 
-                    <!-- News -->
-                    <!--<ul>-->
-                        <!--<li>-->
-                            <!--<a id="headline0"></a>-->
-                            <!--<div id="datetime0"></div>-->
-                            <!--<div id="source0"></div>-->
-                        <!--</li>-->
-                    <!--</ul>-->
-                    <!--<ul>-->
-                        <!--<li>-->
-                            <!--<a id="headline1"></a>-->
-                            <!--<div id="datetime1"></div>-->
-                            <!--<div id="source1"></div>-->
-                        <!--</li>-->
-                    <!--</ul>-->
-                    <!--<ul>-->
-                        <!--<li>-->
-                            <!--<a id="headline2"></a>-->
-                            <!--<div id="datetime2"></div>-->
-                            <!--<div id="source2"></div>-->
-                        <!--</li>-->
-                    <!--</ul>-->
-
                     <!-- Card 1 -->
                     <div class="blog-card">
-                        <div class="photo photo1"></div>
+                        <div id="blog-cardPic" class="photo photo1"></div>
                         <ul class="details">
                             <li class="author"><a id="source0" href=""></a></li>
                             <li class="date" id="datetime0"></li>
@@ -407,8 +393,6 @@
                     <br>
 
                 </div>
-
-
 
                 <!-- Peers -->
                 <div class="col-sm-4" style="padding-bottom: 15px">
@@ -480,6 +464,9 @@
     <!-- Firebase Key init -->
     <script src="js/FirebaseInit.js"></script>
 
+    <!-- Useful scripts -->
+    <script src="js/UsefulScripts.js"></script>
+
     <!-- Jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -490,7 +477,7 @@
     <script src="http://d3js.org/d3.v3.min.js"></script>
 
     <!-- D3 Graph -->
-    <script src=js/D3LineGraph.js>  </script>
+    <script src=js/D3LineGraph.js></script>
 
     <!-- Enter on Key press for Search for stocks -->
     <script src="js/EnterOnKeyPress.js"></script>

@@ -32,7 +32,7 @@ function parseURLParams(url) {
     return parms;
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             // User is signed in.
@@ -50,36 +50,38 @@ $(document).ready(function() {
             resultStockSymbol = stockSymbol;
 
             //getting portfolio information and save it
-            var refPortfolio = firebase.database().ref("Portfolios");
-            refPortfolio.orderByChild("userId").equalTo(user.uid).once("value", function(snapshot) {
-                if(snapshot.exists()){
-                    snapshot.forEach(function (value){
-                        // console.log("StockSymbol: " + value.child("stockSymbol").val());
-                        if(stockSymbol === value.child("stockSymbol").val()){
-                            //change css to state "stock in symbole" + change custom-attribute
-                            document.getElementById("portfolioButton").setAttribute("data-inPortfolio", true);
-                            document.getElementById("portfolioButton").setAttribute("data-pk", value.key);
-                            //document.getElementById("portfolioButton").innerText = " Remove from Portfolio";
+            // var refPortfolio = firebase.database().ref("Portfolios");
+            // refPortfolio.orderByChild("userId").equalTo(user.uid).once("value", function (snapshot) {
+            //     if (snapshot.exists()) {
+            //         snapshot.forEach(function (value) {
+            //             // console.log("StockSymbol: " + value.child("stockSymbol").val());
+            //             if (stockSymbol === value.child("stockSymbol").val()) {
+            //                 //change css to state "stock in symbole" + change custom-attribute
+            //                 document.getElementById("portfolioButton").setAttribute("data-inPortfolio", true);
+            //                 document.getElementById("portfolioButton").setAttribute("data-pk", value.key);
+            //                 //document.getElementById("portfolioButton").innerText = " Remove from Portfolio";
+            //
+            //                 $("#portfolioButton").addClass("fa fa-minus");
+            //
+            //                 // Toggle off the addstockportfolio div
+            //                 var div1 = document.getElementById('AddStocktoPortfolio');
+            //                 div1.style.display = "none";
+            //                 // console.log("onstart");
+            //             }
+            //         });
+            //     }
+            //     // activate portfolio button (deactivate it as default)
+            //     document.getElementById("portfolioButton").disabled = false;
+            // });
 
-                            $("#portfolioButton").addClass("fa fa-minus");
-
-                            // Toggle off the addstockportfolio div
-                            var div1 = document.getElementById('AddStocktoPortfolio');
-                            div1.style.display = "none";
-                            // console.log("onstart");
-                        }
-                    });
-                }
-                // activate portfolio button (deactivate it as default)
-                document.getElementById("portfolioButton").disabled = false;
-            });
+            document.getElementById("portfolioButton").disabled = false;
 
             //getting watchlist information and save it
             var refWatchlist = firebase.database().ref("Watchlists");
-            refWatchlist.orderByChild("userId").equalTo(user.uid).once("value", function(snapshot) {
-                if(snapshot.exists()){
-                    snapshot.forEach(function (value){
-                        if(stockSymbol === value.child("stockSymbol").val()){
+            refWatchlist.orderByChild("userId").equalTo(user.uid).once("value", function (snapshot) {
+                if (snapshot.exists()) {
+                    snapshot.forEach(function (value) {
+                        if (stockSymbol === value.child("stockSymbol").val()) {
                             //change css to state "stock in symbole" + change custom-attribute
                             document.getElementById("watchlistButton").setAttribute("data-inWatchlist", true);
                             document.getElementById("watchlistButton").setAttribute("data-pk", value.key);
@@ -126,8 +128,8 @@ $(document).ready(function() {
                         var revisedCompany = null;
 
                         // Check for length of company name
-                        if (companyName.length > 20){
-                            revisedCompany = companyName.slice(0,50);
+                        if (companyName.length > 20) {
+                            revisedCompany = companyName.slice(0, 50);
                             document.getElementById("CompanyName").innerHTML = revisedCompany + "...";
 
                             // Calling tooltip
@@ -144,13 +146,13 @@ $(document).ready(function() {
                         // Symbol
                         document.getElementById("StockSymbolUpperCase").innerHTML = data.symbol;
                     },
-                    error: function(error){
+                    error: function (error) {
                         // Handle Errors here.
                         // console.log(error.responseText);
                         //alert(error.responseText);
                     }
                 });
-            }, 2000);
+            });
 
             // calling current stock symbol
             currentStockStats();
@@ -161,16 +163,16 @@ $(document).ready(function() {
             $.ajax({
                 url: peersUrl,
                 success: function (data) {
-                    for (var i = 0; i < data.length; i++){
+                    for (var i = 0; i < data.length; i++) {
                         var peerName = data[i];
 
                         // for each peer name (grab stats)
                         peersStatsUrlGrab(peerName);
                     }
-                }, error: function(error){
+                }, error: function (error) {
                     // console.log(error.responseText);
 
-                    if (error.responseText === "Unknown symbol"){
+                    if (error.responseText === "Unknown symbol") {
                         // console.log("Reached Error");
 
                         // Transfer to the homepage
@@ -188,11 +190,11 @@ $(document).ready(function() {
                     d3.json(companyDescriptionUrl, function (error, data) {
                         document.getElementById("aboutCompany").innerHTML = data.description;
                     });
-                }, error: function(error){
+                }, error: function (error) {
                     // console.log(error.responseText);
 
                     // Handling undefined Exception
-                    if (error.responseText === "Unknown symbol"){
+                    if (error.responseText === "Unknown symbol") {
                         // console.log("Reached Error");
 
                         // Transfer to the homepage
@@ -209,7 +211,7 @@ $(document).ready(function() {
                 success: function (data) {
                     d3.json(urlNews, function (error, data) {
                         // console.log("News: " + data);
-                        for (var i = 0; i < data.length; i++){
+                        for (var i = 0; i < data.length; i++) {
                             var headlineIndex = "headline";
                             var sourceIndex = "source";
                             var datetimeIndex = "datetime";
@@ -217,10 +219,10 @@ $(document).ready(function() {
 
                             var parser = data[i].datetime;
                             var indexNumber = parser.indexOf("T");
-                            var dataParsed = parser.slice(0,indexNumber);
+                            var dataParsed = parser.slice(0, indexNumber);
 
                             headlineIndex = headlineIndex + i;
-                            sourceIndex =  sourceIndex + i;
+                            sourceIndex = sourceIndex + i;
                             datetimeIndex = datetimeIndex + i;
                             linkIndex = linkIndex + i;
 
@@ -236,11 +238,11 @@ $(document).ready(function() {
                             document.getElementById(datetimeIndex).innerHTML = dataParsed;
                         }
                     });
-                }, error: function(error){
+                }, error: function (error) {
                     // console.log(error.responseText);
 
                     // Handling undefined Exception
-                    if (error.responseText === "Unknown symbol"){
+                    if (error.responseText === "Unknown symbol") {
                         // console.log("Reached Error");
 
                         // Transfer to the homepage
@@ -273,12 +275,12 @@ $(document).ready(function() {
                         document.getElementById("grossProfit").innerHTML = grossProfit;
                         document.getElementById("debt").innerHTML = debt;
                     });
-                }, error: function(error){
+                }, error: function (error) {
                     // console.log(error.responseText);
                     //alert(error.responseText);
 
                     // Handling undefined Exception
-                    if (error.responseText === "Unknown symbol"){
+                    if (error.responseText === "Unknown symbol") {
                         console.log("Reached Error");
 
                         // Transfer to the homepage
@@ -298,8 +300,16 @@ $(document).ready(function() {
 });
 
 /** Deleting White Space Logo */
-function DisplayLogo(){
+function DisplayLogo() {
     var logoUrl = "https://storage.googleapis.com/iex/api/logos/" + resultStockSymbol.toUpperCase() + ".png";
+    // var backgroundUrl = "url(" + "'" + logoUrl +  "'" +  ")" + "no-repeat right top";
+    //
+    // console.log(backgroundUrl);
+    // // document.getElementsByClassName('.blog-card .photo.photo1').backgroundImage = backgroundUrl;
+    // document.getElementById('#blog-cardPic').style.background = backgroundUrl;
+    //
+    // // document.body.style.background = "#f3f3f3 url('img_tree.png') no-repeat right top";
+
 
     // Converting URL to Base64 with the use of a proxy
     var getDataUri = function (targetUrl, callback) {
@@ -322,7 +332,7 @@ function DisplayLogo(){
         // console.log('RESULT:', base64);
 
         //handling no Logo
-        if (base64 === "data:image/png;base64,Cg=="){
+        if (base64 === "data:image/png;base64,Cg==") {
             // console.log("Reached No Logo");
 
             // Setting logo to not display
@@ -335,7 +345,7 @@ function DisplayLogo(){
 
         //original
         $("#original").attr("src", base64);
-        $("#original").on("load", function() {
+        $("#original").on("load", function () {
             var canvas = document.getElementById("modified"),
                 ctx = canvas.getContext("2d"),
                 image = document.getElementById("original");
@@ -343,29 +353,26 @@ function DisplayLogo(){
             // This size can change
             canvas.height = canvas.width = 50;
 
-            // console.log(canvas.height);
-            // console.log(canvas.width);
-
             // Updating modified id to display
             document.getElementById("modified").style.display = "block";
 
-            ctx.drawImage(image,0,0, image.width, image.height, 0, 0, canvas.width, canvas.height);
+            ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvas.width, canvas.height);
 
             var imgd = ctx.getImageData(0, 0, 1000, 1000),
                 pix = imgd.data,
-                newColor = {r:0,g:0,b:0, a:0};
+                newColor = {r: 0, g: 0, b: 0, a: 0};
 
-            for (var i = 0, n = pix.length; i <n; i += 4) {
+            for (var i = 0, n = pix.length; i < n; i += 4) {
                 var r = pix[i],
-                    g = pix[i+1],
-                    b = pix[i+2];
+                    g = pix[i + 1],
+                    b = pix[i + 2];
 
-                if(r >= 250&& g >= 250 && b >= 250){
+                if (r >= 250 && g >= 250 && b >= 250) {
                     // Change the white to the new color.
                     pix[i] = newColor.r;
-                    pix[i+1] = newColor.g;
-                    pix[i+2] = newColor.b;
-                    pix[i+3] = newColor.a;
+                    pix[i + 1] = newColor.g;
+                    pix[i + 2] = newColor.b;
+                    pix[i + 3] = newColor.a;
                 }
             }
 
@@ -375,7 +382,7 @@ function DisplayLogo(){
 }
 
 /** Peer Stats for Peers Table **/
-function peersStatsUrlGrab (name) {
+function peersStatsUrlGrab(name) {
 
     document.getElementById("genericSymbol").innerHTML = resultStockSymbol;
 
@@ -391,7 +398,7 @@ function peersStatsUrlGrab (name) {
     cell0.innerHTML = name.link(stockTransferURL);
 
     /** Stock price for Every Peer **/
-    var peerStockPriceUrl = "https://api.iextrading.com/1.0/stock/" + name +  "/quote";
+    var peerStockPriceUrl = "https://api.iextrading.com/1.0/stock/" + name + "/quote";
 
     $.ajax({
         url: peerStockPriceUrl,
@@ -405,7 +412,7 @@ function peersStatsUrlGrab (name) {
     });
 
     /** Grabbing 6m% and 1y% for Each Peer **/
-    var peerStatusURL = "https://api.iextrading.com/1.0/stock/" + name +  "/stats";
+    var peerStatusURL = "https://api.iextrading.com/1.0/stock/" + name + "/stats";
 
     setTimeout(function () {
         $.ajax({
@@ -420,7 +427,7 @@ function peersStatsUrlGrab (name) {
                 var cell2 = row.insertCell(2);
                 var percentStr1y = percentage1y.toString();
 
-                if (percent1y < 0){
+                if (percent1y < 0) {
                     cell2.innerHTML = unicodeDown + " " + percentStr1y + "%";
                 } else {
                     cell2.innerHTML = unicodeUp + "  " + percentStr1y + "%";
@@ -436,17 +443,17 @@ function peersStatsUrlGrab (name) {
                 var percentStr6m = percentage6m.toString();
 
                 // Test to see if percentage is negative
-                if (percent6m < 0){
+                if (percent6m < 0) {
                     cell3.innerHTML = unicodeDown + " " + percentStr6m + "%";
                 } else {
                     cell3.innerHTML = unicodeUp + "  " + percentStr6m + "%";
                 }
             }
         });
-    }, 2000);
+    }, 250);
 
     /** Grabbing 6m% and 1y% for Current Stock **/
-    var stockSymbolStatusURL = "https://api.iextrading.com/1.0/stock/" + name +  "/stats";
+    var stockSymbolStatusURL = "https://api.iextrading.com/1.0/stock/" + name + "/stats";
 
     setTimeout(function () {
 
@@ -469,7 +476,7 @@ function peersStatsUrlGrab (name) {
                 // Bold the text
                 percentStr1y = percentStr1y.bold();
 
-                if (percent1y < 0){
+                if (percent1y < 0) {
                     document.getElementById("myTable").rows[1].cells[2].innerHTML = unicodeDown + " " + percentStr1y + percentSign;
                 } else {
                     document.getElementById("myTable").rows[1].cells[2].innerHTML = unicodeUp + "  " + percentStr1y + percentSign;
@@ -487,18 +494,18 @@ function peersStatsUrlGrab (name) {
                 percentStr6m = percentStr6m.bold();
 
                 // Test to see if percentage is negative
-                if (percent6m < 0){
+                if (percent6m < 0) {
                     document.getElementById("myTable").rows[1].cells[3].innerHTML = unicodeDown + " " + percentStr6m + percentSign;
                 } else {
                     document.getElementById("myTable").rows[1].cells[3].innerHTML = unicodeUp + "  " + percentStr6m + percentSign;
                 }
             }
         });
-    }, 2000);
+    });
 }
 
-/** GET the date and quantity of stock price (On enter bttn) **/
-function getStockDateAndQuantity(){
+/** GET the date and quantity of stock price (On enter button) **/
+function getStockDateAndQuantity() {
     var user = firebase.auth().currentUser;
 
     var date = null;
@@ -510,14 +517,16 @@ function getStockDateAndQuantity(){
     price = document.getElementById("pricePortfolio").value;
 
     //NEED!!!!!!!!    // MSG to the user Please renter both
-    if (!date || !quantity || date == null || quantity == null){
+    if (!date || !quantity || date == null || quantity == null) {
         // MSG to the User Please Enter
         document.getElementById("addToPorfolioError").style.visibility = "visible";
+        document.getElementById("addToPorfolioError").style.display = "block";
 
         // console.log("Please enter valid Add to portfolio inputs");
 
     } else {
         document.getElementById("addToPorfolioSuccess").style.visibility = "visible";
+        document.getElementById("addToPorfolioSuccess").style.display = "block";
 
         //user put in a price?
         var closePriceForDate = price;
@@ -548,86 +557,171 @@ function getStockDateAndQuantity(){
             })
         }
 
-        $("#portfolioButton").removeClass("fa fa-plus");
-        $("#portfolioButton").addClass("fa fa-minus");
+        document.getElementById("AddStocktoPortfolio").setAttribute("data-hidden", "true");
+        $("#portfolioButton").removeClass("fa fa-minus");
+        $("#portfolioButton").addClass("fa fa-plus");
 
         // Fading out on 3 seconds
         $("#AddStocktoPortfolio").fadeOut(3000);
 
         //wait for ajax response
-        setTimeout(function(){
+        setTimeout(function () {
             // @TODO SEND to firebase  (resDate, resNumber, resultStockSymbol, closePriceForDate)
             // Since closePriceForDate is made from ajax request you might have to use a promise or wait a couple of seconds
             // to send it firebase
 
-            if(closePriceForDate) {
+            if (closePriceForDate) {
                 firebase.database().ref('Portfolios/').push().set({
                     userId: user.uid,
                     stockSymbol: resultStockSymbol,
                     price: closePriceForDate,
                     quantity: quantity,
                     date: date
-                }).then(function(){
-                    document.getElementById("portfolioButton").setAttribute("data-inPortfolio", true);
-                    setPK("portfolioButton");
                 });
             } else {
                 //NEED!!!!!!!!    // MSG to the user
                 // generic CSS
                 // console.log("empty");
             }
-        }, 2000);
+        });
     }
 }
 
 /** Adding to portfolio and syncing to the database **/
-function AddToPortfolio () {
+function AddToPortfolio() {
     var user = firebase.auth().currentUser;
 
+    document.getElementById("addToPorfolioError").style.display = "none";
     document.getElementById("addToPorfolioError").style.visibility = "hidden";
 
-    //console.log(document.getElementById("portfolioButton").getAttribute("data-inPortfolio"));
-    //console.log(document.getElementById("portfolioButton").getAttribute("data-pk"));
 
-    if(document.getElementById("portfolioButton").getAttribute("data-inPortfolio") === "true"){
-        firebase.database().ref("Portfolios/" + document.getElementById("portfolioButton").getAttribute("data-pk")).remove();
+    if (document.getElementById("AddStocktoPortfolio").getAttribute("data-hidden") === "true") {
 
-        document.getElementById("portfolioButton").setAttribute("data-inPortfolio", false);
-        document.getElementById("portfolioButton").setAttribute("data-pk", null);
+        //getting portfolio information and save it
+        if (user) {
+            // User is signed in.
+            var fullPortfolio = [];
 
+            var refPortfolio = firebase.database().ref("Portfolios");
+            refPortfolio.orderByChild("userId").equalTo(user.uid).once("value", function (snapshot) {
+                var result = [];
+                if (snapshot.exists()) {
+                    snapshot.forEach(function (value) {
+                        if (resultStockSymbol === value.child("stockSymbol").val()) {
+                            var help = [];
+                            help["pk"] = value.key;
+                            help["userId"] = value.child("userId").val();
+                            help["stockSymbol"] = value.child("stockSymbol").val();
+                            help["date"] = value.child("date").val();
+                            help["price"] = value.child("price").val();
+                            help["quantity"] = value.child("quantity").val();
+
+                            fullPortfolio.push(help);
+                        }
+                    });
+                }
+            }).then(function () {
+                //populate portfolioTable
+                var table = document.getElementById("portfolioTable");
+                table.innerHTML = "";
+                var header = table.createTHead();
+                var body = table.createTBody();
+
+                var row = header.insertRow(0);
+
+                //document.getElementById("myBtn").style.height =+ "50px";
+                var divHeight = document.getElementById("AddStocktoPortfolio").style.height;
+
+                // Date purchased
+                var cell1 = row.insertCell((0));
+                cell1.innerHTML = "<b>Date Purchased</b>";
+
+                // Purchased Price
+                var cell2 = row.insertCell((1));
+                cell2.innerHTML = "<b>Purchase Price</b>";
+
+                // Quantity
+                var cell3 = row.insertCell((2));
+                cell3.innerHTML = "<b>Quantity</b>";
+
+                // Delete?
+                var cell4 = row.insertCell((3));
+                cell4.innerHTML = "<b>Delete?</b>";
+
+                for (var i = 0; i < fullPortfolio.length; i++) {
+
+                    divHeight = divHeight + 200;
+                    document.getElementById("AddStocktoPortfolio").style.height = divHeight;
+
+                    row = body.insertRow(i);
+
+                    row.setAttribute("data-pk", fullPortfolio[i].pk);
+
+                    // Date purchased
+                    cell1 = row.insertCell((0));
+                    cell1.innerHTML = fullPortfolio[i].date;
+
+                    // Purchased Price
+                    cell2 = row.insertCell((1));
+                    cell2.innerHTML = "$" + fullPortfolio[i].price;
+
+                    // Quantity
+                    cell3 = row.insertCell((2));
+                    cell3.innerHTML = fullPortfolio[i].quantity;
+
+                    // Add delete button
+                    cell4 = row.insertCell((3));
+                    //set button class
+                    cell4.setAttribute("class", "deleteButton");
+                    //centralize content
+                    cell4.style.display = 'flex';
+                    cell4.style.alignItems = 'center';
+                    cell4.style.justifyContent = 'center';
+
+                    var buttonDelete = document.createElement("BUTTON");
+                    buttonDelete.appendChild(document.createTextNode("Delete"));
+                    buttonDelete.addEventListener('click', function (button) {
+                        var row = button.path[2];
+                        var stockSymbol = row.firstChild.firstChild.innerHTML;
+
+                        //removes the row from table
+                        row.parentNode.removeChild(row);
+                        firebase.database().ref("Portfolios/" + row.getAttribute("data-pk")).remove();
+
+                    });
+                    cell4.appendChild(buttonDelete);
+
+                }
+            });
+
+            $('#datePortfolio').val(new Date().toDateInputValue());
+
+            document.getElementById("AddStocktoPortfolio").setAttribute("data-hidden", "false");
+            $("#portfolioButton").removeClass("fa fa-plus");
+            $("#portfolioButton").addClass("fa fa-minus");
+
+        }
+    } else {
+        document.getElementById("AddStocktoPortfolio").setAttribute("data-hidden", "true");
         $("#portfolioButton").removeClass("fa fa-minus");
         $("#portfolioButton").addClass("fa fa-plus");
-
-
-        // Toggle off the addstockportfolio div
-        var div1 = document.getElementById('AddStocktoPortfolio');
-        div1.style.display = "none";
-    } else {
-        //toggle overlay add
-        $("#AddStocktoPortfolio").fadeToggle("slow");
-        $('#datePortfolio').val(new Date().toDateInputValue());
-
-        // Clearing input on click
-        document.getElementById("pricePortfolio").value = '';
-        document.getElementById("quantityPortfolio").value = '';
-
-        // Toggle off the addstockportfolio div
-        var addStock = document.getElementById('AddStocktoPortfolio');
-        addStock.style.display = "block";
     }
+
+    //toggle overlay add
+    $("#AddStocktoPortfolio").fadeToggle("slow");
 }
 
 /** get Today **/
-Date.prototype.toDateInputValue = (function() {
+Date.prototype.toDateInputValue = (function () {
     var local = new Date(this);
     local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
-    return local.toJSON().slice(0,10);
+    return local.toJSON().slice(0, 10);
 });
 
 /** Getting day of week and time of day **/
 function dateWeekTime() {
 
-    var dateArray  = [];
+    var dateArray = [];
     var d = new Date();
     // console.log("Date for closing: " + d);
 
@@ -636,10 +730,10 @@ function dateWeekTime() {
 }
 
 /** Adding to watchlist and syncing to the database **/
-function AddToWatchlist () {
+function AddToWatchlist() {
     var user = firebase.auth().currentUser;
 
-    if(document.getElementById("watchlistButton").getAttribute("data-inWatchlist") === "true"){
+    if (document.getElementById("watchlistButton").getAttribute("data-inWatchlist") === "true") {
         firebase.database().ref("Watchlists/" + document.getElementById("watchlistButton").getAttribute("data-pk")).remove();
 
         document.getElementById("watchlistButton").setAttribute("data-inWatchlist", false);
@@ -653,7 +747,7 @@ function AddToWatchlist () {
         firebase.database().ref('Watchlists/').push().set({
             userId: user.uid,
             stockSymbol: resultStockSymbol
-        }).then(function(){
+        }).then(function () {
             document.getElementById("watchlistButton").setAttribute("data-inWatchlist", true);
             setPK("watchlistButton");
         });
@@ -666,21 +760,21 @@ function AddToWatchlist () {
 }
 
 /** Setting Primary Key **/
-function setPK(button){
+function setPK(button) {
     var user = firebase.auth().currentUser;
 
     var ref = null;
-    if(button === "portfolioButton"){
+    if (button === "portfolioButton") {
         ref = firebase.database().ref("Portfolios");
     } else {
         ref = firebase.database().ref("Watchlists");
     }
 
-    ref.orderByChild("userId").equalTo(user.uid).once("value", function(snapshot) {
-        if(snapshot.exists()){
-            snapshot.forEach(function (value){
+    ref.orderByChild("userId").equalTo(user.uid).once("value", function (snapshot) {
+        if (snapshot.exists()) {
+            snapshot.forEach(function (value) {
                 console.log("StockSymbol1: " + value.child("stockSymbol").val());
-                if(resultStockSymbol == value.child("stockSymbol").val()){
+                if (resultStockSymbol == value.child("stockSymbol").val()) {
                     document.getElementById(button).setAttribute("data-pk", value.key);
                 }
             });
@@ -690,12 +784,13 @@ function setPK(button){
 
 /** Dynamic ToolTip **/
 var cachedData = Array();
-function hoverGetData(companyName){
+
+function hoverGetData(companyName) {
     var element = $(this);
 
     var id = element.data('id');
 
-    if(id in cachedData){
+    if (id in cachedData) {
         return cachedData[id];
     }
 
@@ -711,15 +806,13 @@ function currentStockStats() {
     document.getElementById("genericSymbol").innerHTML = resultStockSymbol;
 
     /** Grabbing 6m% and 1y% for Current Stock **/
-    var stockSymbolStatusURL = "https://api.iextrading.com/1.0/stock/" + resultStockSymbol +  "/stats";
+    var stockSymbolStatusURL = "https://api.iextrading.com/1.0/stock/" + resultStockSymbol + "/stats";
 
     setTimeout(function () {
 
         $.ajax({
             url: stockSymbolStatusURL,
             success: function (data) {
-
-                // console.log(data);
 
                 // Bold the percent sign
                 var percentSign = '%';
@@ -736,7 +829,7 @@ function currentStockStats() {
                 // Bold the text
                 percentStr1y = percentStr1y.bold();
 
-                if (percent1y < 0){
+                if (percent1y < 0) {
                     document.getElementById("myTable").rows[1].cells[2].innerHTML = unicodeDown + " " + percentStr1y + percentSign;
                 } else {
                     document.getElementById("myTable").rows[1].cells[2].innerHTML = unicodeUp + "  " + percentStr1y + percentSign;
@@ -754,7 +847,7 @@ function currentStockStats() {
                 percentStr6m = percentStr6m.bold();
 
                 // Test to see if percentage is negative
-                if (percent6m < 0){
+                if (percent6m < 0) {
                     document.getElementById("myTable").rows[1].cells[3].innerHTML = unicodeDown + " " + percentStr6m + percentSign;
                 } else {
                     document.getElementById("myTable").rows[1].cells[3].innerHTML = unicodeUp + "  " + percentStr6m + percentSign;
@@ -766,6 +859,10 @@ function currentStockStats() {
 
 /** Updating price every 3 seconds **/
 function setIntervalPrice(resultUrl) {
+
+    var result = stockMarketTime();
+    console.log(result);
+
     setInterval(function () {
         $.ajax({
             url: resultUrl,
@@ -781,7 +878,7 @@ function setIntervalPrice(resultUrl) {
                 document.getElementById("myTable").rows[1].cells[1].innerHTML = "$" + stockprice;
 
             },
-            error: function(error){
+            error: function (error) {
                 // Handle Errors here.
                 // console.log(error.responseText);
                 //alert(error.responseText);
@@ -790,7 +887,7 @@ function setIntervalPrice(resultUrl) {
     }, 2500);
 }
 
-/** Updating price every 3 seconds **/
+/** Updating price once **/
 function setTimeoutPrice(resultUrl) {
     setTimeout(function () {
         $.ajax({
@@ -807,7 +904,7 @@ function setTimeoutPrice(resultUrl) {
                 document.getElementById("myTable").rows[1].cells[1].innerHTML = "$" + stockprice;
 
             },
-            error: function(error){
+            error: function (error) {
                 // Handle Errors here.
                 // console.log(error.responseText);
                 //alert(error.responseText);
