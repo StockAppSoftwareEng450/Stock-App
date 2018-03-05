@@ -45,7 +45,9 @@ function getFullPortfolio() {
                 }
             }).then(function () {
 
-                issueBatchRequest(fullPortfolio)
+                // Issuing BatchRequest for Portfolio
+                issueBatchRequestP(fullPortfolio);
+
             });
         } else {
 
@@ -85,6 +87,8 @@ function getFullWatchlist() {
                 }
             }).then(function () {
 
+                // Issuing BatchRequest for Watchlist
+                issueBatchRequestW(fullWatchlist);
 
             });
         } else {
@@ -96,8 +100,8 @@ function getFullWatchlist() {
 }
 
 
-/** Issuing one Ajax request **/
-function issueBatchRequest(fullPortfolio) {
+/** Issuing Portfolio Ajax request **/
+function issueBatchRequestP(fullPortfolio) {
 
     var stockSymbolRequest = "";
 
@@ -127,17 +131,6 @@ function issueBatchRequest(fullPortfolio) {
         });
 
         // @TODO SetInterval is copying entries in the watchlist
-        // // Every 3 Seconds
-        // setInterval(function () {
-        //     $.ajax({
-        //         url: batchURL,
-        //         success: function (data) {
-        //
-        //             // Display to Table
-        //             displayDataToTableP(data,fullPortfolio);
-        //         }
-        //     });
-        // }, 3000);
 
     } else {
 
@@ -148,29 +141,29 @@ function issueBatchRequest(fullPortfolio) {
                 success: function (data) {
 
                     // Display to Table
-                    displayDataToTableP(data,fullPortfolio);
+                    displayDataToTableP(data, fullPortfolio);
                 }
             });
         })
     }
 }
 
+var portfolioArray = [];
+
 /** Displaying the Portfolio Table **/
 function displayDataToTableP(data, fullPortfolio) {
 
-    // Finding Length of object
-    var dataLength = Object.keys(data);
-    console.log(dataLength.length);
+    var percentArray = [];
 
     // Finding Table
     var table = document.getElementById("portfolioTable");
 
     // Returning the price and stats for each Stock Symbol
     for (var i = 0; i < fullPortfolio.length; i++) {
-        console.log("Returning quote: " + i , data[Object.keys(data)[i]].quote);
-        console.log("Returning stats: " + i , data[Object.keys(data)[i]].stats);
-        console.log("Returning price: " + i , data[Object.keys(data)[i]].price);
-        console.log("-----------------------------------------------");
+        // console.log("Returning quote: " + i , data[Object.keys(data)[i]].quote);
+        // console.log("Returning stats: " + i , data[Object.keys(data)[i]].stats);
+        // console.log("Returning price: " + i , data[Object.keys(data)[i]].price);
+        // console.log("-----------------------------------------------");
 
         // Transfers stock to the Individual StockPage
         var stockTransferURL = "IndividualStockPage.html?stock=" + data[Object.keys(data)[i]].quote.symbol + "#";
@@ -246,8 +239,167 @@ function displayDataToTableP(data, fullPortfolio) {
             cell7.innerHTML = unicodeUp + " " + (((data[Object.keys(data)[i]].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2) + "%";
         }
 
+        //entering info to donutQuantityArray
+        portfolioArray[i] = {
+            StockSymbol: fullPortfolio[i].stockSymbol,
+            Quantity: fullPortfolio[i].quantity
+        };
+
+        // Sending to Bar Chart in the future
+        percentArray.push((((data[Object.keys(data)[i]].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2));
+    }
+
+    fillDonut(portfolioArray);
+
+    // Send to Bar Chart
+    grabPortfolioBarChart(fullPortfolio, percentArray);
+
+}
+
+/** Issuing Batch Request for Watchlist **/
+function issueBatchRequestW(fullWatchlist){
+
+    var stockSymbolRequest = "";
+
+    // Enumerating over all stock Symbols for portfolio
+    for (var i = 0; i < fullWatchlist.length; i++){
+        stockSymbolRequest += fullWatchlist[i].stockSymbol + ",";
+    }
+
+    // Concate URL
+    var url =  "https://api.iextrading.com/1.0/stock/market/batch?symbols=" + stockSymbolRequest + "&types=quote,stats,price";
+
+    // Returns whether stockMarket is open or closed
+    var openClosedResult = stockMarketTime();
+
+    // Issue Set Interval every 3 seconds when open
+    if (openClosedResult === "open") {
+
+        // Returns as soon as available, Interval waits 3 seconds before
+        setTimeout(function () {
+            $.ajax({
+                url: url,
+                success: function (data) {
+
+                    // Display to Watchlist Table
+                    displayDataToTableW(data, fullWatchlist);
+                }
+            });
+        });
+
+        // @TODO SetInterval is copying entries in the watchlist
+
+    } else {
+
+        // Returns once
+        setTimeout(function () {
+            $.ajax({
+                url: url,
+                success: function (data) {
+
+                    // Display to Table
+                    displayDataToTableW(data, fullWatchlist);
+                }
+            });
+        })
     }
 }
+
+/** Watchlist **/
+function displayDataToTableW(data, fullWatchlist) {
+
+    var table = document.getElementById("watchlistTable");
+
+    // console.log("-----------------------------------------------");
+        for (var i = 0; i < fullWatchlist.length; i++) {
+
+        // console.log("Returning quote: " + i, data[Object.keys(data)[i]].quote);
+        // console.log("Returning stats: " + i, data[Object.keys(data)[i]].stats);
+        // console.log("Returning price: " + i, data[Object.keys(data)[i]].price);
+        // console.log("-----------------------------------------------");
+
+        var stockTransferURL = "IndividualStockPage.html?stock=" + data[Object.keys(data)[i]].quote.symbol + "#";
+
+        var row = table.insertRow(i + 1);
+        row.setAttribute("data-pk", fullWatchlist[i].pk);
+
+        // Stock Symbol
+        var cell0 = row.insertCell((0));
+        cell0.innerHTML = fullWatchlist[i].stockSymbol.link(stockTransferURL);
+
+        // Current Price
+        var cell1 = row.insertCell((1));
+        cell1.innerHTML = "$" + data[Object.keys(data)[i]].price;
+
+        // 3 Month Percent
+        var cell2 = row.insertCell((2));
+
+        if (data[Object.keys(data)[i]].stats.month3ChangePercent > 0){
+            cell2.innerHTML = unicodeUp + " " + ((data[Object.keys(data)[i]].stats.month3ChangePercent) * 100).toFixed(2).toString() + "%";
+        } else {
+            cell2.innerHTML = unicodeDown + ((data[Object.keys(data)[i]].stats.month3ChangePercent) * 100).toFixed(2).toString() + "%";
+        }
+
+        // 6 Month Percent
+        var cell3 = row.insertCell((3));
+
+        if (data[Object.keys(data)[i]].stats.month6ChangePercent > 0){
+            cell3.innerHTML = unicodeUp + " " + ((data[Object.keys(data)[i]].stats.month6ChangePercent) * 100).toFixed(2).toString() + "%";
+        } else {
+            cell3.innerHTML = unicodeDown + ((data[Object.keys(data)[i]].stats.month6ChangePercent) * 100).toFixed(2).toString() + "%";
+        }
+
+        // 1 Year Percent
+        var cell4 = row.insertCell((4));
+
+        if (data[Object.keys(data)[i]].stats.year1ChangePercent > 0){
+            cell4.innerHTML = unicodeUp + " " + ((data[Object.keys(data)[i]].stats.year1ChangePercent) * 100).toFixed(2).toString() + "%";
+        } else {
+            cell4.innerHTML = unicodeDown + ((data[Object.keys(data)[i]].stats.year1ChangePercent) * 100).toFixed(2).toString() + "%";
+        }
+
+        // add delete button
+        var cell5 = row.insertCell((5));
+        cell5.setAttribute("class", "deleteButton");
+        cell5.style.display = 'flex';
+        cell5.style.alignItems = 'center';
+        cell5.style.justifyContent = 'center';
+
+        var buttonDelete = document.createElement("BUTTON");
+        buttonDelete.appendChild(document.createTextNode("Delete"));
+        buttonDelete.addEventListener('click', function (button) {
+            var row = button.path[2];
+            var stockSymbol = row.firstChild.firstChild.innerHTML;
+
+            //removes the row from table
+            row.parentNode.removeChild(row);
+            firebase.database().ref("Watchlists/" + row.getAttribute("data-pk")).remove();
+
+        });
+        cell5.appendChild(buttonDelete);
+    }
+}
+
+/** Displaying Donut **/
+function fillDonut(portfolioArray){
+
+    var donut = donutChart()
+        .width(1000)
+        .height(1000)
+        .cornerRadius(3) // sets how rounded the corners are on each slice
+        .padAngle(0.015) // effectively dictates the gap between slices
+        .variable('Quantity')
+        .category('StockSymbol');
+
+
+    d3.select('#Piechart')
+        .datum(portfolioArray) // bind data to the div
+        .call(donut); // draw chart in div
+}
+
+
+
+
 
 
 

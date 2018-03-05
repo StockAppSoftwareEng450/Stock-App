@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -60,6 +60,8 @@
             /*background: cornsilk;*/
             z-index: 2;
         }
+
+
     </style>
 
 </head>
@@ -245,16 +247,16 @@
 
         <div class="row">
 
-            <div class="col-lg-8">
+            <div class="col-lg-8" style="padding-bottom: 16px;">
 
                 <!-- Example Bar Chart Card -->
-                <div class="card mb-3">
+                <div class="card mb-3" style="height: 100%">
                     <div class="card-header">
                         <i class="fa fa-bar-chart"></i>
-                        Bar Chart Example
+                        Percentage Change Bar Chart
                     </div>
                     <div class="card-body">
-                        <div class="row">
+                        <div class="row" style="height: 100%;">
                             <div class="col-sm-8 my-auto">
                                 <canvas id="myBarChart" width="100" height="50"></canvas>
                             </div>
@@ -288,10 +290,10 @@
                 <div class="card mb-3">
                     <div class="card-header">
                         <i class="fa fa-pie-chart"></i>
-                        Pie Chart Example
+                        Stock Portfolio Diversity
                     </div>
                     <div id="Chart" class="card-body">
-                        <div id= "art"></div>
+                        <div id="Piechart"></div>
                     </div>
                     <div class="card-footer small text-muted">
                         Updated yesterday at 11:59 PM
@@ -397,13 +399,16 @@
 
 <!-- Plugin JavaScript -->
 <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="vendor/chart.js/Chart.min.js"></script>
+<script src="vendor/chart.js/Chart.js"></script>
 
 <!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
 
 <!-- D3V4 Test -->
 <script src="https://d3js.org/d3.v5.min.js"></script>
+
+<!-- Color Wheel -->
+<script src="js/ModifiedColorSheme.js"></script>
 
 <!-- Firebase Key init -->
 <script src="js/FirebaseInit.js"></script>
@@ -415,18 +420,13 @@
 <script src="js/Donut.js"></script>
 
 <!-- JS that takes Search for Stock input a -->
-<script src="js/index.js"></script>
+<!--<script src="js/index.js"></script>-->
 
 <!-- New Index File -->
-<!--<script src="js/newIndex.js"></script>-->
-
-<!-- Donut.js -->
-<script src="js/Donut.js"></script>
+<script src="js/newIndex.js"></script>
 
 <!-- Auto complete -->
 <script src="js/Autocomplete.js"></script>
-
-
 
 <!-- Enter on Keypress for Search for Stocks -->
 <script src="js/EnterOnKeyPress.js"></script>
@@ -437,8 +437,10 @@
 <!-- Custom scripts for this template -->
 <script src="js/sbAdmin.js"></script>
 
+
+
 <!-- D3 Percent Change Graph -->
-<script src="js/D3PortfolioGrowth.js"></script>
+<!--<script src="js/D3PortfolioGrowth.js"></script>-->
 
 
 </body>

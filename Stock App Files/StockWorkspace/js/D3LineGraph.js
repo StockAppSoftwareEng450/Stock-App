@@ -220,7 +220,6 @@ setTimeout(function () {
                     // Date
                     var newDate = d.date.toString();
                     document.getElementById("date").innerHTML = newDate.slice(0,15);
-
                 }
             });
         }
@@ -274,9 +273,6 @@ function updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, data, result, cu
         priceTitle.style("font-size", "12px");
         yAxisPrice.style("font-size", "11px");
     }
-
-
-
 }
 
 /** Live Button **/
@@ -782,7 +778,6 @@ function update5Year() {
         }
     });
 }
-
 
 Date.prototype.yyyymmdd = function() {
     var mm = this.getMonth() + 1; // getMonth() is zero-based

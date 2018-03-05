@@ -1,122 +1,86 @@
-// var percentChangeArray = [];
-// var stockSymbol = [];
-//
-// var filteredArrS = [];
-// var filteredArrP = [];
-//
-// var count = 0;
-// var max = null;
-//
-// function grabPercentChange(stockSymbl, percent){
-//
-//     stockSymbol.push(stockSymbl);
-//     percentChangeArray.push(percent);
-//
-//     if (count > 1){
-//         filteredArrS = duplicates(stockSymbol);
-//         filteredArrP = duplicates(percentChangeArray);
-//     }
-//
-//     count++;
-//     max = findMaxValueArr(percentChangeArray);
-//     var result = ( 40 / max) * 1000;
-//     max = max + result;
-//     createBarChart(max);
-// }
-//
-// /** removing duplicates **/
-// function duplicates(array){
-//     return array.filter(function(val,ind) { return array.indexOf(val) === ind; });
-// }
-//
-// /** Finding the Max Value **/
-// function findMaxValueArr(array) {
-//     return Math.max.apply(null, array) // 4
-// }
-//
-//
-// !function (a) {
-//     "use strict";
-//     a('.navbar-sidenav [data-toggle="tooltip"]').tooltip({template: '<div class="tooltip navbar-sidenav-tooltip" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>'}), a("#sidenavToggler").click(function (e) {
-//         e.preventDefault(), a("body").toggleClass("sidenav-toggled"), a(".navbar-sidenav .nav-link-collapse").addClass("collapsed"), a(".navbar-sidenav .sidenav-second-level, .navbar-sidenav .sidenav-third-level").removeClass("show")
-//     }), a(".navbar-sidenav .nav-link-collapse").click(function (e) {
-//         e.preventDefault(), a("body").removeClass("sidenav-toggled")
-//     }), a("body.fixed-nav .navbar-sidenav, body.fixed-nav .sidenav-toggler, body.fixed-nav .navbar-collapse").on("mousewheel DOMMouseScroll", function (a) {
-//         var e = a.originalEvent, t = e.wheelDelta || -e.detail;
-//         this.scrollTop += 30 * (t < 0 ? 1 : -1), a.preventDefault()
-//     }), a(document).scroll(function () {
-//         a(this).scrollTop() > 100 ? a(".scroll-to-top").fadeIn() : a(".scroll-to-top").fadeOut()
-//     }), a('[data-toggle="tooltip"]').tooltip(), a(document).on("click", "a.scroll-to-top", function (e) {
-//         var t = a(this);
-//         a("html, body").stop().animate({scrollTop: a(t.attr("href")).offset().top}, 1e3, "easeInOutExpo"), e.preventDefault()
-//         // }), a(document).ready(function () {
-//         //     a("#dataTable").DataTable()
-//     })
-// }(jQuery), Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif', Chart.defaults.global.defaultFontColor = "#292b2c";
-// var ctx = document.getElementById("myAreaChart"), myLineChart = new Chart(ctx, {
-//     type: "line",
-//     data: {
-//         labels: ["Mar 1", "Mar 2", "Mar 3", "Mar 4", "Mar 5", "Mar 6", "Mar 7", "Mar 8", "Mar 9", "Mar 10", "Mar 11", "Mar 12", "Mar 13"],
-//         datasets: [{
-//             label: "Sessions",
-//             lineTension: .3,
-//             backgroundColor: "rgba(2,117,216,0.2)",
-//             borderColor: "rgba(2,117,216,1)",
-//             pointRadius: 5,
-//             pointBackgroundColor: "rgba(2,117,216,1)",
-//             pointBorderColor: "rgba(255,255,255,0.8)",
-//             pointHoverRadius: 5,
-//             pointHoverBackgroundColor: "rgba(2,117,216,1)",
-//             pointHitRadius: 20,
-//             pointBorderWidth: 2,
-//             data: [1e4, 30162, 26263, 18394, 18287, 28682, 31274, 33259, 25849, 24159, 32651, 31984, 38451]
-//         }]
-//     },
-//     options: {
-//         scales: {
-//             xAxes: [{time: {unit: "date"}, gridLines: {display: !1}, ticks: {maxTicksLimit: 7}}],
-//             yAxes: [{ticks: {min: 0, max: 4e4, maxTicksLimit: 5}, gridLines: {color: "rgba(0, 0, 0, .125)"}}]
-//         }, legend: {display: !1}
-//     }
-// });
-//
-// for (var i = 0; i < stockSymbol.length; i++){
-//     console.log("stockSymbol",stockSymbol[i]);
-// }
-//
-// // @TODO Stop Animation , Display Company Name
-// function createBarChart(max) {
-//     // Bar Chart
-//     ctx = document.getElementById("myBarChart"), myLineChart = new Chart(ctx, {
-//         type: "bar",
-//         data: {
-//             // labels: [stockSymbol[0], "February", "March", "April", "May", "June"],
-//             labels: filteredArrS,
-//             datasets: [{
-//                 label: "Percent Change",
-//                 backgroundColor: "rgba(2,117,216,1)",
-//                 borderColor: "rgba(2,117,216,1)",
-//                 // data: [4215, 5312, 6251, 7841, 9821, 14984]
-//                 data: filteredArrP
-//             }]
-//         },
-//         options: {
-//             scales: {
-//                 xAxes: [{time: {unit: "month"}, gridLines: {display: !1}, ticks: {maxTicksLimit: 6}}],
-//                 yAxes: [{ticks: {min: 0, max: max, maxTicksLimit: 5}, gridLines: {display: !0}}]
-//             }, legend: {display: !1},
-//             animation: {
-//                 duration: 0
-//             }
-//         }
-//     });
-// }
-//
-// // Pie Chart
-// ctx = document.getElementById("myPieChart"), myPieChart = new Chart(ctx, {
-//     type: "pie",
-//     data: {
-//         labels: ["Blue", "Red", "Yellow", "Green"],
-//         datasets: [{data: [12.21, 15.58, 11.25, 8.32], backgroundColor: ["#007bff", "#dc3545", "#ffc107", "#28a745"]}]
-//     }
-// });
+var filteredArrS = [];
+var filteredArrP = [];
+
+var count = 0;
+var max = null;
+
+function grabPortfolioBarChart(fullPortfolio, percentArray){
+
+    var stockSymbol = [];
+
+    // console.log(stockSymbol);       // AAPL, MSFT
+    // console.log(percentArray);      // "300%", "400%"
+
+    // Pushing stock Symbols
+    for (var i = 0; i < fullPortfolio.length; i++) {
+        stockSymbol.push(fullPortfolio[i].stockSymbol);
+    }
+
+    // Removing Duplicates for stock Symbol
+    for (var i = 0; i < stockSymbol.length; i++) {
+        filteredArrS = duplicates(stockSymbol);
+    }
+
+    // Removing Duplicates for percent
+    for (var i = 0; i < percentArray.length; i++) {
+        filteredArrP = duplicates(percentArray);
+    }
+
+    for (var i = 0; i < filteredArrP.length; i++){
+        filteredArrP[i] = Number(filteredArrP[i]).toFixed(2);
+    }
+
+    // Finding max value then adding padding, then
+    max = findMaxValueArr(percentArray);
+    var result = ( 10 / max) * 1000;
+    max = max + result;
+
+    createBarChart(max);
+}
+
+
+
+/** removing duplicates **/
+function duplicates(array){
+    return array.filter(function(val,ind) { return array.indexOf(val) === ind; });
+}
+
+
+/** Finding the Max Value **/
+function findMaxValueArr(array) {
+    return Math.max.apply(null, array) // 4
+}
+
+// @TODO Stop Animation , Display Company Name
+function createBarChart(max) {
+    // Bar Chart
+    ctx = document.getElementById("myBarChart"), myLineChart = new Chart(ctx, {
+        type: "bar",
+        data: {
+            // labels: [stockSymbol[0], "February", "March", "April", "May", "June"],
+            labels: filteredArrS,
+            datasets: [{
+                label: "Percent Change",
+                // backgroundColor: "rgba(2,117,216,1)",
+                backgroundColor: palette('tol', filteredArrS.length).map(function(hex) {
+                    return '#' + hex;
+                }),
+                borderColor: "rgba(2,117,216,1)",
+                // data: [4215, 5312, 6251, 7841, 9821, 14984]
+                data: filteredArrP
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                xAxes: [
+                    {time: {unit: "month"}, gridLines: {display: !1}, ticks: {maxTicksLimit: 6}}],
+                yAxes: [{ticks: {min: 0, max: max, maxTicksLimit: 5}, gridLines: {display: !0}}]
+            }, legend: {display: !1},
+            animation: {
+                duration: 0
+            }
+        }
+    });
+}
+
