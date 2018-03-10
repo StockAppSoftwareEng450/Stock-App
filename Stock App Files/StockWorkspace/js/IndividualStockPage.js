@@ -33,264 +33,269 @@ function parseURLParams(url) {
 }
 
 $(document).ready(function () {
+
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-            // User is signed in.
-            // Array with stockSymbol in [0]
-            var testDG = parseURLParams(window.location.href);
-            var variable1 = testDG['stock'];
-            var stockSymbol = variable1[0];
 
-            // On refresh loads back to screen 1
-            if (stockSymbol === undefined) {
-                // Display error to the user and return user to homepage
-                // console.log("reached undefined");
-                window.location.href = "index.html";
-            }
-            resultStockSymbol = stockSymbol;
+            setTimeout(function() {
+                // User is signed in.
+                // Array with stockSymbol in [0]
+                var testDG = parseURLParams(window.location.href);
+                var variable1 = testDG['stock'];
+                var stockSymbol = variable1[0];
 
-            //getting portfolio information and save it
-            // var refPortfolio = firebase.database().ref("Portfolios");
-            // refPortfolio.orderByChild("userId").equalTo(user.uid).once("value", function (snapshot) {
-            //     if (snapshot.exists()) {
-            //         snapshot.forEach(function (value) {
-            //             // console.log("StockSymbol: " + value.child("stockSymbol").val());
-            //             if (stockSymbol === value.child("stockSymbol").val()) {
-            //                 //change css to state "stock in symbole" + change custom-attribute
-            //                 document.getElementById("portfolioButton").setAttribute("data-inPortfolio", true);
-            //                 document.getElementById("portfolioButton").setAttribute("data-pk", value.key);
-            //                 //document.getElementById("portfolioButton").innerText = " Remove from Portfolio";
-            //
-            //                 $("#portfolioButton").addClass("fa fa-minus");
-            //
-            //                 // Toggle off the addstockportfolio div
-            //                 var div1 = document.getElementById('AddStocktoPortfolio');
-            //                 div1.style.display = "none";
-            //                 // console.log("onstart");
-            //             }
-            //         });
-            //     }
-            //     // activate portfolio button (deactivate it as default)
-            //     document.getElementById("portfolioButton").disabled = false;
-            // });
+                // On refresh loads back to screen 1
+                if (stockSymbol === undefined) {
+                    // Display error to the user and return user to homepage
+                    // console.log("reached undefined");
+                    window.location.href = "index.html";
+                }
+                resultStockSymbol = stockSymbol;
 
-            document.getElementById("portfolioButton").disabled = false;
+                //getting portfolio information and save it
+                // var refPortfolio = firebase.database().ref("Portfolios");
+                // refPortfolio.orderByChild("userId").equalTo(user.uid).once("value", function (snapshot) {
+                //     if (snapshot.exists()) {
+                //         snapshot.forEach(function (value) {
+                //             // console.log("StockSymbol: " + value.child("stockSymbol").val());
+                //             if (stockSymbol === value.child("stockSymbol").val()) {
+                //                 //change css to state "stock in symbole" + change custom-attribute
+                //                 document.getElementById("portfolioButton").setAttribute("data-inPortfolio", true);
+                //                 document.getElementById("portfolioButton").setAttribute("data-pk", value.key);
+                //                 //document.getElementById("portfolioButton").innerText = " Remove from Portfolio";
+                //
+                //                 $("#portfolioButton").addClass("fa fa-minus");
+                //
+                //                 // Toggle off the addstockportfolio div
+                //                 var div1 = document.getElementById('AddStocktoPortfolio');
+                //                 div1.style.display = "none";
+                //                 // console.log("onstart");
+                //             }
+                //         });
+                //     }
+                //     // activate portfolio button (deactivate it as default)
+                //     document.getElementById("portfolioButton").disabled = false;
+                // });
 
-            //getting watchlist information and save it
-            var refWatchlist = firebase.database().ref("Watchlists");
-            refWatchlist.orderByChild("userId").equalTo(user.uid).once("value", function (snapshot) {
-                if (snapshot.exists()) {
-                    snapshot.forEach(function (value) {
-                        if (stockSymbol === value.child("stockSymbol").val()) {
-                            //change css to state "stock in symbole" + change custom-attribute
-                            document.getElementById("watchlistButton").setAttribute("data-inWatchlist", true);
-                            document.getElementById("watchlistButton").setAttribute("data-pk", value.key);
-                            //document.getElementById("watchlistButton").innerText = " Remove from Watchlist";
+                document.getElementById("portfolioButton").disabled = false;
 
-                            $("#watchlistButton").addClass("fa fa-minus");
+                //getting watchlist information and save it
+                var refWatchlist = firebase.database().ref("Watchlists");
+                refWatchlist.orderByChild("userId").equalTo(user.uid).once("value", function (snapshot) {
+                    if (snapshot.exists()) {
+                        snapshot.forEach(function (value) {
+                            if (stockSymbol === value.child("stockSymbol").val()) {
+                                //change css to state "stock in symbole" + change custom-attribute
+                                document.getElementById("watchlistButton").setAttribute("data-inWatchlist", true);
+                                document.getElementById("watchlistButton").setAttribute("data-pk", value.key);
+                                //document.getElementById("watchlistButton").innerText = " Remove from Watchlist";
+
+                                $("#watchlistButton").addClass("fa fa-minus");
+                            }
+                        });
+                    }
+                    // activate portfolio button (deactivate it as default)
+                    document.getElementById("watchlistButton").disabled = false;
+                });
+
+                // Parsing Stock Quote
+                var parser = document.createElement('a');
+                parser.href = "https://api.iextrading.com/1.0/stock/";
+                parser.StockName = stockSymbol;
+                var url = parser.href;
+                var stockName = parser.StockName;
+                var resultUrl = url + stockName;
+                var addQuote = "/quote";
+                resultUrl = resultUrl + addQuote;
+
+                /** If stock Market is open **/
+                var d = new Date();
+                var currentHour = d.getHours();
+                var day = d.getDay();
+                // console.log("day: " + day);
+
+                if ((currentHour > 7 && currentHour < 18) && (day >= 1 && day <= 5)) {
+                    // console.log("interval");
+                    setIntervalPrice(resultUrl);
+                } else {
+                    // console.log("timeout");
+                    setTimeoutPrice(resultUrl);
+                }
+
+                /** Updating Name and Symbol Once **/
+                setTimeout(function () {
+                    $.ajax({
+                        url: resultUrl,
+                        success: function (data) {
+                            var companyName = data.companyName;
+                            var revisedCompany = null;
+
+                            // Check for length of company name
+                            if (companyName.length > 20) {
+                                revisedCompany = companyName.slice(0, 50);
+                                document.getElementById("CompanyName").innerHTML = revisedCompany + "...";
+
+                                // Calling tooltip
+                                $('#CompanyName').tooltip({
+                                    title: hoverGetData(companyName),
+                                    html: true,
+                                    container: 'body'
+                                });
+
+                            } else {
+                                document.getElementById("CompanyName").innerHTML = companyName;
+                            }
+
+                            // Symbol
+                            document.getElementById("StockSymbolUpperCase").innerHTML = data.symbol;
+                        },
+                        error: function (error) {
+                            // Handle Errors here.
+                            // console.log(error.responseText);
+                            //alert(error.responseText);
                         }
                     });
-                }
-                // activate portfolio button (deactivate it as default)
-                document.getElementById("watchlistButton").disabled = false;
-            });
+                });
 
-            // Parsing Stock Quote
-            var parser = document.createElement('a');
-            parser.href = "https://api.iextrading.com/1.0/stock/";
-            parser.StockName = stockSymbol;
-            var url = parser.href;
-            var stockName = parser.StockName;
-            var resultUrl = url + stockName;
-            var addQuote = "/quote";
-            resultUrl = resultUrl + addQuote;
+                // calling current stock symbol
+                currentStockStats();
 
-            /** If stock Market is open **/
-            var d = new Date();
-            var currentHour = d.getHours();
-            var day = d.getDay();
-            // console.log("day: " + day);
+                /** Peers Section  **/
+                var peersUrl = "https://api.iextrading.com/1.0/stock/" + stockSymbol + "/peers";
 
-            if ((currentHour > 7 && currentHour < 18) && (day >= 1 && day <= 5)) {
-                // console.log("interval");
-                setIntervalPrice(resultUrl);
-            } else {
-                // console.log("timeout");
-                setTimeoutPrice(resultUrl);
-            }
-
-            /** Updating Name and Symbol Once **/
-            setTimeout(function () {
                 $.ajax({
-                    url: resultUrl,
+                    url: peersUrl,
                     success: function (data) {
-                        var companyName = data.companyName;
-                        var revisedCompany = null;
+                        for (var i = 0; i < data.length; i++) {
+                            var peerName = data[i];
 
-                        // Check for length of company name
-                        if (companyName.length > 20) {
-                            revisedCompany = companyName.slice(0, 50);
-                            document.getElementById("CompanyName").innerHTML = revisedCompany + "...";
-
-                            // Calling tooltip
-                            $('#CompanyName').tooltip({
-                                title: hoverGetData(companyName),
-                                html: true,
-                                container: 'body'
-                            });
-
-                        } else {
-                            document.getElementById("CompanyName").innerHTML = companyName;
+                            // for each peer name (grab stats)
+                            peersStatsUrlGrab(peerName);
                         }
-
-                        // Symbol
-                        document.getElementById("StockSymbolUpperCase").innerHTML = data.symbol;
-                    },
-                    error: function (error) {
-                        // Handle Errors here.
+                    }, error: function (error) {
                         // console.log(error.responseText);
-                        //alert(error.responseText);
+
+                        if (error.responseText === "Unknown symbol") {
+                            // console.log("Reached Error");
+
+                            // Transfer to the homepage
+                            window.location.href = "index.html";
+                        }
                     }
                 });
-            });
 
-            // calling current stock symbol
-            currentStockStats();
+                /** Company About Page **/
+                var companyDescriptionUrl = "https://api.iextrading.com/1.0/stock/" + stockSymbol + "/company";
 
-            /** Peers Section  **/
-            var peersUrl = "https://api.iextrading.com/1.0/stock/" + stockSymbol + "/peers";
+                $.ajax({
+                    url: companyDescriptionUrl,
+                    success: function (data) {
+                        d3.json(companyDescriptionUrl, function (error, data) {
+                            document.getElementById("aboutCompany").innerHTML = data.description;
+                        });
+                    }, error: function (error) {
+                        // console.log(error.responseText);
 
-            $.ajax({
-                url: peersUrl,
-                success: function (data) {
-                    for (var i = 0; i < data.length; i++) {
-                        var peerName = data[i];
+                        // Handling undefined Exception
+                        if (error.responseText === "Unknown symbol") {
+                            // console.log("Reached Error");
 
-                        // for each peer name (grab stats)
-                        peersStatsUrlGrab(peerName);
-                    }
-                }, error: function (error) {
-                    // console.log(error.responseText);
-
-                    if (error.responseText === "Unknown symbol") {
-                        // console.log("Reached Error");
-
-                        // Transfer to the homepage
-                        window.location.href = "index.html";
-                    }
-                }
-            });
-
-            /** Company About Page **/
-            var companyDescriptionUrl = "https://api.iextrading.com/1.0/stock/" + stockSymbol + "/company";
-
-            $.ajax({
-                url: companyDescriptionUrl,
-                success: function (data) {
-                    d3.json(companyDescriptionUrl, function (error, data) {
-                        document.getElementById("aboutCompany").innerHTML = data.description;
-                    });
-                }, error: function (error) {
-                    // console.log(error.responseText);
-
-                    // Handling undefined Exception
-                    if (error.responseText === "Unknown symbol") {
-                        // console.log("Reached Error");
-
-                        // Transfer to the homepage
-                        window.location.href = "index.html";
-                    }
-                }
-            });
-
-            /** Displaying News to individual stock page **/
-            var urlNews = "https://api.iextrading.com/1.0/stock/" + stockSymbol + "/news/last/3";
-
-            $.ajax({
-                url: urlNews,
-                success: function (data) {
-                    d3.json(urlNews, function (error, data) {
-                        // console.log("News: " + data);
-                        for (var i = 0; i < data.length; i++) {
-                            var headlineIndex = "headline";
-                            var sourceIndex = "source";
-                            var datetimeIndex = "datetime";
-                            var linkIndex = "linkIndex";
-
-                            var parser = data[i].datetime;
-                            var indexNumber = parser.indexOf("T");
-                            var dataParsed = parser.slice(0, indexNumber);
-
-                            headlineIndex = headlineIndex + i;
-                            sourceIndex = sourceIndex + i;
-                            datetimeIndex = datetimeIndex + i;
-                            linkIndex = linkIndex + i;
-
-                            var revLink = "http://www." + data[i].source + ".com";
-                            console.log("source:" + data[i].source);
-                            console.log("revLink:" + revLink);
-
-
-                            document.getElementById(linkIndex).href = data[i].url;
-                            document.getElementById(headlineIndex).innerHTML = data[i].headline;
-                            document.getElementById(sourceIndex).innerHTML = data[i].source;
-                            document.getElementById(sourceIndex).href = revLink;
-                            document.getElementById(datetimeIndex).innerHTML = dataParsed;
+                            // Transfer to the homepage
+                            window.location.href = "index.html";
                         }
-                    });
-                }, error: function (error) {
-                    // console.log(error.responseText);
-
-                    // Handling undefined Exception
-                    if (error.responseText === "Unknown symbol") {
-                        // console.log("Reached Error");
-
-                        // Transfer to the homepage
-                        window.location.href = "index.html";
                     }
-                }
-            });
+                });
 
-            /** Key Stats to **/
-            var urlKeyStats = "https://api.iextrading.com/1.0/stock/" + stockSymbol + "/stats";
+                /** Displaying News to individual stock page **/
+                var urlNews = "https://api.iextrading.com/1.0/stock/" + stockSymbol + "/news/last/3";
 
-            $.ajax({
-                url: urlKeyStats,
-                success: function (data) {
-                    d3.json(urlKeyStats, function (error, data) {
-                        // console.log("Key Stats: " + data);
+                $.ajax({
+                    url: urlNews,
+                    success: function (data) {
+                        d3.json(urlNews, function (error, data) {
+                            // console.log("News: " + data);
+                            for (var i = 0; i < data.length; i++) {
+                                var headlineIndex = "headline";
+                                var sourceIndex = "source";
+                                var datetimeIndex = "datetime";
+                                var linkIndex = "linkIndex";
 
-                        var response = (data);
-                        var week52high = response.week52high;
-                        var week52low = response.week52low;
-                        var dividendRate = response.dividendRate;
-                        var latestEPS = response.latestEPS;
-                        var grossProfit = response.grossProfit;
-                        var debt = response.debt;
+                                var parser = data[i].datetime;
+                                var indexNumber = parser.indexOf("T");
+                                var dataParsed = parser.slice(0, indexNumber);
 
-                        document.getElementById("week52high").innerHTML = week52high;
-                        document.getElementById("week52low").innerHTML = week52low;
-                        document.getElementById("dividendRate").innerHTML = dividendRate;
-                        document.getElementById("latestEPS").innerHTML = latestEPS;
-                        document.getElementById("grossProfit").innerHTML = grossProfit;
-                        document.getElementById("debt").innerHTML = debt;
-                    });
-                }, error: function (error) {
-                    // console.log(error.responseText);
-                    //alert(error.responseText);
+                                headlineIndex = headlineIndex + i;
+                                sourceIndex = sourceIndex + i;
+                                datetimeIndex = datetimeIndex + i;
+                                linkIndex = linkIndex + i;
 
-                    // Handling undefined Exception
-                    if (error.responseText === "Unknown symbol") {
-                        console.log("Reached Error");
+                                var revLink = "http://www." + data[i].source + ".com";
+                                console.log("source:" + data[i].source);
+                                console.log("revLink:" + revLink);
 
-                        // Transfer to the homepage
-                        window.location.href = "index.html";
+
+                                document.getElementById(linkIndex).href = data[i].url;
+                                document.getElementById(headlineIndex).innerHTML = data[i].headline;
+                                document.getElementById(sourceIndex).innerHTML = data[i].source;
+                                document.getElementById(sourceIndex).href = revLink;
+                                document.getElementById(datetimeIndex).innerHTML = dataParsed;
+                            }
+                        });
+                    }, error: function (error) {
+                        // console.log(error.responseText);
+
+                        // Handling undefined Exception
+                        if (error.responseText === "Unknown symbol") {
+                            // console.log("Reached Error");
+
+                            // Transfer to the homepage
+                            window.location.href = "index.html";
+                        }
                     }
-                }
-            });
+                });
 
-            /** Displaying Logo **/
-            DisplayLogo();
+                /** Key Stats to **/
+                var urlKeyStats = "https://api.iextrading.com/1.0/stock/" + stockSymbol + "/stats";
+
+                $.ajax({
+                    url: urlKeyStats,
+                    success: function (data) {
+                        d3.json(urlKeyStats, function (error, data) {
+                            // console.log("Key Stats: " + data);
+
+                            var response = (data);
+                            var week52high = response.week52high;
+                            var week52low = response.week52low;
+                            var dividendRate = response.dividendRate;
+                            var latestEPS = response.latestEPS;
+                            var grossProfit = response.grossProfit;
+                            var debt = response.debt;
+
+                            document.getElementById("week52high").innerHTML = currencySymbole + " " + fx.convert(week52high).toFixed(2);
+                            document.getElementById("week52low").innerHTML = currencySymbole + " " + fx.convert(week52low).toFixed(2);
+                            document.getElementById("dividendRate").innerHTML = dividendRate;
+                            document.getElementById("latestEPS").innerHTML = latestEPS;
+                            document.getElementById("grossProfit").innerHTML = currencySymbole + " " + fx.convert(grossProfit).toFixed(2);
+                            document.getElementById("debt").innerHTML = currencySymbole + " " + fx.convert(debt).toFixed(2);
+                        });
+                    }, error: function (error) {
+                        // console.log(error.responseText);
+                        //alert(error.responseText);
+
+                        // Handling undefined Exception
+                        if (error.responseText === "Unknown symbol") {
+                            console.log("Reached Error");
+
+                            // Transfer to the homepage
+                            window.location.href = "index.html";
+                        }
+                    }
+                });
+
+                /** Displaying Logo **/
+                DisplayLogo();
+
+            }, 500);
 
         } else {
             // if no user is signed in, return to the login screen.
@@ -406,8 +411,7 @@ function peersStatsUrlGrab(name) {
 
             var price = data.latestPrice;
             var cell1 = row.insertCell(1);
-            cell1.innerHTML = "$" + price;
-
+            cell1.innerHTML = currencySymbole + " " + fx.convert(price).toFixed(2);
         }
     });
 
@@ -663,7 +667,7 @@ function AddToPortfolio() {
 
                     // Purchased Price
                     cell2 = row.insertCell((1));
-                    cell2.innerHTML = "$" + fullPortfolio[i].price;
+                    cell2.innerHTML = currencySymbole + " " + fx.convert(fullPortfolio[i].price).toFixed(2);
 
                     // Quantity
                     cell3 = row.insertCell((2));
@@ -869,13 +873,13 @@ function setIntervalPrice(resultUrl) {
             success: function (data) {
                 var stockprice = data.latestPrice;
 
-                document.getElementById("StockPrice").innerHTML = stockprice;
+                document.getElementById("StockPrice").innerHTML = currencySymbole + " " + fx.convert(stockprice).toFixed(2);
 
                 stockprice = stockprice.toString();
                 stockprice = stockprice.bold();
 
                 // Send price to the peers table
-                document.getElementById("myTable").rows[1].cells[1].innerHTML = "$" + stockprice;
+                document.getElementById("myTable").rows[1].cells[1].innerHTML = currencySymbole + " " + fx.convert(stockprice).toFixed(2);
 
             },
             error: function (error) {
@@ -895,13 +899,14 @@ function setTimeoutPrice(resultUrl) {
             success: function (data) {
                 var stockprice = data.latestPrice;
 
-                document.getElementById("StockPrice").innerHTML = stockprice;
+                document.getElementById("StockPrice").innerHTML = currencySymbole + " " + fx.convert(stockprice).toFixed(2);
 
+                stockprice = fx.convert(stockprice).toFixed(2);
                 stockprice = stockprice.toString();
                 stockprice = stockprice.bold();
 
                 // Send price to the peers table
-                document.getElementById("myTable").rows[1].cells[1].innerHTML = "$" + stockprice;
+                document.getElementById("myTable").rows[1].cells[1].innerHTML = currencySymbole + " " + stockprice;
 
             },
             error: function (error) {

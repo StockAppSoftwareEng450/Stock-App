@@ -1,6 +1,5 @@
 "use strict";
 
-
 $(document).ready(function () {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
@@ -200,7 +199,10 @@ function submitForm(e){
     var fstName = getInputVal('fstName');
     var lstName = getInputVal('lstName');
     var phone = getInputVal('phone');
-    var currency = getInputVal('currency');
+
+    var dropdown = document.getElementById("currency");
+    var currency = dropdown.options[dropdown.selectedIndex].value;
+
     var ubPortfolio = getInputVal('ubPortfolioText');
     var lbPortfolio = getInputVal('lbPortfolioText');
     var ubWatchlist = getInputVal('ubWatchlistText');

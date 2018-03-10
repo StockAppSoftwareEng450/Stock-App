@@ -194,7 +194,7 @@ function displayDataToTableP(data, fullPortfolio) {
     if (fullPortfolio.length >= 1){
 
         // Returning the price and stats for each Stock Symbol
-        for (var i = 0; i < fullPortfolio.length; i++) {
+        for (var i = 0; i < fullPortfolio.length-1; i++) {
             // console.log("Returning quote: " + i , data[Object.keys(data)[i]].quote);
             // console.log("Returning stats: " + i , data[Object.keys(data)[i]].stats);
             // console.log("Returning price: " + i , data[Object.keys(data)[i]].price);
@@ -217,11 +217,11 @@ function displayDataToTableP(data, fullPortfolio) {
 
             // Purchased Price          (FROM FIREBASE)
             var cell2 = row.insertCell((2));
-            cell2.innerHTML = "$" + fullPortfolio[i].price;
+            cell2.innerHTML = currencySymbole + " " + fx.convert(fullPortfolio[i].price).toFixed(2);
 
             // Current Price            (FROM IEX)
             var cell3 = row.insertCell((3));
-            cell3.innerHTML = "$" + data[Object.keys(data)[i]].price;
+            cell3.innerHTML = currencySymbole + " " + fx.convert(data[Object.keys(data)[i]].price).toFixed(2);
 
             // Quantity                 (FROM FIREBASE)
             var cell4 = row.insertCell((4));
@@ -229,14 +229,14 @@ function displayDataToTableP(data, fullPortfolio) {
 
             // Purchased Equity         (FROM FIREBASE)
             var cell5 = row.insertCell((5));
-            cell5.innerHTML = "$" + (fullPortfolio[i].price * fullPortfolio[i].quantity).toFixed(2).toString();
-            purchasedEquity += Number((fullPortfolio[i].price * fullPortfolio[i].quantity).toFixed(2));
+            cell5.innerHTML = currencySymbole + " " + (fx.convert(fullPortfolio[i].price * fullPortfolio[i].quantity)).toFixed(2).toString();
+            purchasedEquity += Number(fx.convert((fullPortfolio[i].price * fullPortfolio[i].quantity)).toFixed(2));
 
             console.log(purchasedEquity);
 
             // Current Equity           (Calculation)
             var cell6 = row.insertCell((6));
-            cell6.innerHTML = "$" + (data[Object.keys(data)[i]].price * fullPortfolio[i].quantity).toFixed(2);
+            cell6.innerHTML = currencySymbole + " " + fx.convert((data[Object.keys(data)[i]].price * fullPortfolio[i].quantity)).toFixed(2);
             currentEquity += Number((data[Object.keys(data)[i]].price * fullPortfolio[i].quantity).toFixed(2));
 
             console.log(currentEquity);
@@ -295,16 +295,18 @@ function displayDataToTableP(data, fullPortfolio) {
     // settingInterval();
 
     // Displaying Total Purchased Equity
-    document.getElementById("TotalPurchasedEquity").innerHTML = "$" + purchasedEquity.toString();
-    document.getElementById("TotalCurrentEquity").innerHTML = "$" +  currentEquity.toString();
+    purchasedEquity = purchasedEquity.toFixed(2);
+    currentEquity = currentEquity.toFixed(2);
+    document.getElementById("TotalPurchasedEquity").innerHTML = currencySymbole + " " + fx.convert(purchasedEquity).toFixed(2).toString();
+    document.getElementById("TotalCurrentEquity").innerHTML = currencySymbole + " " +  fx.convert(currentEquity).toFixed(2).toString();
 
     // Display negative when less than zero and color to red
     if ((currentEquity - purchasedEquity) < 0){
-        document.getElementById("profit").innerHTML = "- " + "$" + (currentEquity - purchasedEquity).toString();
+        document.getElementById("profit").innerHTML = currencySymbole + " " + fx.convert((currentEquity - purchasedEquity)).toFixed(2).toString();
         var negVal = document.getElementById("profit");
         negVal.setAttribute('style', 'color: #D53343 !important');
     } else {
-        document.getElementById("profit").innerHTML = "$" + (currentEquity - purchasedEquity).toString();
+        document.getElementById("profit").innerHTML = currencySymbole + " " + fx.convert((currentEquity - purchasedEquity)).toFixed(2).toString();
     }
 
 }
@@ -386,7 +388,7 @@ function displayDataToTableW(data, fullWatchlist) {
 
         // Current Price
         var cell1 = row.insertCell((1));
-        cell1.innerHTML = "$" + data[Object.keys(data)[i]].price;
+        cell1.innerHTML = currencySymbole + " " + fx.convert(data[Object.keys(data)[i]].price).toFixed(2);
 
         // 3 Month Percent
         var cell2 = row.insertCell((2));
@@ -542,6 +544,8 @@ function displayCards(data, fullPortfolio) {
         }
     }
 }
+
+
 
 
 
