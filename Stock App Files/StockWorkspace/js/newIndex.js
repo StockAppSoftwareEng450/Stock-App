@@ -49,6 +49,8 @@ function getFullPortfolio() {
                 // Issuing BatchRequest for Portfolio
                 issueBatchRequestP(fullPortfolio);
 
+                getOneDayPrice(fullPortfolio);
+
             });
         } else {
 
@@ -191,103 +193,103 @@ function displayDataToTableP(data, fullPortfolio) {
     var table = document.getElementById("portfolioTable");
 
     // Checking if something in fullPortfolio
-    if (fullPortfolio.length >= 1){
 
-        // Returning the price and stats for each Stock Symbol
-        for (var i = 0; i < fullPortfolio.length-1; i++) {
-            // console.log("Returning quote: " + i , data[Object.keys(data)[i]].quote);
-            // console.log("Returning stats: " + i , data[Object.keys(data)[i]].stats);
-            // console.log("Returning price: " + i , data[Object.keys(data)[i]].price);
-            // console.log("-----------------------------------------------");
 
-            // Transfers stock to the Individual StockPage
-            var stockTransferURL = "IndividualStockPage.html?stock=" + data[Object.keys(data)[i]].quote.symbol + "#";
+    // Returning the price and stats for each Stock Symbol
+    for (var i = 0; i < fullPortfolio.length; i++) {
+        // console.log("Returning quote: " + i , data[Object.keys(data)[i]].quote);
+        // console.log("Returning stats: " + i , data[Object.keys(data)[i]].stats);
+        // console.log("Returning price: " + i , data[Object.keys(data)[i]].price);
+        // console.log("-----------------------------------------------");
 
-            // Inserting rows
-            var row = table.insertRow(i + 1);
-            row.setAttribute("data-pk", fullPortfolio[i].pk);
+        // Transfers stock to the Individual StockPage
+        var stockTransferURL = "IndividualStockPage.html?stock=" + data[Object.keys(data)[i]].quote.symbol + "#";
 
-            // Displaying Stock Symbol  (FROM FIREBASE)
-            var cell0 = row.insertCell((0));
-            cell0.innerHTML = fullPortfolio[i].stockSymbol.link(stockTransferURL);
+        // Inserting rows
+        var row = table.insertRow(i + 1);
+        row.setAttribute("data-pk", fullPortfolio[i].pk);
 
-            // Date purchased           (FROM FIREBASE)
-            var cell1 = row.insertCell((1));
-            cell1.innerHTML = fullPortfolio[i].date;
+        // Displaying Stock Symbol  (FROM FIREBASE)
+        var cell0 = row.insertCell((0));
+        cell0.innerHTML = fullPortfolio[i].stockSymbol.link(stockTransferURL);
 
-            // Purchased Price          (FROM FIREBASE)
-            var cell2 = row.insertCell((2));
-            cell2.innerHTML = currencySymbole + " " + fx.convert(fullPortfolio[i].price).toFixed(2);
+        // Date purchased           (FROM FIREBASE)
+        var cell1 = row.insertCell((1));
+        cell1.innerHTML = fullPortfolio[i].date;
 
-            // Current Price            (FROM IEX)
-            var cell3 = row.insertCell((3));
-            cell3.innerHTML = currencySymbole + " " + fx.convert(data[Object.keys(data)[i]].price).toFixed(2);
+        // Purchased Price          (FROM FIREBASE)
+        var cell2 = row.insertCell((2));
+        cell2.innerHTML = currencySymbole + " " + fx.convert(fullPortfolio[i].price).toFixed(2);
 
-            // Quantity                 (FROM FIREBASE)
-            var cell4 = row.insertCell((4));
-            cell4.innerHTML = fullPortfolio[i].quantity;
+        // Current Price            (FROM IEX)
+        var cell3 = row.insertCell((3));
+        cell3.innerHTML = currencySymbole + " " + fx.convert(data[Object.keys(data)[i]].price).toFixed(2);
 
-            // Purchased Equity         (FROM FIREBASE)
-            var cell5 = row.insertCell((5));
-            cell5.innerHTML = currencySymbole + " " + (fx.convert(fullPortfolio[i].price * fullPortfolio[i].quantity)).toFixed(2).toString();
-            purchasedEquity += Number(fx.convert((fullPortfolio[i].price * fullPortfolio[i].quantity)).toFixed(2));
+        // Quantity                 (FROM FIREBASE)
+        var cell4 = row.insertCell((4));
+        cell4.innerHTML = fullPortfolio[i].quantity;
 
-            console.log(purchasedEquity);
+        // Purchased Equity         (FROM FIREBASE)
+        var cell5 = row.insertCell((5));
+        cell5.innerHTML = currencySymbole + " " + (fx.convert(fullPortfolio[i].price * fullPortfolio[i].quantity)).toFixed(2).toString();
+        purchasedEquity += Number(fx.convert((fullPortfolio[i].price * fullPortfolio[i].quantity)).toFixed(2));
 
-            // Current Equity           (Calculation)
-            var cell6 = row.insertCell((6));
-            cell6.innerHTML = currencySymbole + " " + fx.convert((data[Object.keys(data)[i]].price * fullPortfolio[i].quantity)).toFixed(2);
-            currentEquity += Number((data[Object.keys(data)[i]].price * fullPortfolio[i].quantity).toFixed(2));
+        console.log(purchasedEquity);
 
-            console.log(currentEquity);
+        // Current Equity           (Calculation)
+        var cell6 = row.insertCell((6));
+        cell6.innerHTML = currencySymbole + " " + fx.convert((data[Object.keys(data)[i]].price * fullPortfolio[i].quantity)).toFixed(2);
+        currentEquity += Number((data[Object.keys(data)[i]].price * fullPortfolio[i].quantity).toFixed(2));
 
-            // Current Percent Change   (Calculation)   Bought price vs current price
-            var cell7 = row.insertCell((7));
-            cell7.innerHTML = (((data[Object.keys(data)[i]].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2).toString();
+        console.log(currentEquity);
 
-            // Delete Button            (FROM FIREBASE)
-            var cell8 = row.insertCell((8));
-            cell8.setAttribute("class", "deleteButton");
-            cell8.style.display = 'flex';
-            cell8.style.alignItems = 'center';
-            cell8.style.justifyContent = 'center';
+        // Current Percent Change   (Calculation)   Bought price vs current price
+        var cell7 = row.insertCell((7));
+        cell7.innerHTML = (((data[Object.keys(data)[i]].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2).toString();
 
-            var buttonDelete = document.createElement("BUTTON");
-            buttonDelete.appendChild(document.createTextNode("Delete"));
-            buttonDelete.addEventListener('click', function (button) {
-                var row = button.path[2];
-                var stockSymbol = row.firstChild.firstChild.innerHTML;
+        // Delete Button            (FROM FIREBASE)
+        var cell8 = row.insertCell((8));
+        cell8.setAttribute("class", "deleteButton");
+        cell8.style.display = 'flex';
+        cell8.style.alignItems = 'center';
+        cell8.style.justifyContent = 'center';
 
-                //removes the row from table
-                row.parentNode.removeChild(row);
-                firebase.database().ref("Portfolios/" + row.getAttribute("data-pk")).remove();
+        var buttonDelete = document.createElement("BUTTON");
+        buttonDelete.appendChild(document.createTextNode("Delete"));
+        buttonDelete.addEventListener('click', function (button) {
+            var row = button.path[2];
+            var stockSymbol = row.firstChild.firstChild.innerHTML;
 
-            });
-            cell8.appendChild(buttonDelete);
+            //removes the row from table
+            row.parentNode.removeChild(row);
+            firebase.database().ref("Portfolios/" + row.getAttribute("data-pk")).remove();
 
-            // @TODO Create Tooltip/ Title when hovering over the stock symbol
+        });
+        cell8.appendChild(buttonDelete);
 
-            // Displaying the color for unicode for the percentage change
-            if ((((data[Object.keys(data)[i]].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100) < 0) {
-                cell7.innerHTML = unicodeDown + " " + (((data[Object.keys(data)[i]].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2) + "%";
-            } else {
-                cell7.innerHTML = unicodeUp + " " + (((data[Object.keys(data)[i]].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2) + "%";
-            }
+        // @TODO Create Tooltip/ Title when hovering over the stock symbol
 
-            //entering info to donutQuantityArray
-            portfolioArray[i] = {
-                StockSymbol: fullPortfolio[i].stockSymbol,
-                Quantity: fullPortfolio[i].quantity
-            };
-
-            // Sending to Bar Chart in the future
-            percentArray.push((((data[Object.keys(data)[i]].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2));
+        // Displaying the color for unicode for the percentage change
+        if ((((data[Object.keys(data)[i]].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100) < 0) {
+            cell7.innerHTML = unicodeDown + " " + (((data[Object.keys(data)[i]].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2) + "%";
+        } else {
+            cell7.innerHTML = unicodeUp + " " + (((data[Object.keys(data)[i]].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2) + "%";
         }
 
+        // entering info to donutQuantityArray
+        portfolioArray[i] = {
+            StockSymbol: fullPortfolio[i].stockSymbol,
+            Quantity: fullPortfolio[i].quantity
+        };
+
+        //
+        console.log("portfolio",portfolioArray);
+
+        // Sending to Bar Chart in the future
+        percentArray.push((((data[Object.keys(data)[i]].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2));
     }
 
-    // Displaying Donut JS
-    fillDonut(portfolioArray);
+
 
     // Send to Bar Chart
     grabPortfolioBarChart(fullPortfolio, percentArray);
@@ -308,6 +310,9 @@ function displayDataToTableP(data, fullPortfolio) {
     } else {
         document.getElementById("profit").innerHTML = currencySymbole + " " + fx.convert((currentEquity - purchasedEquity)).toFixed(2).toString();
     }
+
+    // Displaying Donut JS
+    fillDonut(portfolioArray);
 
 }
 
@@ -450,6 +455,7 @@ function fillDonut(portfolioArray){
         .variable('Quantity')
         .category('StockSymbol');
 
+    console.log("port Array",portfolioArray);
 
     d3.select('#Piechart')
         .datum(portfolioArray) // bind data to the div
