@@ -162,12 +162,9 @@ p {
     visibility: visible;
 }
 
-#week52high:before  {
-    content: "$";
- }
 
 #week52low:before  {
-    content: "\00a0$";
+    content: "\00a0";
 }
 
 #dividendRate:before {
@@ -179,11 +176,11 @@ p {
 }
 
 #grossProfit:before {
-    content: "\00a0\00a0\00a0$";
+    content: "\00a0\00a0\00a0";
 }
 
 #debt:before {
-    content: "\00a0\00a0\00a0$";
+    content: "\00a0\00a0\00a0";
 }
 
 /* Add to stock to the users portfolio */

@@ -16,7 +16,7 @@ function stockMarketTime() {
         }
 
     } else {
-        console.log("closed");
+        // console.log("Market closed");
         return "closed";
     }
 }
@@ -46,3 +46,4 @@ var unicodeDown = '\u25BC';
 // Adding color
 unicodeUp = unicodeUp.fontcolor("green");
 unicodeDown = unicodeDown.fontcolor("red");
+

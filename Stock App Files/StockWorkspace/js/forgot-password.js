@@ -15,7 +15,12 @@ function submitForm(e){
         // Email sent.
         console.log("Email sent!");
         //On success forward to index.html
-        window.location.replace("index.html");
+        document.querySelector('.successful').style.display = 'block';
+        // //hide alert after 5 seconds
+        setTimeout(function(){
+            document.querySelector('.successful').style.display = 'none';
+            window.location.replace("index.html");
+        }, 3000);
     }).catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;

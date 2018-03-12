@@ -226,7 +226,7 @@ function saveMessage(userId, fstName, lstName, phone){
         firstName: fstName,
         lastName: lstName,
         phone: phone,
-        currency: "$",
+        currency: "USD",
         upperBoundPortfolio: 15,
         lowerBoundPortfolio: 5,
         upperBoundWatchlist: 20,

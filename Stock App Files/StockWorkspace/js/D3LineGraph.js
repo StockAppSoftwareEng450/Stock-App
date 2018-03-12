@@ -26,29 +26,40 @@ var margin = {
     height = 300 - margin.top - margin.bottom -20;
 
 // Parse the date / time
-var parseDate = d3.time.format("%Y-%m-%d").parse,
+var parseDate =
+        d3.time.format("%Y-%m-%d").parse,
+    // d3.timeFormat("%Y-%m-%d").parse,
     bisectDate = d3.bisector(function(d) { return d.date; }).left,
     formatValue = d3.format(",.2f"),
     formatCurrency = function(d) { return "$" + formatValue(d);};
 
 // Parse the time for the Day
-var parseMinute = d3.time.format("%H:%M").parse;
+var parseMinute =
+    d3.time.format("%H:%M").parse;
+    // d3.timeFormat("%H:%M").parse;
 
 // Set the ranges
 var x = d3.time.scale().range([0, width]);
+// var x = d3.scaleTime() .range([0, width]);
 var y = d3.scale.linear().range([height, 0]);
+// var y = d3.scaleLinear().range([height, 0]);
 
 // Define the axes
 var xAxis = d3.svg.axis().scale(x)
     .orient("bottom").ticks(5);
 
+// var xAxis = d3.axisBottom(x).ticks(5);
+
 var yAxis = d3.svg.axis().scale(y)
     .orient("left").ticks(5);
+
+// var yAxis = d3.axisLeft(y).ticks(5);
 
 
 // Define the line
 var valueline = d3.svg.line()
 //.interpolate("basis")
+// var valueline = d3.line()
     .x(function(d) { return x(d.date); })
     .y(function(d) { return y(d.close); });
 
@@ -215,12 +226,11 @@ setTimeout(function () {
                     focus.attr("transform", "translate(" + x(d.date) + "," + y(d.close) + ")");
                     focus.select(".x-hover-line").attr("y2", height - y(d.close));
                     focus.select(".y-hover-line").attr("x2", width + width);
-                    document.getElementById("close").innerHTML = "$" + d.close;
+                    document.getElementById("close").innerHTML = currencySymbole + " " + d.close;
 
                     // Date
                     var newDate = d.date.toString();
                     document.getElementById("date").innerHTML = newDate.slice(0,15);
-
                 }
             });
         }
@@ -274,9 +284,6 @@ function updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, data, result, cu
         priceTitle.style("font-size", "12px");
         yAxisPrice.style("font-size", "11px");
     }
-
-
-
 }
 
 /** Live Button **/
@@ -782,7 +789,6 @@ function update5Year() {
         }
     });
 }
-
 
 Date.prototype.yyyymmdd = function() {
     var mm = this.getMonth() + 1; // getMonth() is zero-based
