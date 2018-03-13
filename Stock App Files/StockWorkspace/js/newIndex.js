@@ -49,6 +49,8 @@ function getFullPortfolio() {
                 // Issuing BatchRequest for Portfolio
                 issueBatchRequestP(fullPortfolio);
 
+                getOneDayPrice(fullPortfolio);
+
             });
         } else {
 
@@ -191,108 +193,101 @@ function displayDataToTableP(data, fullPortfolio) {
     var table = document.getElementById("portfolioTable");
 
     // Checking if something in fullPortfolio
-    if (fullPortfolio.length >= 1){
 
-        // Returning the price and stats for each Stock Symbol
-        for (var i = 0; i < fullPortfolio.length-1; i++) {
-            // console.log("Returning quote: " + i , data[Object.keys(data)[i]].quote);
-            // console.log("Returning stats: " + i , data[Object.keys(data)[i]].stats);
-            // console.log("Returning price: " + i , data[Object.keys(data)[i]].price);
-            // console.log("-----------------------------------------------");
 
-            // Transfers stock to the Individual StockPage
-            var stockTransferURL = "IndividualStockPage.html?stock=" + data[Object.keys(data)[i]].quote.symbol + "#";
+    // Returning the price and stats for each Stock Symbol
+    for (var i = 0; i < fullPortfolio.length; i++) {
+        // console.log("Returning quote: " + i , data[Object.keys(data)[i]].quote);
+        // console.log("Returning stats: " + i , data[Object.keys(data)[i]].stats);
+        // console.log("Returning price: " + i , data[Object.keys(data)[i]].price);
+        // console.log("-----------------------------------------------");
 
-            // Inserting rows
-            var row = table.insertRow(i + 1);
-            row.setAttribute("data-pk", fullPortfolio[i].pk);
+        // Transfers stock to the Individual StockPage
+        var stockTransferURL = "IndividualStockPage.html?stock=" + data[Object.keys(data)[i]].quote.symbol + "#";
 
-            // Displaying Stock Symbol  (FROM FIREBASE)
-            var cell0 = row.insertCell((0));
-            cell0.innerHTML = fullPortfolio[i].stockSymbol.link(stockTransferURL);
+        // Inserting rows
+        var row = table.insertRow(i + 1);
+        row.setAttribute("data-pk", fullPortfolio[i].pk);
 
-            // Date purchased           (FROM FIREBASE)
-            var cell1 = row.insertCell((1));
-            cell1.innerHTML = fullPortfolio[i].date;
+        // Displaying Stock Symbol  (FROM FIREBASE)
+        var cell0 = row.insertCell((0));
+        cell0.innerHTML = fullPortfolio[i].stockSymbol.link(stockTransferURL);
 
-            // Purchased Price          (FROM FIREBASE)
-            var cell2 = row.insertCell((2));
-            cell2.innerHTML = currencySymbole + " " + fx.convert(fullPortfolio[i].price).toFixed(2);
+        // Date purchased           (FROM FIREBASE)
+        var cell1 = row.insertCell((1));
+        cell1.innerHTML = fullPortfolio[i].date;
 
-            // Current Price            (FROM IEX)
-            var cell3 = row.insertCell((3));
-            cell3.innerHTML = currencySymbole + " " + fx.convert(data[Object.keys(data)[i]].price).toFixed(2);
+        // Purchased Price          (FROM FIREBASE)
+        var cell2 = row.insertCell((2));
+        cell2.innerHTML = currencySymbole + " " + fx.convert(fullPortfolio[i].price).toFixed(2);
 
-            // Quantity                 (FROM FIREBASE)
-            var cell4 = row.insertCell((4));
-            cell4.innerHTML = fullPortfolio[i].quantity;
+        // Current Price            (FROM IEX)
+        var cell3 = row.insertCell((3));
+        cell3.innerHTML = currencySymbole + " " + fx.convert(data[Object.keys(data)[i]].price).toFixed(2);
 
-            // Purchased Equity         (FROM FIREBASE)
-            var cell5 = row.insertCell((5));
-            cell5.innerHTML = currencySymbole + " " + (fx.convert(fullPortfolio[i].price * fullPortfolio[i].quantity)).toFixed(2).toString();
-            purchasedEquity += Number(fx.convert((fullPortfolio[i].price * fullPortfolio[i].quantity)).toFixed(2));
+        // Quantity                 (FROM FIREBASE)
+        var cell4 = row.insertCell((4));
+        cell4.innerHTML = fullPortfolio[i].quantity;
 
-            console.log(purchasedEquity);
+        // Purchased Equity         (FROM FIREBASE)
+        var cell5 = row.insertCell((5));
+        cell5.innerHTML = currencySymbole + " " + (fx.convert(fullPortfolio[i].price * fullPortfolio[i].quantity)).toFixed(2).toString();
+        purchasedEquity += Number(fx.convert((fullPortfolio[i].price * fullPortfolio[i].quantity)).toFixed(2));
 
-            // Current Equity           (Calculation)
-            var cell6 = row.insertCell((6));
-            cell6.innerHTML = currencySymbole + " " + fx.convert((data[Object.keys(data)[i]].price * fullPortfolio[i].quantity)).toFixed(2);
-            currentEquity += Number((data[Object.keys(data)[i]].price * fullPortfolio[i].quantity).toFixed(2));
+        // console.log(purchasedEquity);
 
-            console.log(currentEquity);
+        // Current Equity           (Calculation)
+        var cell6 = row.insertCell((6));
+        cell6.innerHTML = currencySymbole + " " + fx.convert((data[Object.keys(data)[i]].price * fullPortfolio[i].quantity)).toFixed(2);
+        currentEquity += Number((data[Object.keys(data)[i]].price * fullPortfolio[i].quantity).toFixed(2));
 
-            // Current Percent Change   (Calculation)   Bought price vs current price
-            var cell7 = row.insertCell((7));
-            cell7.innerHTML = (((data[Object.keys(data)[i]].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2).toString();
+        // console.log(currentEquity);
 
-            // Delete Button            (FROM FIREBASE)
-            var cell8 = row.insertCell((8));
-            cell8.setAttribute("class", "deleteButton");
-            cell8.style.display = 'flex';
-            cell8.style.alignItems = 'center';
-            cell8.style.justifyContent = 'center';
+        // Current Percent Change   (Calculation)   Bought price vs current price
+        var cell7 = row.insertCell((7));
+        cell7.innerHTML = (((data[Object.keys(data)[i]].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2).toString();
 
-            var buttonDelete = document.createElement("BUTTON");
-            buttonDelete.appendChild(document.createTextNode("Delete"));
-            buttonDelete.addEventListener('click', function (button) {
-                var row = button.path[2];
-                var stockSymbol = row.firstChild.firstChild.innerHTML;
+        // Delete Button            (FROM FIREBASE)
+        var cell8 = row.insertCell((8));
+        cell8.setAttribute("class", "deleteButton");
+        cell8.style.display = 'flex';
+        cell8.style.alignItems = 'center';
+        cell8.style.justifyContent = 'center';
 
-                //removes the row from table
-                row.parentNode.removeChild(row);
-                firebase.database().ref("Portfolios/" + row.getAttribute("data-pk")).remove();
+        var buttonDelete = document.createElement("BUTTON");
+        buttonDelete.appendChild(document.createTextNode("Delete"));
+        buttonDelete.addEventListener('click', function (button) {
+            var row = button.path[2];
+            var stockSymbol = row.firstChild.firstChild.innerHTML;
 
-            });
-            cell8.appendChild(buttonDelete);
+            //removes the row from table
+            row.parentNode.removeChild(row);
+            firebase.database().ref("Portfolios/" + row.getAttribute("data-pk")).remove();
 
-            // @TODO Create Tooltip/ Title when hovering over the stock symbol
+        });
+        cell8.appendChild(buttonDelete);
 
-            // Displaying the color for unicode for the percentage change
-            if ((((data[Object.keys(data)[i]].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100) < 0) {
-                cell7.innerHTML = unicodeDown + " " + (((data[Object.keys(data)[i]].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2) + "%";
-            } else {
-                cell7.innerHTML = unicodeUp + " " + (((data[Object.keys(data)[i]].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2) + "%";
-            }
+        // @TODO Create Tooltip/ Title when hovering over the stock symbol
 
-            //entering info to donutQuantityArray
-            portfolioArray[i] = {
-                StockSymbol: fullPortfolio[i].stockSymbol,
-                Quantity: fullPortfolio[i].quantity
-            };
-
-            // Sending to Bar Chart in the future
-            percentArray.push((((data[Object.keys(data)[i]].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2));
+        // Displaying the color for unicode for the percentage change
+        if ((((data[Object.keys(data)[i]].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100) < 0) {
+            cell7.innerHTML = unicodeDown + " " + (((data[Object.keys(data)[i]].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2) + "%";
+        } else {
+            cell7.innerHTML = unicodeUp + " " + (((data[Object.keys(data)[i]].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2) + "%";
         }
 
-    }
+        // entering info to donutQuantityArray
+        portfolioArray[i] = {
+            StockSymbol: fullPortfolio[i].stockSymbol,
+            Quantity: fullPortfolio[i].quantity
+        };
 
-    // Displaying Donut JS
-    fillDonut(portfolioArray);
+        // Sending to Bar Chart in the future
+        percentArray.push((((data[Object.keys(data)[i]].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2));
+    }
 
     // Send to Bar Chart
     grabPortfolioBarChart(fullPortfolio, percentArray);
-
-    // settingInterval();
 
     // Displaying Total Purchased Equity
     purchasedEquity = purchasedEquity.toFixed(2);
@@ -308,6 +303,79 @@ function displayDataToTableP(data, fullPortfolio) {
     } else {
         document.getElementById("profit").innerHTML = currencySymbole + " " + fx.convert((currentEquity - purchasedEquity)).toFixed(2).toString();
     }
+
+    var after1yearTotal = 0;
+    var before1yearTotal = 0;
+
+    // given any date for any stock, determine if it is over a year old, then take out 15% in tax, otherwise 30% in tax takeaway
+    for (var i = 0; i < fullPortfolio.length; i++) {
+
+        // Parsing each date in the portfolio to convert to JS Date format
+        var month =  "";
+        month = fullPortfolio[i].date.substring(5,7);                               // 03
+
+        var year = "";
+        year = fullPortfolio[i].date.substring(0,4);                                // 2018
+
+        var day = "";
+        day = fullPortfolio[i].date.substring(8,10);                                // 12
+
+        // Converting month number to month name
+        if (month === "01"){
+            month = "January";
+        } else if (month === "02"){
+            month = "February";
+        } else if (month === "03"){
+            month = "March";
+        } else if (month === "04"){
+            month = "April";
+        } else if (month === "05"){
+            month = "May";
+        } else if (month === "06"){
+            month = "June";
+        } else if (month === "07"){
+            month = "July";
+        } else if (month === "08"){
+            month = "August";
+        } else if (month === "09"){
+            month = "September";
+        } else if (month === "10"){
+            month = "October";
+        } else if (month === "11"){
+            month = "November";
+        } else if (month === "12"){
+            month = "December";
+        }
+
+        // setting old date to be compared to current date
+        var givenDate = new Date(month + " " + day + "," + year);
+        var curDate = new Date();
+
+        curDate.toLocaleDateString();
+        curDate.setMonth(curDate.getMonth() - 12);
+        curDate.toLocaleDateString();
+
+        console.log("givenDate" + i + ": ", givenDate);
+        console.log("oldDate" + i + ": ", curDate);
+        console.log(givenDate < curDate);
+
+        // 15% in tax after 1 year, otherwise 30% if date is before
+        if ((givenDate < curDate) === true) {
+            var resultAfter = (15 / 100) * (data[Object.keys(data)[i]].price * fullPortfolio[i].quantity);
+            after1yearTotal += (data[Object.keys(data)[i]].price * fullPortfolio[i].quantity) - resultAfter;
+            console.log("after1yearTotal" + i + ": ", after1yearTotal);
+        } else if ((givenDate < curDate) === false) {
+            var resultBefore = (30 / 100) * (data[Object.keys(data)[i]].price * fullPortfolio[i].quantity);
+            before1yearTotal += (data[Object.keys(data)[i]].price * fullPortfolio[i].quantity) - resultBefore;
+            console.log("before1yearTotal" + i + ": ", before1yearTotal);
+        }
+
+        // Display total after tax to the screen
+        document.getElementById("afterTax").innerHTML = currencySymbole + " " + fx.convert((before1yearTotal + after1yearTotal)).toFixed(2).toString();
+    }
+
+    // Displaying Donut JS
+    fillDonut(portfolioArray);
 
 }
 
@@ -450,6 +518,7 @@ function fillDonut(portfolioArray){
         .variable('Quantity')
         .category('StockSymbol');
 
+    // console.log("port Array",portfolioArray);
 
     d3.select('#Piechart')
         .datum(portfolioArray) // bind data to the div
@@ -459,7 +528,7 @@ function fillDonut(portfolioArray){
 // Return Last Updated
 function PageLoadTime(){
     var time = new Date();
-    console.log("reached");
+    // console.log("reached");
     var pageLoadTimeString = time.toLocaleString('en-US', {
             hour: 'numeric',
             minute: 'numeric',
@@ -475,24 +544,25 @@ function PageLoadTime(){
 /** Top Cards **/
 function displayCards(data, fullPortfolio) {
 
-    console.log(data[Object.keys(data)[0]].quote.companyName);
-    console.log(fullPortfolio.length);
+    // console.log(data[Object.keys(data)[0]].quote.companyName);
+    // console.log(fullPortfolio.length);
 
     // If portfolio contains more than four, return the first four, if not, return as many as possible with (add more in company name)
     if (fullPortfolio.length > 4){
 
-        console.log("more than four in portfolio");
+        // console.log("more than four in portfolio");
 
         // Return the First four in the list
         for(var i = 0; i < 4; i++){
             var companyNameI = "CompanyName" + i;
             var stockPriceI = "StockPrice" + i;
-            document.getElementById(companyNameI).innerHTML = data[Object.keys(data)[i]].quote.companyName;
+
+            document.getElementById(companyNameI).innerHTML = limitCharacter((data[Object.keys(data)[i]].quote.companyName));
             document.getElementById(stockPriceI).innerHTML = data[Object.keys(data)[i]].price;
         }
     } else {
 
-        console.log("less than four in portfolio");
+        // console.log("less than four in portfolio");
 
         // If fullPortfolio is greater than or equal to 1
         if (fullPortfolio.length >= 1) {
@@ -501,7 +571,8 @@ function displayCards(data, fullPortfolio) {
             for(var i = 0; i < fullPortfolio.length; i++){
                 var companyNameE = "CompanyName" + i;
                 var stockPriceE = "StockPrice" + i;
-                document.getElementById(companyNameE).innerHTML = data[Object.keys(data)[i]].quote.companyName;
+
+                document.getElementById(companyNameE).innerHTML = limitCharacter((data[Object.keys(data)[i]].quote.companyName));
                 document.getElementById(stockPriceE).innerHTML = data[Object.keys(data)[i]].price;
             }
 
@@ -530,11 +601,9 @@ function displayCards(data, fullPortfolio) {
                     document.getElementById(companyNameE3).innerHTML = "Add Items to your Portfolio";
                 }
             }
-
-
         } else {
 
-            console.log("No Items in portfolio");
+            // console.log("No Items in portfolio");
 
             // if its less than 0 then
             for(var i = 0; i < 4; i++){
@@ -545,13 +614,15 @@ function displayCards(data, fullPortfolio) {
     }
 }
 
+// Limiting character limit for company Name for Cards
+function limitCharacter(companyName){
+    var companyNameLimit = "";
 
-
-
-
-
-
-
-
-
-
+    if (companyName.length > 35) {
+        companyNameLimit = companyName.substring(0, 35);
+        return companyNameLimit;
+    } else {
+        companyNameLimit = companyName;
+        return companyNameLimit;
+    }
+}

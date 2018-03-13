@@ -207,7 +207,7 @@ $(document).ready(function () {
                 });
 
                 /** Displaying News to individual stock page **/
-                var urlNews = "https://api.iextrading.com/1.0/stock/" + stockSymbol + "/news/last/3";
+                var urlNews = "https://api.iextrading.com/1.0/stock/" + stockSymbol + "/news/last/2";
 
                 $.ajax({
                     url: urlNews,

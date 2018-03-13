@@ -79,6 +79,10 @@ Array.min = function (array) {
 };
 
 setTimeout(function () {
+
+    // Checking time
+    liveButtonDisplay();
+
     var url = "https://api.iextrading.com/1.0/stock/" + stockSymbl + "/chart/5y";
 
     // Get the data
@@ -799,3 +803,15 @@ Date.prototype.yyyymmdd = function() {
         (dd>9 ? '' : '0') + dd
     ].join('');
 };
+
+// Checking if stock Market is open
+function liveButtonDisplay() {
+
+    var result = stockMarketTime();
+
+    // If open, then dipslay live button
+    if (result === "open"){
+        document.getElementById("liveButton").style.display = "block";
+    }
+
+}
