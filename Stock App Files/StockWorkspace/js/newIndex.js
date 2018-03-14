@@ -306,6 +306,7 @@ function displayDataToTableP(data, fullPortfolio) {
 
     var after1yearTotal = 0;
     var before1yearTotal = 0;
+    var afterTaxProfitTotal = 0;
 
     // given any date for any stock, determine if it is over a year old, then take out 15% in tax, otherwise 30% in tax takeaway
     for (var i = 0; i < fullPortfolio.length; i++) {
@@ -359,14 +360,25 @@ function displayDataToTableP(data, fullPortfolio) {
         console.log("oldDate" + i + ": ", curDate);
         console.log(givenDate < curDate);
 
+        var purchasedEquit = fullPortfolio[i].price * fullPortfolio[i].quantity;
+        var currentEquit = (data[Object.keys(data)[i]].price * fullPortfolio[i].quantity);
+
+        // Calculating profit
+        var profitAfterTax = currentEquit - purchasedEquit;
+        // profitAfterTax = profitAfterTax.toFixed(2);
+
+        console.log("purchasedEquity" + fullPortfolio[i].stockSymbol + ": ", purchasedEquit);
+        console.log("currentEquit" + fullPortfolio[i].stockSymbol + ": ", currentEquit);
+        console.log("profitAfterTax" + fullPortfolio[i].stockSymbol + ": ", profitAfterTax);
+
         // 15% in tax after 1 year, otherwise 30% if date is before
         if ((givenDate < curDate) === true) {
-            var resultAfter = (15 / 100) * (data[Object.keys(data)[i]].price * fullPortfolio[i].quantity);
-            after1yearTotal += (data[Object.keys(data)[i]].price * fullPortfolio[i].quantity) - resultAfter;
+            var resultAfter = (15 / 100) * profitAfterTax;
+            after1yearTotal += profitAfterTax - resultAfter;
             console.log("after1yearTotal" + i + ": ", after1yearTotal);
         } else if ((givenDate < curDate) === false) {
-            var resultBefore = (30 / 100) * (data[Object.keys(data)[i]].price * fullPortfolio[i].quantity);
-            before1yearTotal += (data[Object.keys(data)[i]].price * fullPortfolio[i].quantity) - resultBefore;
+            var resultBefore = (30 / 100) * profitAfterTax;
+            before1yearTotal += profitAfterTax - resultBefore;
             console.log("before1yearTotal" + i + ": ", before1yearTotal);
         }
 
