@@ -3,6 +3,7 @@ var filteredArrP = [];
 
 var count = 0;
 var max = null;
+var min = null;
 
 function grabPortfolioBarChart(fullPortfolio, percentArray){
 
@@ -31,28 +32,39 @@ function grabPortfolioBarChart(fullPortfolio, percentArray){
     }
 
     // Finding max value then adding padding, then
+    var maxOrginal = findMaxValueArr(percentArray);
+
+    console.log(maxOrginal);
+
     max = findMaxValueArr(percentArray);
-    var result = ( 10 / max) * 1000;
-    max = max + result;
+    var resultmx = ( 3 / max) * 1000;
+    max = max + resultmx;
 
-    createBarChart(max);
+    // Finding min value then adding padding, then
+    min = findMinValueArr(percentArray);
+    var resultmn = ( 3 / min) * 100;
+    min = min + resultmn;
+
+    createBarChart(max, min);
 }
-
-
 
 /** removing duplicates **/
 function duplicates(array){
     return array.filter(function(val,ind) { return array.indexOf(val) === ind; });
 }
 
-
 /** Finding the Max Value **/
 function findMaxValueArr(array) {
     return Math.max.apply(null, array) // 4
 }
 
+/** Finding the Min Value **/
+function findMinValueArr(array) {
+    return Math.min.apply(null, array) // 4
+}
+
 // @TODO Stop Animation , Display Company Name
-function createBarChart(max) {
+function createBarChart(max, min) {
     // Bar Chart
     ctx = document.getElementById("myBarChart"), myLineChart = new Chart(ctx, {
         type: "bar",
@@ -75,7 +87,7 @@ function createBarChart(max) {
             scales: {
                 xAxes: [
                     {time: {unit: "month"}, gridLines: {display: !1}, ticks: {maxTicksLimit: 6}}],
-                yAxes: [{ticks: {min: 0, max: max, maxTicksLimit: 5}, gridLines: {display: !0}}]
+                yAxes: [{ticks: {min: min, max: max, maxTicksLimit: 5}, gridLines: {display: !0}}]
             }, legend: {display: !1},
             animation: {
                 duration: 0

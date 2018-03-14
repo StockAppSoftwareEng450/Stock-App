@@ -290,23 +290,25 @@ function displayDataToTableP(data, fullPortfolio) {
     grabPortfolioBarChart(fullPortfolio, percentArray);
 
     // Displaying Total Purchased Equity
-    purchasedEquity = purchasedEquity.toFixed(2);
-    currentEquity = currentEquity.toFixed(2);
+    // purchasedEquity = purchasedEquity.toFixed(2);
+    // currentEquity = currentEquity.toFixed(2);
     document.getElementById("TotalPurchasedEquity").innerHTML = currencySymbole + " " + fx.convert(purchasedEquity).toFixed(2).toString();
     document.getElementById("TotalCurrentEquity").innerHTML = currencySymbole + " " +  fx.convert(currentEquity).toFixed(2).toString();
 
-    // Display negative when less than zero and color to red
-    if ((currentEquity - purchasedEquity) < 0){
-        document.getElementById("profit").innerHTML = currencySymbole + " " + fx.convert((currentEquity - purchasedEquity)).toFixed(2).toString();
-        var negVal = document.getElementById("profit");
-        negVal.setAttribute('style', 'color: #D53343 !important');
-    } else {
-        document.getElementById("profit").innerHTML = currencySymbole + " " + fx.convert((currentEquity - purchasedEquity)).toFixed(2).toString();
+    // Only displaying positive profit
+    for (var i = 0; i < fullPortfolio.length; i++){
+        var purchasedEquityF = fullPortfolio[i].price * fullPortfolio[i].quantity;
+        var currentEquityF = (data[Object.keys(data)[i]].price * fullPortfolio[i].quantity);
+
+        var profit = currentEquityF - purchasedEquityF;
+
+        if (profit > 0){
+            document.getElementById("profit").innerHTML = currencySymbole + " " + fx.convert(profit).toFixed(2).toString();
+        }
     }
 
     var after1yearTotal = 0;
     var before1yearTotal = 0;
-    var afterTaxProfitTotal = 0;
 
     // given any date for any stock, determine if it is over a year old, then take out 15% in tax, otherwise 30% in tax takeaway
     for (var i = 0; i < fullPortfolio.length; i++) {
@@ -356,30 +358,25 @@ function displayDataToTableP(data, fullPortfolio) {
         curDate.setMonth(curDate.getMonth() - 12);
         curDate.toLocaleDateString();
 
-        console.log("givenDate" + i + ": ", givenDate);
-        console.log("oldDate" + i + ": ", curDate);
-        console.log(givenDate < curDate);
-
         var purchasedEquit = fullPortfolio[i].price * fullPortfolio[i].quantity;
         var currentEquit = (data[Object.keys(data)[i]].price * fullPortfolio[i].quantity);
 
         // Calculating profit
         var profitAfterTax = currentEquit - purchasedEquit;
-        // profitAfterTax = profitAfterTax.toFixed(2);
 
-        console.log("purchasedEquity" + fullPortfolio[i].stockSymbol + ": ", purchasedEquit);
-        console.log("currentEquit" + fullPortfolio[i].stockSymbol + ": ", currentEquit);
-        console.log("profitAfterTax" + fullPortfolio[i].stockSymbol + ": ", profitAfterTax);
+        // Checking if profit is positive
+        if (profitAfterTax > 0 ){
 
-        // 15% in tax after 1 year, otherwise 30% if date is before
-        if ((givenDate < curDate) === true) {
-            var resultAfter = (15 / 100) * profitAfterTax;
-            after1yearTotal += profitAfterTax - resultAfter;
-            console.log("after1yearTotal" + i + ": ", after1yearTotal);
-        } else if ((givenDate < curDate) === false) {
-            var resultBefore = (30 / 100) * profitAfterTax;
-            before1yearTotal += profitAfterTax - resultBefore;
-            console.log("before1yearTotal" + i + ": ", before1yearTotal);
+            // 15% in tax after 1 year, otherwise 30% if date is before
+            if ((givenDate < curDate) === true) {
+                var resultAfter = (15 / 100) * profitAfterTax;
+                after1yearTotal += profitAfterTax - resultAfter;
+                // console.log("after1yearTotal" + i + ": ", after1yearTotal);
+            } else if ((givenDate < curDate) === false) {
+                var resultBefore = (30 / 100) * profitAfterTax;
+                before1yearTotal += profitAfterTax - resultBefore;
+                // console.log("before1yearTotal" + i + ": ", before1yearTotal);
+            }
         }
 
         // Display total after tax to the screen

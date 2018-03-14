@@ -2,7 +2,7 @@ function donutChart() {
     var width,
         height,
         margin = {top: 30, right: 30, bottom: 30, left: 30},
-        colour = d3.scaleOrdinal(d3.schemeCategory10),
+        // colour = d3.scaleOrdinal(d3.schemeCategory10),
         variable,                           // value in data that will dictate proportions on chart
         category,                           // compare data by
         padAngle,                           // effectively dictates the gap between slices
@@ -10,6 +10,9 @@ function donutChart() {
         intFormat = d3.format('r'),
         cornerRadius,                       // sets how rounded the corners are on each slice
         percentFormat = d3.format(',.2%');
+
+    var color = d3.scaleOrdinal()
+        .range(["#007bff" , "#ffc107" , "#28a745", "#dc3545"]);
 
     function chart(selection){
         selection.each(function(data) {
@@ -53,7 +56,10 @@ function donutChart() {
                 .datum(data).selectAll('path')
                 .data(pie)
                 .enter().append('path')
-                .attr('fill', function(d) { return colour(d.data[category]); })
+                // .attr('fill', function(d) { return colour(d.data[category]); })
+                .attr('fill', function(d, i) {
+                    return color(d.data[category]);
+                })
                 .attr('d', arc);
 
             // // add text labels
@@ -116,7 +122,7 @@ function donutChart() {
                     svg.append('circle')
                         .attr('class', 'toolCircle')
                         .attr('r', radius * 0.55) // radius of tooltip circle
-                        .style('fill', colour(data.data[category])) // colour based on category mouse is over
+                        .style('fill', color(data.data[category])) // colour based on category mouse is over
                         .style('fill-opacity', 0.65);
 
                 });
@@ -187,11 +193,11 @@ function donutChart() {
         return chart;
     };
 
-    chart.colour = function(value) {
-        if (!arguments.length) return colour;
-        colour = value;
-        return chart;
-    };
+    // chart.colour = function(value) {
+    //     if (!arguments.length) return colour;
+    //     colour = value;
+    //     return chart;
+    // };
 
     chart.variable = function(value) {
         if (!arguments.length) return variable;
