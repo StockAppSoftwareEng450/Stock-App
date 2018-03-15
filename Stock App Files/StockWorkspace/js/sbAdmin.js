@@ -37,13 +37,21 @@ function grabPortfolioBarChart(fullPortfolio, percentArray){
     console.log(maxOrginal);
 
     max = findMaxValueArr(percentArray);
-    var resultmx = ( 3 / max) * 1000;
+    var resultmx = ( 6 / max) * 1000;
     max = max + resultmx;
 
+    console.log(max)
     // Finding min value then adding padding, then
     min = findMinValueArr(percentArray);
-    var resultmn = ( 3 / min) * 100;
+    var resultmn = ( 4 / min) * 100;
     min = min + resultmn;
+
+    // 600 , 200, -100 will fix lowest min value to 0 if above 0
+    for(var i = 0; i < percentArray.length; i++){
+        if (min > 0){
+            min = 0;
+        }
+    }
 
     createBarChart(max, min);
 }

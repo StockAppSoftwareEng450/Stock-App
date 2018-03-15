@@ -173,15 +173,15 @@
                 <!-- Enter button -->
                 <button onclick="getStockDateAndQuantity()" class="enterButton" id="enterButtonAddToStock">Enter</button>
 
-                <!-- Inserting table -->
-                <table id="portfolioTable" class="table" style="font-size: smaller;">
-                    <tr id="portfolioTableCol">
-                        <th scope="col">Date Purchased</th>         <!-- 0 -->
-                        <th scope="col">Purchase Price</th>         <!-- 1 -->
-                        <th scope="col">Quantity</th>               <!-- 2 -->
-                        <th scope="col">Delete?</th>                <!-- 3 -->
-                    </tr>
-                </table>
+                <!--&lt;!&ndash; Inserting table &ndash;&gt;-->
+                <!--<table id="portfolioTable" class="table" style="font-size: smaller;">-->
+                    <!--<tr id="portfolioTableCol">-->
+                        <!--<th scope="col">Date Purchased</th>         &lt;!&ndash; 0 &ndash;&gt;-->
+                        <!--<th scope="col">Purchase Price</th>         &lt;!&ndash; 1 &ndash;&gt;-->
+                        <!--<th scope="col">Quantity</th>               &lt;!&ndash; 2 &ndash;&gt;-->
+                        <!--<th scope="col">Delete?</th>                &lt;!&ndash; 3 &ndash;&gt;-->
+                    <!--</tr>-->
+                <!--</table>-->
             </div>
         </div>
 
@@ -300,6 +300,8 @@
         <div class="container" style="padding-top: 3%">
             <div class="row">
                 <div class="col-sm-4">
+
+                    <!-- Stats -->
                     <h3>Stats</h3>
                     <hr>
                     <ul>
@@ -328,6 +330,24 @@
                             <strong style="padding-left:8em" id="debt"></strong>
                         </li>
                     </ul>
+
+                    <br>
+                    <br>
+
+                    <!-- Purchased Stock -->
+                    <h3>Purchased Stock</h3>
+                    <hr>
+                    <div id="PurchasedStockName"></div>
+
+                    <!-- Purchased Stock table -->
+                    <table id="portfolioTable" class="portTable" style="display: none; width: 100%">
+                        <tr>
+                            <th scope="col">Date Purchased</th>         <!-- 0 -->
+                            <th scope="col">Purchase Price</th>         <!-- 1 -->
+                            <th scope="col">Quantity</th>               <!-- 2 -->
+                            <th scope="col">Delete?</th>                <!-- 3 -->
+                        </tr>
+                    </table>
                 </div>
                 <hr id="hrDown">
 
@@ -386,7 +406,7 @@
                     <div id="peers"></div>
 
                     <!-- Inserting table -->
-                    <table id="myTable" border="2">
+                    <table id="myTable" border="2" class="myTable1">
                         <tr>
                             <th>Symbol</th>
                             <th>Price</th>

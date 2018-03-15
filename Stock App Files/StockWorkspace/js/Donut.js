@@ -19,6 +19,8 @@ function donutChart() {
             // generate chart
             var radius = Math.min(width, height) / 2;
 
+            var mouseOverStatus;
+
             // creates a new pie generator
             var pie = d3.pie()
                 .value(function(d) { return intFormat(d[variable]); })
@@ -62,46 +64,37 @@ function donutChart() {
                 })
                 .attr('d', arc);
 
-            // // add text labels
-            // var label = svg.select('.labelName').selectAll('text')
-            //     .data(pie)
-            //     .enter().append('text')
-            //     .attr('font-size', '4em')
-            //     .attr('dy', '.35em')
-            //     .html(function(d) {
-            //         // add "key: value" for given category. Number inside tspan is bolded in stylesheet.
-            //         return d.data[category] + ': <tspan>' + intFormat(d.data[variable]) + '</tspan>';
-            //     })
-            //     .attr('transform', function(d) {
-            //
-            //         // effectively computes the centre of the slice.
-            //         // see https://github.com/d3/d3-shape/blob/master/README.md#arc_centroid
-            //         var pos = outerArc.centroid(d);
-            //
-            //         // changes the point to be on left or right depending on where label is.
-            //         pos[0] = radius * 0.95 * (midAngle(d) < Math.PI ? 1 : -1);
-            //         return 'translate(' + pos + ')';
-            //     })
-            //     .style('text-anchor', function(d) {
-            //         // if slice centre is on the left, anchor text to start, otherwise anchor to end
-            //         return (midAngle(d)) < Math.PI ? 'start' : 'end';
-            //     });
-
-            // add lines connecting labels to slice. A polyline creates straight lines connecting several points
-            // var polyline = svg.select('.lines')
-            //     .selectAll('polyline')
-            //     .data(pie)
-            //     .enter().append('polyline')
-            //     .attr('points', function(d) {
-            //
-            //         // see label transform function for explanations of these three lines.
-            //         var pos = outerArc.centroid(d);
-            //         pos[0] = radius * 0.95 * (midAngle(d) < Math.PI ? 1 : -1);
-            //         return [arc.centroid(d), outerArc.centroid(d), pos]
-            //     });
-
             // add tooltip to mouse events on slices and labels
             d3.selectAll('.labelName text, .slices path').call(toolTip);
+
+            var legendRectSize = 24;
+            var legendSpacing = 6;
+
+            var legend = svg.selectAll('.legend')
+                .data(color.domain())
+                .enter()
+                .append('g')
+                .attr('class', 'legend')
+                .attr('transform', function(d, i) {
+                    var height = legendRectSize + legendSpacing;
+                    var offset =  height * color.domain().length / 2;
+                    var horz = -2 * legendRectSize;
+                    var vert = i * height - offset;
+                    return 'translate(' + horz + ',' + vert + ')';
+                });
+
+            legend.append('rect')
+                .attr('width', legendRectSize)
+                .attr('height', legendRectSize)
+                .style('fill', color)
+                .style('stroke', color);
+
+            legend.append('text')
+                .attr('x', legendRectSize + legendSpacing)
+                .attr('y', legendRectSize - legendSpacing)
+                .text(function(d) { return d; });
+
+
 
             // calculates the angle for the middle of a slice
             function midAngle(d) { return d.startAngle + (d.endAngle - d.startAngle) / 2; }
@@ -111,6 +104,8 @@ function donutChart() {
 
                 // add tooltip (svg circle element) when mouse enters label or slice
                 selection.on('mouseenter', function (data) {
+
+                    d3.selectAll('.legend').remove();
 
                     svg.append('text')
                         .attr('class', 'toolCircle')
@@ -130,8 +125,61 @@ function donutChart() {
                 // remove the tooltip when mouse leaves the slice/label
                 selection.on('mouseout', function () {
                     d3.selectAll('.toolCircle').remove();
+
+                    var legendRectSize = 24;
+                    var legendSpacing = 6;
+                    var count = 0;
+
+                    var legend = svg.selectAll('.legend')
+                        .data(color.domain())
+                        .enter()
+                        .append('g')
+                        .attr('class', 'legend')
+                        .attr('transform', function(d, i) {
+                            var height = legendRectSize + legendSpacing;
+                            var offset =  height * color.domain().length / 2;
+                            var horz = -2 * legendRectSize;
+                            var vert = i * height - offset;
+                            count = i;
+
+                            return 'translate(' + horz + ',' + vert + ')';
+                        });
+
+                    console.log("count: " + (count + 1));
+
+                    legend.append('rect')
+                        .attr('width', legendRectSize)
+                        .attr('height', legendRectSize)
+                        .style('fill', color)
+                        .style('stroke', color);
+
+                    legend.append('text')
+                        .attr('x', legendRectSize + legendSpacing)
+                        .attr('y', legendRectSize - legendSpacing)
+                        .text(function(d) { return d; });
+
                 });
             }
+
+            // var legend = d3.select("#Piechart").append("svg")
+            //     .attr("class", "legend")
+            //     .attr("width", 0)
+            //     .attr("height", 50)
+            //     .selectAll("g")
+            //     .data(color.domain().slice().reverse())
+            //     .enter().append("g")
+            //     .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+            //
+            // legend.append("rect")
+            //     .attr("width", 18)
+            //     .attr("height", 18)
+            //     .style("fill", color);
+            //
+            // legend.append("text")
+            //     .attr("x", 24)
+            //     .attr("y", 9)
+            //     .attr("dy", ".35em")
+            //     .text(function(d) { return d; });
 
             // function to create the HTML string for the tool tip. Loops through each key in data object
             function toolTipHTML(data) {

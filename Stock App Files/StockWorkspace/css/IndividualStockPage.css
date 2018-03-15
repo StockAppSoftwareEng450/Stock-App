@@ -133,6 +133,34 @@ p {
     visibility: visible;
 }
 
+/* Table Styling */
+table.portTable{
+font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+border-collapse: collapse;
+width: 100%;
+}
+
+table.portTable td{
+border: 1px solid #ddd;
+padding: 6px;
+}
+
+table.portTable tr:nth-child(even){
+background-color: #f2f2f2;
+}
+
+table.portTable tr:hover {
+background-color: #ddd;
+}
+
+table.portTable th {
+padding-top: 12px;
+padding-bottom: 12px;
+text-align: center;
+background-color: #007bff;
+color: white;
+}
+
 /* Watchlist Button */
 .WatchlistSpanButton {
     position: relative;
@@ -215,22 +243,26 @@ p {
 }
 
 /* Table Styling */
-#myTable {
+table.myTable1 {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
 }
 
-#myTable td, #customers th {
+table.myTable1 td, #customers th {
     border: 1px solid #ddd;
     padding: 6px;
 }
 
-#myTable tr:nth-child(even){background-color: #f2f2f2;}
+table.myTable1 tr:nth-child(even){
+    background-color: #f2f2f2;
+}
 
-#myTable tr:hover {background-color: #ddd;}
+table.myTable1 tr:hover {
+    background-color: #ddd;
+}
 
-#myTable th {
+table.myTable1 th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: center;
@@ -295,6 +327,8 @@ p {
 #modified {
     float: left !important;
 }
+
+
 
 
 
