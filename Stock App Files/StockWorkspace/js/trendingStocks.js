@@ -1,7 +1,12 @@
+// unicode for UP and DOWN arrows
+var unicodeUp = '\u25B2';
+var unicodeDown = '\u25BC';
+
+// adding color
+unicodeUp = unicodeUp.fontcolor("green");
+unicodeDown = unicodeDown.fontcolor("red");
+
 var gainersTable = document.getElementById("gainersTable");
-
-
-/** Grabbing 6m% and 1y% for Each Peer **/
 var stockGainersUrl = "https://api.iextrading.com/1.0/stock/market/list/gainers";
 
 setTimeout(function () {
@@ -15,15 +20,15 @@ setTimeout(function () {
                     cell0 = row.insertCell(0);
                     cell0.innerHTML = symbol.toString();
 
-                    var latestPrice = data[i].latestPrice;
+                    var latestPrice = data[i].latestPrice.toFixed(2);
                     cell1 = row.insertCell(1);
                     cell1.innerHTML = latestPrice.toString();
 
-                    var highPrice = data[i].high;
+                    var highPrice = data[i].high.toFixed(2);
                     cell2 = row.insertCell(2);
                     cell2.innerHTML = highPrice.toString();
 
-                    var lowPrice = data[i].low;
+                    var lowPrice = data[i].low.toFixed(2);
                     cell3 = row.insertCell(3);
                     cell3.innerHTML = lowPrice.toString();
                 }
@@ -47,15 +52,15 @@ setTimeout(function () {
                 cell0 = row.insertCell(0);
                 cell0.innerHTML = symbol.toString();
 
-                var latestPrice = data[i].latestPrice;
+                var latestPrice = data[i].latestPrice.toFixed(2);
                 cell1 = row.insertCell(1);
                 cell1.innerHTML = latestPrice.toString();
 
-                var highPrice = data[i].high;
+                var highPrice = data[i].high.toFixed(2);
                 cell2 = row.insertCell(2);
                 cell2.innerHTML = highPrice.toString();
 
-                var lowPrice = data[i].low;
+                var lowPrice = data[i].low.toFixed(2);
                 cell3 = row.insertCell(3);
                 cell3.innerHTML = lowPrice.toString();
             }
