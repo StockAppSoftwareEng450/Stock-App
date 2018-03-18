@@ -69,16 +69,16 @@ function setPortfolioEquityBarGraph(fullPortfolio) {
                 };
 
             var equityData = [];
-            var minEquity = equityArr[Object.keys(equityArr)[0]];
+            var minEquity = fx.convert(equityArr[Object.keys(equityArr)[0]]).toFixed(2);
 
             for (var item in equityArr) {
                 var help = {
                     date: parseDate(item),
-                    equity: equityArr[item]
+                    equity: fx.convert(equityArr[item]).toFixed(2)
                 };
 
-                if(minEquity > equityArr[item]){
-                    minEquity = equityArr[item];
+                if(minEquity > fx.convert(equityArr[item]).toFixed(2)){
+                    minEquity = fx.convert(equityArr[item]).toFixed(2);
                 }
 
                 equityData.push(help);
@@ -89,7 +89,7 @@ function setPortfolioEquityBarGraph(fullPortfolio) {
             var title = null;
             var yAxisPrice = null;
             var priceTitle = null;
-            var currentGraph = "";
+            var currentGraph = "Current Portfolio Equity Graph";
 
             // Set the dimensions of the canvas / graph
             var margin = {
