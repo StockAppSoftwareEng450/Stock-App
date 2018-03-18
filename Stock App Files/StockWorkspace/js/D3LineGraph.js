@@ -322,7 +322,7 @@ function updateLiveButton () {
 
                 // Mon Jan 22 2018 00:00:00 GMT-0500
                 currDate = new Date();
-                currPrice = data;
+                currPrice = fx.convert(data).toFixed(2);
 
                 objectInner.date = currDate;
                 objectInner.close = currPrice;
@@ -397,7 +397,7 @@ function update1Day () {
 
                         // Parsing the minute instead of conventional date
                         d.date = parseMinute(d.minute);
-                        d.close = +d.average;
+                        d.close = +fx.convert(d.average).toFixed(2);
 
                         // Adding each result to the end of the array
                         arrayClose.push(d.close);
@@ -460,7 +460,7 @@ function update1Month () {
                 data.forEach(function (d) {
                     d.date = parseDate(d.date);
                     // console.log(d.date);
-                    // d.close = +d.close;
+                     d.close = fx.convert(d.close).toFixed(2);
 
                     // Adding each result to the end of the array
                     arrayClose.push(d.close);
@@ -511,7 +511,7 @@ function update3Month() {
             d3.json(url, function (error, data) {
                 data.forEach(function (d) {
                     d.date = parseDate(d.date);
-                    d.close = +d.close;
+                    d.close = +fx.convert(d.close).toFixed(2);
 
                     // Adding each result to the end of the array
                     arrayClose.push(d.close);
@@ -562,7 +562,7 @@ function update6Month () {
             d3.json(url, function (error, data) {
                 data.forEach(function (d) {
                     d.date = parseDate(d.date);
-                    d.close = +d.close;
+                    d.close = +fx.convert(d.close).toFixed(2);
 
                     // Adding each result to the end of the array
                     arrayClose.push(d.close);
@@ -614,7 +614,7 @@ function updateYearToDate () {
             d3.json(url, function (error, data) {
                 data.forEach(function (d) {
                     d.date = parseDate(d.date);
-                    d.close = +d.close;
+                    d.close = +fx.convert(d.close).toFixed(2);
 
                     // Adding each result to the end of the array
                     arrayClose.push(d.close);
@@ -665,7 +665,7 @@ function update1Year() {
             d3.json(url, function (error, data) {
                 data.forEach(function (d) {
                     d.date = parseDate(d.date);
-                    d.close = +d.close;
+                    d.close = +fx.convert(d.close).toFixed(2);
 
                     // Adding each result to the end of the array
                     arrayClose.push(d.close);
@@ -716,7 +716,7 @@ function update2Year() {
             d3.json(url, function (error, data) {
                 data.forEach(function (d) {
                     d.date = parseDate(d.date);
-                    d.close = +d.close;
+                    d.close = +fx.convert(d.close).toFixed(2);
 
                     // Adding each result to the end of the array
                     arrayClose.push(d.close);
@@ -768,7 +768,7 @@ function update5Year() {
                 data.forEach(function (d) {
 
                     d.date = parseDate(d.date);
-                    d.close = +d.close;
+                    d.close = +fx.convert(d.close).toFixed(2);
 
                     // Adding each result to the end of the array
                     arrayClose.push(d.close);
