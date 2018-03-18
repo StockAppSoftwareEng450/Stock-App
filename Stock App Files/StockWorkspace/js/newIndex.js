@@ -207,7 +207,6 @@ var portfolioArray = [];
 
 /** Displaying the Portfolio Table **/
 function displayDataToTableP(data, fullPortfolio) {
-
     var percentArray = [];
     var purchasedEquity = 0;
     var currentEquity = 0;
@@ -226,7 +225,7 @@ function displayDataToTableP(data, fullPortfolio) {
         // console.log("-----------------------------------------------");
 
         // Transfers stock to the Individual StockPage
-        var stockTransferURL = "IndividualStockPage.html?stock=" + data[Object.keys(data)[i]].quote.symbol + "#";
+        var stockTransferURL = "IndividualStockPage.html?stock=" + data[fullPortfolio[i].stockSymbol].quote.symbol + "#";
 
         // Inserting rows
         var row = table.insertRow(i + 1);
@@ -246,7 +245,7 @@ function displayDataToTableP(data, fullPortfolio) {
 
         // Current Price            (FROM IEX)
         var cell3 = row.insertCell((3));
-        cell3.innerHTML = currencySymbole + " " + fx.convert(data[Object.keys(data)[i]].price).toFixed(2);
+        cell3.innerHTML = currencySymbole + " " + fx.convert(data[fullPortfolio[i].stockSymbol].price).toFixed(2);
 
         // Quantity                 (FROM FIREBASE)
         var cell4 = row.insertCell((4));
@@ -261,14 +260,14 @@ function displayDataToTableP(data, fullPortfolio) {
 
         // Current Equity           (Calculation)
         var cell6 = row.insertCell((6));
-        cell6.innerHTML = currencySymbole + " " + fx.convert((data[Object.keys(data)[i]].price * fullPortfolio[i].quantity)).toFixed(2);
-        currentEquity += Number((data[Object.keys(data)[i]].price * fullPortfolio[i].quantity).toFixed(2));
+        cell6.innerHTML = currencySymbole + " " + fx.convert((data[fullPortfolio[i].stockSymbol].price * fullPortfolio[i].quantity)).toFixed(2);
+        currentEquity += Number((data[fullPortfolio[i].stockSymbol].price * fullPortfolio[i].quantity).toFixed(2));
 
         // console.log(currentEquity);
 
         // Current Percent Change   (Calculation)   Bought price vs current price
         var cell7 = row.insertCell((7));
-        cell7.innerHTML = (((data[Object.keys(data)[i]].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2).toString();
+        cell7.innerHTML = (((data[fullPortfolio[i].stockSymbol].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2).toString();
 
         // Delete Button            (FROM FIREBASE)
         var cell8 = row.insertCell((8));
@@ -286,17 +285,17 @@ function displayDataToTableP(data, fullPortfolio) {
             //removes the row from table
             row.parentNode.removeChild(row);
             firebase.database().ref("Portfolios/" + row.getAttribute("data-pk")).remove();
-
+            window.location.href = "index.html";
         });
         cell8.appendChild(buttonDelete);
 
         // @TODO Create Tooltip/ Title when hovering over the stock symbol
 
         // Displaying the color for unicode for the percentage change
-        if ((((data[Object.keys(data)[i]].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100) < 0) {
-            cell7.innerHTML = unicodeDown + " " + (((data[Object.keys(data)[i]].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2) + "%";
+        if ((((data[fullPortfolio[i].stockSymbol].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100) < 0) {
+            cell7.innerHTML = unicodeDown + " " + (((data[fullPortfolio[i].stockSymbol].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2) + "%";
         } else {
-            cell7.innerHTML = unicodeUp + " " + (((data[Object.keys(data)[i]].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2) + "%";
+            cell7.innerHTML = unicodeUp + " " + (((data[fullPortfolio[i].stockSymbol].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2) + "%";
         }
 
         // entering info to donutQuantityArray
@@ -306,7 +305,7 @@ function displayDataToTableP(data, fullPortfolio) {
         };
 
         // Sending to Bar Chart in the future
-        percentArray.push((((data[Object.keys(data)[i]].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2));
+        percentArray.push((((data[fullPortfolio[i].stockSymbol].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2));
     }
 
     // Send to Bar Chart
@@ -321,7 +320,7 @@ function displayDataToTableP(data, fullPortfolio) {
     // Only displaying positive profit
     for (var i = 0; i < fullPortfolio.length; i++){
         var purchasedEquityF = fullPortfolio[i].price * fullPortfolio[i].quantity;
-        var currentEquityF = (data[Object.keys(data)[i]].price * fullPortfolio[i].quantity);
+        var currentEquityF = (data[fullPortfolio[i].stockSymbol].price * fullPortfolio[i].quantity);
 
         var profit = currentEquityF - purchasedEquityF;
 
@@ -382,7 +381,7 @@ function displayDataToTableP(data, fullPortfolio) {
         curDate.toLocaleDateString();
 
         var purchasedEquit = fullPortfolio[i].price * fullPortfolio[i].quantity;
-        var currentEquit = (data[Object.keys(data)[i]].price * fullPortfolio[i].quantity);
+        var currentEquit = (data[fullPortfolio[i].stockSymbol].price * fullPortfolio[i].quantity);
 
         // Calculating profit
         var profitAfterTax = currentEquit - purchasedEquit;
@@ -405,6 +404,8 @@ function displayDataToTableP(data, fullPortfolio) {
         // Display total after tax to the screen
         document.getElementById("afterTax").innerHTML = currencySymbole + " " + fx.convert((before1yearTotal + after1yearTotal)).toFixed(2).toString();
     }
+
+    setPortfolioEquityBarGraph(fullPortfolio);
 
     // Displaying Donut JS
     fillDonut(portfolioArray);
