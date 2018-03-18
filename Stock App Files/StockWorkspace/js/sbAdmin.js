@@ -24,6 +24,7 @@ function grabPortfolioBarChart(fullPortfolio, percentArray){
         filteredArrP = duplicates(percentArray);
     }
 
+    // Rounding to the nearest 100th for each element
     for (var i = 0; i < filteredArrP.length; i++){
         filteredArrP[i] = Number(filteredArrP[i]).toFixed(2);
     }
@@ -37,7 +38,9 @@ function grabPortfolioBarChart(fullPortfolio, percentArray){
 
 /** removing duplicates **/
 function duplicates(array){
-    return array.filter(function(val,ind) { return array.indexOf(val) === ind; });
+    return array.filter(function(val,ind) {
+        return array.indexOf(val) === ind;
+    });
 }
 
 /** Finding the Max Value **/
@@ -56,26 +59,38 @@ function createBarChart(max, min) {
     ctx = document.getElementById("myBarChart"), myLineChart = new Chart(ctx, {
         type: "bar",
         data: {
-            // labels: [stockSymbol[0], "February", "March", "April", "May", "June"],
             labels: filteredArrS,
             datasets: [{
                 label: "Percent Change",
-                // backgroundColor: "rgba(2,117,216,1)",
-                backgroundColor: palette('tol', filteredArrS.length).map(function(hex) {
+                backgroundColor: palette('tol', filteredArrS.length).map(function (hex) {
                     return '#' + hex;
                 }),
                 borderColor: "rgba(2,117,216,1)",
-                // data: [4215, 5312, 6251, 7841, 9821, 14984]
                 data: filteredArrP
             }]
         },
         options: {
             responsive: true,
             scales: {
-                xAxes: [
-                    {time: {unit: "month"}, gridLines: {display: !1}, ticks: {maxTicksLimit: 6}}],
-                yAxes: [{ticks: {min: min, max: max, maxTicksLimit: 5}, gridLines: {display: !0}}]
-            }, legend: {display: !1},
+                xAxes: [{
+                    time: {
+                        unit: "month"},
+                    gridLines: {
+                        display: !1},
+                    ticks: {
+                        maxTicksLimit: 12}
+                }],
+                yAxes: [{
+                    ticks: {
+                        min: min,
+                        max: max,
+                        maxTicksLimit: 5},
+                    gridLines: {
+                        display: !0}
+                }]
+            },
+            legend: {
+                display: !1},
             animation: {
                 duration: 0
             }
