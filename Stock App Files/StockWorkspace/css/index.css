@@ -2,8 +2,8 @@
 #indexPortfolio , #indexWatchlist{
     width: 100%;
     padding-left: 0;
-    margin-left: 15px;
-    margin-right: 15px;
+    /* margin-left: 15px; */
+    /* margin-right: 15px; */
 }
 
 #indexPortfolioHeader, #indexWatchlistHeader {
