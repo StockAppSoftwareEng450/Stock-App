@@ -11,6 +11,28 @@ var unicodeDown = '\u25BC';
 unicodeUp = unicodeUp.fontcolor("green");
 unicodeDown = unicodeDown.fontcolor("red");
 
+/** Loading Screen Gif **/
+// On ready function
+function onReady(callback) {
+    var intervalID = window.setInterval(checkReady, 2000);
+
+    function checkReady() {
+        if (document.getElementsByTagName('body')[0] !== undefined) {
+            window.clearInterval(intervalID);
+            callback.call(this);
+        }
+    }
+}
+
+function show(id, value) {
+    document.getElementById(id).style.display = value ? 'block' : 'none';
+}
+
+onReady(function () {
+    show('LoadingMain', true);
+    show('loading', false);
+});
+
 // Takes in the url
 function parseURLParams(url) {
     var queryStart = url.indexOf("?") + 1,
@@ -851,6 +873,7 @@ function portfolioOwnedTable(){
                         help["quantity"] = value.child("quantity").val();
 
                         // Render table if stock is in portfolio
+                        document.getElementById("PurchasedStockName").style.display = "block";
                         document.getElementById('portfolioTable').style.display = "table";
 
                         fullPortfolio.push(help);

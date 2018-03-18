@@ -39,6 +39,9 @@
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
 
+<!-- Loading screen Wating GIF -->
+<div id="loading"></div>
+
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <a class="navbar-brand" href="index.html">Stock Portfolio</a>
@@ -97,7 +100,7 @@
 </nav>
 
 <!---------------------------------------------------------------------------------------------->
-<div class="content-wrapper" style="margin-left: 0">
+<div class="content-wrapper" id="LoadingMain" style="margin-left: 0; display: none" >
     <div class="container-fluid">
 
         <!-- Breadcrumbs -->
@@ -172,21 +175,12 @@
 
                 <!-- Enter button -->
                 <button onclick="getStockDateAndQuantity()" class="enterButton" id="enterButtonAddToStock">Enter</button>
-
-                <!--&lt;!&ndash; Inserting table &ndash;&gt;-->
-                <!--<table id="portfolioTable" class="table" style="font-size: smaller;">-->
-                    <!--<tr id="portfolioTableCol">-->
-                        <!--<th scope="col">Date Purchased</th>         &lt;!&ndash; 0 &ndash;&gt;-->
-                        <!--<th scope="col">Purchase Price</th>         &lt;!&ndash; 1 &ndash;&gt;-->
-                        <!--<th scope="col">Quantity</th>               &lt;!&ndash; 2 &ndash;&gt;-->
-                        <!--<th scope="col">Delete?</th>                &lt;!&ndash; 3 &ndash;&gt;-->
-                    <!--</tr>-->
-                <!--</table>-->
+                
             </div>
         </div>
 
         <!-- Company Information and Graph -->
-        <div class="container" >
+        <div class="container">
             <div class="row">
                 <div class="col-sm-4">
                     <h3>Company Information</h3>
@@ -335,9 +329,8 @@
                     <br>
 
                     <!-- Purchased Stock -->
-                    <h3>Purchased Stock</h3>
+                    <h3 id="PurchasedStockName" style="display: none;" >Purchased Stock</h3>
                     <hr>
-                    <div id="PurchasedStockName"></div>
 
                     <!-- Purchased Stock table -->
                     <table id="portfolioTable" class="portTable" style="display: none; width: 100%">

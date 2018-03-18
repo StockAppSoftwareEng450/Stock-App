@@ -95,3 +95,19 @@ polyline {
 .card-body {
     padding: 15px;
 }
+
+/* Loading Screen Gif */
+#loading {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+    background-color: #ecf0f1;
+    /*background-image: url("http://i.stack.imgur.com/MnyxU.gif");*/
+    background-image: url("https://media.giphy.com/media/jAYUbVXgESSti/giphy.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+}

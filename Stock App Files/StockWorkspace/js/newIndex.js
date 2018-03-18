@@ -1,3 +1,25 @@
+/** Loading Screen Gif **/
+// On ready function
+function onReady(callback) {
+    var intervalID = window.setInterval(checkReady, 2000);
+
+    function checkReady() {
+        if (document.getElementsByTagName('body')[0] !== undefined) {
+            window.clearInterval(intervalID);
+            callback.call(this);
+        }
+    }
+}
+
+function show(id, value) {
+    document.getElementById(id).style.display = value ? 'block' : 'none';
+}
+
+onReady(function () {
+    show('LoadingMain', true);
+    show('loading', false);
+});
+
 $(document).ready(function () {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
@@ -583,11 +605,11 @@ function displayCards(data, fullPortfolio) {
                 var stockPriceE = "StockPrice" + i;
                 var viewDetails = "viewDetails" + i;
 
-                console.log(data[Object.keys(data)[i]].quote);
+                var stockTransferURL = "IndividualStockPage.html?stock=" + data[Object.keys(data)[i]].quote.symbol + "#";
 
                 document.getElementById(companyNameE).innerHTML = limitCharacter((data[Object.keys(data)[i]].quote.companyName));
                 document.getElementById(stockPriceE).innerHTML = data[Object.keys(data)[i]].price;
-                document.getElementById(viewDetails).href = "https://www.google.com";
+                document.getElementById(viewDetails).href = stockTransferURL;
 
 
             }
