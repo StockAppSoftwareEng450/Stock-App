@@ -437,7 +437,7 @@ function peersStatsUrlGrab(name) {
             var price = data.latestPrice;
             var cell1 = row.insertCell(1);
             cell1.innerHTML = currencySymbole + " " + fx.convert(price).toFixed(2);
-            document.getElementById("pricePortfolio").placeholder = price;
+            // document.getElementById("pricePortfolio").placeholder = price;
         }
     });
 
@@ -829,7 +829,7 @@ function setIntervalPrice(resultUrl) {
                 var stockprice = data.latestPrice;
 
                 document.getElementById("StockPrice").innerHTML = currencySymbole + " " + fx.convert(stockprice).toFixed(2);
-                document.getElementById("pricePortfolio").value = stockprice;
+                document.getElementById("pricePortfolio").value = fx.convert(stockprice).toFixed(2);
 
                 stockprice = stockprice.toString();
                 stockprice = stockprice.bold();
@@ -855,7 +855,7 @@ function setTimeoutPrice(resultUrl) {
                 var stockprice = data.latestPrice;
 
                 document.getElementById("StockPrice").innerHTML = currencySymbole + " " + fx.convert(stockprice).toFixed(2);
-                document.getElementById("pricePortfolio").value = stockprice;
+                document.getElementById("pricePortfolio").value = fx.convert(stockprice).toFixed(2);
 
                 stockprice = fx.convert(stockprice).toFixed(2);
                 stockprice = stockprice.toString();
