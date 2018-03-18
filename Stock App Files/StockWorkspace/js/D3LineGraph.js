@@ -102,7 +102,7 @@ setTimeout(function () {
             d3.json(url, function (error, data) {
                 data.forEach(function (d) {
                     d.date = parseDate(d.date);
-                    d.close = +d.close;
+                    d.close = +fx.convert(d.close).toFixed(2);
 
                     // Adding each result to the end of the array
                     arrayClose.push(d.close);
