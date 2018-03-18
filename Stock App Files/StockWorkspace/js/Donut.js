@@ -2,7 +2,7 @@ function donutChart() {
     var width,
         height,
         margin = {top: 30, right: 30, bottom: 30, left: 30},
-        colour = d3.scaleOrdinal(d3.schemeCategory10),
+        // colour = d3.scaleOrdinal(d3.schemeCategory10),
         variable,                           // value in data that will dictate proportions on chart
         category,                           // compare data by
         padAngle,                           // effectively dictates the gap between slices
@@ -11,10 +11,24 @@ function donutChart() {
         cornerRadius,                       // sets how rounded the corners are on each slice
         percentFormat = d3.format(',.2%');
 
+    // scaling to SbAdmins Color Scheme
+    var color = d3.scaleOrdinal()
+        .range(["#007bff" , "#ffc107" , "#28a745", "#dc3545"]);
+
     function chart(selection){
         selection.each(function(data) {
             // generate chart
             var radius = Math.min(width, height) / 2;
+
+            // default values for legend
+            var legendRectSize = 24;
+            var legendSpacing = 6;
+            var fontsize = 16;
+
+            // Scaling higher
+            legendRectSize += (70 / 100) * legendRectSize;
+            legendSpacing += (70 / 100) * legendSpacing;
+            fontsize += (70 / 100) * fontsize;
 
             // creates a new pie generator
             var pie = d3.pie()
@@ -53,49 +67,60 @@ function donutChart() {
                 .datum(data).selectAll('path')
                 .data(pie)
                 .enter().append('path')
-                .attr('fill', function(d) { return colour(d.data[category]); })
+                // .attr('fill', function(d) { return colour(d.data[category]); })
+                .attr('fill', function(d, i) {
+                    return color(d.data[category]);
+                })
                 .attr('d', arc);
-
-            // // add text labels
-            // var label = svg.select('.labelName').selectAll('text')
-            //     .data(pie)
-            //     .enter().append('text')
-            //     .attr('font-size', '4em')
-            //     .attr('dy', '.35em')
-            //     .html(function(d) {
-            //         // add "key: value" for given category. Number inside tspan is bolded in stylesheet.
-            //         return d.data[category] + ': <tspan>' + intFormat(d.data[variable]) + '</tspan>';
-            //     })
-            //     .attr('transform', function(d) {
-            //
-            //         // effectively computes the centre of the slice.
-            //         // see https://github.com/d3/d3-shape/blob/master/README.md#arc_centroid
-            //         var pos = outerArc.centroid(d);
-            //
-            //         // changes the point to be on left or right depending on where label is.
-            //         pos[0] = radius * 0.95 * (midAngle(d) < Math.PI ? 1 : -1);
-            //         return 'translate(' + pos + ')';
-            //     })
-            //     .style('text-anchor', function(d) {
-            //         // if slice centre is on the left, anchor text to start, otherwise anchor to end
-            //         return (midAngle(d)) < Math.PI ? 'start' : 'end';
-            //     });
-
-            // add lines connecting labels to slice. A polyline creates straight lines connecting several points
-            // var polyline = svg.select('.lines')
-            //     .selectAll('polyline')
-            //     .data(pie)
-            //     .enter().append('polyline')
-            //     .attr('points', function(d) {
-            //
-            //         // see label transform function for explanations of these three lines.
-            //         var pos = outerArc.centroid(d);
-            //         pos[0] = radius * 0.95 * (midAngle(d) < Math.PI ? 1 : -1);
-            //         return [arc.centroid(d), outerArc.centroid(d), pos]
-            //     });
 
             // add tooltip to mouse events on slices and labels
             d3.selectAll('.labelName text, .slices path').call(toolTip);
+
+            console.log("number of stocks: " + data.length);
+
+            // if length is greater than 8 scale highest possible
+            if ( data.length > 10) {
+                console.log('reached');
+
+                var decrAmount = (data.length * 1.5);
+
+                legendRectSize -= (decrAmount / 100) * legendRectSize;
+                legendSpacing -= (decrAmount / 100) * legendSpacing;
+                fontsize -= (decrAmount / 100) * fontsize;
+
+                console.log(legendRectSize);
+                console.log(legendSpacing);
+                console.log(fontsize);
+            }
+
+            // Adding legend
+            var legend = svg.selectAll('.legend')
+                .data(color.domain())
+                .enter()
+                .append('g')
+                .attr('class', 'legend')
+                .attr('transform', function(d, i) {
+                    var height = legendRectSize + legendSpacing;
+                    var offset =  height * color.domain().length / 2;
+                    var horz = -2 * legendRectSize;
+                    var vert = i * height - offset;
+                    console.log(i);
+                    return 'translate(' + horz + ',' + vert + ')';
+                });
+
+            legend.append('rect')
+                .attr('width', legendRectSize)
+                .attr('height', legendRectSize)
+                .style('fill', color)
+                .style('stroke', color);
+
+            legend.append('text')
+                .attr('x', legendRectSize + legendSpacing)
+                .attr('y', legendRectSize - legendSpacing)
+                .style("font-size", (fontsize.toString() + "px"))
+                .text(function(d) {
+                    return d;
+                });
 
             // calculates the angle for the middle of a slice
             function midAngle(d) { return d.startAngle + (d.endAngle - d.startAngle) / 2; }
@@ -105,6 +130,9 @@ function donutChart() {
 
                 // add tooltip (svg circle element) when mouse enters label or slice
                 selection.on('mouseenter', function (data) {
+
+                    // removing legend on mouseover
+                    d3.selectAll('.legend').remove();
 
                     svg.append('text')
                         .attr('class', 'toolCircle')
@@ -116,7 +144,7 @@ function donutChart() {
                     svg.append('circle')
                         .attr('class', 'toolCircle')
                         .attr('r', radius * 0.55) // radius of tooltip circle
-                        .style('fill', colour(data.data[category])) // colour based on category mouse is over
+                        .style('fill', color(data.data[category])) // colour based on category mouse is over
                         .style('fill-opacity', 0.65);
 
                 });
@@ -124,6 +152,61 @@ function donutChart() {
                 // remove the tooltip when mouse leaves the slice/label
                 selection.on('mouseout', function () {
                     d3.selectAll('.toolCircle').remove();
+
+                    // default values for legend
+                    var legendRectSize = 24;
+                    var legendSpacing = 6;
+                    var fontsize = 16;
+
+                    // Scaling higher
+                    legendRectSize += (70 / 100) * legendRectSize;
+                    legendSpacing += (70 / 100) * legendSpacing;
+                    fontsize += (70 / 100) * fontsize;
+
+                    // if length is greater than 8 scale highest possible
+                    if ( data.length > 10) {
+                        console.log('reached');
+
+                        var decrAmount = (data.length * 1.5);
+
+                        legendRectSize -= (decrAmount / 100) * legendRectSize;
+                        legendSpacing -= (decrAmount / 100) * legendSpacing;
+                        fontsize -= (decrAmount / 100) * fontsize;
+
+                        console.log(legendRectSize);
+                        console.log(legendSpacing);
+                        console.log(fontsize);
+                    }
+
+                    var legend = svg.selectAll('.legend')
+                        .data(color.domain())
+                        .enter()
+                        .append('g')
+                        .attr('class', 'legend')
+                        .attr('transform', function(d, i) {
+                            var height = legendRectSize + legendSpacing;
+                            var offset =  height * color.domain().length / 2;
+                            var horz = -2 * legendRectSize;
+                            var vert = i * height - offset;
+                            count = i;
+
+                            return 'translate(' + horz + ',' + vert + ')';
+                        });
+
+                    console.log("count: " + (count + 1));
+
+                    legend.append('rect')
+                        .attr('width', legendRectSize)
+                        .attr('height', legendRectSize)
+                        .style('fill', color)
+                        .style('stroke', color);
+
+                    legend.append('text')
+                        .attr('x', legendRectSize + legendSpacing)
+                        .attr('y', legendRectSize - legendSpacing)
+                        .style("font-size", (fontsize.toString() + "px"))
+                        .text(function(d) { return d; });
+
                 });
             }
 
@@ -184,12 +267,6 @@ function donutChart() {
     chart.cornerRadius = function(value) {
         if (!arguments.length) return cornerRadius;
         cornerRadius = value;
-        return chart;
-    };
-
-    chart.colour = function(value) {
-        if (!arguments.length) return colour;
-        colour = value;
         return chart;
     };
 

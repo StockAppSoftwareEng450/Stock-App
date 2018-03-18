@@ -11,6 +11,28 @@ var unicodeDown = '\u25BC';
 unicodeUp = unicodeUp.fontcolor("green");
 unicodeDown = unicodeDown.fontcolor("red");
 
+/** Loading Screen Gif **/
+// On ready function
+function onReady(callback) {
+    var intervalID = window.setInterval(checkReady, 2000);
+
+    function checkReady() {
+        if (document.getElementsByTagName('body')[0] !== undefined) {
+            window.clearInterval(intervalID);
+            callback.call(this);
+        }
+    }
+}
+
+function show(id, value) {
+    document.getElementById(id).style.display = value ? 'block' : 'none';
+}
+
+onReady(function () {
+    show('LoadingMain', true);
+    show('loading', false);
+});
+
 // Takes in the url
 function parseURLParams(url) {
     var queryStart = url.indexOf("?") + 1,
@@ -295,6 +317,9 @@ $(document).ready(function () {
                 /** Displaying Logo **/
                 DisplayLogo();
 
+                /** portfolioOwnedTable **/
+                portfolioOwnedTable();
+
             }, 500);
 
         } else {
@@ -412,6 +437,7 @@ function peersStatsUrlGrab(name) {
             var price = data.latestPrice;
             var cell1 = row.insertCell(1);
             cell1.innerHTML = currencySymbole + " " + fx.convert(price).toFixed(2);
+            // document.getElementById("pricePortfolio").placeholder = price;
         }
     });
 
@@ -508,17 +534,19 @@ function peersStatsUrlGrab(name) {
     });
 }
 
+var clicked = false;
+var divHeight = 180;
+
 /** GET the date and quantity of stock price (On enter button) **/
 function getStockDateAndQuantity() {
     var user = firebase.auth().currentUser;
 
     var date = null;
     var quantity = null;
-    var price = null;
 
     date = document.getElementById("datePortfolio").value;
     quantity = document.getElementById("quantityPortfolio").value;
-    price = document.getElementById("pricePortfolio").value;
+    var price = document.getElementById("pricePortfolio").value;
 
     //NEED!!!!!!!!    // MSG to the user Please renter both
     if (!date || !quantity || date == null || quantity == null) {
@@ -526,11 +554,32 @@ function getStockDateAndQuantity() {
         document.getElementById("addToPorfolioError").style.visibility = "visible";
         document.getElementById("addToPorfolioError").style.display = "block";
 
+        // Adding height to div when error is displayed
+        if (divHeight <= 180) {
+            divHeight +=40;
+            clicked = true;
+            console.log(clicked)
+        }
+
+        var sendNewHieght = divHeight + "px";
+        console.log(sendNewHieght);
+        document.getElementById("AddStocktoPortfolio").style.height = sendNewHieght;
+
         // console.log("Please enter valid Add to portfolio inputs");
 
     } else {
         document.getElementById("addToPorfolioSuccess").style.visibility = "visible";
         document.getElementById("addToPorfolioSuccess").style.display = "block";
+
+        console.log(clicked);
+
+        if (clicked === true){
+            divHeight +=40;
+            document.getElementById("AddStocktoPortfolio").style.height = divHeight + "px";
+        } else {
+            divHeight +=40;
+            document.getElementById("AddStocktoPortfolio").style.height = divHeight + "px";
+        }
 
         //user put in a price?
         var closePriceForDate = price;
@@ -603,100 +652,6 @@ function AddToPortfolio() {
 
         //getting portfolio information and save it
         if (user) {
-            // User is signed in.
-            var fullPortfolio = [];
-
-            var refPortfolio = firebase.database().ref("Portfolios");
-            refPortfolio.orderByChild("userId").equalTo(user.uid).once("value", function (snapshot) {
-                var result = [];
-                if (snapshot.exists()) {
-                    snapshot.forEach(function (value) {
-                        if (resultStockSymbol === value.child("stockSymbol").val()) {
-                            var help = [];
-                            help["pk"] = value.key;
-                            help["userId"] = value.child("userId").val();
-                            help["stockSymbol"] = value.child("stockSymbol").val();
-                            help["date"] = value.child("date").val();
-                            help["price"] = value.child("price").val();
-                            help["quantity"] = value.child("quantity").val();
-
-                            fullPortfolio.push(help);
-                        }
-                    });
-                }
-            }).then(function () {
-                //populate portfolioTable
-                var table = document.getElementById("portfolioTable");
-                table.innerHTML = "";
-                var header = table.createTHead();
-                var body = table.createTBody();
-
-                var row = header.insertRow(0);
-
-                //document.getElementById("myBtn").style.height =+ "50px";
-                var divHeight = document.getElementById("AddStocktoPortfolio").style.height;
-
-                // Date purchased
-                var cell1 = row.insertCell((0));
-                cell1.innerHTML = "<b>Date Purchased</b>";
-
-                // Purchased Price
-                var cell2 = row.insertCell((1));
-                cell2.innerHTML = "<b>Purchase Price</b>";
-
-                // Quantity
-                var cell3 = row.insertCell((2));
-                cell3.innerHTML = "<b>Quantity</b>";
-
-                // Delete?
-                var cell4 = row.insertCell((3));
-                cell4.innerHTML = "<b>Delete?</b>";
-
-                for (var i = 0; i < fullPortfolio.length; i++) {
-
-                    divHeight = divHeight + 200;
-                    document.getElementById("AddStocktoPortfolio").style.height = divHeight;
-
-                    row = body.insertRow(i);
-
-                    row.setAttribute("data-pk", fullPortfolio[i].pk);
-
-                    // Date purchased
-                    cell1 = row.insertCell((0));
-                    cell1.innerHTML = fullPortfolio[i].date;
-
-                    // Purchased Price
-                    cell2 = row.insertCell((1));
-                    cell2.innerHTML = currencySymbole + " " + fx.convert(fullPortfolio[i].price).toFixed(2);
-
-                    // Quantity
-                    cell3 = row.insertCell((2));
-                    cell3.innerHTML = fullPortfolio[i].quantity;
-
-                    // Add delete button
-                    cell4 = row.insertCell((3));
-                    //set button class
-                    cell4.setAttribute("class", "deleteButton");
-                    //centralize content
-                    cell4.style.display = 'flex';
-                    cell4.style.alignItems = 'center';
-                    cell4.style.justifyContent = 'center';
-
-                    var buttonDelete = document.createElement("BUTTON");
-                    buttonDelete.appendChild(document.createTextNode("Delete"));
-                    buttonDelete.addEventListener('click', function (button) {
-                        var row = button.path[2];
-                        var stockSymbol = row.firstChild.firstChild.innerHTML;
-
-                        //removes the row from table
-                        row.parentNode.removeChild(row);
-                        firebase.database().ref("Portfolios/" + row.getAttribute("data-pk")).remove();
-
-                    });
-                    cell4.appendChild(buttonDelete);
-
-                }
-            });
 
             $('#datePortfolio').val(new Date().toDateInputValue());
 
@@ -874,13 +829,13 @@ function setIntervalPrice(resultUrl) {
                 var stockprice = data.latestPrice;
 
                 document.getElementById("StockPrice").innerHTML = currencySymbole + " " + fx.convert(stockprice).toFixed(2);
+                document.getElementById("pricePortfolio").value = fx.convert(stockprice).toFixed(2);
 
                 stockprice = stockprice.toString();
                 stockprice = stockprice.bold();
 
                 // Send price to the peers table
                 document.getElementById("myTable").rows[1].cells[1].innerHTML = currencySymbole + " " + fx.convert(stockprice).toFixed(2);
-
             },
             error: function (error) {
                 // Handle Errors here.
@@ -900,6 +855,7 @@ function setTimeoutPrice(resultUrl) {
                 var stockprice = data.latestPrice;
 
                 document.getElementById("StockPrice").innerHTML = currencySymbole + " " + fx.convert(stockprice).toFixed(2);
+                document.getElementById("pricePortfolio").value = fx.convert(stockprice).toFixed(2);
 
                 stockprice = fx.convert(stockprice).toFixed(2);
                 stockprice = stockprice.toString();
@@ -907,6 +863,7 @@ function setTimeoutPrice(resultUrl) {
 
                 // Send price to the peers table
                 document.getElementById("myTable").rows[1].cells[1].innerHTML = currencySymbole + " " + stockprice;
+
 
             },
             error: function (error) {
@@ -917,6 +874,93 @@ function setTimeoutPrice(resultUrl) {
         });
     });
 }
+
+/** portfolioOwnedTable **/
+function portfolioOwnedTable(){
+    //getting portfolio information and save it
+    var user = firebase.auth().currentUser;
+
+    if (user) {
+        // User is signed in.
+        var fullPortfolio = [];
+
+        var refPortfolio = firebase.database().ref("Portfolios");
+        refPortfolio.orderByChild("userId").equalTo(user.uid).once("value", function (snapshot) {
+            var result = [];
+            if (snapshot.exists()) {
+                snapshot.forEach(function (value) {
+                    if (resultStockSymbol === value.child("stockSymbol").val()) {
+                        var help = [];
+                        help["pk"] = value.key;
+                        help["userId"] = value.child("userId").val();
+                        help["stockSymbol"] = value.child("stockSymbol").val();
+                        help["date"] = value.child("date").val();
+                        help["price"] = value.child("price").val();
+                        help["quantity"] = value.child("quantity").val();
+
+                        // Render table if stock is in portfolio
+                        document.getElementById("PurchasedStockName").style.display = "block";
+                        document.getElementById('portfolioTable').style.display = "table";
+
+                        fullPortfolio.push(help);
+
+                        console.log("fullPortfolio: ", fullPortfolio);
+                    }
+                });
+
+                //  populate portfolioTable
+                var table = document.getElementById("portfolioTable");
+
+                for (var i = 0; i < fullPortfolio.length; i++) {
+
+                    // divHeight = divHeight + 200;
+                    // document.getElementById("AddStocktoPortfolio").style.height = divHeight;
+
+                    var row = table.insertRow(i + 1);
+
+                    row.setAttribute("data-pk", fullPortfolio[i].pk);
+
+                    // Date purchased
+                    var cell1 = row.insertCell((0));
+                    cell1.innerHTML = fullPortfolio[i].date;
+
+                    // Purchased Price
+                    var cell2 = row.insertCell((1));
+                    cell2.innerHTML = currencySymbole + " " + fx.convert(fullPortfolio[i].price).toFixed(2);
+
+                    // Quantity
+                    var cell3 = row.insertCell((2));
+                    cell3.innerHTML = fullPortfolio[i].quantity;
+
+                    // Add delete button
+                    var cell4 = row.insertCell((3));
+                    //set button class
+                    cell4.setAttribute("class", "deleteButton");
+                    //centralize content
+                    cell4.style.display = 'flex';
+                    cell4.style.alignItems = 'center';
+                    cell4.style.justifyContent = 'center';
+
+                    var buttonDelete = document.createElement("BUTTON");
+                    buttonDelete.appendChild(document.createTextNode("Delete"));
+                    buttonDelete.addEventListener('click', function (button) {
+                        var row = button.path[2];
+                        var stockSymbol = row.firstChild.firstChild.innerHTML;
+
+                        //removes the row from table
+                        row.parentNode.removeChild(row);
+                        firebase.database().ref("Portfolios/" + row.getAttribute("data-pk")).remove();
+
+                    });
+                    cell4.appendChild(buttonDelete);
+                }
+            }
+        });
+
+        $('#datePortfolio').val(new Date().toDateInputValue());
+    }
+}
+
 
 
 

@@ -1,3 +1,25 @@
+/** Loading Screen Gif **/
+// On ready function
+function onReady(callback) {
+    var intervalID = window.setInterval(checkReady, 2000);
+
+    function checkReady() {
+        if (document.getElementsByTagName('body')[0] !== undefined) {
+            window.clearInterval(intervalID);
+            callback.call(this);
+        }
+    }
+}
+
+function show(id, value) {
+    document.getElementById(id).style.display = value ? 'block' : 'none';
+}
+
+onReady(function () {
+    show('LoadingMain', true);
+    show('loading', false);
+});
+
 $(document).ready(function () {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
@@ -49,6 +71,7 @@ function getFullPortfolio() {
                 // Issuing BatchRequest for Portfolio
                 issueBatchRequestP(fullPortfolio);
 
+                // Calling the D3 full Portfolio
                 getOneDayPrice(fullPortfolio);
 
             });
@@ -184,7 +207,6 @@ var portfolioArray = [];
 
 /** Displaying the Portfolio Table **/
 function displayDataToTableP(data, fullPortfolio) {
-
     var percentArray = [];
     var purchasedEquity = 0;
     var currentEquity = 0;
@@ -203,7 +225,7 @@ function displayDataToTableP(data, fullPortfolio) {
         // console.log("-----------------------------------------------");
 
         // Transfers stock to the Individual StockPage
-        var stockTransferURL = "IndividualStockPage.html?stock=" + data[Object.keys(data)[i]].quote.symbol + "#";
+        var stockTransferURL = "IndividualStockPage.html?stock=" + data[fullPortfolio[i].stockSymbol].quote.symbol + "#";
 
         // Inserting rows
         var row = table.insertRow(i + 1);
@@ -223,7 +245,7 @@ function displayDataToTableP(data, fullPortfolio) {
 
         // Current Price            (FROM IEX)
         var cell3 = row.insertCell((3));
-        cell3.innerHTML = currencySymbole + " " + fx.convert(data[Object.keys(data)[i]].price).toFixed(2);
+        cell3.innerHTML = currencySymbole + " " + fx.convert(data[fullPortfolio[i].stockSymbol].price).toFixed(2);
 
         // Quantity                 (FROM FIREBASE)
         var cell4 = row.insertCell((4));
@@ -238,14 +260,14 @@ function displayDataToTableP(data, fullPortfolio) {
 
         // Current Equity           (Calculation)
         var cell6 = row.insertCell((6));
-        cell6.innerHTML = currencySymbole + " " + fx.convert((data[Object.keys(data)[i]].price * fullPortfolio[i].quantity)).toFixed(2);
-        currentEquity += Number((data[Object.keys(data)[i]].price * fullPortfolio[i].quantity).toFixed(2));
+        cell6.innerHTML = currencySymbole + " " + fx.convert((data[fullPortfolio[i].stockSymbol].price * fullPortfolio[i].quantity)).toFixed(2);
+        currentEquity += Number((data[fullPortfolio[i].stockSymbol].price * fullPortfolio[i].quantity).toFixed(2));
 
         // console.log(currentEquity);
 
         // Current Percent Change   (Calculation)   Bought price vs current price
         var cell7 = row.insertCell((7));
-        cell7.innerHTML = (((data[Object.keys(data)[i]].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2).toString();
+        cell7.innerHTML = (((data[fullPortfolio[i].stockSymbol].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2).toString();
 
         // Delete Button            (FROM FIREBASE)
         var cell8 = row.insertCell((8));
@@ -263,17 +285,17 @@ function displayDataToTableP(data, fullPortfolio) {
             //removes the row from table
             row.parentNode.removeChild(row);
             firebase.database().ref("Portfolios/" + row.getAttribute("data-pk")).remove();
-
+            window.location.href = "index.html";
         });
         cell8.appendChild(buttonDelete);
 
         // @TODO Create Tooltip/ Title when hovering over the stock symbol
 
         // Displaying the color for unicode for the percentage change
-        if ((((data[Object.keys(data)[i]].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100) < 0) {
-            cell7.innerHTML = unicodeDown + " " + (((data[Object.keys(data)[i]].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2) + "%";
+        if ((((data[fullPortfolio[i].stockSymbol].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100) < 0) {
+            cell7.innerHTML = unicodeDown + " " + (((data[fullPortfolio[i].stockSymbol].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2) + "%";
         } else {
-            cell7.innerHTML = unicodeUp + " " + (((data[Object.keys(data)[i]].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2) + "%";
+            cell7.innerHTML = unicodeUp + " " + (((data[fullPortfolio[i].stockSymbol].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2) + "%";
         }
 
         // entering info to donutQuantityArray
@@ -283,25 +305,28 @@ function displayDataToTableP(data, fullPortfolio) {
         };
 
         // Sending to Bar Chart in the future
-        percentArray.push((((data[Object.keys(data)[i]].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2));
+        percentArray.push((((data[fullPortfolio[i].stockSymbol].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2));
     }
 
     // Send to Bar Chart
     grabPortfolioBarChart(fullPortfolio, percentArray);
 
     // Displaying Total Purchased Equity
-    purchasedEquity = purchasedEquity.toFixed(2);
-    currentEquity = currentEquity.toFixed(2);
+    // purchasedEquity = purchasedEquity.toFixed(2);
+    // currentEquity = currentEquity.toFixed(2);
     document.getElementById("TotalPurchasedEquity").innerHTML = currencySymbole + " " + fx.convert(purchasedEquity).toFixed(2).toString();
     document.getElementById("TotalCurrentEquity").innerHTML = currencySymbole + " " +  fx.convert(currentEquity).toFixed(2).toString();
 
-    // Display negative when less than zero and color to red
-    if ((currentEquity - purchasedEquity) < 0){
-        document.getElementById("profit").innerHTML = currencySymbole + " " + fx.convert((currentEquity - purchasedEquity)).toFixed(2).toString();
-        var negVal = document.getElementById("profit");
-        negVal.setAttribute('style', 'color: #D53343 !important');
-    } else {
-        document.getElementById("profit").innerHTML = currencySymbole + " " + fx.convert((currentEquity - purchasedEquity)).toFixed(2).toString();
+    // Only displaying positive profit
+    for (var i = 0; i < fullPortfolio.length; i++){
+        var purchasedEquityF = fullPortfolio[i].price * fullPortfolio[i].quantity;
+        var currentEquityF = (data[fullPortfolio[i].stockSymbol].price * fullPortfolio[i].quantity);
+
+        var profit = currentEquityF - purchasedEquityF;
+
+        if (profit > 0){
+            document.getElementById("profit").innerHTML = currencySymbole + " " + fx.convert(profit).toFixed(2).toString();
+        }
     }
 
     var after1yearTotal = 0;
@@ -355,24 +380,32 @@ function displayDataToTableP(data, fullPortfolio) {
         curDate.setMonth(curDate.getMonth() - 12);
         curDate.toLocaleDateString();
 
-        console.log("givenDate" + i + ": ", givenDate);
-        console.log("oldDate" + i + ": ", curDate);
-        console.log(givenDate < curDate);
+        var purchasedEquit = fullPortfolio[i].price * fullPortfolio[i].quantity;
+        var currentEquit = (data[fullPortfolio[i].stockSymbol].price * fullPortfolio[i].quantity);
 
-        // 15% in tax after 1 year, otherwise 30% if date is before
-        if ((givenDate < curDate) === true) {
-            var resultAfter = (15 / 100) * (data[Object.keys(data)[i]].price * fullPortfolio[i].quantity);
-            after1yearTotal += (data[Object.keys(data)[i]].price * fullPortfolio[i].quantity) - resultAfter;
-            console.log("after1yearTotal" + i + ": ", after1yearTotal);
-        } else if ((givenDate < curDate) === false) {
-            var resultBefore = (30 / 100) * (data[Object.keys(data)[i]].price * fullPortfolio[i].quantity);
-            before1yearTotal += (data[Object.keys(data)[i]].price * fullPortfolio[i].quantity) - resultBefore;
-            console.log("before1yearTotal" + i + ": ", before1yearTotal);
+        // Calculating profit
+        var profitAfterTax = currentEquit - purchasedEquit;
+
+        // Checking if profit is positive
+        if (profitAfterTax > 0 ){
+
+            // 15% in tax after 1 year, otherwise 30% if date is before
+            if ((givenDate < curDate) === true) {
+                var resultAfter = (15 / 100) * profitAfterTax;
+                after1yearTotal += profitAfterTax - resultAfter;
+                // console.log("after1yearTotal" + i + ": ", after1yearTotal);
+            } else if ((givenDate < curDate) === false) {
+                var resultBefore = (30 / 100) * profitAfterTax;
+                before1yearTotal += profitAfterTax - resultBefore;
+                // console.log("before1yearTotal" + i + ": ", before1yearTotal);
+            }
         }
 
         // Display total after tax to the screen
         document.getElementById("afterTax").innerHTML = currencySymbole + " " + fx.convert((before1yearTotal + after1yearTotal)).toFixed(2).toString();
     }
+
+    setPortfolioEquityBarGraph(fullPortfolio);
 
     // Displaying Donut JS
     fillDonut(portfolioArray);
@@ -541,24 +574,44 @@ function PageLoadTime(){
     document.getElementById("timeUpdate3").innerHTML = "Updated today at " + pageLoadTimeString.toString();
 }
 
+/** removing duplicates **/
+function duplicates(array){
+    return array.filter(function(val,ind) {
+        return array.indexOf(val) === ind;
+    });
+}
+
 /** Top Cards **/
 function displayCards(data, fullPortfolio) {
 
-    // console.log(data[Object.keys(data)[0]].quote.companyName);
-    // console.log(fullPortfolio.length);
+    var filteredArrS = [];
+    var stockSymbol = [];
+
+    // Pushing stock Symbols
+    for (var i = 0; i < fullPortfolio.length; i++) {
+        stockSymbol.push(fullPortfolio[i].stockSymbol);
+    }
+
+    // Removing Duplicates for stock Symbol
+    for (var i = 0; i < stockSymbol.length; i++) {
+        filteredArrS = duplicates(stockSymbol);
+    }
+
+    console.log(filteredArrS);
 
     // If portfolio contains more than four, return the first four, if not, return as many as possible with (add more in company name)
     if (fullPortfolio.length > 4){
-
-        // console.log("more than four in portfolio");
 
         // Return the First four in the list
         for(var i = 0; i < 4; i++){
             var companyNameI = "CompanyName" + i;
             var stockPriceI = "StockPrice" + i;
+            var viewDetailsI = "viewDetails" + i;
 
+            var stockTransferURLI = "IndividualStockPage.html?stock=" + filteredArrS[i] + "#";
             document.getElementById(companyNameI).innerHTML = limitCharacter((data[Object.keys(data)[i]].quote.companyName));
             document.getElementById(stockPriceI).innerHTML = data[Object.keys(data)[i]].price;
+            document.getElementById(viewDetailsI).href = stockTransferURLI;
         }
     } else {
 
@@ -571,9 +624,14 @@ function displayCards(data, fullPortfolio) {
             for(var i = 0; i < fullPortfolio.length; i++){
                 var companyNameE = "CompanyName" + i;
                 var stockPriceE = "StockPrice" + i;
+                var viewDetails = "viewDetails" + i;
+
+                var stockTransferURL = "IndividualStockPage.html?stock=" + filteredArrS[i] + "#";
 
                 document.getElementById(companyNameE).innerHTML = limitCharacter((data[Object.keys(data)[i]].quote.companyName));
                 document.getElementById(stockPriceE).innerHTML = data[Object.keys(data)[i]].price;
+                document.getElementById(viewDetails).href = stockTransferURL;
+
             }
 
             var leftOver = 4 - fullPortfolio.length;
