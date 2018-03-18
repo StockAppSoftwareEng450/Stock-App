@@ -49,6 +49,7 @@ function getFullPortfolio() {
                 // Issuing BatchRequest for Portfolio
                 issueBatchRequestP(fullPortfolio);
 
+                // Calling the D3 full Portfolio
                 getOneDayPrice(fullPortfolio);
 
             });
@@ -580,9 +581,15 @@ function displayCards(data, fullPortfolio) {
             for(var i = 0; i < fullPortfolio.length; i++){
                 var companyNameE = "CompanyName" + i;
                 var stockPriceE = "StockPrice" + i;
+                var viewDetails = "viewDetails" + i;
+
+                console.log(data[Object.keys(data)[i]].quote);
 
                 document.getElementById(companyNameE).innerHTML = limitCharacter((data[Object.keys(data)[i]].quote.companyName));
                 document.getElementById(stockPriceE).innerHTML = data[Object.keys(data)[i]].price;
+                document.getElementById(viewDetails).href = "https://www.google.com";
+
+
             }
 
             var leftOver = 4 - fullPortfolio.length;

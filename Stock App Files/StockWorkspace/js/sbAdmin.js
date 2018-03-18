@@ -9,9 +9,6 @@ function grabPortfolioBarChart(fullPortfolio, percentArray){
 
     var stockSymbol = [];
 
-    // console.log(stockSymbol);       // AAPL, MSFT
-    // console.log(percentArray);      // "300%", "400%"
-
     // Pushing stock Symbols
     for (var i = 0; i < fullPortfolio.length; i++) {
         stockSymbol.push(fullPortfolio[i].stockSymbol);
@@ -32,26 +29,8 @@ function grabPortfolioBarChart(fullPortfolio, percentArray){
     }
 
     // Finding max value then adding padding, then
-    var maxOrginal = findMaxValueArr(percentArray);
-
-    console.log(maxOrginal);
-
     max = findMaxValueArr(percentArray);
-    var resultmx = ( 6 / max) * 1000;
-    max = max + resultmx;
-
-    console.log(max)
-    // Finding min value then adding padding, then
     min = findMinValueArr(percentArray);
-    var resultmn = ( 4 / min) * 100;
-    min = min + resultmn;
-
-    // 600 , 200, -100 will fix lowest min value to 0 if above 0
-    for(var i = 0; i < percentArray.length; i++){
-        if (min > 0){
-            min = 0;
-        }
-    }
 
     createBarChart(max, min);
 }

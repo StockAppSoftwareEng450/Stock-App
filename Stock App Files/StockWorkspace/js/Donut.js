@@ -11,6 +11,7 @@ function donutChart() {
         cornerRadius,                       // sets how rounded the corners are on each slice
         percentFormat = d3.format(',.2%');
 
+    // scaling to SbAdmins Color Scheme
     var color = d3.scaleOrdinal()
         .range(["#007bff" , "#ffc107" , "#28a745", "#dc3545"]);
 
@@ -19,7 +20,15 @@ function donutChart() {
             // generate chart
             var radius = Math.min(width, height) / 2;
 
-            var mouseOverStatus;
+            // default values for legend
+            var legendRectSize = 24;
+            var legendSpacing = 6;
+            var fontsize = 16;
+
+            // Scaling higher
+            legendRectSize += (70 / 100) * legendRectSize;
+            legendSpacing += (70 / 100) * legendSpacing;
+            fontsize += (70 / 100) * fontsize;
 
             // creates a new pie generator
             var pie = d3.pie()
@@ -67,9 +76,24 @@ function donutChart() {
             // add tooltip to mouse events on slices and labels
             d3.selectAll('.labelName text, .slices path').call(toolTip);
 
-            var legendRectSize = 24;
-            var legendSpacing = 6;
+            console.log("number of stocks: " + data.length);
 
+            // if length is greater than 8 scale highest possible
+            if ( data.length > 10) {
+                console.log('reached');
+
+                var decrAmount = (data.length * 1.5);
+
+                legendRectSize -= (decrAmount / 100) * legendRectSize;
+                legendSpacing -= (decrAmount / 100) * legendSpacing;
+                fontsize -= (decrAmount / 100) * fontsize;
+
+                console.log(legendRectSize);
+                console.log(legendSpacing);
+                console.log(fontsize);
+            }
+
+            // Adding legend
             var legend = svg.selectAll('.legend')
                 .data(color.domain())
                 .enter()
@@ -80,6 +104,7 @@ function donutChart() {
                     var offset =  height * color.domain().length / 2;
                     var horz = -2 * legendRectSize;
                     var vert = i * height - offset;
+                    console.log(i);
                     return 'translate(' + horz + ',' + vert + ')';
                 });
 
@@ -92,9 +117,10 @@ function donutChart() {
             legend.append('text')
                 .attr('x', legendRectSize + legendSpacing)
                 .attr('y', legendRectSize - legendSpacing)
-                .text(function(d) { return d; });
-
-
+                .style("font-size", (fontsize.toString() + "px"))
+                .text(function(d) {
+                    return d;
+                });
 
             // calculates the angle for the middle of a slice
             function midAngle(d) { return d.startAngle + (d.endAngle - d.startAngle) / 2; }
@@ -105,6 +131,7 @@ function donutChart() {
                 // add tooltip (svg circle element) when mouse enters label or slice
                 selection.on('mouseenter', function (data) {
 
+                    // removing legend on mouseover
                     d3.selectAll('.legend').remove();
 
                     svg.append('text')
@@ -126,9 +153,30 @@ function donutChart() {
                 selection.on('mouseout', function () {
                     d3.selectAll('.toolCircle').remove();
 
+                    // default values for legend
                     var legendRectSize = 24;
                     var legendSpacing = 6;
-                    var count = 0;
+                    var fontsize = 16;
+
+                    // Scaling higher
+                    legendRectSize += (70 / 100) * legendRectSize;
+                    legendSpacing += (70 / 100) * legendSpacing;
+                    fontsize += (70 / 100) * fontsize;
+
+                    // if length is greater than 8 scale highest possible
+                    if ( data.length > 10) {
+                        console.log('reached');
+
+                        var decrAmount = (data.length * 1.5);
+
+                        legendRectSize -= (decrAmount / 100) * legendRectSize;
+                        legendSpacing -= (decrAmount / 100) * legendSpacing;
+                        fontsize -= (decrAmount / 100) * fontsize;
+
+                        console.log(legendRectSize);
+                        console.log(legendSpacing);
+                        console.log(fontsize);
+                    }
 
                     var legend = svg.selectAll('.legend')
                         .data(color.domain())
@@ -156,30 +204,11 @@ function donutChart() {
                     legend.append('text')
                         .attr('x', legendRectSize + legendSpacing)
                         .attr('y', legendRectSize - legendSpacing)
+                        .style("font-size", (fontsize.toString() + "px"))
                         .text(function(d) { return d; });
 
                 });
             }
-
-            // var legend = d3.select("#Piechart").append("svg")
-            //     .attr("class", "legend")
-            //     .attr("width", 0)
-            //     .attr("height", 50)
-            //     .selectAll("g")
-            //     .data(color.domain().slice().reverse())
-            //     .enter().append("g")
-            //     .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
-            //
-            // legend.append("rect")
-            //     .attr("width", 18)
-            //     .attr("height", 18)
-            //     .style("fill", color);
-            //
-            // legend.append("text")
-            //     .attr("x", 24)
-            //     .attr("y", 9)
-            //     .attr("dy", ".35em")
-            //     .text(function(d) { return d; });
 
             // function to create the HTML string for the tool tip. Loops through each key in data object
             function toolTipHTML(data) {
@@ -240,12 +269,6 @@ function donutChart() {
         cornerRadius = value;
         return chart;
     };
-
-    // chart.colour = function(value) {
-    //     if (!arguments.length) return colour;
-    //     colour = value;
-    //     return chart;
-    // };
 
     chart.variable = function(value) {
         if (!arguments.length) return variable;
