@@ -33,7 +33,20 @@ function grabPortfolioBarChart(fullPortfolio, percentArray){
     max = findMaxValueArr(percentArray);
     min = findMinValueArr(percentArray);
 
+    if (percentArray.every(positiveCheck) === true){
+        min = 0;
+    }
+
+    // adding padding
+    // max = max * (1 + 0.05);
+    // min = min * (1 + 0.05);
+
     createBarChart(max, min);
+
+}
+
+function positiveCheck(num) {
+    return num >= 0;
 }
 
 /** removing duplicates **/

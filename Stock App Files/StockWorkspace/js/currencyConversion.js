@@ -6,7 +6,9 @@ var currencySymbole = "";
 //problem only 1000 requests a month
 $.getJSON(
     // NB: using Open Exchange Rates here, but you can use any source!
-    'https://openexchangerates.org/api/latest.json?app_id=d540041c0ca14ee5a3440dbd36c39659',
+    // 76d1e3af84e24f01b2602913112d4ba1
+    // 'https://openexchangerates.org/api/latest.json?app_id=d540041c0ca14ee5a3440dbd36c39659',
+    'https://openexchangerates.org/api/latest.json?app_id=76d1e3af84e24f01b2602913112d4ba1',
     function(data) {
         // Check money.js has finished loading:
         if ( typeof fx !== "undefined" && fx.rates ) {

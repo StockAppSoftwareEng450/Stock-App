@@ -829,13 +829,13 @@ function setIntervalPrice(resultUrl) {
                 var stockprice = data.latestPrice;
 
                 document.getElementById("StockPrice").innerHTML = currencySymbole + " " + fx.convert(stockprice).toFixed(2);
-                document.getElementById("pricePortfolio").value = fx.convert(stockprice).toFixed(2);
+                // document.getElementById("pricePortfolio").value = fx.convert(stockprice).toFixed(2);
 
                 stockprice = stockprice.toString();
-                stockprice = stockprice.bold();
 
                 // Send price to the peers table
-                document.getElementById("myTable").rows[1].cells[1].innerHTML = currencySymbole + " " + fx.convert(stockprice).toFixed(2);
+                document.getElementById("myTable").rows[1].cells[1].innerHTML = currencySymbole + " " + fx.convert(data.latestPrice).toFixed(2);
+
             },
             error: function (error) {
                 // Handle Errors here.
@@ -859,11 +859,9 @@ function setTimeoutPrice(resultUrl) {
 
                 stockprice = fx.convert(stockprice).toFixed(2);
                 stockprice = stockprice.toString();
-                stockprice = stockprice.bold();
 
                 // Send price to the peers table
-                document.getElementById("myTable").rows[1].cells[1].innerHTML = currencySymbole + " " + stockprice;
-
+                document.getElementById("myTable").rows[1].cells[1].innerHTML = currencySymbole + " " + fx.convert(stockprice).toFixed(2);
 
             },
             error: function (error) {
