@@ -89,7 +89,7 @@ function setPortfolioEquityBarGraph(fullPortfolio) {
             var title = null;
             var yAxisPrice = null;
             var priceTitle = null;
-            var currentGraph = "Current Portfolio Equity Graph";
+            var currentGraph = "";
 
             // Set the dimensions of the canvas / graph
             var margin = {

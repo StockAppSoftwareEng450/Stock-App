@@ -1,4 +1,4 @@
-To Do List
+﻿To Do List
 
     ✔ login search bar to match individual search bar width             JH - 2/13/18
 	✔ Add to portfolio --> sync to Fire base                            DG - 2/09/18
@@ -39,5 +39,5 @@ To Do List
     - revamp news (make it prettier)
     - Add Trending stocks top of every page
     - Delete view navigation slider from RAD and from
-    ✔ Fix Price Label d3 graph                                          JH - 2/21/18
+    ✔ Fix Price Label D3 graph                                          JH - 2/21/18
 

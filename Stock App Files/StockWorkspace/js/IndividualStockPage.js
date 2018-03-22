@@ -437,6 +437,7 @@ function peersStatsUrlGrab(name) {
             var price = data.latestPrice;
             var cell1 = row.insertCell(1);
             cell1.innerHTML = currencySymbole + " " + fx.convert(price).toFixed(2);
+            // document.getElementById("pricePortfolio").placeholder = price;
         }
     });
 
@@ -533,17 +534,19 @@ function peersStatsUrlGrab(name) {
     });
 }
 
+var clicked = false;
+var divHeight = 180;
+
 /** GET the date and quantity of stock price (On enter button) **/
 function getStockDateAndQuantity() {
     var user = firebase.auth().currentUser;
 
     var date = null;
     var quantity = null;
-    var price = null;
 
     date = document.getElementById("datePortfolio").value;
     quantity = document.getElementById("quantityPortfolio").value;
-    price = document.getElementById("pricePortfolio").value;
+    var price = document.getElementById("pricePortfolio").value;
 
     //NEED!!!!!!!!    // MSG to the user Please renter both
     if (!date || !quantity || date == null || quantity == null) {
@@ -551,11 +554,32 @@ function getStockDateAndQuantity() {
         document.getElementById("addToPorfolioError").style.visibility = "visible";
         document.getElementById("addToPorfolioError").style.display = "block";
 
+        // Adding height to div when error is displayed
+        if (divHeight <= 180) {
+            divHeight +=40;
+            clicked = true;
+            console.log(clicked)
+        }
+
+        var sendNewHieght = divHeight + "px";
+        console.log(sendNewHieght);
+        document.getElementById("AddStocktoPortfolio").style.height = sendNewHieght;
+
         // console.log("Please enter valid Add to portfolio inputs");
 
     } else {
         document.getElementById("addToPorfolioSuccess").style.visibility = "visible";
         document.getElementById("addToPorfolioSuccess").style.display = "block";
+
+        console.log(clicked);
+
+        if (clicked === true){
+            divHeight +=40;
+            document.getElementById("AddStocktoPortfolio").style.height = divHeight + "px";
+        } else {
+            divHeight +=40;
+            document.getElementById("AddStocktoPortfolio").style.height = divHeight + "px";
+        }
 
         //user put in a price?
         var closePriceForDate = price;
@@ -805,12 +829,12 @@ function setIntervalPrice(resultUrl) {
                 var stockprice = data.latestPrice;
 
                 document.getElementById("StockPrice").innerHTML = currencySymbole + " " + fx.convert(stockprice).toFixed(2);
+                // document.getElementById("pricePortfolio").value = fx.convert(stockprice).toFixed(2);
 
                 stockprice = stockprice.toString();
-                stockprice = stockprice.bold();
 
                 // Send price to the peers table
-                document.getElementById("myTable").rows[1].cells[1].innerHTML = currencySymbole + " " + fx.convert(stockprice).toFixed(2);
+                document.getElementById("myTable").rows[1].cells[1].innerHTML = currencySymbole + " " + fx.convert(data.latestPrice).toFixed(2);
 
             },
             error: function (error) {
@@ -831,13 +855,13 @@ function setTimeoutPrice(resultUrl) {
                 var stockprice = data.latestPrice;
 
                 document.getElementById("StockPrice").innerHTML = currencySymbole + " " + fx.convert(stockprice).toFixed(2);
+                document.getElementById("pricePortfolio").value = fx.convert(stockprice).toFixed(2);
 
                 stockprice = fx.convert(stockprice).toFixed(2);
                 stockprice = stockprice.toString();
-                stockprice = stockprice.bold();
 
                 // Send price to the peers table
-                document.getElementById("myTable").rows[1].cells[1].innerHTML = currencySymbole + " " + stockprice;
+                document.getElementById("myTable").rows[1].cells[1].innerHTML = currencySymbole + " " + fx.convert(stockprice).toFixed(2);
 
             },
             error: function (error) {

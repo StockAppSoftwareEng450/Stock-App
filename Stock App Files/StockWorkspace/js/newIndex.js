@@ -574,31 +574,53 @@ function PageLoadTime(){
     document.getElementById("timeUpdate3").innerHTML = "Updated today at " + pageLoadTimeString.toString();
 }
 
+/** removing duplicates **/
+function duplicates(array){
+    return array.filter(function(val,ind) {
+        return array.indexOf(val) === ind;
+    });
+}
+
 /** Top Cards **/
 function displayCards(data, fullPortfolio) {
 
-    // console.log(data[Object.keys(data)[0]].quote.companyName);
-    // console.log(fullPortfolio.length);
+    var filteredArrS = [];
+    var stockSymbol = [];
+
+    // Pushing stock Symbols
+    for (var i = 0; i < fullPortfolio.length; i++) {
+        stockSymbol.push(fullPortfolio[i].stockSymbol);
+    }
+
+    // Removing Duplicates for stock Symbol
+    for (var i = 0; i < stockSymbol.length; i++) {
+        filteredArrS = duplicates(stockSymbol);
+    }
+
+    console.log(filteredArrS);
+    console.log((data));
 
     // If portfolio contains more than four, return the first four, if not, return as many as possible with (add more in company name)
-    if (fullPortfolio.length > 4){
-
-        // console.log("more than four in portfolio");
+    if (filteredArrS.length > 4){
 
         // Return the First four in the list
         for(var i = 0; i < 4; i++){
             var companyNameI = "CompanyName" + i;
             var stockPriceI = "StockPrice" + i;
+            var viewDetailsI = "viewDetails" + i;
+
+            var stockTransferURLI = "IndividualStockPage.html?stock=" + filteredArrS[i] + "#";
 
             document.getElementById(companyNameI).innerHTML = limitCharacter((data[Object.keys(data)[i]].quote.companyName));
             document.getElementById(stockPriceI).innerHTML = data[Object.keys(data)[i]].price;
+            document.getElementById(viewDetailsI).href = stockTransferURLI;
         }
     } else {
 
         // console.log("less than four in portfolio");
 
         // If fullPortfolio is greater than or equal to 1
-        if (fullPortfolio.length >= 1) {
+        if (filteredArrS.length >= 1) {
 
             // Return as many as possible first, if only 1, 2, or 3
             for(var i = 0; i < fullPortfolio.length; i++){
@@ -606,16 +628,17 @@ function displayCards(data, fullPortfolio) {
                 var stockPriceE = "StockPrice" + i;
                 var viewDetails = "viewDetails" + i;
 
-                var stockTransferURL = "IndividualStockPage.html?stock=" + data[Object.keys(data)[i]].quote.symbol + "#";
+                var stockTransferURL = "IndividualStockPage.html?stock=" + filteredArrS[i] + "#";
 
-                document.getElementById(companyNameE).innerHTML = limitCharacter((data[Object.keys(data)[i]].quote.companyName));
+                console.log(fullPortfolio[i]);
+
+                document.getElementById(companyNameE).innerHTML = (data[Object.keys(data)[i]].quote.companyName);
                 document.getElementById(stockPriceE).innerHTML = data[Object.keys(data)[i]].price;
                 document.getElementById(viewDetails).href = stockTransferURL;
 
-
             }
 
-            var leftOver = 4 - fullPortfolio.length;
+            var leftOver = 4 - filteredArrS.length;
 
             // Starting on second card for 1
             if (leftOver === 3) {

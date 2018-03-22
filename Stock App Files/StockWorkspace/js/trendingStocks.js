@@ -39,20 +39,32 @@ setTimeout(function () {
                     var row = gainersTable.insertRow(i+1);
 
                     var symbol = data[i].symbol;
-                    cell0 = row.insertCell(0);
+                    var cell0 = row.insertCell(0);
                     cell0.innerHTML = symbol.toString();
 
-                    var latestPrice = data[i].latestPrice.toFixed(2);
-                    cell1 = row.insertCell(1);
+                    var latestPrice = currencySymbole + " " + fx.convert(data[i].latestPrice).toFixed(2);
+                    var cell1 = row.insertCell(1);
                     cell1.innerHTML = latestPrice.toString();
 
-                    var highPrice = data[i].high.toFixed(2);
-                    cell2 = row.insertCell(2);
+                    var highPrice = currencySymbole + " " + fx.convert(data[i].high).toFixed(2);
+                    var cell2 = row.insertCell(2);
                     cell2.innerHTML = highPrice.toString();
 
-                    var lowPrice = data[i].low.toFixed(2);
-                    cell3 = row.insertCell(3);
+                    var lowPrice = currencySymbole + " " + fx.convert(data[i].low).toFixed(2);
+                    var cell3 = row.insertCell(3);
                     cell3.innerHTML = lowPrice.toString();
+
+                    var changePercent = data[i].changePercent;
+                    changePercent = (changePercent * 100).toFixed(2);
+                    var cell4 = row.insertCell(4);
+                    if(changePercent < 0){
+                        cell4.innerHTML = unicodeDown + changePercent.toString();
+                    }else{
+                        cell4.innerHTML = unicodeUp + changePercent.toString();
+                    }
+
+
+
                 }
 
             }
@@ -74,17 +86,26 @@ setTimeout(function () {
                 cell0 = row.insertCell(0);
                 cell0.innerHTML = symbol.toString();
 
-                var latestPrice = data[i].latestPrice.toFixed(2);
+                var latestPrice = currencySymbole + " " + fx.convert(data[i].latestPrice).toFixed(2);
                 cell1 = row.insertCell(1);
                 cell1.innerHTML = latestPrice.toString();
 
-                var highPrice = data[i].high.toFixed(2);
+                var highPrice = currencySymbole + " " + fx.convert(data[i].high).toFixed(2);
                 cell2 = row.insertCell(2);
                 cell2.innerHTML = highPrice.toString();
 
-                var lowPrice = data[i].low.toFixed(2);
+                var lowPrice = currencySymbole + " " + fx.convert(data[i].low).toFixed(2);
                 cell3 = row.insertCell(3);
                 cell3.innerHTML = lowPrice.toString();
+
+                var changePercent = data[i].changePercent;
+                changePercent = (changePercent * 100).toFixed(2);
+                var cell4 = row.insertCell(4);
+                if(changePercent < 0){
+                    cell4.innerHTML = unicodeDown + changePercent.toString();
+                }else{
+                    cell4.innerHTML = unicodeUp + changePercent.toString();
+                }
             }
 
         }
