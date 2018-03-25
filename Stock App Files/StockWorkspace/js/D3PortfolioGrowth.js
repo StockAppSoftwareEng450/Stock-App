@@ -47,7 +47,12 @@ function setPortfolioEquityBarGraph(fullPortfolio) {
             for (var i = 0; i < fullPortfolio.length; i++) {
                 for (var j = data[fullPortfolio[i].stockSymbol].chart.length - 7; j < data[fullPortfolio[i].stockSymbol].chart.length; j++) {
 
-                    var equity = fullPortfolio[i].quantity * data[fullPortfolio[i].stockSymbol].chart[j].close;
+                    var equity = 0;
+
+                    if(data[fullPortfolio[i].stockSymbol].chart[j].date >= fullPortfolio[i].date){
+                        equity = fullPortfolio[i].quantity * data[fullPortfolio[i].stockSymbol].chart[j].close;
+                    }
+
 
                     if (equityArr[data[fullPortfolio[i].stockSymbol].chart[j].date] === undefined) {
                         equityArr[data[fullPortfolio[i].stockSymbol].chart[j].date] = equity;
