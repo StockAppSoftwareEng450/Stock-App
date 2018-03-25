@@ -50,7 +50,7 @@
             animation: bannermove 30s linear infinite;
 }
  
-@keyframes "bannermove" {
+@keyframes bannermove {
  0% {margin-left: 0px;}
  100% {margin-left: -2125px;}
 }
@@ -60,17 +60,17 @@
  100% {margin-left: -2125px;}
 }
  
-@-webkit-keyframes "bannermove" {
+@-webkit-keyframes bannermove {
  0% {margin-left: 0px;}
  100% {margin-left: -2125px;}
 }
  
-@-ms-keyframes "bannermove" {
+@-ms-keyframes bannermove {
  0% {margin-left: 0px;}
  100% {margin-left: -2125px;}
 }
  
-@-o-keyframes "bannermove" {
+@-o-keyframes bannermove {
  0% {margin-left: 0px;}
  100% {margin-left: -2125px;}
 }
@@ -83,7 +83,7 @@
             animation: bannermoves 30s linear infinite;
 }
  
-@keyframes "bannermoves" {
+@keyframes bannermoves {
  0% {margin-left: -2125px;}
  100% {margin-left: 0px;}
 }
@@ -93,17 +93,17 @@
  100% {margin-left: 0px;}
 }
  
-@-webkit-keyframes "bannermoves" {
+@-webkit-keyframes bannermoves{
  0% {margin-left: -2125px;}
  100% {margin-left: 0px;}
 }
  
-@-ms-keyframes "bannermoves" {
+@-ms-keyframes bannermoves {
  0% {margin-left: -2125px;}
  100% {margin-left: 0px;}
 }
  
-@-o-keyframes "bannermoves" {
+@-o-keyframes bannermoves {
  0% {margin-left: -2125px;}
  100% {margin-left: 0px;}
 }

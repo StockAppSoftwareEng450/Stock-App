@@ -1,0 +1,134 @@
+<html>
+    <head>
+        <style>
+            .slider{
+                width:100%;
+                overflow:hidden;
+                position:relative;
+                margin:0;
+            }
+            .edge{
+                left:0;
+                right:0;
+                top:0;
+                bottom:0;
+                position:absolute;
+                height:100%;
+                display:block;
+            }
+            .edge:before{
+                content:'';
+                position:absolute;
+                left:0;
+                background:-webkit-linear-gradient(left, white 10%, rgba(0,0,0,0) 100%);
+                width:25%;
+                height:100%;
+            }
+            .edge:after{
+                content:'';
+                position:absolute;
+                right:0;
+                background:-webkit-linear-gradient(right, white 10%, rgba(0,0,0,0) 100%);
+                width:25%;
+                height:100%;
+            }
+            ul{
+                background:#ddd;
+                overflow:hidden;
+                width:1000%;
+                margin:0;
+            }
+            li{
+                list-style:none;
+                display:inline-block;
+                padding:0 75px;
+            }
+
+            #footer {
+                line-height: 2;
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                text-shadow: 0 1px 0 #84BAFF;
+                box-shadow: 0 0 15px #00214B
+            }
+
+        </style>
+    </head>
+    <body>
+        <div id="footer">
+            <div class='slider'>
+                <div class="edge"></div>
+                <ul class="slideContainer" id="money_start">
+                    <li class="slideItem" id="item1">
+                    </li>
+                    <li class="slideItem" id="item2">
+                    </li>
+                    <li class="slideItem" id="item3">
+                    </li>
+                    <li class="slideItem" id="item4">
+                    </li>
+                    <li class="slideItem" id="item5">
+                    </li>
+                    <li class="slideItem" id="item6">
+                    </li>
+                    <li class="slideItem" id="item7">
+                    </li>
+                    <li class="slideItem" id="item8">
+                    </li>
+                    <li class="slideItem" id="item9">
+                    </li>
+                    <li class="slideItem" id="item10">
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <script
+                src="https://code.jquery.com/jquery-3.3.1.js"
+                integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+                crossorigin="anonymous"></script>
+        <script>
+
+            var url = "https://api.iextrading.com/1.0/stock/market/list/mostactive";
+            var allStocks = "";
+
+            $.ajax({
+                url: url,
+                type: "GET",
+                success: function (data) {
+
+                    console.log(data);
+
+                    // grab information and display it to the slideItem
+                    for (var i = 1; i <= 10; i++){
+                        var item = "item";
+                        item = item+i;
+
+                        document.getElementById(item).innerHTML = data[i].companyName + " " + data[i].changePercent;
+                        console.log(item)
+                    }
+                }
+            });
+
+            // polyfill
+            window.requestAnimationFrame = (function(){
+                return  window.requestAnimationFrame       ||
+                    window.webkitRequestAnimationFrame ||
+                    window.mozRequestAnimationFrame    ||
+                    function( callback ){
+                        window.setTimeout(callback, 1000 / 60);
+                    };
+            })();
+
+            var speed = 5000;
+            (function currencySlide(){
+                var currencyPairWidth = $('.slideItem:first-child').outerWidth();
+                $(".slideContainer").animate({marginLeft:-currencyPairWidth},speed, 'linear', function(){
+                    $(this).css({marginLeft:0}).find("li:last").after($(this).find("li:first"));
+                });
+                requestAnimationFrame(currencySlide);
+            })();
+        </script>
+    </body>
+</html>

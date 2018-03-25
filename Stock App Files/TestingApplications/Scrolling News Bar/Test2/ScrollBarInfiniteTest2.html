@@ -10,7 +10,7 @@
                 <div class="photobanner">
                     <img class="first" src="http://placehold.it/350x150">
                     <img src="https://storage.googleapis.com/iex/api/logos/AAPL.png">
-                    <img src="http://placehold.it/350x150">
+                    <img src="http://placehold.it/350x150" alt="a;lsdjf;lj">
                     <img src="http://placehold.it/350x150">
                     <img src="http://placehold.it/350x150">
                     <img src="http://placehold.it/350x150">
@@ -74,45 +74,29 @@
             <div class="container">
                 <div class="photobanner">
                     <img class="first" src="http://placehold.it/350x150">
-                    <img src="http://placehold.it/350x150">
-                    <img src="http://placehold.it/350x150">
-                    <img src="http://placehold.it/350x150">
-                    <img src="http://placehold.it/350x150">
-                    <img src="http://placehold.it/350x150">
-                    <img src="http://placehold.it/350x150">
-                    <img src="http://placehold.it/350x150">
-                    <img src="http://placehold.it/350x150">
-                    <img src="http://placehold.it/350x150">
-                    <img src="http://placehold.it/350x150">
-                    <img src="https://storage.googleapis.com/iex/api/logos/AAPL.png">
-                    <img src="http://placehold.it/350x150">
-                    <img src="http://placehold.it/350x150">
-                    <img src="http://placehold.it/350x150">
-                    <img src="http://placehold.it/350x150">
-                    <img src="http://placehold.it/350x150">
-                    <img src="http://placehold.it/350x150">
-                    <img src="http://placehold.it/350x150">
-                    <img src="http://placehold.it/350x150">
-                    <img src="http://placehold.it/350x150">
-                    <img src="http://placehold.it/350x150">
-                    <img src="http://placehold.it/350x150">
-                    <img src="http://placehold.it/350x150">
-                    <img src="http://placehold.it/350x150">
-                    <img src="http://placehold.it/350x150">
-                    <img src="http://placehold.it/350x150">
-                    <img src="http://placehold.it/350x150">
-                    <img src="http://placehold.it/350x150">
-                    <img src="http://placehold.it/350x150">
-                    <img src="http://placehold.it/350x150">
-                    <img src="http://placehold.it/350x150">
-                    <img src="http://placehold.it/350x150">
-                    <img src="http://placehold.it/350x150">
-                    <img src="http://placehold.it/350x150">
-                    <img src="http://placehold.it/350x150">
-                    <img src="http://placehold.it/350x150">
-                    <img src="http://placehold.it/350x150">
+                    <img id='image' src="">
+                    <img id="image1" src="">
+
                 </div>
             </div>
+
+        <canvas id='textCanvas' height=20></canvas>
+
+
+
+    <script>
+        var tCtx = document.getElementById('textCanvas').getContext('2d'),
+            tCtx1 = document.getElementById('textCanvas').getContext('2d'),
+            imageElem = document.getElementById('image'),
+            imageElem1 = document.getElementById('image1');
+
+        tCtx.fillText("no", 0, 10);
+        tCtx1.fillText("no1", 0, 10);
+
+        imageElem.src = tCtx.canvas.toDataURL();
+        imageElem1.src = tCtx.canvas.toDataURL();
+        console.log(imageElem.src);
+    </script>
 
     </body>
 </html>

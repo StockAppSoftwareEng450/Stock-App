@@ -210,12 +210,13 @@ function displayDataToTableP(data, fullPortfolio) {
     var percentArray = [];
     var purchasedEquity = 0;
     var currentEquity = 0;
+    var profit = 0;
+    var afterTaxProfit = 0;
 
     // Finding Table
     var table = document.getElementById("portfolioTable");
 
     // Checking if something in fullPortfolio
-
 
     // Returning the price and stats for each Stock Symbol
     for (var i = 0; i < fullPortfolio.length; i++) {
@@ -263,18 +264,38 @@ function displayDataToTableP(data, fullPortfolio) {
         cell6.innerHTML = currencySymbole + " " + fx.convert((data[fullPortfolio[i].stockSymbol].price * fullPortfolio[i].quantity)).toFixed(2);
         currentEquity += Number((data[fullPortfolio[i].stockSymbol].price * fullPortfolio[i].quantity).toFixed(2));
 
-        // console.log(currentEquity);
+        // Profit                   (Calculation)
+        var cell7 = row.insertCell((7));
+        var profitI = calcProfit(data, fullPortfolio, i);
+
+        // Only Accepts Positive Profit
+        if (profitI > 0){
+            profit += profitI;
+        }
+
+        cell7.innerHTML = currencySymbole + " " + fx.convert(profitI).toFixed(2).toString();
+
+        // After Tax profit         (Calculation)
+        var cell8 = row.insertCell((8));
+        var afterTaxProfitI = calcAfterTaxProfit(data, fullPortfolio, i);
+
+        // Only Accepts Positive AfterTax Profit
+        if (afterTaxProfitI > 0){
+            afterTaxProfit += afterTaxProfitI;
+        }
+
+        cell8.innerHTML = currencySymbole + " " + fx.convert(afterTaxProfitI).toFixed(2).toString();
 
         // Current Percent Change   (Calculation)   Bought price vs current price
-        var cell7 = row.insertCell((7));
-        cell7.innerHTML = (((data[fullPortfolio[i].stockSymbol].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2).toString();
+        var cell9 = row.insertCell((9));
+        cell9.innerHTML = (((data[fullPortfolio[i].stockSymbol].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2).toString();
 
         // Delete Button            (FROM FIREBASE)
-        var cell8 = row.insertCell((8));
-        cell8.setAttribute("class", "deleteButton");
-        cell8.style.display = 'flex';
-        cell8.style.alignItems = 'center';
-        cell8.style.justifyContent = 'center';
+        var cell10 = row.insertCell((10));
+        cell10.setAttribute("class", "deleteButton");
+        cell10.style.display = 'flex';
+        cell10.style.alignItems = 'center';
+        cell10.style.justifyContent = 'center';
 
         var buttonDelete = document.createElement("BUTTON");
         buttonDelete.appendChild(document.createTextNode("Delete"));
@@ -287,15 +308,15 @@ function displayDataToTableP(data, fullPortfolio) {
             firebase.database().ref("Portfolios/" + row.getAttribute("data-pk")).remove();
             window.location.href = "index.html";
         });
-        cell8.appendChild(buttonDelete);
+        cell10.appendChild(buttonDelete);
 
         // @TODO Create Tooltip/ Title when hovering over the stock symbol
 
         // Displaying the color for unicode for the percentage change
         if ((((data[fullPortfolio[i].stockSymbol].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100) < 0) {
-            cell7.innerHTML = unicodeDown + " " + (((data[fullPortfolio[i].stockSymbol].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2) + "%";
+            cell9.innerHTML = unicodeDown + " " + (((data[fullPortfolio[i].stockSymbol].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2) + "%";
         } else {
-            cell7.innerHTML = unicodeUp + " " + (((data[fullPortfolio[i].stockSymbol].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2) + "%";
+            cell9.innerHTML = unicodeUp + " " + (((data[fullPortfolio[i].stockSymbol].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2) + "%";
         }
 
         // entering info to donutQuantityArray
@@ -312,104 +333,121 @@ function displayDataToTableP(data, fullPortfolio) {
     grabPortfolioBarChart(fullPortfolio, percentArray);
 
     // Displaying Total Purchased Equity
-    // purchasedEquity = purchasedEquity.toFixed(2);
-    // currentEquity = currentEquity.toFixed(2);
     document.getElementById("TotalPurchasedEquity").innerHTML = currencySymbole + " " + fx.convert(purchasedEquity).toFixed(2).toString();
+
+    // Displaying Total Current Equity
     document.getElementById("TotalCurrentEquity").innerHTML = currencySymbole + " " +  fx.convert(currentEquity).toFixed(2).toString();
 
-    // Only displaying positive profit
-    for (var i = 0; i < fullPortfolio.length; i++){
-        var purchasedEquityF = fullPortfolio[i].price * fullPortfolio[i].quantity;
-        var currentEquityF = (data[fullPortfolio[i].stockSymbol].price * fullPortfolio[i].quantity);
+    // Entire Portfolio Profit
+    document.getElementById("profit").innerHTML = currencySymbole + " " + fx.convert(profit).toFixed(2).toString();
 
-        var profit = currentEquityF - purchasedEquityF;
+    // Entire Portfolio After Tax Profit
+    document.getElementById("afterTax").innerHTML = currencySymbole + " " + fx.convert(afterTaxProfit).toFixed(2).toString();
 
-        if (profit > 0){
-            document.getElementById("profit").innerHTML = currencySymbole + " " + fx.convert(profit).toFixed(2).toString();
-        }
-    }
-
-    var after1yearTotal = 0;
-    var before1yearTotal = 0;
-
-    // given any date for any stock, determine if it is over a year old, then take out 15% in tax, otherwise 30% in tax takeaway
-    for (var i = 0; i < fullPortfolio.length; i++) {
-
-        // Parsing each date in the portfolio to convert to JS Date format
-        var month =  "";
-        month = fullPortfolio[i].date.substring(5,7);                               // 03
-
-        var year = "";
-        year = fullPortfolio[i].date.substring(0,4);                                // 2018
-
-        var day = "";
-        day = fullPortfolio[i].date.substring(8,10);                                // 12
-
-        // Converting month number to month name
-        if (month === "01"){
-            month = "January";
-        } else if (month === "02"){
-            month = "February";
-        } else if (month === "03"){
-            month = "March";
-        } else if (month === "04"){
-            month = "April";
-        } else if (month === "05"){
-            month = "May";
-        } else if (month === "06"){
-            month = "June";
-        } else if (month === "07"){
-            month = "July";
-        } else if (month === "08"){
-            month = "August";
-        } else if (month === "09"){
-            month = "September";
-        } else if (month === "10"){
-            month = "October";
-        } else if (month === "11"){
-            month = "November";
-        } else if (month === "12"){
-            month = "December";
-        }
-
-        // setting old date to be compared to current date
-        var givenDate = new Date(month + " " + day + "," + year);
-        var curDate = new Date();
-
-        curDate.toLocaleDateString();
-        curDate.setMonth(curDate.getMonth() - 12);
-        curDate.toLocaleDateString();
-
-        var purchasedEquit = fullPortfolio[i].price * fullPortfolio[i].quantity;
-        var currentEquit = (data[fullPortfolio[i].stockSymbol].price * fullPortfolio[i].quantity);
-
-        // Calculating profit
-        var profitAfterTax = currentEquit - purchasedEquit;
-
-        // Checking if profit is positive
-        if (profitAfterTax > 0 ){
-
-            // 15% in tax after 1 year, otherwise 30% if date is before
-            if ((givenDate < curDate) === true) {
-                var resultAfter = (15 / 100) * profitAfterTax;
-                after1yearTotal += profitAfterTax - resultAfter;
-                // console.log("after1yearTotal" + i + ": ", after1yearTotal);
-            } else if ((givenDate < curDate) === false) {
-                var resultBefore = (30 / 100) * profitAfterTax;
-                before1yearTotal += profitAfterTax - resultBefore;
-                // console.log("before1yearTotal" + i + ": ", before1yearTotal);
-            }
-        }
-
-        // Display total after tax to the screen
-        document.getElementById("afterTax").innerHTML = currencySymbole + " " + fx.convert((before1yearTotal + after1yearTotal)).toFixed(2).toString();
-    }
-
+    // Sending Portfolio to Bar Chart
     setPortfolioEquityBarGraph(fullPortfolio);
 
     // Displaying Donut JS
     fillDonut(portfolioArray);
 
+}
+
+/** Calculate Profit **/
+function calcProfit(data, fullPortfolio, i){
+    var purchasedEquit = fullPortfolio[i].price * fullPortfolio[i].quantity;
+    var currentEquit = (data[fullPortfolio[i].stockSymbol].price * fullPortfolio[i].quantity);
+
+    console.log(purchasedEquit);
+    console.log(currentEquit);
+
+    var profitI = currentEquit - purchasedEquit;
+    console.log(profitI);
+
+    return profitI;
+}
+
+/** Calculate After Tax Profit **/
+function calcAfterTaxProfit(data, fullPortfolio, i) {
+
+    var after1yearTotal = 0;
+    var before1yearTotal = 0;
+
+    // Parsing each date in the portfolio to convert to JS Date format
+    var month =  "";
+    month = fullPortfolio[i].date.substring(5,7);                               // 03
+
+    var year = "";
+    year = fullPortfolio[i].date.substring(0,4);                                // 2018
+
+    var day = "";
+    day = fullPortfolio[i].date.substring(8,10);                                // 12
+
+    // Converting month number to month name
+    if (month === "01"){
+        month = "January";
+    } else if (month === "02"){
+        month = "February";
+    } else if (month === "03"){
+        month = "March";
+    } else if (month === "04"){
+        month = "April";
+    } else if (month === "05"){
+        month = "May";
+    } else if (month === "06"){
+        month = "June";
+    } else if (month === "07"){
+        month = "July";
+    } else if (month === "08"){
+        month = "August";
+    } else if (month === "09"){
+        month = "September";
+    } else if (month === "10"){
+        month = "October";
+    } else if (month === "11"){
+        month = "November";
+    } else if (month === "12"){
+        month = "December";
+    }
+
+    // setting old date to be compared to current date
+    var givenDate = new Date(month + " " + day + "," + year);
+    var curDate = new Date();
+
+    console.log("givenDate" + givenDate);
+    console.log("curDate" + curDate);
+
+    curDate.toLocaleDateString();
+    curDate.setMonth(curDate.getMonth() - 12);
+    curDate.toLocaleDateString();
+
+    var purchasedEquit = fullPortfolio[i].price * fullPortfolio[i].quantity;
+    var currentEquit = (data[fullPortfolio[i].stockSymbol].price * fullPortfolio[i].quantity);
+
+    console.log(purchasedEquit);
+    console.log(currentEquit);
+
+    // Calculating profit
+    var profitBeforeTax = currentEquit - purchasedEquit;
+    console.log(profitBeforeTax);
+
+    // Checking if profit is positive
+    if (profitBeforeTax > 0 ){
+
+        // 15% in tax after 1 year, otherwise 30% if date is before
+        if ((givenDate < curDate) === true) {
+            var resultAfter = (15 / 100) * profitBeforeTax;
+            after1yearTotal += profitBeforeTax - resultAfter;
+            console.log("after1yearTotal" + i + ": ", after1yearTotal);
+            return after1yearTotal;
+        } else if ((givenDate < curDate) === false) {
+            var resultBefore = (30 / 100) * profitBeforeTax;
+            before1yearTotal += profitBeforeTax - resultBefore;
+            console.log("before1yearTotal" + i + ": ", before1yearTotal);
+            return before1yearTotal;
+        }
+    } else {
+        return 0;
+    }
 }
 
 /** Issuing Batch Request for Watchlist **/
