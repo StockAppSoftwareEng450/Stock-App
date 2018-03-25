@@ -623,19 +623,19 @@ function displayCards(data, fullPortfolio) {
         if (filteredArrS.length >= 1) {
 
             // Return as many as possible first, if only 1, 2, or 3
-            for(var i = 0; i < fullPortfolio.length; i++){
+            var i = 0;
+            for(var ss in data){
                 var companyNameE = "CompanyName" + i;
                 var stockPriceE = "StockPrice" + i;
                 var viewDetails = "viewDetails" + i;
 
                 var stockTransferURL = "IndividualStockPage.html?stock=" + filteredArrS[i] + "#";
 
-                console.log(fullPortfolio[i]);
-
                 document.getElementById(companyNameE).innerHTML = (data[Object.keys(data)[i]].quote.companyName);
                 document.getElementById(stockPriceE).innerHTML = data[Object.keys(data)[i]].price;
                 document.getElementById(viewDetails).href = stockTransferURL;
 
+                i++;
             }
 
             var leftOver = 4 - filteredArrS.length;
