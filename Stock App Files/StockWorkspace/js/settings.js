@@ -1,5 +1,10 @@
 "use strict";
 
+function show(id, value) {
+    document.getElementById(id).style.display = value ? 'block' : 'none';
+}
+
+
 $(document).ready(function () {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
@@ -21,6 +26,7 @@ $(document).ready(function () {
                         document.getElementById("ubWatchlistText").value = value.val().upperBoundWatchlist;
                         document.getElementById("lbWatchlist").value = value.val().lowerBoundWatchlist;
                         document.getElementById("lbWatchlistText").value = value.val().lowerBoundWatchlist;
+                        show('alert_message',false);
                     });
                 }
             });
@@ -246,6 +252,16 @@ function submitForm(e){
         // Calling send function to pass checked values to the array
         send(checkedArray[0], checkedArray[1], checkedArray[2], checkedArray[3], checkedArray[4], checkedArray[5], checkedArray[6], checkedArray[7], checkedArray[8]);
     }
+
+    show('alert_message',true);
+    //document.getElementById('alert').setAttribute('display','block');
+    window.location.href = "#";
+    setTimeout(function () {
+       window.location.href = "index.html";
+    },1000);
+
+
+
 }
 
 // Function to check if all values are correct
@@ -371,7 +387,7 @@ function send(fstName, lstName, phone, currency, ubPortfolio, lbPortfolio, ubWat
             saveMessage(user.uid, fstName, lstName, phone, currency, ubPortfolio, lbPortfolio, ubWatchlist, lbWatchlist);
 
             // show alert
-            document.querySelector('.successful-register').style.display = 'block';
+            //document.querySelector('.successful-register').style.display = 'block';
 
         } else {
             // No user is signed in.
@@ -393,6 +409,7 @@ function saveMessage(userId, fstName, lstName, phone, currency, ubPortfolio, lbP
     });
 
     console.log("Sent");
+
 }
 
 //Function to get the form values
