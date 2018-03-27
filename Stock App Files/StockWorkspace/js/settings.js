@@ -51,6 +51,12 @@ function submitUserForm(){
     var checkedArray = checkUserVals(email, password, confirmPass);
     console.log("checked values: " + checkedArray);
 
+    show('alert_message',true);
+    window.location.href = "#";
+    setTimeout(function () {
+        window.location.href = "index.html";
+    },1000);
+
     /** INVALID EMAIL MESSAGE TO USER**/
     if (checkedArray[0] === false ){
         document.querySelector('.email-invalid ').style.display = 'block';
@@ -254,7 +260,6 @@ function submitForm(e){
     }
 
     show('alert_message',true);
-    //document.getElementById('alert').setAttribute('display','block');
     window.location.href = "#";
     setTimeout(function () {
        window.location.href = "index.html";
