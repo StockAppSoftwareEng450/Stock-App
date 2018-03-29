@@ -549,7 +549,7 @@ function getStockDateAndQuantity() {
     var price = document.getElementById("pricePortfolio").value;
 
     //NEED!!!!!!!!    // MSG to the user Please renter both
-    if (!date || !quantity || date == null || quantity == null) {
+    if (!date || !quantity || date == null || quantity == null || price <= 0 || quantity <= 0) {
         // MSG to the User Please Enter
         document.getElementById("addToPorfolioError").style.visibility = "visible";
         document.getElementById("addToPorfolioError").style.display = "block";
