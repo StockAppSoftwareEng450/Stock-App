@@ -23,6 +23,13 @@ function onReady(callback) {
         }
     }
 }
+function timeClosed(){
+    console.log(stockMarketTime())
+    if(stockMarketTime() === "closed"){
+        console.log("here");
+        document.getElementById("time").style.display = 'block';
+    }
+}
 
 function show(id, value) {
     document.getElementById(id).style.display = value ? 'block' : 'none';
@@ -319,6 +326,9 @@ $(document).ready(function () {
 
                 /** portfolioOwnedTable **/
                 portfolioOwnedTable();
+
+                /** Stock Market Time open/Closed **/
+                timeClosed();
 
             }, 500);
 
