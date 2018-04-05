@@ -1,7 +1,16 @@
 # Stock App
 
 
-In our Software Engineering class we were tasked with designing a program. We chose to create a clean way of managing stocks by creating a website that lets users track, manage, and add stocks to thier portfolio in a easy to use manner.
+In our Software Engineering class we were tasked with designing a program. We chose to create a clean way of managing stocks by creating a website that lets users track, manage, and add stocks to thier portfolio in a easy to use manner. Found at: http://stockapp.jarretthorton.com/
+
+## Main Page
+![alt text](https://github.com/StockAppSoftwareEng450/Stock-App/blob/master/images/index1.PNG)
+
+## Individual Stock Page
+![alt text](https://github.com/StockAppSoftwareEng450/Stock-App/blob/master/images/individualStockPage1.PNG)
+
+## Trending Stocks Page
+![alt text](https://github.com/StockAppSoftwareEng450/Stock-App/blob/master/images/TrendingStocks1.PNG)
 
 ## Software Used
 - IEXTrading API
