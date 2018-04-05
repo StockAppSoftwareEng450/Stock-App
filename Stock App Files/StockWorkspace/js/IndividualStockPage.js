@@ -81,31 +81,6 @@ $(document).ready(function () {
                 }
                 resultStockSymbol = stockSymbol;
 
-                //getting portfolio information and save it
-                // var refPortfolio = firebase.database().ref("Portfolios");
-                // refPortfolio.orderByChild("userId").equalTo(user.uid).once("value", function (snapshot) {
-                //     if (snapshot.exists()) {
-                //         snapshot.forEach(function (value) {
-                //             // console.log("StockSymbol: " + value.child("stockSymbol").val());
-                //             if (stockSymbol === value.child("stockSymbol").val()) {
-                //                 //change css to state "stock in symbole" + change custom-attribute
-                //                 document.getElementById("portfolioButton").setAttribute("data-inPortfolio", true);
-                //                 document.getElementById("portfolioButton").setAttribute("data-pk", value.key);
-                //                 //document.getElementById("portfolioButton").innerText = " Remove from Portfolio";
-                //
-                //                 $("#portfolioButton").addClass("fa fa-minus");
-                //
-                //                 // Toggle off the addstockportfolio div
-                //                 var div1 = document.getElementById('AddStocktoPortfolio');
-                //                 div1.style.display = "none";
-                //                 // console.log("onstart");
-                //             }
-                //         });
-                //     }
-                //     // activate portfolio button (deactivate it as default)
-                //     document.getElementById("portfolioButton").disabled = false;
-                // });
-
                 document.getElementById("portfolioButton").disabled = false;
 
                 //getting watchlist information and save it
@@ -337,6 +312,10 @@ $(document).ready(function () {
             window.location.href = "login.html";
         }
     })
+
+    // Calling footer for Copyright
+    setCopyrightTime();
+
 });
 
 /** Deleting White Space Logo */

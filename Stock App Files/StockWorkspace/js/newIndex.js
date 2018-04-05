@@ -32,7 +32,10 @@ $(document).ready(function () {
             // No user is signed in.
             window.location.href = "login.html";
         }
-    })
+    });
+
+    // Calling footer Copyright
+    setCopyrightTime();
 });
 
 /** Clean Portfolio **/

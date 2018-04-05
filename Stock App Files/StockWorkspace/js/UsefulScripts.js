@@ -38,6 +38,12 @@ function hoverGetData(companyName) {
     return localData;
 }
 
+/** Setting Copyright footer at the bottom of every page **/
+function setCopyrightTime() {
+    let date = new Date();
+    document.getElementById("Copyright").innerHTML = "Copyright @ stockApp " + date.getFullYear();
+}
+
 
 /** Unicode for UP and DOWN **/
 var unicodeUp = '\u25B2';

@@ -6,6 +6,7 @@ function show(id, value) {
 
 
 $(document).ready(function () {
+
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             //fill input fields with values
@@ -34,7 +35,11 @@ $(document).ready(function () {
             // No user is signed in.
             window.location.href = "login.html";
         }
-    })
+    });
+
+    // Setting copyright footer to current
+    setCopyrightTime();
+
 });
 
 // Listen for form sumbit
@@ -459,4 +464,6 @@ document.getElementById("lbWatchlist").oninput = function() {
 document.getElementById("lbWatchlistText").oninput = function() {
     document.getElementById("lbWatchlist").value = this.value;
 };
+
+
 

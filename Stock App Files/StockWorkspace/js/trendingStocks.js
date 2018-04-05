@@ -72,6 +72,8 @@ setTimeout(function () {
         });
 }, 250);
 
+// Calling footer Copyright
+setCopyrightTime();
 
 var losersTable = document.getElementById("losersTable");
 var stockLoserUrl = "https://api.iextrading.com/1.0/stock/market/list/losers";
