@@ -275,12 +275,12 @@ $(document).ready(function () {
                             var grossProfit = response.grossProfit;
                             var debt = response.debt;
 
-                            document.getElementById("week52high").innerHTML = currencySymbole + " " + fx.convert(week52high).toFixed(2);
-                            document.getElementById("week52low").innerHTML = currencySymbole + " " + fx.convert(week52low).toFixed(2);
-                            document.getElementById("dividendRate").innerHTML = dividendRate;
-                            document.getElementById("latestEPS").innerHTML = latestEPS;
-                            document.getElementById("grossProfit").innerHTML = currencySymbole + " " + fx.convert(grossProfit).toFixed(2);
-                            document.getElementById("debt").innerHTML = currencySymbole + " " + fx.convert(debt).toFixed(2);
+                            document.getElementById("week52high").innerHTML = currencySymbole + " " + numberWithCommas(fx.convert(week52high).toFixed(2));
+                            document.getElementById("week52low").innerHTML = currencySymbole + " " + numberWithCommas(fx.convert(week52low).toFixed(2));
+                            document.getElementById("dividendRate").innerHTML = numberWithCommas(dividendRate);
+                            document.getElementById("latestEPS").innerHTML = numberWithCommas(latestEPS);
+                            document.getElementById("grossProfit").innerHTML = currencySymbole + " " + numberWithCommas(fx.convert(grossProfit).toFixed(2));
+                            document.getElementById("debt").innerHTML = currencySymbole + " " + numberWithCommas(fx.convert(debt).toFixed(2));
                         });
                     }, error: function (error) {
                         // console.log(error.responseText);
@@ -424,7 +424,7 @@ function peersStatsUrlGrab(name) {
         success: function (data) {
 
             var price = data.latestPrice;
-            price = numberWithCommas(fx.convert(price));
+            price = numberWithCommas(fx.convert(price).toFixed(2));
             var cell1 = row.insertCell(1);
             cell1.innerHTML = currencySymbole + " " + price;
             // document.getElementById("pricePortfolio").placeholder = price;
@@ -817,14 +817,12 @@ function setIntervalPrice(resultUrl) {
             url: resultUrl,
             success: function (data) {
                 var stockprice = data.latestPrice;
+                stockprice = numberWithCommas(fx.convert(stockprice).toFixed(2));
 
-                document.getElementById("StockPrice").innerHTML = currencySymbole + " " + fx.convert(stockprice).toFixed(2);
-                // document.getElementById("pricePortfolio").value = fx.convert(stockprice).toFixed(2);
-
-                stockprice = stockprice.toString();
+                document.getElementById("StockPrice").innerHTML = currencySymbole + " " + stockprice;
 
                 // Send price to the peers table
-                document.getElementById("myTable").rows[1].cells[1].innerHTML = currencySymbole + " " + fx.convert(data.latestPrice).toFixed(2);
+                document.getElementById("myTable").rows[1].cells[1].innerHTML = currencySymbole + " " + stockprice;
 
             },
             error: function (error) {
@@ -843,15 +841,13 @@ function setTimeoutPrice(resultUrl) {
             url: resultUrl,
             success: function (data) {
                 var stockprice = data.latestPrice;
+                stockprice = numberWithCommas(fx.convert(stockprice).toFixed(2));
 
-                document.getElementById("StockPrice").innerHTML = currencySymbole + " " + fx.convert(stockprice).toFixed(2);
-                document.getElementById("pricePortfolio").value = fx.convert(stockprice).toFixed(2);
-
-                stockprice = fx.convert(stockprice).toFixed(2);
-                stockprice = stockprice.toString();
+                document.getElementById("StockPrice").innerHTML = currencySymbole + " " + stockprice;
+                document.getElementById("pricePortfolio").value = stockprice;
 
                 // Send price to the peers table
-                document.getElementById("myTable").rows[1].cells[1].innerHTML = currencySymbole + " " + fx.convert(stockprice).toFixed(2);
+                document.getElementById("myTable").rows[1].cells[1].innerHTML = currencySymbole + " " + stockprice;
 
             },
             error: function (error) {
@@ -914,11 +910,11 @@ function portfolioOwnedTable(){
 
                     // Purchased Price
                     var cell2 = row.insertCell((1));
-                    cell2.innerHTML = currencySymbole + " " + fx.convert(fullPortfolio[i].price).toFixed(2);
+                    cell2.innerHTML = currencySymbole + " " + numberWithCommas(fx.convert(fullPortfolio[i].price).toFixed(2));
 
                     // Quantity
                     var cell3 = row.insertCell((2));
-                    cell3.innerHTML = fullPortfolio[i].quantity;
+                    cell3.innerHTML = numberWithCommas(fullPortfolio[i].quantity);
 
                     // Add delete button
                     var cell4 = row.insertCell((3));
@@ -952,7 +948,7 @@ function portfolioOwnedTable(){
 
 
 function numberWithCommas(x) {
-    return x.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 
