@@ -424,8 +424,9 @@ function peersStatsUrlGrab(name) {
         success: function (data) {
 
             var price = data.latestPrice;
+            price = numberWithCommas(fx.convert(price));
             var cell1 = row.insertCell(1);
-            cell1.innerHTML = currencySymbole + " " + fx.convert(price).toFixed(2);
+            cell1.innerHTML = currencySymbole + " " + price;
             // document.getElementById("pricePortfolio").placeholder = price;
         }
     });
@@ -949,6 +950,10 @@ function portfolioOwnedTable(){
 }
 
 
+
+function numberWithCommas(x) {
+    return x.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
 
 
