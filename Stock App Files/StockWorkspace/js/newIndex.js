@@ -245,26 +245,26 @@ function displayDataToTableP(data, fullPortfolio) {
 
         // Purchased Price          (FROM FIREBASE)
         var cell2 = row.insertCell((2));
-        cell2.innerHTML = currencySymbole + " " + fx.convert(fullPortfolio[i].price).toFixed(2);
+        cell2.innerHTML = currencySymbole + " " + numberWithCommas(fx.convert(fullPortfolio[i].price).toFixed(2));
 
         // Current Price            (FROM IEX)
         var cell3 = row.insertCell((3));
-        cell3.innerHTML = currencySymbole + " " + fx.convert(data[fullPortfolio[i].stockSymbol].price).toFixed(2);
+        cell3.innerHTML = currencySymbole + " " + numberWithCommas(fx.convert(data[fullPortfolio[i].stockSymbol].price).toFixed(2));
 
         // Quantity                 (FROM FIREBASE)
         var cell4 = row.insertCell((4));
-        cell4.innerHTML = fullPortfolio[i].quantity;
+        cell4.innerHTML = numberWithCommas(fullPortfolio[i].quantity);
 
         // Purchased Equity         (FROM FIREBASE)
         var cell5 = row.insertCell((5));
-        cell5.innerHTML = currencySymbole + " " + (fx.convert(fullPortfolio[i].price * fullPortfolio[i].quantity)).toFixed(2).toString();
+        cell5.innerHTML = currencySymbole + " " + numberWithCommas((fx.convert(fullPortfolio[i].price * fullPortfolio[i].quantity)).toFixed(2));
         purchasedEquity += Number(fx.convert((fullPortfolio[i].price * fullPortfolio[i].quantity)).toFixed(2));
 
         // console.log(purchasedEquity);
 
         // Current Equity           (Calculation)
         var cell6 = row.insertCell((6));
-        cell6.innerHTML = currencySymbole + " " + fx.convert((data[fullPortfolio[i].stockSymbol].price * fullPortfolio[i].quantity)).toFixed(2);
+        cell6.innerHTML = currencySymbole + " " + numberWithCommas(fx.convert((data[fullPortfolio[i].stockSymbol].price * fullPortfolio[i].quantity)).toFixed(2));
         currentEquity += Number((data[fullPortfolio[i].stockSymbol].price * fullPortfolio[i].quantity).toFixed(2));
 
         // Profit                   (Calculation)
@@ -276,7 +276,7 @@ function displayDataToTableP(data, fullPortfolio) {
             profit += profitI;
         }
 
-        cell7.innerHTML = currencySymbole + " " + fx.convert(profitI).toFixed(2).toString();
+        cell7.innerHTML = currencySymbole + " " + numberWithCommas(fx.convert(profitI).toFixed(2));
 
         // After Tax profit         (Calculation)
         var cell8 = row.insertCell((8));
@@ -287,7 +287,7 @@ function displayDataToTableP(data, fullPortfolio) {
             afterTaxProfit += afterTaxProfitI;
         }
 
-        cell8.innerHTML = currencySymbole + " " + fx.convert(afterTaxProfitI).toFixed(2).toString();
+        cell8.innerHTML = currencySymbole + " " + numberWithCommas(fx.convert(afterTaxProfitI).toFixed(2));
 
         // Current Percent Change   (Calculation)   Bought price vs current price
         var cell9 = row.insertCell((9));
@@ -336,16 +336,16 @@ function displayDataToTableP(data, fullPortfolio) {
     grabPortfolioBarChart(fullPortfolio, percentArray);
 
     // Displaying Total Purchased Equity
-    document.getElementById("TotalPurchasedEquity").innerHTML = currencySymbole + " " + fx.convert(purchasedEquity).toFixed(2).toString();
+    document.getElementById("TotalPurchasedEquity").innerHTML = currencySymbole + " " + numberWithCommas(fx.convert(purchasedEquity).toFixed(2));
 
     // Displaying Total Current Equity
-    document.getElementById("TotalCurrentEquity").innerHTML = currencySymbole + " " +  fx.convert(currentEquity).toFixed(2).toString();
+    document.getElementById("TotalCurrentEquity").innerHTML = currencySymbole + " " +  numberWithCommas(fx.convert(currentEquity).toFixed(2));
 
     // Entire Portfolio Profit
-    document.getElementById("profit").innerHTML = currencySymbole + " " + fx.convert(profit).toFixed(2).toString();
+    document.getElementById("profit").innerHTML = currencySymbole + " " + numberWithCommas(fx.convert(profit).toFixed(2));
 
     // Entire Portfolio After Tax Profit
-    document.getElementById("afterTax").innerHTML = currencySymbole + " " + fx.convert(afterTaxProfit).toFixed(2).toString();
+    document.getElementById("afterTax").innerHTML = currencySymbole + " " + numberWithCommas(fx.convert(afterTaxProfit).toFixed(2));
 
     // Sending Portfolio to Bar Chart
     setPortfolioEquityBarGraph(fullPortfolio);
@@ -530,7 +530,7 @@ function displayDataToTableW(data, fullWatchlist) {
 
         // Current Price
         var cell1 = row.insertCell((1));
-        cell1.innerHTML = currencySymbole + " " + fx.convert(data[Object.keys(data)[i]].price).toFixed(2);
+        cell1.innerHTML = currencySymbole + " " + numberWithCommas(fx.convert(data[Object.keys(data)[i]].price).toFixed(2));
 
         // 3 Month Percent
         var cell2 = row.insertCell((2));
@@ -653,7 +653,7 @@ function displayCards(data, fullPortfolio) {
             var stockTransferURLI = "IndividualStockPage.html?stock=" + filteredArrS[i] + "#";
 
             document.getElementById(companyNameI).innerHTML = limitCharacter((data[Object.keys(data)[i]].quote.companyName));
-            document.getElementById(stockPriceI).innerHTML = data[Object.keys(data)[i]].price;
+            document.getElementById(stockPriceI).innerHTML = numberWithCommas(data[Object.keys(data)[i]].price);
             document.getElementById(viewDetailsI).href = stockTransferURLI;
         }
     } else {
@@ -673,7 +673,7 @@ function displayCards(data, fullPortfolio) {
                 var stockTransferURL = "IndividualStockPage.html?stock=" + filteredArrS[i] + "#";
 
                 document.getElementById(companyNameE).innerHTML = (data[Object.keys(data)[i]].quote.companyName);
-                document.getElementById(stockPriceE).innerHTML = data[Object.keys(data)[i]].price;
+                document.getElementById(stockPriceE).innerHTML = numberWithCommas(data[Object.keys(data)[i]].price);
                 document.getElementById(viewDetails).href = stockTransferURL;
 
                 i++;
@@ -728,4 +728,8 @@ function limitCharacter(companyName){
         companyNameLimit = companyName;
         return companyNameLimit;
     }
+}
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }

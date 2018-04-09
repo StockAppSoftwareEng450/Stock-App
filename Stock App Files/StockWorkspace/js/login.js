@@ -65,7 +65,7 @@ function loginUser(email, password) {
         //console.log(errorMessage);
 
         // Handle wrong code code
-        if (errorCode === "auth/invalid-email" || errorCode === "auth/wrong-password"){
+        if (errorCode === "auth/invalid-email" || errorCode === "auth/wrong-password" || errorCode === "auth/user-not-found"){
             document.querySelector('.wrong-credentials').style.display = 'block';
             console.log("showing invalid credentials alert");
 

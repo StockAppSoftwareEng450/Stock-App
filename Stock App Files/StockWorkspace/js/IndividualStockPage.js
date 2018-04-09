@@ -26,7 +26,7 @@ function onReady(callback) {
 function timeClosed(){
     console.log(stockMarketTime())
     if(stockMarketTime() === "closed"){
-        console.log("here");
+        //console.log("here");
         document.getElementById("time").style.display = 'block';
     }
 }
@@ -408,28 +408,31 @@ function peersStatsUrlGrab(name) {
     // each peer in peer table is clickable and will transfer to specific page
     var stockTransferURL = "IndividualStockPage.html?stock=" + name + "#";
 
+    /** Stock price for Every Peer **/
+    var peerStockPriceUrl = "https://api.iextrading.com/1.0/stock/" + name + "/quote";
+
     // getting table
     var table = document.getElementById("myTable");
     var row = table.insertRow(-1);
 
-    // Inserting name
-    var cell0 = row.insertCell(0);
-    cell0.innerHTML = name.link(stockTransferURL);
-
-    /** Stock price for Every Peer **/
-    var peerStockPriceUrl = "https://api.iextrading.com/1.0/stock/" + name + "/quote";
-
     $.ajax({
         url: peerStockPriceUrl,
         success: function (data) {
+
+            // Inserting name
+            var cell0 = row.insertCell(0);
+            cell0.innerHTML = name.link(stockTransferURL);
 
             var price = data.latestPrice;
             price = numberWithCommas(fx.convert(price).toFixed(2));
             var cell1 = row.insertCell(1);
             cell1.innerHTML = currencySymbole + " " + price;
             // document.getElementById("pricePortfolio").placeholder = price;
+        }, error: function(error){
+            //handel stock symbol not found error
         }
     });
+
 
     /** Grabbing 6m% and 1y% for Each Peer **/
     var peerStatusURL = "https://api.iextrading.com/1.0/stock/" + name + "/stats";
@@ -468,8 +471,10 @@ function peersStatsUrlGrab(name) {
                 } else {
                     cell3.innerHTML = unicodeUp + "  " + percentStr6m + "%";
                 }
+            }, error: function (error) {
+                //handle stock symbol not found error
             }
-        });
+        })
     }, 250);
 
     /** Grabbing 6m% and 1y% for Current Stock **/
