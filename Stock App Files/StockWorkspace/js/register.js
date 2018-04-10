@@ -121,7 +121,7 @@ function checkVals (fstName, lstName, email, phone, password, confirmPass) {
     console.log("lstNameChecked " + lstNameChecked);
 
     /** EMAIL CHECKING **/
-    var emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var emailRegex = /q[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
     var emailRegexResult = emailRegex.test(email);
     //console.log("emailRegexResult: " +  emailRegexResult);
 
