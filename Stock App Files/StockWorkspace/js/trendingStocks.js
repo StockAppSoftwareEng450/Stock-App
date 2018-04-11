@@ -36,8 +36,8 @@ setTimeout(function () {
                 data.sort(compare);
                 
                 for(var i = 0; i < data.length; i++) {
-                    var row = gainersTable.insertRow(i+1);
 
+                    var row = gainersTable.insertRow(i + 1);
                     var symbol = data[i].symbol.toString();
                     var stockTransferURL = "IndividualStockPage.html?stock=" + symbol + "#";
                     var cell0 = row.insertCell(0);
@@ -46,6 +46,7 @@ setTimeout(function () {
                     var latestPrice = currencySymbole + " " + fx.convert(data[i].latestPrice).toFixed(2);
                     var cell1 = row.insertCell(1);
                     cell1.innerHTML = latestPrice.toString();
+
 
                     var highPrice = currencySymbole + " " + fx.convert(data[i].high).toFixed(2);
                     var cell2 = row.insertCell(2);
@@ -58,15 +59,14 @@ setTimeout(function () {
                     var changePercent = data[i].changePercent;
                     changePercent = (changePercent * 100).toFixed(2);
                     var cell4 = row.insertCell(4);
-                    if(changePercent < 0){
+                    if (changePercent < 0) {
                         cell4.innerHTML = unicodeDown + changePercent.toString() + "%";
-                    }else{
+                    } else {
                         cell4.innerHTML = unicodeUp + changePercent.toString() + "%";
                     }
 
-
-
                 }
+
 
             }
         });
@@ -85,7 +85,8 @@ setTimeout(function () {
             data.sort(compare);
 
             for(var i = 0; i < data.length; i++) {
-                var row = losersTable.insertRow(i+1);
+
+                var row = losersTable.insertRow(i + 1);
 
                 var symbol = data[i].symbol.toString();
                 var stockTransferURL = "IndividualStockPage.html?stock=" + symbol + "#";
@@ -107,9 +108,9 @@ setTimeout(function () {
                 var changePercent = data[i].changePercent;
                 changePercent = (changePercent * 100).toFixed(2);
                 var cell4 = row.insertCell(4);
-                if(changePercent < 0){
+                if (changePercent < 0) {
                     cell4.innerHTML = unicodeDown + changePercent.toString() + "%";
-                }else{
+                } else {
                     cell4.innerHTML = unicodeUp + changePercent.toString() + "%";
                 }
             }

@@ -6,6 +6,13 @@
     /* margin-right: 15px; */
 }
 
+#fstName{
+    padding-top: 20px;
+}
+
+#lstName{
+    padding-top: 20px;
+}
 #indexPortfolioHeader, #indexWatchlistHeader {
     width: 100%;
 }

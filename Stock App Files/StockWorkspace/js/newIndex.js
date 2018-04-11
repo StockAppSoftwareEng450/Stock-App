@@ -11,9 +11,33 @@ function onReady(callback) {
     }
 }
 
+"use strict";
+
 function show(id, value) {
     document.getElementById(id).style.display = value ? 'block' : 'none';
+
 }
+
+
+$(document).ready(function () {
+    firebase.auth().onAuthStateChanged(function (user) {
+            //fill input fields with values
+            var ref = firebase.database().ref("Users");
+            ref.orderByKey().equalTo(user.uid).once("value", function(snapshot) {
+
+                    snapshot.forEach(function (value){
+                        //document.getElementById("email").value =  user.email;
+
+                        document.getElementById("fstName").innerHTML = value.val().firstName;
+                        document.getElementById("lstName").innerHTML = value.val().lastName;
+
+                        show('alert_message',false);
+                    });
+
+            });
+
+    })
+});
 
 onReady(function () {
     show('LoadingMain', true);
