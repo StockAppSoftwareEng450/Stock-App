@@ -6,17 +6,20 @@
     /* margin-right: 15px; */
 }
 
+/* Display first name */
 #fstName{
     position: relative;
     top: 9px;
-    color: #fff;
+    color: #989B9F;
 }
 
+/* Display Last name */
 #lstName{
     position: relative;
     top: 9px;
-    color: #fff;
+    color: #989B9F;
 }
+
 #indexPortfolioHeader, #indexWatchlistHeader {
     width: 100%;
 }

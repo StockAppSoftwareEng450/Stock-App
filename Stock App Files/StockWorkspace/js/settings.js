@@ -10,7 +10,7 @@ $(document).ready(function () {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             //fill input fields with values
-            var ref = firebase.database().ref("Users");
+            let ref = firebase.database().ref("Users");
             ref.orderByKey().equalTo(user.uid).once("value", function(snapshot) {
                 if(snapshot.exists()){
                     snapshot.forEach(function (value){
@@ -19,14 +19,6 @@ $(document).ready(function () {
                         document.getElementById("lstName").value = value.val().lastName;
                         document.getElementById("phone").value = value.val().phone;
                         document.getElementById("currency").value = value.val().currency;
-                        document.getElementById("ubPortfolio").value = value.val().upperBoundPortfolio;
-                        document.getElementById("ubPortfolioText").value = value.val().upperBoundPortfolio;
-                        document.getElementById("lbPortfolio").value = value.val().lowerBoundPortfolio;
-                        document.getElementById("lbPortfolioText").value = value.val().lowerBoundPortfolio;
-                        document.getElementById("ubWatchlist").value = value.val().upperBoundWatchlist;
-                        document.getElementById("ubWatchlistText").value = value.val().upperBoundWatchlist;
-                        document.getElementById("lbWatchlist").value = value.val().lowerBoundWatchlist;
-                        document.getElementById("lbWatchlistText").value = value.val().lowerBoundWatchlist;
                         show('alert_message',false);
                     });
                 }
@@ -48,19 +40,15 @@ document.getElementById('settingsForm').addEventListener('submit', submitForm);
 // Sumbit form
 function submitUserForm(){
     //Get values
-    var email = getInputVal('email');
-    var password = getInputVal('password');
-    var confirmPass = getInputVal('confirmPass');
+    let email = getInputVal('email');
+    let password = getInputVal('password');
+    let confirmPass = getInputVal('confirmPass');
 
     // Passing values that need to be checked to a function that returns whether they are correct or not.
-    var checkedArray = checkUserVals(email, password, confirmPass);
+    let checkedArray = checkUserVals(email, password, confirmPass);
     console.log("checked values: " + checkedArray);
 
     show('alert_message',true);
-    window.location.href = "#";
-    setTimeout(function () {
-        window.location.href = "index.html";
-    },1000);
 
     /** INVALID EMAIL MESSAGE TO USER**/
     if (checkedArray[0] === false ){
@@ -93,14 +81,14 @@ function submitUserForm(){
 
 // Function to check if all values are correct
 function checkUserVals (email, password, confirmPass) {
-    var array = [email, password, confirmPass];
+    let array = [email, password, confirmPass];
 
     // Checked values return false if all criteria are not met
-    var emailChecked, passwordChecked, confirmPassChecked = null;
+    let emailChecked, passwordChecked, confirmPassChecked = null;
 
     /** EMAIL CHECKING **/
-    var emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    var emailRegexResult = emailRegex.test(email);
+    let emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let emailRegexResult = emailRegex.test(email);
     //console.log("emailRegexResult: " +  emailRegexResult);
 
     if (emailRegexResult === false){
@@ -112,8 +100,8 @@ function checkUserVals (email, password, confirmPass) {
     console.log("emailChecked " + emailChecked);
 
     /** PASSWORD **/
-    var passRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;  // Minimum 8 chars, 1 num, 1 upper, 1 lower
-    var passRegexResult = passRegex.test(password);
+    let passRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;  // Minimum 8 chars, 1 num, 1 upper, 1 lower
+    let passRegexResult = passRegex.test(password);
     //console.log("passRegexResult: " + passRegexResult);
 
     if (passRegexResult === false){
@@ -151,7 +139,7 @@ function sendUser(email, password) {
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             // User is signed in.
-            var credential = firebase.auth.EmailAuthProvider.credential(
+            let credential = firebase.auth.EmailAuthProvider.credential(
                 user.email,
                 password
             );
@@ -165,8 +153,8 @@ function sendUser(email, password) {
                         console.log("Email Update successful")
                     }).catch(function(error) {
                         // An error happened.
-                        var errorCode = error.code;
-                        var errorMessage = error.message;
+                        let errorCode = error.code;
+                        let errorMessage = error.message;
 
                         // Consoling error messages
                         console.log(errorCode);
@@ -180,8 +168,8 @@ function sendUser(email, password) {
                         console.log("Password Update successful")
                     }).catch(function(error) {
                         // An error happened.
-                        var errorCode = error.code;
-                        var errorMessage = error.message;
+                        let errorCode = error.code;
+                        let errorMessage = error.message;
 
                         // Consoling error messages
                         console.log(errorCode);
@@ -190,8 +178,8 @@ function sendUser(email, password) {
                 }
             }).catch(function(error) {
                 // An error happened.
-                var errorCode = error.code;
-                var errorMessage = error.message;
+                let errorCode = error.code;
+                let errorMessage = error.message;
 
                 // Consoling error messages
                 console.log(errorCode);
@@ -213,21 +201,15 @@ function submitForm(e){
     e.preventDefault();
 
     //Get values
-    var fstName = getInputVal('fstName');
-    var lstName = getInputVal('lstName');
-    var phone = getInputVal('phone');
+    let fstName = getInputVal('fstName');
+    let lstName = getInputVal('lstName');
+    let phone = getInputVal('phone');
 
-    var dropdown = document.getElementById("currency");
-    var currency = dropdown.options[dropdown.selectedIndex].value;
-
-    var ubPortfolio = getInputVal('ubPortfolioText');
-    var lbPortfolio = getInputVal('lbPortfolioText');
-    var ubWatchlist = getInputVal('ubWatchlistText');
-    var lbWatchlist = getInputVal('lbWatchlistText');
-
+    let dropdown = document.getElementById("currency");
+    let currency = dropdown.options[dropdown.selectedIndex].value;
 
     // Passing values that need to be checked to a function that returns whether they are correct or not.
-    var checkedArray = checkVals(fstName, lstName, phone, currency, ubPortfolio, lbPortfolio, ubWatchlist, lbWatchlist);
+    let checkedArray = checkVals(fstName, lstName, phone, currency);
     console.log("checked values: " + checkedArray);
 
     /** INVALID NAME MESSAGE TO USER**/
@@ -265,31 +247,24 @@ function submitForm(e){
     }
 
     show('alert_message',true);
-    window.location.href = "#";
-    setTimeout(function () {
-       window.location.href = "index.html";
-    },1000);
-
-
-
 }
 
 // Function to check if all values are correct
-function checkVals (fstName, lstName, phone, currency, ubPortfolio, lbPortfolio, ubWatchlist, lbWatchlist) {
-    var array = [fstName, lstName, phone, currency, ubPortfolio, lbPortfolio, ubWatchlist, lbWatchlist];
+function checkVals (fstName, lstName, phone, currency) {
+    let array = [fstName, lstName, phone, currency];
 
     // Checked values return false if all criteria are not met
-    var fstNameChecked, lstNameChecked, phoneChecked, currencyChecked, ubPortfolioChecked, lbPortfolioChecked, ubWatchlistChecked, lbWatchlistChecked = null;
+    let fstNameChecked, lstNameChecked, phoneChecked, currencyChecked = null;
 
     /** NAME CHECKING **/
 
         // Calculating the len of first and last name does not exceed 40 chars
-    var fstNameLen = fstName.length;
-    var lstNameLen = lstName.length;
-    var nameLenResult = fstNameLen + lstNameLen + 1;    // Adding 1 to account for the space in between the name
+    let fstNameLen = fstName.length;
+    let lstNameLen = lstName.length;
+    let nameLenResult = fstNameLen + lstNameLen + 1;    // Adding 1 to account for the space in between the name
 
-    var fullNameRegex = /^(([A-Za-z]+[\-']?)*([A-Za-z]+)?\s)+([A-Za-z]+[\-']?)*([A-Za-z]+)?$/;
-    var NameRegexResult = fullNameRegex.test(fstName + " " + lstName);
+    let fullNameRegex = /^(([A-Za-z]+[\-']?)*([A-Za-z]+)?\s)+([A-Za-z]+[\-']?)*([A-Za-z]+)?$/;
+    let NameRegexResult = fullNameRegex.test(fstName + " " + lstName);
     //console.log("fullNameRegexResult: " + NameRegexResult);
 
     // Check to see if user forgot name
@@ -310,10 +285,10 @@ function checkVals (fstName, lstName, phone, currency, ubPortfolio, lbPortfolio,
     console.log("lstNameChecked " + lstNameChecked);
 
     /** PHONE CHECKING **/
-    var phoneLen = phone.length;
+    let phoneLen = phone.length;
 
-    var phoneRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
-    var phoneRegexResult = phoneRegex.test(phone);
+    let phoneRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+    let phoneRegexResult = phoneRegex.test(phone);
     //console.log("phoneRegexResult: " + phoneRegexResult);
 
     // Check for ten numbers
@@ -335,58 +310,16 @@ function checkVals (fstName, lstName, phone, currency, ubPortfolio, lbPortfolio,
 
     console.log("currencyChecked " + currencyChecked);
 
-    /** Upper Bound Portfolio CHECKING **/
-    // Check for between 0 and 100
 
-    if (isNaN(ubPortfolio) || (ubPortfolio<0 || ubPortfolio>100)){
-        ubPortfolioChecked = false;
-    } else {
-        ubPortfolioChecked = ubPortfolio;
-    }
-
-    console.log("ubPortfolioChecked " + ubPortfolioChecked);
-
-    /** Lower Bound Portfolio CHECKING **/
-    // Check for between 0 and 100
-
-    if (isNaN(lbPortfolio) || (lbPortfolio<0 || lbPortfolio>100)){
-        lbPortfolioChecked = false;
-    } else {
-        lbPortfolioChecked = lbPortfolio;
-    }
-
-    console.log("lbPortfolioChecked " + lbPortfolioChecked);
-
-    /** Upper Bound Watchlist CHECKING **/
-    // Check for between 0 and 100
-
-    if (isNaN(ubWatchlist) || (ubWatchlist<0 || ubWatchlist>100)){
-        ubWatchlistChecked = false;
-    } else {
-        ubWatchlistChecked = ubWatchlist;
-    }
-
-    console.log("ubWatchlistChecked " + ubWatchlistChecked);
-
-    /** Lower Bound Watchlist CHECKING **/
-    // Check for between 0 and 100
-
-    if (isNaN(lbWatchlist) || (lbWatchlist<0 || lbWatchlist>100)){
-        lbWatchlistChecked = false;
-    } else {
-        lbWatchlistChecked = lbWatchlist;
-    }
-
-    console.log("lbWatchlistChecked " + lbWatchlistChecked);
 
     // Return checked array
-    array = [fstNameChecked, lstNameChecked, phoneChecked, currencyChecked, ubPortfolioChecked, lbPortfolioChecked, ubWatchlistChecked, lbWatchlistChecked];
+    array = [fstNameChecked, lstNameChecked, phoneChecked, currencyChecked];
 
     return array;
 }
 
 // Function to send the correct values to firebase
-function send(fstName, lstName, phone, currency, ubPortfolio, lbPortfolio, ubWatchlist, lbWatchlist) {
+function send(fstName, lstName, phone, currency) {
 
     // Get current Firebase user
     firebase.auth().onAuthStateChanged(function(user) {
@@ -394,7 +327,7 @@ function send(fstName, lstName, phone, currency, ubPortfolio, lbPortfolio, ubWat
             // User is signed in.
 
             // Save message
-            saveMessage(user.uid, fstName, lstName, phone, currency, ubPortfolio, lbPortfolio, ubWatchlist, lbWatchlist);
+            saveMessage(user.uid, fstName, lstName, phone, currency);
 
             // show alert
             //document.querySelector('.successful-register').style.display = 'block';
@@ -406,16 +339,12 @@ function send(fstName, lstName, phone, currency, ubPortfolio, lbPortfolio, ubWat
 }
 
 // Save message to firebase
-function saveMessage(userId, fstName, lstName, phone, currency, ubPortfolio, lbPortofolio, ubWatchlist, lbWatchlost){
+function saveMessage(userId, fstName, lstName, phone, currency){
     firebase.database().ref('Users/' + userId).set({
         firstName: fstName,
         lastName: lstName,
         phone: phone,
-        currency: currency,
-        upperBoundPortfolio: ubPortfolio,
-        lowerBoundPortfolio: lbPortofolio,
-        upperBoundWatchlist: ubWatchlist,
-        lowerBoundWatchlist: lbWatchlost
+        currency: currency
     });
 
     console.log("Sent");
@@ -427,43 +356,6 @@ function getInputVal(id) {
     //returns value of id
     return document.getElementById(id).value;
 }
-
-
-// Update the upper bound portoflio slider value (each time you drag the slider handle)
-document.getElementById("ubPortfolio").oninput = function() {
-    document.getElementById("ubPortfolioText").value = this.value;
-};
-// Update the upper bound portoflio number value
-document.getElementById("ubPortfolioText").oninput = function() {
-    document.getElementById("ubPortfolio").value = this.value;
-};
-
-// Update the lower bound portoflio slider value (each time you drag the slider handle)
-document.getElementById("lbPortfolio").oninput = function() {
-    document.getElementById("lbPortfolioText").value = this.value;
-};
-// Update the lower bound portoflio number value
-document.getElementById("lbPortfolioText").oninput = function() {
-    document.getElementById("lbPortfolio").value = this.value;
-};
-
-// Update the upper bound watchlist slider value (each time you drag the slider handle)
-document.getElementById("ubWatchlist").oninput = function() {
-    document.getElementById("ubWatchlistText").value = this.value;
-};
-// Update the upper bound watchlist number value
-document.getElementById("ubWatchlistText").oninput = function() {
-    document.getElementById("ubWatchlist").value = this.value;
-};
-
-// Update the lower bound watchlist slider value (each time you drag the slider handle)
-document.getElementById("lbWatchlist").oninput = function() {
-    document.getElementById("lbWatchlistText").value = this.value;
-};
-// Update the lower bound watchlist number value
-document.getElementById("lbWatchlistText").oninput = function() {
-    document.getElementById("lbWatchlist").value = this.value;
-};
 
 
 
