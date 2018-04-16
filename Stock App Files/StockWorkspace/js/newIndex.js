@@ -229,6 +229,7 @@ let portfolioArray = [];
 /** Displaying the Portfolio Table **/
 function displayDataToTableP(data, fullPortfolio) {
     let percentArray = [];
+    let cpArray = [];
     let purchasedEquity = 0;
     let currentEquity = 0;
     let profit = 0;
@@ -267,6 +268,7 @@ function displayDataToTableP(data, fullPortfolio) {
 
         // Current Price            (FROM IEX)
         let cell3 = row.insertCell((3));
+        cpArray.push(fx.convert(data[fullPortfolio[i].stockSymbol].price).toFixed(2));
         cell3.innerHTML = currencySymbole + " " + numberWithCommas(fx.convert(data[fullPortfolio[i].stockSymbol].price).toFixed(2));
 
         // Quantity                 (FROM FIREBASE)
@@ -289,10 +291,7 @@ function displayDataToTableP(data, fullPortfolio) {
         let cell7 = row.insertCell((7));
         let profitI = calcProfit(data, fullPortfolio, i);
 
-        // Only Accepts Positive Profit
-        if (profitI > 0){
-            profit += profitI;
-        }
+        profit += profitI;
 
         cell7.innerHTML = currencySymbole + " " + numberWithCommas(fx.convert(profitI).toFixed(2));
 
@@ -300,10 +299,7 @@ function displayDataToTableP(data, fullPortfolio) {
         let cell8 = row.insertCell((8));
         let afterTaxProfitI = calcAfterTaxProfit(data, fullPortfolio, i);
 
-        // Only Accepts Positive AfterTax Profit
-        if (afterTaxProfitI > 0){
-            afterTaxProfit += afterTaxProfitI;
-        }
+        afterTaxProfit += afterTaxProfitI;
 
         cell8.innerHTML = currencySymbole + " " + numberWithCommas(fx.convert(afterTaxProfitI).toFixed(2));
 
@@ -351,7 +347,7 @@ function displayDataToTableP(data, fullPortfolio) {
     }
 
     // Send to Bar Chart
-    grabPortfolioBarChart(fullPortfolio, percentArray);
+    grabPortfolioBarChart(fullPortfolio, cpArray);
 
     // Displaying Total Purchased Equity
     document.getElementById("TotalPurchasedEquity").innerHTML = currencySymbole + " " + numberWithCommas(fx.convert(purchasedEquity).toFixed(2));
@@ -451,23 +447,17 @@ function calcAfterTaxProfit(data, fullPortfolio, i) {
     let profitBeforeTax = currentEquit - purchasedEquit;
     console.log(profitBeforeTax);
 
-    // Checking if profit is positive
-    if (profitBeforeTax > 0 ){
-
-        // 15% in tax after 1 year, otherwise 30% if date is before
-        if ((givenDate < curDate) === true) {
-            let resultAfter = (15 / 100) * profitBeforeTax;
-            after1yearTotal += profitBeforeTax - resultAfter;
-            console.log("after1yearTotal" + i + ": ", after1yearTotal);
-            return after1yearTotal;
-        } else if ((givenDate < curDate) === false) {
-            let resultBefore = (30 / 100) * profitBeforeTax;
-            before1yearTotal += profitBeforeTax - resultBefore;
-            console.log("before1yearTotal" + i + ": ", before1yearTotal);
-            return before1yearTotal;
-        }
-    } else {
-        return 0;
+    // 15% in tax after 1 year, otherwise 30% if date is before
+    if ((givenDate < curDate) === true) {
+        let resultAfter = (15 / 100) * profitBeforeTax;
+        after1yearTotal += profitBeforeTax - resultAfter;
+        console.log("after1yearTotal" + i + ": ", after1yearTotal);
+        return after1yearTotal;
+    } else if ((givenDate < curDate) === false) {
+        let resultBefore = (30 / 100) * profitBeforeTax;
+        before1yearTotal += profitBeforeTax - resultBefore;
+        console.log("before1yearTotal" + i + ": ", before1yearTotal);
+        return before1yearTotal;
     }
 }
 

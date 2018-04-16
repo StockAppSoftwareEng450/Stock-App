@@ -1,39 +1,33 @@
 var filteredArrS = [];
 var filteredArrP = [];
+var colors = [];
 
 var count = 0;
 var max = null;
 var min = null;
 
-function grabPortfolioBarChart(fullPortfolio, percentArray){
-
-    var stockSymbol = [];
-
+function grabPortfolioBarChart(fullPortfolio, cpArray){
     // Pushing stock Symbols
     for (var i = 0; i < fullPortfolio.length; i++) {
-        stockSymbol.push(fullPortfolio[i].stockSymbol);
-    }
+        filteredArrS.push(fullPortfolio[i].stockSymbol);
+        var price = Number(fullPortfolio[i].price);
 
-    // Removing Duplicates for stock Symbol
-    for (var i = 0; i < stockSymbol.length; i++) {
-        filteredArrS = duplicates(stockSymbol);
-    }
+        var j = 1;
+        while(fullPortfolio[i+1]!==undefined && fullPortfolio[i].stockSymbol === fullPortfolio[i+1].stockSymbol){
+            price = Number(price)+Number(fullPortfolio[i+1].price);
+            i++;
+            j++;
+        }
+        let percent = ((((cpArray[i]*j)-price) / price) * 100).toFixed(2);
 
-    // Removing Duplicates for percent
-    for (var i = 0; i < percentArray.length; i++) {
-        filteredArrP = duplicates(percentArray);
-    }
-
-    // Rounding to the nearest 100th for each element
-    for (var i = 0; i < filteredArrP.length; i++){
-        filteredArrP[i] = Number(filteredArrP[i]).toFixed(2);
+        filteredArrP.push(percent);
     }
 
     // Finding max value then adding padding, then
-    max = findMaxValueArr(percentArray);
-    min = findMinValueArr(percentArray);
+    max = findMaxValueArr(filteredArrP);
+    min = findMinValueArr(filteredArrP);
 
-    if (percentArray.every(positiveCheck) === true){
+    if (filteredArrP.every(positiveCheck) === true){
         min = 0;
     }
 
@@ -69,13 +63,15 @@ function findMinValueArr(array) {
 // @TODO Stop Animation , Display Company Name
 function createBarChart(max, min) {
     // Bar Chart
-    ctx = document.getElementById("myBarChart"), myLineChart = new Chart(ctx, {
+    var ctx = document.getElementById("myBarChart");
+    var myLineChart = new Chart(ctx, {
         type: "bar",
         data: {
             labels: filteredArrS,
             datasets: [{
                 label: "Percent Change",
-                backgroundColor: palette('tol', filteredArrS.length).map(function (hex) {
+                backgroundColor: palette('sequential', filteredArrS.length).map(function (hex) {
+                    colors.push('#' + hex);
                     return '#' + hex;
                 }),
                 borderColor: "rgba(2,117,216,1)",

@@ -12,8 +12,7 @@ function donutChart() {
         percentFormat = d3.format(',.2%');
 
     // scaling to SbAdmins Color Scheme
-    var color = d3.scaleOrdinal()
-        .range(["#007bff" , "#ffc107" , "#28a745", "#dc3545"]);
+    var color = d3.scaleOrdinal(colors);
 
     function chart(selection){
         selection.each(function(data) {
