@@ -7,12 +7,14 @@
 }
 
 #fstName{
-    text-align: center;
+    position: relative;
+    top: 20px;
     color: #fff;
 }
 
 #lstName{
-    text-align: center;
+    position: relative;
+    top: 20px;
     color: #fff;
 }
 #indexPortfolioHeader, #indexWatchlistHeader {
