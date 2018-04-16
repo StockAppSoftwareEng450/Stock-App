@@ -7,11 +7,15 @@
 }
 
 #fstName{
-    padding-top: 20px;
+    position: relative;
+    top: 9px;
+    color: #fff;
 }
 
 #lstName{
-    padding-top: 20px;
+    position: relative;
+    top: 9px;
+    color: #fff;
 }
 #indexPortfolioHeader, #indexWatchlistHeader {
     width: 100%;
