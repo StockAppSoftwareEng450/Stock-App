@@ -1,7 +1,7 @@
 /** Loading Screen Gif **/
 // On ready function
 function onReady(callback) {
-    var intervalID = window.setInterval(checkReady, 2000);
+    let intervalID = window.setInterval(checkReady, 2000);
 
     function checkReady() {
         if (document.getElementsByTagName('body')[0] !== undefined) {
@@ -15,27 +15,21 @@ function onReady(callback) {
 
 function show(id, value) {
     document.getElementById(id).style.display = value ? 'block' : 'none';
-
 }
-
 
 $(document).ready(function () {
     firebase.auth().onAuthStateChanged(function (user) {
-            //fill input fields with values
-            var ref = firebase.database().ref("Users");
-            ref.orderByKey().equalTo(user.uid).once("value", function(snapshot) {
 
-                    snapshot.forEach(function (value){
-                        //document.getElementById("email").value =  user.email;
+        //fill input fields with values
+        let ref = firebase.database().ref("Users");
+        ref.orderByKey().equalTo(user.uid).once("value", function(snapshot) {
 
-                        document.getElementById("fstName").innerHTML = value.val().firstName;
-                        document.getElementById("lstName").innerHTML = value.val().lastName;
+            snapshot.forEach(function (value){
 
-                        show('alert_message',false);
-                    });
-
+                document.getElementById("fstName").innerHTML = value.val().firstName;
+                document.getElementById("lstName").innerHTML = value.val().lastName;
             });
-
+        });
     })
 });
 
@@ -69,14 +63,14 @@ function getFullPortfolio() {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             // User is signed in.
-            var fullPortfolio = [];
+            let fullPortfolio = [];
 
-            var refPortfolio = firebase.database().ref("Portfolios");
+            let refPortfolio = firebase.database().ref("Portfolios");
             refPortfolio.orderByChild("userId").equalTo(user.uid).once("value", function (snapshot) {
 
                 if (snapshot.exists()) {
                     snapshot.forEach(function (value) {
-                        var help = [];
+                        let help = [];
                         help["pk"] = value.key;
                         help["userId"] = value.child("userId").val();
                         help["stockSymbol"] = value.child("stockSymbol").val();
@@ -117,14 +111,14 @@ function getFullWatchlist() {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             // User is signed in.
-            var fullWatchlist = [];
+            let fullWatchlist = [];
 
-            var refPortfolio = firebase.database().ref("Watchlists");
+            let refPortfolio = firebase.database().ref("Watchlists");
             refPortfolio.orderByChild("userId").equalTo(user.uid).once("value", function (snapshot) {
-                var result = [];
+                let result = [];
                 if (snapshot.exists()) {
                     snapshot.forEach(function (value) {
-                        var help = [];
+                        let help = [];
                         help["pk"] = value.key;
                         help["userId"] = value.child("userId").val();
                         help["stockSymbol"] = value.child("stockSymbol").val();
@@ -156,17 +150,17 @@ function getFullWatchlist() {
 /** Issuing Portfolio Ajax request **/
 function issueBatchRequestP(fullPortfolio) {
 
-    var stockSymbolRequest = "";
+    let stockSymbolRequest = "";
 
     // Enumerating over all stock Symbols for portfolio
-    for (var i = 0; i < fullPortfolio.length; i++){
+    for (let i = 0; i < fullPortfolio.length; i++){
         stockSymbolRequest += fullPortfolio[i].stockSymbol + ",";
     }
 
-    var url =  "https://api.iextrading.com/1.0/stock/market/batch?symbols=" + stockSymbolRequest + "&types=quote,stats,price";
+    let url =  "https://api.iextrading.com/1.0/stock/market/batch?symbols=" + stockSymbolRequest + "&types=quote,stats,price";
 
     // Returns whether stockMarket is open or closed
-    var openClosedResult = stockMarketTime();
+    let openClosedResult = stockMarketTime();
 
     // Checking to see if fullPortfolio is atLeast 1
     if (fullPortfolio.length >= 1) {
@@ -210,125 +204,121 @@ function issueBatchRequestP(fullPortfolio) {
         console.log("Nothing in portfolio");
 
         // Nothing in portfolio, then display Add items in portfolio
-        for(var i = 0; i < 4; i++){
-            var companyNameE0 = "CompanyName" + i;
+        for(let i = 0; i < 4; i++){
+            let companyNameE0 = "CompanyName" + i;
             document.getElementById(companyNameE0).innerHTML = "Add Items to your Portfolio";
         }
 
         // Finding Table
-        var table = document.getElementById("portfolioTable");
+        let table = document.getElementById("portfolioTable");
 
         // Display Items empty in table, create only one cell
-        var row = table.insertRow(1);
-        var cell = row.insertCell((0));
+        let row = table.insertRow(1);
+        let cell = row.insertCell((0));
         cell.innerHTML = "Add Items to your Portfolio";
 
-        for (var i = 1; i < 9; i++) {
-            var celli = row.insertCell((i));
+        for (let i = 1; i < 9; i++) {
+            let celli = row.insertCell((i));
             celli.innerHTML = "";
         }
     }
 }
 
-var portfolioArray = [];
+let portfolioArray = [];
 
 /** Displaying the Portfolio Table **/
 function displayDataToTableP(data, fullPortfolio) {
-    var percentArray = [];
-    var purchasedEquity = 0;
-    var currentEquity = 0;
-    var profit = 0;
-    var afterTaxProfit = 0;
+    let percentArray = [];
+    let cpArray = [];
+    let purchasedEquity = 0;
+    let currentEquity = 0;
+    let profit = 0;
+    let afterTaxProfit = 0;
 
     // Finding Table
-    var table = document.getElementById("portfolioTable");
+    let table = document.getElementById("portfolioTable");
 
     // Checking if something in fullPortfolio
 
     // Returning the price and stats for each Stock Symbol
-    for (var i = 0; i < fullPortfolio.length; i++) {
+    for (let i = 0; i < fullPortfolio.length; i++) {
         // console.log("Returning quote: " + i , data[Object.keys(data)[i]].quote);
         // console.log("Returning stats: " + i , data[Object.keys(data)[i]].stats);
         // console.log("Returning price: " + i , data[Object.keys(data)[i]].price);
         // console.log("-----------------------------------------------");
 
         // Transfers stock to the Individual StockPage
-        var stockTransferURL = "IndividualStockPage.html?stock=" + data[fullPortfolio[i].stockSymbol].quote.symbol + "#";
+        let stockTransferURL = "IndividualStockPage.html?stock=" + data[fullPortfolio[i].stockSymbol].quote.symbol + "#";
 
         // Inserting rows
-        var row = table.insertRow(i + 1);
+        let row = table.insertRow(i + 1);
         row.setAttribute("data-pk", fullPortfolio[i].pk);
 
         // Displaying Stock Symbol  (FROM FIREBASE)
-        var cell0 = row.insertCell((0));
+        let cell0 = row.insertCell((0));
         cell0.innerHTML = fullPortfolio[i].stockSymbol.link(stockTransferURL);
 
         // Date purchased           (FROM FIREBASE)
-        var cell1 = row.insertCell((1));
+        let cell1 = row.insertCell((1));
         cell1.innerHTML = fullPortfolio[i].date;
 
         // Purchased Price          (FROM FIREBASE)
-        var cell2 = row.insertCell((2));
+        let cell2 = row.insertCell((2));
         cell2.innerHTML = currencySymbole + " " + numberWithCommas(fx.convert(fullPortfolio[i].price).toFixed(2));
 
         // Current Price            (FROM IEX)
-        var cell3 = row.insertCell((3));
+        let cell3 = row.insertCell((3));
+        cpArray.push(fx.convert(data[fullPortfolio[i].stockSymbol].price).toFixed(2));
         cell3.innerHTML = currencySymbole + " " + numberWithCommas(fx.convert(data[fullPortfolio[i].stockSymbol].price).toFixed(2));
 
         // Quantity                 (FROM FIREBASE)
-        var cell4 = row.insertCell((4));
+        let cell4 = row.insertCell((4));
         cell4.innerHTML = numberWithCommas(fullPortfolio[i].quantity);
 
         // Purchased Equity         (FROM FIREBASE)
-        var cell5 = row.insertCell((5));
+        let cell5 = row.insertCell((5));
         cell5.innerHTML = currencySymbole + " " + numberWithCommas((fx.convert(fullPortfolio[i].price * fullPortfolio[i].quantity)).toFixed(2));
         purchasedEquity += Number(fx.convert((fullPortfolio[i].price * fullPortfolio[i].quantity)).toFixed(2));
 
         // console.log(purchasedEquity);
 
         // Current Equity           (Calculation)
-        var cell6 = row.insertCell((6));
+        let cell6 = row.insertCell((6));
         cell6.innerHTML = currencySymbole + " " + numberWithCommas(fx.convert((data[fullPortfolio[i].stockSymbol].price * fullPortfolio[i].quantity)).toFixed(2));
         currentEquity += Number((data[fullPortfolio[i].stockSymbol].price * fullPortfolio[i].quantity).toFixed(2));
 
         // Profit                   (Calculation)
-        var cell7 = row.insertCell((7));
-        var profitI = calcProfit(data, fullPortfolio, i);
+        let cell7 = row.insertCell((7));
+        let profitI = calcProfit(data, fullPortfolio, i);
 
-        // Only Accepts Positive Profit
-        if (profitI > 0){
-            profit += profitI;
-        }
+        profit += profitI;
 
         cell7.innerHTML = currencySymbole + " " + numberWithCommas(fx.convert(profitI).toFixed(2));
 
         // After Tax profit         (Calculation)
-        var cell8 = row.insertCell((8));
-        var afterTaxProfitI = calcAfterTaxProfit(data, fullPortfolio, i);
+        let cell8 = row.insertCell((8));
+        let afterTaxProfitI = calcAfterTaxProfit(data, fullPortfolio, i);
 
-        // Only Accepts Positive AfterTax Profit
-        if (afterTaxProfitI > 0){
-            afterTaxProfit += afterTaxProfitI;
-        }
+        afterTaxProfit += afterTaxProfitI;
 
         cell8.innerHTML = currencySymbole + " " + numberWithCommas(fx.convert(afterTaxProfitI).toFixed(2));
 
         // Current Percent Change   (Calculation)   Bought price vs current price
-        var cell9 = row.insertCell((9));
+        let cell9 = row.insertCell((9));
         cell9.innerHTML = (((data[fullPortfolio[i].stockSymbol].price - fullPortfolio[i].price) / fullPortfolio[i].price) * 100).toFixed(2).toString();
 
         // Delete Button            (FROM FIREBASE)
-        var cell10 = row.insertCell((10));
+        let cell10 = row.insertCell((10));
         cell10.setAttribute("class", "deleteButton");
         cell10.style.display = 'flex';
         cell10.style.alignItems = 'center';
         cell10.style.justifyContent = 'center';
 
-        var buttonDelete = document.createElement("BUTTON");
+        let buttonDelete = document.createElement("BUTTON");
         buttonDelete.appendChild(document.createTextNode("Delete"));
         buttonDelete.addEventListener('click', function (button) {
-            var row = button.path[2];
-            var stockSymbol = row.firstChild.firstChild.innerHTML;
+            let row = button.path[2];
+            let stockSymbol = row.firstChild.firstChild.innerHTML;
 
             //removes the row from table
             row.parentNode.removeChild(row);
@@ -357,7 +347,7 @@ function displayDataToTableP(data, fullPortfolio) {
     }
 
     // Send to Bar Chart
-    grabPortfolioBarChart(fullPortfolio, percentArray);
+    grabPortfolioBarChart(fullPortfolio, cpArray);
 
     // Displaying Total Purchased Equity
     document.getElementById("TotalPurchasedEquity").innerHTML = currencySymbole + " " + numberWithCommas(fx.convert(purchasedEquity).toFixed(2));
@@ -381,13 +371,13 @@ function displayDataToTableP(data, fullPortfolio) {
 
 /** Calculate Profit **/
 function calcProfit(data, fullPortfolio, i){
-    var purchasedEquit = fullPortfolio[i].price * fullPortfolio[i].quantity;
-    var currentEquit = (data[fullPortfolio[i].stockSymbol].price * fullPortfolio[i].quantity);
+    let purchasedEquit = fullPortfolio[i].price * fullPortfolio[i].quantity;
+    let currentEquit = (data[fullPortfolio[i].stockSymbol].price * fullPortfolio[i].quantity);
 
     console.log(purchasedEquit);
     console.log(currentEquit);
 
-    var profitI = currentEquit - purchasedEquit;
+    let profitI = currentEquit - purchasedEquit;
     console.log(profitI);
 
     return profitI;
@@ -396,17 +386,17 @@ function calcProfit(data, fullPortfolio, i){
 /** Calculate After Tax Profit **/
 function calcAfterTaxProfit(data, fullPortfolio, i) {
 
-    var after1yearTotal = 0;
-    var before1yearTotal = 0;
+    let after1yearTotal = 0;
+    let before1yearTotal = 0;
 
     // Parsing each date in the portfolio to convert to JS Date format
-    var month =  "";
+    let month =  "";
     month = fullPortfolio[i].date.substring(5,7);                               // 03
 
-    var year = "";
+    let year = "";
     year = fullPortfolio[i].date.substring(0,4);                                // 2018
 
-    var day = "";
+    let day = "";
     day = fullPortfolio[i].date.substring(8,10);                                // 12
 
     // Converting month number to month name
@@ -437,8 +427,8 @@ function calcAfterTaxProfit(data, fullPortfolio, i) {
     }
 
     // setting old date to be compared to current date
-    var givenDate = new Date(month + " " + day + "," + year);
-    var curDate = new Date();
+    let givenDate = new Date(month + " " + day + "," + year);
+    let curDate = new Date();
 
     console.log("givenDate" + givenDate);
     console.log("curDate" + curDate);
@@ -447,51 +437,45 @@ function calcAfterTaxProfit(data, fullPortfolio, i) {
     curDate.setMonth(curDate.getMonth() - 12);
     curDate.toLocaleDateString();
 
-    var purchasedEquit = fullPortfolio[i].price * fullPortfolio[i].quantity;
-    var currentEquit = (data[fullPortfolio[i].stockSymbol].price * fullPortfolio[i].quantity);
+    let purchasedEquit = fullPortfolio[i].price * fullPortfolio[i].quantity;
+    let currentEquit = (data[fullPortfolio[i].stockSymbol].price * fullPortfolio[i].quantity);
 
     console.log(purchasedEquit);
     console.log(currentEquit);
 
     // Calculating profit
-    var profitBeforeTax = currentEquit - purchasedEquit;
+    let profitBeforeTax = currentEquit - purchasedEquit;
     console.log(profitBeforeTax);
 
-    // Checking if profit is positive
-    if (profitBeforeTax > 0 ){
-
-        // 15% in tax after 1 year, otherwise 30% if date is before
-        if ((givenDate < curDate) === true) {
-            var resultAfter = (15 / 100) * profitBeforeTax;
-            after1yearTotal += profitBeforeTax - resultAfter;
-            console.log("after1yearTotal" + i + ": ", after1yearTotal);
-            return after1yearTotal;
-        } else if ((givenDate < curDate) === false) {
-            var resultBefore = (30 / 100) * profitBeforeTax;
-            before1yearTotal += profitBeforeTax - resultBefore;
-            console.log("before1yearTotal" + i + ": ", before1yearTotal);
-            return before1yearTotal;
-        }
-    } else {
-        return 0;
+    // 15% in tax after 1 year, otherwise 30% if date is before
+    if ((givenDate < curDate) === true) {
+        let resultAfter = (15 / 100) * profitBeforeTax;
+        after1yearTotal += profitBeforeTax - resultAfter;
+        console.log("after1yearTotal" + i + ": ", after1yearTotal);
+        return after1yearTotal;
+    } else if ((givenDate < curDate) === false) {
+        let resultBefore = (30 / 100) * profitBeforeTax;
+        before1yearTotal += profitBeforeTax - resultBefore;
+        console.log("before1yearTotal" + i + ": ", before1yearTotal);
+        return before1yearTotal;
     }
 }
 
 /** Issuing Batch Request for Watchlist **/
 function issueBatchRequestW(fullWatchlist){
 
-    var stockSymbolRequest = "";
+    let stockSymbolRequest = "";
 
     // Enumerating over all stock Symbols for portfolio
-    for (var i = 0; i < fullWatchlist.length; i++){
+    for (let i = 0; i < fullWatchlist.length; i++){
         stockSymbolRequest += fullWatchlist[i].stockSymbol + ",";
     }
 
     // Concate URL
-    var url =  "https://api.iextrading.com/1.0/stock/market/batch?symbols=" + stockSymbolRequest + "&types=quote,stats,price";
+    let url =  "https://api.iextrading.com/1.0/stock/market/batch?symbols=" + stockSymbolRequest + "&types=quote,stats,price";
 
     // Returns whether stockMarket is open or closed
-    var openClosedResult = stockMarketTime();
+    let openClosedResult = stockMarketTime();
 
     // Checking if Atleast one is available
     if (fullWatchlist.length >= 1) {
@@ -533,31 +517,31 @@ function issueBatchRequestW(fullWatchlist){
 /** Watchlist **/
 function displayDataToTableW(data, fullWatchlist) {
 
-    var table = document.getElementById("watchlistTable");
+    let table = document.getElementById("watchlistTable");
 
         // console.log("-----------------------------------------------");
-        for (var i = 0; i < fullWatchlist.length; i++) {
+        for (let i = 0; i < fullWatchlist.length; i++) {
 
         // console.log("Returning quote: " + i, data[Object.keys(data)[i]].quote);
         // console.log("Returning stats: " + i, data[Object.keys(data)[i]].stats);
         // console.log("Returning price: " + i, data[Object.keys(data)[i]].price);
         // console.log("-----------------------------------------------");
 
-        var stockTransferURL = "IndividualStockPage.html?stock=" + data[Object.keys(data)[i]].quote.symbol + "#";
+        let stockTransferURL = "IndividualStockPage.html?stock=" + data[Object.keys(data)[i]].quote.symbol + "#";
 
-        var row = table.insertRow(i + 1);
+        let row = table.insertRow(i + 1);
         row.setAttribute("data-pk", fullWatchlist[i].pk);
 
         // Stock Symbol
-        var cell0 = row.insertCell((0));
+        let cell0 = row.insertCell((0));
         cell0.innerHTML = fullWatchlist[i].stockSymbol.link(stockTransferURL);
 
         // Current Price
-        var cell1 = row.insertCell((1));
+        let cell1 = row.insertCell((1));
         cell1.innerHTML = currencySymbole + " " + numberWithCommas(fx.convert(data[Object.keys(data)[i]].price).toFixed(2));
 
         // 3 Month Percent
-        var cell2 = row.insertCell((2));
+        let cell2 = row.insertCell((2));
 
         if (data[Object.keys(data)[i]].stats.month3ChangePercent > 0){
             cell2.innerHTML = unicodeUp + " " + ((data[Object.keys(data)[i]].stats.month3ChangePercent) * 100).toFixed(2).toString() + "%";
@@ -566,7 +550,7 @@ function displayDataToTableW(data, fullWatchlist) {
         }
 
         // 6 Month Percent
-        var cell3 = row.insertCell((3));
+        let cell3 = row.insertCell((3));
 
         if (data[Object.keys(data)[i]].stats.month6ChangePercent > 0){
             cell3.innerHTML = unicodeUp + " " + ((data[Object.keys(data)[i]].stats.month6ChangePercent) * 100).toFixed(2).toString() + "%";
@@ -575,7 +559,7 @@ function displayDataToTableW(data, fullWatchlist) {
         }
 
         // 1 Year Percent
-        var cell4 = row.insertCell((4));
+        let cell4 = row.insertCell((4));
 
         if (data[Object.keys(data)[i]].stats.year1ChangePercent > 0){
             cell4.innerHTML = unicodeUp + " " + ((data[Object.keys(data)[i]].stats.year1ChangePercent) * 100).toFixed(2).toString() + "%";
@@ -584,17 +568,17 @@ function displayDataToTableW(data, fullWatchlist) {
         }
 
         // add delete button
-        var cell5 = row.insertCell((5));
+        let cell5 = row.insertCell((5));
         cell5.setAttribute("class", "deleteButton");
         cell5.style.display = 'flex';
         cell5.style.alignItems = 'center';
         cell5.style.justifyContent = 'center';
 
-        var buttonDelete = document.createElement("BUTTON");
+        let buttonDelete = document.createElement("BUTTON");
         buttonDelete.appendChild(document.createTextNode("Delete"));
         buttonDelete.addEventListener('click', function (button) {
-            var row = button.path[2];
-            var stockSymbol = row.firstChild.firstChild.innerHTML;
+            let row = button.path[2];
+            let stockSymbol = row.firstChild.firstChild.innerHTML;
 
             //removes the row from table
             row.parentNode.removeChild(row);
@@ -608,7 +592,7 @@ function displayDataToTableW(data, fullWatchlist) {
 /** Displaying Donut **/
 function fillDonut(portfolioArray){
 
-    var donut = donutChart()
+    let donut = donutChart()
         .width(1000)
         .height(1000)
         .cornerRadius(3) // sets how rounded the corners are on each slice
@@ -625,9 +609,9 @@ function fillDonut(portfolioArray){
 
 // Return Last Updated
 function PageLoadTime(){
-    var time = new Date();
+    let time = new Date();
     // console.log("reached");
-    var pageLoadTimeString = time.toLocaleString('en-US', {
+    let pageLoadTimeString = time.toLocaleString('en-US', {
             hour: 'numeric',
             minute: 'numeric',
             hour12: true
@@ -649,16 +633,16 @@ function duplicates(array){
 /** Top Cards **/
 function displayCards(data, fullPortfolio) {
 
-    var filteredArrS = [];
-    var stockSymbol = [];
+    let filteredArrS = [];
+    let stockSymbol = [];
 
     // Pushing stock Symbols
-    for (var i = 0; i < fullPortfolio.length; i++) {
+    for (let i = 0; i < fullPortfolio.length; i++) {
         stockSymbol.push(fullPortfolio[i].stockSymbol);
     }
 
     // Removing Duplicates for stock Symbol
-    for (var i = 0; i < stockSymbol.length; i++) {
+    for (let i = 0; i < stockSymbol.length; i++) {
         filteredArrS = duplicates(stockSymbol);
     }
 
@@ -669,12 +653,12 @@ function displayCards(data, fullPortfolio) {
     if (filteredArrS.length > 4){
 
         // Return the First four in the list
-        for(var i = 0; i < 4; i++){
-            var companyNameI = "CompanyName" + i;
-            var stockPriceI = "StockPrice" + i;
-            var viewDetailsI = "viewDetails" + i;
+        for(let i = 0; i < 4; i++){
+            let companyNameI = "CompanyName" + i;
+            let stockPriceI = "StockPrice" + i;
+            let viewDetailsI = "viewDetails" + i;
 
-            var stockTransferURLI = "IndividualStockPage.html?stock=" + filteredArrS[i] + "#";
+            let stockTransferURLI = "IndividualStockPage.html?stock=" + filteredArrS[i] + "#";
 
             document.getElementById(companyNameI).innerHTML = limitCharacter((data[Object.keys(data)[i]].quote.companyName));
             document.getElementById(stockPriceI).innerHTML = numberWithCommas(data[Object.keys(data)[i]].price);
@@ -688,13 +672,13 @@ function displayCards(data, fullPortfolio) {
         if (filteredArrS.length >= 1) {
 
             // Return as many as possible first, if only 1, 2, or 3
-            var i = 0;
-            for(var ss in data){
-                var companyNameE = "CompanyName" + i;
-                var stockPriceE = "StockPrice" + i;
-                var viewDetails = "viewDetails" + i;
+            let i = 0;
+            for(let ss in data){
+                let companyNameE = "CompanyName" + i;
+                let stockPriceE = "StockPrice" + i;
+                let viewDetails = "viewDetails" + i;
 
-                var stockTransferURL = "IndividualStockPage.html?stock=" + filteredArrS[i] + "#";
+                let stockTransferURL = "IndividualStockPage.html?stock=" + filteredArrS[i] + "#";
 
                 document.getElementById(companyNameE).innerHTML = (data[Object.keys(data)[i]].quote.companyName);
                 document.getElementById(stockPriceE).innerHTML = numberWithCommas(data[Object.keys(data)[i]].price);
@@ -703,28 +687,28 @@ function displayCards(data, fullPortfolio) {
                 i++;
             }
 
-            var leftOver = 4 - filteredArrS.length;
+            let leftOver = 4 - filteredArrS.length;
 
             // Starting on second card for 1
             if (leftOver === 3) {
-                for(var i = 1; i < 4; i++){
-                    var companyNameE1 = "CompanyName" + i;
+                for(let i = 1; i < 4; i++){
+                    let companyNameE1 = "CompanyName" + i;
                     document.getElementById(companyNameE1).innerHTML = "Add Items to your Portfolio";
                 }
             }
 
             // Starting on third card for 2
             if (leftOver === 2) {
-                for(var i = 2; i < 4; i++){
-                    var companyNameE2 = "CompanyName" + i;
+                for(let i = 2; i < 4; i++){
+                    let companyNameE2 = "CompanyName" + i;
                     document.getElementById(companyNameE2).innerHTML = "Add Items to your Portfolio";
                 }
             }
 
             // Starting on fourth card for 3
             if (leftOver === 1) {
-                for(var i = 3; i < 4; i++){
-                    var companyNameE3 = "CompanyName" + i;
+                for(let i = 3; i < 4; i++){
+                    let companyNameE3 = "CompanyName" + i;
                     document.getElementById(companyNameE3).innerHTML = "Add Items to your Portfolio";
                 }
             }
@@ -733,8 +717,8 @@ function displayCards(data, fullPortfolio) {
             // console.log("No Items in portfolio");
 
             // if its less than 0 then
-            for(var i = 0; i < 4; i++){
-                var companyNameE0 = "CompanyName" + i;
+            for(let i = 0; i < 4; i++){
+                let companyNameE0 = "CompanyName" + i;
                 document.getElementById(companyNameE0).innerHTML = "Add Items to your Portfolio";
             }
         }
@@ -743,7 +727,7 @@ function displayCards(data, fullPortfolio) {
 
 // Limiting character limit for company Name for Cards
 function limitCharacter(companyName){
-    var companyNameLimit = "";
+    let companyNameLimit = "";
 
     if (companyName.length > 35) {
         companyNameLimit = companyName.substring(0, 35);

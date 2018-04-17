@@ -61,6 +61,23 @@ function parseURLParams(url) {
     return parms;
 }
 
+// Loading first and Last name at the top of the screen
+$(document).ready(function () {
+    firebase.auth().onAuthStateChanged(function (user) {
+
+        //fill input fields with values
+        let ref = firebase.database().ref("Users");
+        ref.orderByKey().equalTo(user.uid).once("value", function(snapshot) {
+
+            snapshot.forEach(function (value){
+
+                document.getElementById("fstName").innerHTML = value.val().firstName;
+                document.getElementById("lstName").innerHTML = value.val().lastName;
+            });
+        });
+    })
+});
+
 $(document).ready(function () {
 
     firebase.auth().onAuthStateChanged(function (user) {
@@ -135,16 +152,9 @@ $(document).ready(function () {
                             var revisedCompany = null;
 
                             // Check for length of company name
-                            if (companyName.length > 20) {
+                            if (companyName.length > 25) {
                                 revisedCompany = companyName.slice(0, 50);
                                 document.getElementById("CompanyName").innerHTML = revisedCompany + "...";
-
-                                // Calling tooltip
-                                $('#CompanyName').tooltip({
-                                    title: hoverGetData(companyName),
-                                    html: true,
-                                    container: 'body'
-                                });
 
                             } else {
                                 document.getElementById("CompanyName").innerHTML = companyName;

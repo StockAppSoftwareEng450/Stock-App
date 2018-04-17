@@ -5,6 +5,20 @@ body {}
     float: left;
 }
 
+/* Display first name */
+#fstName{
+    position: relative;
+    top: 9px;
+    color: #989B9F;
+}
+
+/* Display Last name */
+#lstName{
+    position: relative;
+    top: 9px;
+    color: #989B9F;
+}
+
 .axis {
     font: 10px sans-serif;
 }

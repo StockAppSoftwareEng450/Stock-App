@@ -1,3 +1,17 @@
+/* Displaying First name */
+#fstName{
+    position: relative;
+    top: 9px;
+    color: #989B9F;
+}
+
+/* Displaying Last Name */
+#lstName{
+    position: relative;
+    top: 9px;
+    color: #989B9F;
+}
+
 #gainersTable {
      font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
      border-collapse: collapse;
