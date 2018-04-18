@@ -338,7 +338,7 @@ function updateLiveButton () {
 
                         // Finding the minimum value in the close price in the JSON File
                         minimum = Array.min(arrayClose);
-                        console.log("minimum: " + minimum);
+                        // console.log("minimum: " + minimum);
 
                         // Taking 5% off of graph to dynamically show white space at the bottom of the minimum value
                         result = (.05 / 100) * minimum;
@@ -355,7 +355,7 @@ function updateLiveButton () {
                 count++;
 
                 if (count > 1) {
-                    console.log("reached 10!");
+                    // console.log("reached 10!");
 
                     // Updating Price, lineColor, data, and result
                     updatePriceAxisAndMore(firstPrice,lastPrice,lineColor, objectPrice, result, currentGraph);

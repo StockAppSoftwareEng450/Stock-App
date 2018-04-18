@@ -75,11 +75,11 @@ function donutChart() {
             // add tooltip to mouse events on slices and labels
             d3.selectAll('.labelName text, .slices path').call(toolTip);
 
-            console.log("number of stocks: " + data.length);
+            // console.log("number of stocks: " + data.length);
 
             // if length is greater than 8 scale highest possible
             if ( data.length > 10) {
-                console.log('reached');
+                // console.log('reached');
 
                 var decrAmount = (data.length * 1.5);
 
@@ -87,9 +87,9 @@ function donutChart() {
                 legendSpacing -= (decrAmount / 100) * legendSpacing;
                 fontsize -= (decrAmount / 100) * fontsize;
 
-                console.log(legendRectSize);
-                console.log(legendSpacing);
-                console.log(fontsize);
+                // console.log(legendRectSize);
+                // console.log(legendSpacing);
+                // console.log(fontsize);
             }
 
             // Adding legend
@@ -103,7 +103,7 @@ function donutChart() {
                     var offset =  height * color.domain().length / 2;
                     var horz = -2 * legendRectSize;
                     var vert = i * height - offset;
-                    console.log(i);
+                    // console.log(i);
                     return 'translate(' + horz + ',' + vert + ')';
                 });
 
@@ -164,7 +164,7 @@ function donutChart() {
 
                     // if length is greater than 8 scale highest possible
                     if ( data.length > 10) {
-                        console.log('reached');
+                        // console.log('reached');
 
                         var decrAmount = (data.length * 1.5);
 
@@ -172,9 +172,9 @@ function donutChart() {
                         legendSpacing -= (decrAmount / 100) * legendSpacing;
                         fontsize -= (decrAmount / 100) * fontsize;
 
-                        console.log(legendRectSize);
-                        console.log(legendSpacing);
-                        console.log(fontsize);
+                        // console.log(legendRectSize);
+                        // console.log(legendSpacing);
+                        // console.log(fontsize);
                     }
 
                     var legend = svg.selectAll('.legend')
@@ -192,7 +192,7 @@ function donutChart() {
                             return 'translate(' + horz + ',' + vert + ')';
                         });
 
-                    console.log("count: " + (count + 1));
+                    // console.log("count: " + (count + 1));
 
                     legend.append('rect')
                         .attr('width', legendRectSize)

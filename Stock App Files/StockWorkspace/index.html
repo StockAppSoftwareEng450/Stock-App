@@ -118,16 +118,10 @@
                 <form class="form-inline my-2 my-lg-0 mr-lg-2">
                     <div class="input-group">
                         <div class="easy-autocomplete" style="width: 225px;">
-                        <input type="text" id="myInput" style="width:225px; padding-bottom: 8px;padding-top: 8px;"
-                               class="form-control" onkeypress=" return searchKeyPress(event);"
+                        <input type="text" id="myInput" style="width:225px; border-radius: 4px; padding-bottom: 8px;padding-top: 8px;"
+                               class="form-control" onkeypress="handle(event);"
                                placeholder="Search for a Company" title="Company Search">
                         </div>
-                        <span class="input-group-btn">
-                              <button id="btnSearch" class="btn btn-primary" type="button" onclick="UrlStringPass()"
-                                        value="Search" >
-                                <i class="fa fa-search"></i>
-                              </button>
-                        </span>
                     </div>
                 </form>
             </li>
@@ -166,9 +160,9 @@
                         <th scope="col">Purchase Price</th>         <!-- 2 -->
                         <th scope="col">Current Price</th>          <!-- 3 -->
                         <th scope="col">Quantity</th>               <!-- 4 -->
-                        <th scope="col">Purchased Equity</th>       <!-- 5-->
+                        <th scope="col">Purchase Cost</th>          <!-- 5-->
                         <th scope="col">Current Equity</th>         <!-- 6 -->
-                        <th scope="col">Profit</th>                 <!-- 7 -->
+                        <th scope="col">Net Profit/ Loss</th>                 <!-- 7 -->
                         <th scope="col">After Tax Profit</th>       <!-- 8 -->
                         <th scope="col">Current Percent Change</th> <!-- 9 -->
                         <th scope="col">Delete?</th>                <!-- 10 -->
@@ -222,13 +216,13 @@
                             </div>
                             <div class="col-sm-4 text-center my-auto">
                                 <div id="TotalPurchasedEquity" class="h4 mb-0 text-primary"></div>
-                                <div class="small text-muted">Total Purchased Equity</div>
+                                <div class="small text-muted">Total Purchase Cost</div>
                                 <hr>
                                 <div id="TotalCurrentEquity" class="h4 mb-0 text-warning"></div>
                                 <div class="small text-muted">Total Current Equity</div>
                                 <hr>
                                 <div id="profit" class="h4 mb-0 text-success"></div>
-                                <div class="small text-muted">Profit</div>
+                                <div class="small text-muted">Net Profit/ Loss</div>
                                 <hr>
                                 <div id="afterTax" class="h4 mb-0 text-info"></div>
                                 <div class="small text-muted">After Tax Profit</div>
@@ -262,13 +256,10 @@
 
                     </div>
                 </div>
-
             </div>
 
             <hr>
             <hr>
-
-
 
             <!-- Add to Watchlist -->
             <div class="card mb-3" id="indexWatchlist">
@@ -367,9 +358,6 @@
 
 <!-- Donut.js -->
 <script src="js/Donut.js"></script>
-
-<!-- JS that takes Search for Stock input a -->
-<!--<script src="js/index.js"></script>-->
 
 <!-- New Index File -->
 <script src="js/newIndex.js"></script>

@@ -11,7 +11,7 @@ function getOneDayPrice(fullPortfolio) {
             $.ajax({
                 url: url,
                 success: function (data) {
-                    console.log(data);
+                    // console.log(data);
                 }
             });
         }
@@ -23,7 +23,7 @@ function getOneDayPrice(fullPortfolio) {
         $.ajax({
             url: urle,
             success: function (data) {
-                console.log(data);
+                // console.log(data);
             }
         });
     }
@@ -88,7 +88,7 @@ function setPortfolioEquityBarGraph(fullPortfolio) {
 
                 equityData.push(help);
             }
-            console.log(equityData);
+            // console.log(equityData);
 
 
             var title = null;

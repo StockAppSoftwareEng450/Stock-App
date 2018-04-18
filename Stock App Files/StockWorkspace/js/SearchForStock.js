@@ -6,11 +6,16 @@ $.ajax({
     success: function (data) {
         var options = {
             url: autoURL,
-            getValue: "name",
+            // getValue: "name",
+            getValue: function (element) {
+                // console.log($(element).prop("name"));
+                // console.log($(element).prop("symbol"));
+                return $(element).prop("name") + " (" + $(element).prop("symbol") + ")";
+            },
             template: {
                 type: "custom",
-                method: function(value, item) {
-                    return value + "  (" + item.symbol + ")";
+                method: function(value) {
+                    return value;
                 }
             },
             list: {
@@ -27,7 +32,7 @@ $.ajax({
                         window.location.href = "index.html";
                     }
 
-                    console.log(value);
+                    // console.log(value);
 
                     UrlStringPass(value);
                     //console.log(value);
@@ -38,11 +43,9 @@ $.ajax({
     }
 });
 
-
-
 // Takes the input on button press and parses the string.
 function UrlStringPass(value) {
-    console.log("Search for Stock input: " + value);
+    // console.log("Search for Stock input: " + value);
 
     // Check for undefined value
     if (value === undefined ) {
@@ -51,8 +54,40 @@ function UrlStringPass(value) {
         window.location.href = "index.html";
     }
 
-
     // Passes string input through URL
     window.location.href = "IndividualStockPage.html?stock=" + value + "#";
+}
+
+// Handling the enter button
+function handle(e){
+    if(e.keyCode === 13){
+        e.preventDefault();
+
+        let index1;
+        let index2;
+        let value = $("#myInput").val();
+        
+        // Just making sure its a string
+        value = value.toString();
+
+        // parse Alcoa Corporation (AA) to AA
+        if (value.length > 6) {
+            value = value.split("").reverse().join("");
+
+            // Find whatever is between ) and (
+            index1 = value.indexOf(")");
+            index2 = value.indexOf("(");
+
+            value = value.slice((index1 + 1), index2);
+
+            // Now reverse the string that was previously reversed
+            value = value.split("").reverse().join("");
+        }
+
+        // Making sure that the string is UpperCase
+        value = value.toUpperCase();
+
+        UrlStringPass(value);
+    }
 }
 

@@ -178,7 +178,7 @@ function issueBatchRequestP(fullPortfolio) {
                         displayDataToTableP(data,fullPortfolio);
 
                         // Display Cards
-                        displayCards(data, fullPortfolio);
+                        // displayCards(data, fullPortfolio);
                     }
                 });
             });
@@ -195,13 +195,13 @@ function issueBatchRequestP(fullPortfolio) {
                         displayDataToTableP(data, fullPortfolio);
 
                         // Display cards
-                        displayCards(data, fullPortfolio);
+                        // displayCards(data, fullPortfolio);
                     }
                 });
             })
         }
     } else {
-        console.log("Nothing in portfolio");
+        // console.log("Nothing in portfolio");
 
         // Nothing in portfolio, then display Add items in portfolio
         for(let i = 0; i < 4; i++){
@@ -374,11 +374,11 @@ function calcProfit(data, fullPortfolio, i){
     let purchasedEquit = fullPortfolio[i].price * fullPortfolio[i].quantity;
     let currentEquit = (data[fullPortfolio[i].stockSymbol].price * fullPortfolio[i].quantity);
 
-    console.log(purchasedEquit);
-    console.log(currentEquit);
+    // console.log(purchasedEquit);
+    // console.log(currentEquit);
 
     let profitI = currentEquit - purchasedEquit;
-    console.log(profitI);
+    // console.log(profitI);
 
     return profitI;
 }
@@ -430,8 +430,8 @@ function calcAfterTaxProfit(data, fullPortfolio, i) {
     let givenDate = new Date(month + " " + day + "," + year);
     let curDate = new Date();
 
-    console.log("givenDate" + givenDate);
-    console.log("curDate" + curDate);
+    // console.log("givenDate" + givenDate);
+    // console.log("curDate" + curDate);
 
     curDate.toLocaleDateString();
     curDate.setMonth(curDate.getMonth() - 12);
@@ -440,23 +440,23 @@ function calcAfterTaxProfit(data, fullPortfolio, i) {
     let purchasedEquit = fullPortfolio[i].price * fullPortfolio[i].quantity;
     let currentEquit = (data[fullPortfolio[i].stockSymbol].price * fullPortfolio[i].quantity);
 
-    console.log(purchasedEquit);
-    console.log(currentEquit);
+    // console.log(purchasedEquit);
+    // console.log(currentEquit);
 
     // Calculating profit
     let profitBeforeTax = currentEquit - purchasedEquit;
-    console.log(profitBeforeTax);
+    // console.log(profitBeforeTax);
 
     // 15% in tax after 1 year, otherwise 30% if date is before
     if ((givenDate < curDate) === true) {
         let resultAfter = (15 / 100) * profitBeforeTax;
         after1yearTotal += profitBeforeTax - resultAfter;
-        console.log("after1yearTotal" + i + ": ", after1yearTotal);
+        // console.log("after1yearTotal" + i + ": ", after1yearTotal);
         return after1yearTotal;
     } else if ((givenDate < curDate) === false) {
         let resultBefore = (30 / 100) * profitBeforeTax;
         before1yearTotal += profitBeforeTax - resultBefore;
-        console.log("before1yearTotal" + i + ": ", before1yearTotal);
+        // console.log("before1yearTotal" + i + ": ", before1yearTotal);
         return before1yearTotal;
     }
 }
@@ -510,7 +510,7 @@ function issueBatchRequestW(fullWatchlist){
             })
         }
     } else {
-        console.log("Nothing in Watchlist");
+        // console.log("Nothing in Watchlist");
     }
 }
 
@@ -646,8 +646,8 @@ function displayCards(data, fullPortfolio) {
         filteredArrS = duplicates(stockSymbol);
     }
 
-    console.log(filteredArrS);
-    console.log((data));
+    // console.log(filteredArrS);
+    // console.log((data));
 
     // If portfolio contains more than four, return the first four, if not, return as many as possible with (add more in company name)
     if (filteredArrS.length > 4){

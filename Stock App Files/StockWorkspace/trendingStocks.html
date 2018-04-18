@@ -97,16 +97,10 @@
                 <form class="form-inline my-2 my-lg-0 mr-lg-2">
                     <div class="input-group">
                         <div class="easy-autocomplete" style="width: 225px;">
-                            <input type="text" id="myInput" style="width:225px; padding-bottom: 8px;padding-top: 8px;"
-                                   class="form-control" onkeypress=" return searchKeyPress(event);"
+                            <input type="text" id="myInput" style="width:225px; border-radius: 4px; padding-bottom: 8px;padding-top: 8px;"
+                                   class="form-control" onkeypress="handle(event);"
                                    placeholder="Search for a Company" title="Company Search">
                         </div>
-                        <span class="input-group-btn">
-                              <button id="btnSearch" class="btn btn-primary" type="button" onclick="UrlStringPass()"
-                                      value="Search" >
-                                <i class="fa fa-search"></i>
-                              </button>
-                        </span>
                     </div>
                 </form>
             </li>
