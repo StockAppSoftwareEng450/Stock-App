@@ -53,7 +53,7 @@ $(document).ready(function () {
     });
 
     // Calling footer Copyright
-    setCopyrightTime();
+    //setCopyrightTime();
 });
 
 /** Clean Portfolio **/

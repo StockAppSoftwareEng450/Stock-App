@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,9 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
 
-    <meta name="author" content="">
+    <meta name="author" content="Jarrett Horton">
 
-    <title>FAQ</title>
+    <title>Contact Us</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -26,8 +27,8 @@
     <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="http://cdnjs.cloudflare.com/ajax/libs/fancybox/1.3.4/jquery.fancybox-1.3.4.css" />
-
+    <link rel="stylesheet" type="text/css" media="screen"
+          href="http://cdnjs.cloudflare.com/ajax/libs/fancybox/1.3.4/jquery.fancybox-1.3.4.css"/>
 
     <!-- Auto complete  -->
     <link rel="stylesheet" href="css/autocomplete.css">
@@ -38,7 +39,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html">Stockalytics</a>
+    <a class="navbar-brand" href="index.html">Stock Portfolio</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
             data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
             aria-label="Toggle navigation">
@@ -55,7 +56,7 @@
         <ul class="navbar-nav ml-auto">
 
             <!-- Trending Stocks -->
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" >
+            <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link mr-lg-2" href="trendingStocks.html" style="padding-right: 8px;">
                     <i class="fa fa-fw fa-sitemap"></i>
                     <span class="nav-link-text"> Trending Stocks</span>
@@ -74,7 +75,8 @@
                 <form class="form-inline my-2 my-lg-0 mr-lg-2">
                     <div class="input-group">
                         <div class="easy-autocomplete" style="width: 225px;">
-                            <input type="text" id="myInput" style="width:225px; border-radius: 4px; padding-bottom: 8px;padding-top: 8px;"
+                            <input type="text" id="myInput"
+                                   style="width:225px; border-radius: 4px; padding-bottom: 8px;padding-top: 8px;"
                                    class="form-control" onkeypress="handle(event);"
                                    placeholder="Search for a Company" title="Company Search">
                         </div>
@@ -93,91 +95,17 @@
 </nav>
 
 <div class="container-fluid">
-
     <div class="col-lg-8" style="padding-top: 80px;">
         <div class="card mb-3">
-            <div class="card-header">
-                Navigating the Individual Stock Page
-            </div>
-            <div class="card-body" style="padding: 15px">
-                <p>In our Application, we have a search for stock function that allow the user to search for specific
-                    stock fetures. After selecting the correct stock from the dropdown menu, the user is given the
-                    choice to either buy the stock or add the stock to their watchlist.
-                    The interactive graphs give up to date information on the companies stock prices</p>
-
-                <div class="card mb-3" style="margin-left: 25px; margin-top: 35px">
-                    <div class="card-header">
-                        Company information
-                    </div>
-                    <div class="card-body" style="padding: 15px">
-                        <p>Our application displays information about the company searched such as their name, a brief
-                            summary of the
-                            company, as well as the stock prices in several time ranges, from live that updates every
-                            minute to 5 years back. </p><br><br>
-                        <div>
-                            <img class="fancybox" src="img/individualstock.png" style="width:500px;height:300px;"
-                                 alt="homepage">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card mb-3" style="margin-left: 25px; margin-top: 50px">
-                    <div class="card-header">
-                        Stats
-                    </div>
-                    <div class="card-body" style="padding: 15px">
-                        <p>The Stats section contains information on the companies highs and lows, dividend rates, their
-                            latest EPS, their debt, and their gross profit.</p><br><br>
-                        <div>
-                            <img class="fancybox" src="img/stats.png" style="width:350px;height:300px;" alt="homepage">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card mb-3" style="margin-left: 25px; margin-top: 50px">
-                    <div class="card-header">
-                        News
-                    </div>
-                    <div class="card-body" style="padding: 15px">
-                        <p>This section presents the user with a link to recent news regarding the Stock Market.</p><br><br>
-                        <div>
-                            <img class="fancybox" src="img/news.png" style="width:300px;height:300px;" alt="homepage">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card mb-3" style="margin-left: 25px; margin-top: 50px">
-                    <div class="card-header">
-                        Peers
-                    </div>
-                    <div class="card-body" style="padding: 15px">
-                        <p>Peers are group of individuals or entities that share similar characteristics and interests.
-                            Peer groups, in the case of people, have characteristics which include similarities such as
-                            socio-economic status, level of education, ethnic background, and so on among its individual
-                            members.</p><br><br>
-                        <div>
-                            <img class="fancybox" src="img/peers.png" style="width:300px;height:300px;" alt="homepage">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            <h2>Feel Free to contact us at: <br> jghorton14@gmail.com or at (540)416-1504</h2>
         </div>
     </div>
 </div>
 
-<!-- Pagination -->
-<div class="w3-center w3-padding-32">
-    <div class="w3-bar">
-        <a class="w3-button w3-hover-black" href="FAQ.html">1</a>
-        <a class="w3-button w3-black" href="FAQ2.html">2</a>
-        <a class="w3-button w3-hover-black" href="FAQ3.html">3</a>
-    </div>
-</div><br><br>
-
 <footer class="sticky-footer">
     <div class="container">
         <div class="text-center">
+            <small id="Copyright"></small>
             <small><a href="privacypolicy.htm">Privacy Policy</a></small>
             <small><a href="contactUs.html">Contact Us</a> </small>
         </div>
@@ -234,18 +162,22 @@
 <!--FAQ Scripts-->
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/fancybox/1.3.4/jquery.fancybox-1.3.4.pack.min.js"></script>
+<script type="text/javascript"
+        src="http://cdnjs.cloudflare.com/ajax/libs/fancybox/1.3.4/jquery.fancybox-1.3.4.pack.min.js"></script>
 <script src="js/FAQ.js"></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117693628-1"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
     gtag('js', new Date());
 
     gtag('config', 'UA-117693628-1');
 </script>
-
 </body>
 </html>

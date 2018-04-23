@@ -324,7 +324,7 @@ $(document).ready(function () {
     })
 
     // Calling footer for Copyright
-    setCopyrightTime();
+    // setCopyrightTime();
 
 });
 

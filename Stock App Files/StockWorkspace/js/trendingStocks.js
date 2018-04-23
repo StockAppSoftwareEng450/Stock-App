@@ -59,16 +59,16 @@ setTimeout(function () {
                     let cell0 = row.insertCell(0);
                     cell0.innerHTML = symbol.link(stockTransferURL);
 
-                    let latestPrice = currencySymbole + " " + fx.convert(data[i].latestPrice).toFixed(2);
+                    let latestPrice = currencySymbole + " $" + (data[i].latestPrice).toFixed(2);
                     let cell1 = row.insertCell(1);
                     cell1.innerHTML = latestPrice.toString();
 
 
-                    let highPrice = currencySymbole + " " + fx.convert(data[i].high).toFixed(2);
+                    let highPrice = currencySymbole + " $" + (data[i].high).toFixed(2);
                     let cell2 = row.insertCell(2);
                     cell2.innerHTML = highPrice.toString();
 
-                    let lowPrice = currencySymbole + " " + fx.convert(data[i].low).toFixed(2);
+                    let lowPrice = currencySymbole + " $" + (data[i].low).toFixed(2);
                     let cell3 = row.insertCell(3);
                     cell3.innerHTML = lowPrice.toString();
 
@@ -89,7 +89,7 @@ setTimeout(function () {
 }, 250);
 
 // Calling footer Copyright
-setCopyrightTime();
+// setCopyrightTime();
 
 let losersTable = document.getElementById("losersTable");
 let stockLoserUrl = "https://api.iextrading.com/1.0/stock/market/list/losers";
@@ -109,15 +109,15 @@ setTimeout(function () {
                 let cell0 = row.insertCell(0);
                 cell0.innerHTML = symbol.link(stockTransferURL);
 
-                let latestPrice = currencySymbole + " " + fx.convert(data[i].latestPrice).toFixed(2);
+                let latestPrice = currencySymbole + " $" + (data[i].latestPrice).toFixed(2);
                 cell1 = row.insertCell(1);
                 cell1.innerHTML = latestPrice.toString();
 
-                let highPrice = currencySymbole + " " + fx.convert(data[i].high).toFixed(2);
+                let highPrice = currencySymbole + " $" + (data[i].high).toFixed(2);
                 cell2 = row.insertCell(2);
                 cell2.innerHTML = highPrice.toString();
 
-                let lowPrice = currencySymbole + " " + fx.convert(data[i].low).toFixed(2);
+                let lowPrice = currencySymbole + " $" + (data[i].low).toFixed(2);
                 cell3 = row.insertCell(3);
                 cell3.innerHTML = lowPrice.toString();
 

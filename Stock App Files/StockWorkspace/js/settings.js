@@ -30,7 +30,7 @@ $(document).ready(function () {
     });
 
     // Setting copyright footer to current
-    setCopyrightTime();
+    // setCopyrightTime();
 
 });
 
