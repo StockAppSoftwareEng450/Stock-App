@@ -1,4 +1,4 @@
-# Stock App
+# Stockalytics
 
 
 In our Software Engineering class we were tasked with designing a program. We chose to create a clean way of managing stocks by creating a website that lets users track, manage, and add stocks to thier portfolio in a easy to use manner. Found at: http://stockapp.jarretthorton.com/
