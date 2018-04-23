@@ -57,3 +57,23 @@
     margin-bottom: 10px;
     display:none;
 }
+
+/* Invalid Password */
+.password-no-symbols {
+    text-align: center;
+    padding: 10px;
+    background: red;
+    color: white;
+    margin-bottom: 10px;
+    display:none;
+}
+
+/* Invalid Password */
+.password-unconfirmed {
+    text-align: center;
+    padding: 10px;
+    background: red;
+    color: white;
+    margin-bottom: 10px;
+    display:none;
+}

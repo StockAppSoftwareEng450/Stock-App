@@ -65,7 +65,30 @@ function submitForm(e){
         }, 5000);
     }
 
-    /** INVALID PASSWORD MESSAGE TO USER**/
+    /** INVALID PASSWORD MESSAGE TO USER
+     * Return 3 for non-matching passwords
+     * Return 2 for symbols in password
+     * Return False for not 8 chars, 1 num, 1 upper, 1 lower
+     * Return password if it's all good
+     * **/
+    if (checkedArray[4] === 3 ){
+        document.querySelector('.password-unconfirmed').style.display = 'block';
+        console.log("showing password alert");
+
+        // //hide alert after 5 seconds
+        setTimeout(function(){
+            document.querySelector('.password-unconfirmed').style.display = 'none';
+        }, 5000);
+    }
+    if (checkedArray[4] === 2 ){
+        document.querySelector('.password-no-symbols').style.display = 'block';
+        console.log("showing password alert");
+
+        // //hide alert after 5 seconds
+        setTimeout(function(){
+            document.querySelector('.password-no-symbols').style.display = 'none';
+        }, 5000);
+    }
     if (checkedArray[4] === false ){
         document.querySelector('.password-invalid').style.display = 'block';
         console.log("showing password alert");
@@ -76,6 +99,7 @@ function submitForm(e){
         }, 5000);
     }
 
+    //send
     if (checkedArray[0] !== false && checkedArray[2] !== false &&
         checkedArray[3] !== false && checkedArray[4] !== false) {
 
@@ -149,32 +173,39 @@ function checkVals (fstName, lstName, email, phone, password, confirmPass) {
 
     console.log("phoneChecked " + phoneChecked);
 
-    /** PASSWORD **/
+    /** PASSWORD
+     * Return 3 for non-matching passwords
+     * Return 2 for symbols in password
+     * Return False for not 8 chars, 1 num, 1 upper, 1 lower
+     * Return password if it's all good
+     * **/
+
     var passRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;  // Minimum 8 chars, 1 num, 1 upper, 1 lower
     var passRegexResult = passRegex.test(password);
     //console.log("passRegexResult: " + passRegexResult);
 
-    if (passRegexResult === false){
-        passwordChecked = false;
-    } else {
-        passwordChecked = password;
-    }
+    var passNoSymbolRegex = /^[a-zA-Z0-9]+$/; //No symbols
+    var passNoSymResult = passNoSymbolRegex.test(password);
+    //console.log("passNoSymbolRegex: " + passNoSymResult);
 
-    console.log("passwordChecked" + passwordChecked );
+    passwordChecked = password;
+    confirmPassChecked = confirmPass;
 
-    /** CONFIRM PASSWORD **/
-    // If checked Regex password is the same as the checked Regex Confirm Password
-    if (passwordChecked === confirmPass){
-        passwordChecked = password;
-        confirmPassChecked = confirmPass;
-    } else {
-        passwordChecked = false;
+    //confirm password
+    if (password !== confirmPass){
+        passwordChecked = 3;
         confirmPassChecked = false;
-        //console.log("setting checked passwords against each other to false");
+    }
+    //no symbols
+    else if (passNoSymResult === false) {
+        passwordChecked = 2;
+    }
+    else if (passRegexResult === false) {
+        passwordChecked = false;
     }
 
-    console.log("passwordChecked" + passwordChecked);
-    console.log("confirmPassChecked" + confirmPassChecked );
+    console.log("passwordChecked: " + passwordChecked);
+    console.log("confirmPassChecked: " + confirmPassChecked );
 
     // Return checked array
     array = [fstNameChecked, lstNameChecked, emailChecked, phoneChecked, passwordChecked, confirmPassChecked];
