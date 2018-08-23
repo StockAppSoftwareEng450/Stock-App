@@ -1,3 +1,5 @@
+Future Updates: Porting over to AWS, re-writing in react-redux, condensing code and creating a better UI
+
 # Stockalytics
 
 
