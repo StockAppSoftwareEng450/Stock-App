@@ -1,4 +1,4 @@
-Future Updates: Porting over to AWS, re-writing in react-redux, condensing code and creating a better UI
+Future Updates: Porting over to AWS, re-writing in react-redux with state management, condensing code and creating a better UI, Create unit tests etc.
 
 # Stockalytics
 
